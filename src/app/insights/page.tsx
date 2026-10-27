@@ -3,11 +3,12 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Sparkles, BookOpen, Calendar, Clock, ArrowUpRight, User, TrendingUp } from "lucide-react";
+import { Search, Sparkles, BookOpen, Clock, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
 import SpaceBackground from "@/components/SpaceBackground";
 import CyberButton from "@/components/CyberButton";
+import PageBanner from "@/components/PageBanner";
 
 interface InsightArticle {
   id: string;
@@ -28,31 +29,31 @@ const insightsData: InsightArticle[] = [
   {
     id: "spatial-3d-conversion",
     index: "[01]",
-    title: "Spatial Web & Three.js: How Real-Time 3D Configurator Drives 3.4x Conversion",
+    title: "E-Commerce Optimization: How Modern Storefronts Drive 3.4x Conversion",
     excerpt:
-      "Deep-dive telemetry analysis across 2.4M sessions comparing flat 2D e-commerce layouts against interactive WebGL 3D product viewports with dynamic GLSL illumination.",
+      "Deep-dive telemetry analysis across 2.4M sessions comparing flat outdated store layouts against interactive modern product viewports with responsive checkout funnels.",
     category: "Spatial 3D",
-    image: "/images/project_ecommerce.jpg",
+    image: "/images/service_ecommerce.jpg",
     tall: true,
-    avatarIcon: "🌐",
+    avatarIcon: "🛍️",
     date: "OCT 2026",
     readTime: "7 min read",
-    author: "Vikram Mehta, Lead 3D Architect",
-    tags: ["Three.js", "WebGL", "Conversion", "E-commerce"],
+    author: "Vikram Mehta, Lead Architect",
+    tags: ["E-commerce", "Conversion", "Next.js", "Performance"],
   },
   {
-    id: "production-ai-rag",
+    id: "production-mobile-ux",
     index: "[02]",
-    title: "Production AI: Scaling Multi-Tenant RAG Pipelines with Sub-5ms Latency",
+    title: "Mobile First: Crafting Intuitive Native Mobile Apps with 60fps Fluidity",
     excerpt:
-      "Architecting enterprise generative AI architectures: vector indexing strategies, cache warming, and automated fallback inference models for mission-critical operations.",
+      "Architecting enterprise cross-platform mobile applications: state synchronization, gesture physics, and automated deployment pipelines.",
     category: "AI & RAG",
-    image: "/images/project_ai.jpg",
-    avatarIcon: "🤖",
+    image: "/images/service_mobile.jpg",
+    avatarIcon: "📱",
     date: "OCT 2026",
     readTime: "9 min read",
-    author: "Elena Rostova, Chief AI Scientist",
-    tags: ["AI", "RAG", "Vector Search", "Python"],
+    author: "Elena Rostova, Mobile UX Lead",
+    tags: ["Mobile", "React Native", "iOS", "Android"],
   },
   {
     id: "nextjs-zero-latency",
@@ -61,7 +62,7 @@ const insightsData: InsightArticle[] = [
     excerpt:
       "Eliminating hydration bottlenecks in complex enterprise web applications through streaming SSR, server actions, and localized edge data caching.",
     category: "Architecture",
-    image: "/images/weddev.png",
+    image: "/images/service_webdev.jpg",
     tall: true,
     avatarIcon: "⚡",
     date: "OCT 2026",
@@ -76,7 +77,7 @@ const insightsData: InsightArticle[] = [
     excerpt:
       "A systematic engineering case study on layout shift eradication, script deferral, image pipeline quantization, and server TTFB minimization.",
     category: "SEO & Growth",
-    image: "/images/seoupdate.png",
+    image: "/images/service_marketing.jpg",
     avatarIcon: "📈",
     date: "SEP 2026",
     readTime: "5 min read",
@@ -84,27 +85,27 @@ const insightsData: InsightArticle[] = [
     tags: ["SEO", "Performance", "Lighthouse"],
   },
   {
-    id: "multi-cloud-mesh",
+    id: "agency-pods-scale",
     index: "[05]",
-    title: "Zero-Downtime Multi-Region Kubernetes Failover on Bare Metal & AWS",
+    title: "High-Velocity Squads: Scaling Product Development with Dedicated Pods",
     excerpt:
-      "Designing eBPF network telemetry observability and cross-cloud mTLS routing to survive simultaneous multi-region cloud outages without customer interruption.",
+      "How cross-functional squads of engineers, UI/UX designers, and product owners deliver enterprise milestones 3x faster than traditional siloed agencies.",
     category: "Architecture",
-    image: "/images/nebula_cloud_os_3d.jpg",
-    avatarIcon: "☁️",
+    image: "/images/agency_team_studio.jpg",
+    avatarIcon: "👥",
     date: "SEP 2026",
     readTime: "8 min read",
-    author: "David Vance, Principal Cloud Architect",
-    tags: ["Cloud", "Kubernetes", "DevOps"],
+    author: "David Vance, Agile Principal",
+    tags: ["Agile", "Pods", "Engineering"],
   },
   {
     id: "social-commerce-virality",
     index: "[06]",
-    title: "Algorithmic Virality: Crafting Omni-Channel Funnels in the TikTok Era",
+    title: "Algorithmic Virality: Crafting Omni-Channel Funnels in the Creator Era",
     excerpt:
-      "Why static social ad graphics are dead, and how short-form cinematic motion hooks generate sustained organic conversion pipelines for high-ticket brands.",
+      "Why static social ad graphics are dead, and how short-form cinematic motion hooks generate sustained organic conversion pipelines for high-growth brands.",
     category: "SEO & Growth",
-    image: "/images/social.png",
+    image: "/images/service_social.jpg",
     avatarIcon: "🎯",
     date: "AUG 2026",
     readTime: "6 min read",
@@ -114,11 +115,11 @@ const insightsData: InsightArticle[] = [
   {
     id: "cinema-8k-branding",
     index: "[07]",
-    title: "The Neurobiology of Cinematic Brand Films: Why 8K Visuals Stick",
+    title: "The Neurobiology of Cinematic Brand Films: Why Studio Visuals Stick",
     excerpt:
-      "Cognitive research analyzing consumer recall rates when exposed to high-production cinema-grade brand narratives versus generic templated video ads.",
+      "Cognitive research analyzing consumer recall rates when exposed to high-production studio commercials versus generic templated video ads.",
     category: "Brand & Media",
-    image: "/images/showreel_thumb.jpg",
+    image: "/images/service_media.jpg",
     tall: true,
     avatarIcon: "🎬",
     date: "AUG 2026",
@@ -133,8 +134,8 @@ const insightsData: InsightArticle[] = [
     excerpt:
       "Exploring geometric golden ratios, typography hierarchy, and flexible token systems that preserve brand prestige through rapid technological disruption.",
     category: "Brand & Media",
-    image: "/images/contet.png",
-    avatarIcon: "🖋️",
+    image: "/images/service_branding.jpg",
+    avatarIcon: "✨",
     date: "JUL 2026",
     readTime: "5 min read",
     author: "Hannah Cole, Design Systems Lead",
@@ -179,34 +180,21 @@ export default function InsightsPage() {
       {/* Global Navbar */}
       <Navbar />
 
-      <main className="relative z-10 pt-28 sm:pt-36 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
-        {/* Top Header & Breadcrumb */}
-        <div className="mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>DISPATCHES &amp; INTELLIGENCE // RESEARCH JOURNAL</span>
-          </div>
+      {/* Attractive Hero Page Banner with Dark UI, Title & Breadcrumbs */}
+      <PageBanner
+        theme="dark"
+        title="TECHNICAL PAPERS &"
+        highlightText="DISPATCHES"
+        subtitle="Cutting-edge research on spatial web engineering, enterprise modern UI scaling, real-time telemetry, and algorithmic growth strategies written by our technical leads."
+        badge="DISPATCHES & INTELLIGENCE // RESEARCH JOURNAL"
+        breadcrumbs={[{ label: "Insights" }]}
+        bgImage="/images/service_marketing.jpg"
+        ctaText="SUBSCRIBE TO DISPATCHES"
+        ctaHref="/#contact"
+      />
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
-            <div>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white">
-                TECHNICAL PAPERS &amp;{" "}
-                <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.35)]">
-                  DISPATCHES
-                </span>
-              </h1>
-              <p className="text-sm sm:text-base text-neutral-400 font-light max-w-2xl mt-4">
-                Cutting-edge research on spatial web engineering, enterprise AI scaling, real-time telemetry, and algorithmic growth strategies written by our technical leads.
-              </p>
-            </div>
-
-            <CyberButton href="/#contact" size="md">
-              SUBSCRIBE TO DISPATCHES
-            </CyberButton>
-          </div>
-        </div>
-
-        {/* ================= FILTER & SEARCH BAR (EXACT IMAGE 2 REPLICATION) ================= */}
+      <main className="relative z-10 pt-12 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
+        {/* ================= FILTER & SEARCH BAR (DARK THEME) ================= */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
           {/* Category Filter Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
@@ -236,12 +224,12 @@ export default function InsightsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={`Search ${insightsData.length} articles...`}
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-white/[0.04] hover:bg-white/[0.07] border border-white/15 focus:border-blue-500 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.07] border border-white/15 focus:border-blue-500 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none transition-colors"
             />
           </div>
         </div>
 
-        {/* ================= BENTO GRID (EXACT IMAGE 2 REPLICATION) ================= */}
+        {/* ================= BENTO GRID (DARK UI CARDS) ================= */}
         {filteredArticles.length === 0 ? (
           <div className="text-center py-24 bg-white/[0.02] rounded-3xl border border-white/10">
             <p className="text-neutral-400 font-mono text-sm mb-4">
@@ -290,7 +278,7 @@ export default function InsightsPage() {
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     {/* Multi-Stop Dark Vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/60 to-black/30 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/65 to-black/35 pointer-events-none" />
                   </div>
 
                   {/* Floating Center Badge/Avatar (Matching Image 2) */}
@@ -336,9 +324,9 @@ export default function InsightsPage() {
           </div>
         )}
 
-        {/* Bottom Newsletter Dispatch Banner */}
-        <div className="mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
-          <div>
+        {/* Bottom Newsletter Dispatch Banner with Dark Theme */}
+        <div className="mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+          <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-3">
               <BookOpen className="w-3.5 h-3.5" />
               <span>FORTNIGHTLY RESEARCH BRIEFING</span>
@@ -347,13 +335,15 @@ export default function InsightsPage() {
               Stay at the forefront of digital engineering
             </h2>
             <p className="text-sm text-neutral-400 font-light max-w-xl">
-              Receive curated technical architectures, spatial 3D benchmarks, and AI deployment reports straight to your inbox every two weeks.
+              Receive curated technical architectures, spatial 3D benchmarks, and growth deployment reports straight to your inbox every two weeks.
             </p>
           </div>
 
-          <CyberButton href="/#contact" size="lg">
-            SUBSCRIBE TO NEWSLETTER
-          </CyberButton>
+          <div className="relative z-10 shrink-0">
+            <CyberButton href="/#contact" size="lg">
+              SUBSCRIBE TO NEWSLETTER
+            </CyberButton>
+          </div>
         </div>
       </main>
 

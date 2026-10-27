@@ -29,7 +29,7 @@ export default function ServiceUniverseSection() {
       tagline: "Next-Gen Web Applications & Cloud Infrastructure",
       description:
         "Scalable enterprise software platforms, high-converting Next.js / React 19 web applications, and responsive AI web builders supported by resilient cloud infrastructure and automated 99.9% uptime SLA.",
-      heroImage: "/images/weddev.png",
+      heroImage: "/images/service_webdev.jpg",
       slug: "web-development",
       badge: "100% Responsive",
       scope: [
@@ -48,7 +48,7 @@ export default function ServiceUniverseSection() {
       tagline: "Organic Traffic Growth & Technical Backlink Architecture",
       description:
         "Data-engineered search engine dominance. We transform organic channels into high-velocity customer acquisition engines through real-time keyword analytics, crawl speed audits, and high-authority backlink graph architecture.",
-      heroImage: "/images/seoupdate.png",
+      heroImage: "/images/service_marketing.jpg",
       slug: "seo-intelligence",
       badge: "100% Organic-Driven",
       scope: [
@@ -67,7 +67,7 @@ export default function ServiceUniverseSection() {
       tagline: "High-ROI Funnels, Performance Ads & Conversion Engines",
       description:
         "Precision-targeted paid advertising across Meta, Google, and programmatic video networks. Engineered to lower customer acquisition costs (CAC) and deliver compounding 8x+ return on ad spend (ROAS).",
-      heroImage: "/images/digi_market.png",
+      heroImage: "/images/service_ecommerce.jpg",
       slug: "digital-marketing",
       badge: "8.04x ROAS",
       scope: [
@@ -86,7 +86,7 @@ export default function ServiceUniverseSection() {
       tagline: "Viral Multi-Platform Campaigns & Community Amplification",
       description:
         "Transform brand channels into high-engagement growth drivers. From algorithm-optimized short-form video storytelling to automated scheduling and verified audience acquisition across Instagram, TikTok, and LinkedIn.",
-      heroImage: "/images/social.png",
+      heroImage: "/images/service_social.jpg",
       slug: "social-media-marketing",
       badge: "100% Engagement-Driven",
       scope: [
@@ -101,11 +101,11 @@ export default function ServiceUniverseSection() {
     {
       id: "content",
       number: "05",
-      title: "Content Creation & Editorial Strategy",
-      tagline: "SEO-Driven Copywriting & Multi-Format Publications",
+      title: "Content Creation & Brand Studio",
+      tagline: "Design Systems, Packaging & Editorial Strategy",
       description:
-        "Authority-building digital publications, tone-calibrated commercial copywriting, and multi-format editorial pipelines designed for sustained reader engagement, brand trust, and search dominance.",
-      heroImage: "/images/contet.png",
+        "Comprehensive brand design systems, Pantone color palettes, packaging design, and multi-format editorial pipelines designed for sustained reader engagement, brand trust, and prestige market leadership.",
+      heroImage: "/images/service_branding.jpg",
       slug: "content-creation",
       badge: "100% SEO & Tone-Driven",
       scope: [
@@ -298,7 +298,7 @@ export default function ServiceUniverseSection() {
                         fill
                         priority={idx === 0 || idx === 1}
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-contain object-center transition-all duration-700 ease-out"
+                        className="object-cover object-center transition-all duration-700 ease-out"
                       />
                     </div>
                   );

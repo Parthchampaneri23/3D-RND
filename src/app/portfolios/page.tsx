@@ -3,11 +3,12 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Sparkles, Filter, ArrowUpRight, Globe, Layers, Eye } from "lucide-react";
+import { Search, Sparkles, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
 import SpaceBackground from "@/components/SpaceBackground";
 import CyberButton from "@/components/CyberButton";
+import PageBanner from "@/components/PageBanner";
 
 interface PortfolioProject {
   id: string;
@@ -28,10 +29,10 @@ const portfolioData: PortfolioProject[] = [
     id: "lumen-sal",
     index: "[01]",
     title: "Lumen Sal",
-    subtitle: "Brand Identity & Product Design",
+    subtitle: "Brand Identity & Spatial Architecture",
     year: "2026",
     category: "Branding",
-    image: "/images/industry_automotive.jpg",
+    image: "/images/project_lumen_sal.jpg",
     tall: true,
     client: "Lumen Architecture",
     tags: ["Branding", "Spatial 3D", "Identity"],
@@ -43,7 +44,7 @@ const portfolioData: PortfolioProject[] = [
     subtitle: "Brand Identity & Product Design",
     year: "2025",
     category: "Branding",
-    image: "/images/about_space_pedestal.jpg",
+    image: "/images/project_toma_nota.jpg",
     avatarIcon: "🦉",
     client: "Toma Nota Studios",
     tags: ["Branding", "Creative Direction"],
@@ -55,7 +56,7 @@ const portfolioData: PortfolioProject[] = [
     subtitle: "Development & E-commerce",
     year: "2025",
     category: "Development",
-    image: "/images/project_ecommerce.jpg",
+    image: "/images/service_ecommerce.jpg",
     tall: true,
     client: "Kailua Living",
     tags: ["Development", "E-commerce", "Three.js"],
@@ -63,105 +64,106 @@ const portfolioData: PortfolioProject[] = [
   {
     id: "mission-ops",
     index: "[04]",
-    title: "Wildfire Vanguard",
-    subtitle: "Real-time Telemetry & Autonomous Drone Mesh",
+    title: "Vanguard Outdoors",
+    subtitle: "Commercial Cinematography & Storytelling",
     year: "2025",
-    category: "Development",
-    image: "/images/project_ai.jpg",
-    avatarIcon: "👨‍🚒",
-    client: "State Emergency Service",
-    tags: ["UX/UI", "Development", "AI"],
+    category: "Design",
+    image: "/images/project_forest_film.jpg",
+    avatarIcon: "🎬",
+    client: "Vanguard Media",
+    tags: ["Cinematography", "Storytelling", "Video"],
   },
   {
     id: "apex-fintech",
     index: "[05]",
-    title: "Apex FinTech",
-    subtitle: "Next.js 15 High-Frequency Crypto Engine",
+    title: "Aura Creative",
+    subtitle: "Joyful Lifestyle Brand Campaign & Identity",
     year: "2026",
-    category: "Development",
-    image: "/images/project_fintech.jpg",
-    client: "Apex Global Capital",
-    tags: ["Development", "Fintech", "Security"],
+    category: "Branding",
+    image: "/images/project_lifestyle.jpg",
+    avatarIcon: "✨",
+    client: "Aura Global",
+    tags: ["Branding", "Campaign", "Lifestyle"],
   },
   {
     id: "nebula-cloud",
     index: "[06]",
-    title: "Nebula Cloud OS",
-    subtitle: "Multi-Region Distributed Infrastructure",
+    title: "Core Web Platform",
+    subtitle: "Modern Next.js 15 Web Applications & Cloud",
     year: "2026",
-    category: "UX/UI",
-    image: "/images/nebula_cloud_os_3d.jpg",
-    client: "Orbital Computing Labs",
-    tags: ["UX/UI", "Cloud", "Kubernetes"],
+    category: "Development",
+    image: "/images/service_webdev.jpg",
+    client: "CoreStack Labs",
+    tags: ["Development", "Cloud", "Next.js"],
   },
   {
     id: "astra-film",
     index: "[07]",
     title: "AstraFilm Studios",
-    subtitle: "Commercial 8K Film Production & CGI VFX",
+    subtitle: "Commercial 8K Film Production & Studio Sets",
     year: "2026",
     category: "Design",
-    image: "/images/showreel_thumb.jpg",
+    image: "/images/service_media.jpg",
     tall: true,
-    client: "Orbital Global Media",
+    client: "Astra Media Group",
     tags: ["Design", "Cinematography", "Media"],
   },
   {
     id: "zenith-social",
     index: "[08]",
     title: "Zenith Social",
-    subtitle: "Omnichannel Social Commerce Platform",
+    subtitle: "Omnichannel Social Media & Creator Growth",
     year: "2026",
     category: "Social Media",
-    image: "/images/social.png",
-    avatarIcon: "🌐",
+    image: "/images/service_social.jpg",
+    avatarIcon: "📱",
     client: "Zenith Digital Brands",
     tags: ["Social Media", "Community", "Growth"],
   },
   {
-    id: "aurora-horology",
+    id: "brand-identity-studio",
     index: "[09]",
-    title: "Aurora Spaceware",
-    subtitle: "Photorealistic 3D Chronograph Visualizer",
+    title: "Pantone Identity Studio",
+    subtitle: "Comprehensive Design Systems & Packaging",
     year: "2025",
-    category: "E-commerce",
-    image: "/images/weddev.png",
+    category: "Branding",
+    image: "/images/service_branding.jpg",
     tall: true,
-    client: "Aurora Horology Geneva",
-    tags: ["E-commerce", "WebGL", "Luxury"],
+    client: "Pantone Creative Lab",
+    tags: ["Branding", "Packaging", "Design"],
   },
   {
-    id: "content-matrix",
+    id: "marketing-analytics",
     index: "[10]",
-    title: "Chronos Editorial",
-    subtitle: "Tone-Calibrated Commercial Copywriting Pipeline",
+    title: "OmniGrowth Analytics",
+    subtitle: "Performance Marketing, SEO & Attribution",
     year: "2026",
     category: "Community",
-    image: "/images/contet.png",
-    client: "Chronos Media Group",
-    tags: ["Community", "SEO", "Copywriting"],
+    image: "/images/service_marketing.jpg",
+    client: "OmniGrowth Inc.",
+    tags: ["Community", "SEO", "Analytics"],
   },
   {
-    id: "medtech-vanguard",
+    id: "mobile-ux-platform",
     index: "[11]",
-    title: "MedTech Vanguard",
-    subtitle: "AI Spatial Diagnostics & Tele-Surgical Platform",
+    title: "Quantum Mobile OS",
+    subtitle: "iOS & Android Cross-Platform Experience",
     year: "2025",
     category: "UX/UI",
-    image: "/images/industry_medtech.jpg",
-    client: "Vanguard Life Sciences",
-    tags: ["UX/UI", "Healthcare", "ISO 13485"],
+    image: "/images/service_mobile.jpg",
+    client: "Quantum Apps",
+    tags: ["UX/UI", "Mobile", "React Native"],
   },
   {
-    id: "automotive-os",
+    id: "agency-collaboration",
     index: "[12]",
-    title: "HyperDrive Connected",
-    subtitle: "Next-Gen Cockpit Telemetry & Mobile Fleet OS",
+    title: "Synapse Digital Hub",
+    subtitle: "Dedicated Engineering & Design Pods",
     year: "2026",
-    category: "Design",
-    image: "/images/industry_automotive.jpg",
-    client: "HyperDrive Motors",
-    tags: ["Design", "Automotive", "Mobile"],
+    category: "Development",
+    image: "/images/agency_team_studio.jpg",
+    client: "Synapse Digital",
+    tags: ["Development", "Agency", "Team"],
   },
 ];
 
@@ -205,34 +207,21 @@ export default function PortfoliosPage() {
       {/* Global Navbar */}
       <Navbar />
 
-      <main className="relative z-10 pt-28 sm:pt-36 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
-        {/* Top Header & Breadcrumb */}
-        <div className="mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>PORTFOLIO DIRECTORY // 2025 - 2026 ARCHIVE</span>
-          </div>
+      {/* Attractive Hero Page Banner with Dark UI, Title & Breadcrumbs */}
+      <PageBanner
+        theme="dark"
+        title="SELECTED WORKS &"
+        highlightText="CASE STUDIES"
+        subtitle="Explore our catalog of custom web applications, spatial 3D platforms, brand identities, and high-conversion e-commerce systems engineered for market leaders."
+        badge="PORTFOLIO DIRECTORY // 2025 - 2026 ARCHIVE"
+        breadcrumbs={[{ label: "Portfolios" }]}
+        bgImage="/images/project_lumen_sal.jpg"
+        ctaText="START A PROJECT"
+        ctaHref="/#contact"
+      />
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
-            <div>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white">
-                SELECTED WORKS &amp;{" "}
-                <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.35)]">
-                  CASE STUDIES
-                </span>
-              </h1>
-              <p className="text-sm sm:text-base text-neutral-400 font-light max-w-2xl mt-4">
-                Explore our catalog of custom web applications, spatial 3D platforms, brand identities, and high-conversion e-commerce systems engineered for market leaders.
-              </p>
-            </div>
-
-            <CyberButton href="/#contact" size="md">
-              START A PROJECT
-            </CyberButton>
-          </div>
-        </div>
-
-        {/* ================= FILTER & SEARCH BAR (EXACT IMAGE 2 REPLICATION) ================= */}
+      <main className="relative z-10 pt-12 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
+        {/* ================= FILTER & SEARCH BAR (DARK THEME) ================= */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
           {/* Category Filter Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
@@ -262,12 +251,12 @@ export default function PortfoliosPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={`Search ${portfolioData.length} projects...`}
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-white/[0.04] hover:bg-white/[0.07] border border-white/15 focus:border-blue-500 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.07] border border-white/15 focus:border-blue-500 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none transition-colors"
             />
           </div>
         </div>
 
-        {/* ================= BENTO GRID (EXACT IMAGE 2 MASONRY/BENTO LAYOUT) ================= */}
+        {/* ================= BENTO GRID (DARK UI CARDS) ================= */}
         {filteredProjects.length === 0 ? (
           <div className="text-center py-24 bg-white/[0.02] rounded-3xl border border-white/10">
             <p className="text-neutral-400 font-mono text-sm mb-4">
@@ -302,9 +291,9 @@ export default function PortfoliosPage() {
                     </span>
                   </div>
 
-                  {/* Optional Right Category Badge */}
+                  {/* Top Right Category Badge */}
                   <div className="absolute top-5 right-5 z-20">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFD400] px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#FFD400]/30 shadow-md">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFD400] px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#FFD400]/30 shadow-md">
                       {project.category}
                     </span>
                   </div>
@@ -316,11 +305,11 @@ export default function PortfoliosPage() {
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    {/* Multi-Stop Dark Vignette for Premium Legibility */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/50 to-transparent pointer-events-none" />
+                    {/* Multi-Stop Dark Vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/65 to-black/35 pointer-events-none" />
                   </div>
 
-                  {/* Floating Center Badge/Avatar (Matching Toma Nota owl / 04 Firefighter in Image 2) */}
+                  {/* Floating Center Badge/Avatar (Matching Toma Nota owl / 04 in Image 2) */}
                   {project.avatarIcon && (
                     <div className="relative z-10 my-auto flex justify-center items-center pointer-events-none">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/20 shadow-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
@@ -335,7 +324,7 @@ export default function PortfoliosPage() {
                       <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
                         {project.title}
                       </h3>
-                      <span className="font-mono text-xs sm:text-sm text-neutral-400 shrink-0">
+                      <span className="font-mono text-xs sm:text-sm text-neutral-400 font-bold shrink-0">
                         {project.year}
                       </span>
                     </div>
@@ -368,9 +357,9 @@ export default function PortfoliosPage() {
           </div>
         )}
 
-        {/* Bottom Mission CTA Strip */}
-        <div className="mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
-          <div>
+        {/* Bottom Mission CTA Strip with Dark Theme */}
+        <div className="mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+          <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>BESPOKE CLIENT COMMISSIONS</span>
@@ -383,9 +372,11 @@ export default function PortfoliosPage() {
             </p>
           </div>
 
-          <CyberButton href="/#contact" size="lg">
-            SCHEDULE ARCHITECT CALL
-          </CyberButton>
+          <div className="relative z-10 shrink-0">
+            <CyberButton href="/#contact" size="lg">
+              SCHEDULE ARCHITECT CALL
+            </CyberButton>
+          </div>
         </div>
       </main>
 
