@@ -113,7 +113,7 @@ export default function AboutUsPage() {
           - Overlaps the frozen rocket banner section via -mt-[100vh]
           - Pinned at z-30 with dark background, rounded top, top border & deep shadow
           ========================================================================= */}
-      <section className="relative z-30 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-16 sm:pt-24 pb-20 shadow-[0_-50px_140px_rgba(0,0,0,0.99)] border-t border-white/[0.08] rounded-t-[36px] sm:rounded-t-[48px]">
+      <section className="relative z-30 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-[50px] pb-[50px] shadow-[0_-50px_140px_rgba(0,0,0,0.99)] border-t border-white/[0.08] rounded-t-[36px] sm:rounded-t-[48px]">
         {/* Subtle Ambient Top Border Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#FFD400]/6 blur-[160px] rounded-full pointer-events-none" />
 
@@ -125,7 +125,7 @@ export default function AboutUsPage() {
               - Mission as the Trajectory (dynamic connecting bridge line)
               - Core Values as Orbiting Nodes (interactive planetary pills & glassmorphism cards)
               ========================================================================= */}
-          <ConstellationMissionVision />
+          <ConstellationMissionVision className="py-[50px]" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
 
@@ -135,7 +135,7 @@ export default function AboutUsPage() {
                 - Right: Expanded Single-Column Multi-Row Cards ending aligned with Navbar Button (8 cols)
                 - Background: Cyber Architectural & Circuit SVGs with Soft Radial Flares
                 ========================================================================= */}
-            <section id="pillars" className="mb-20 sm:mb-28 relative">
+            <section id="pillars" className="py-[50px] relative">
               {/* Background Architectural & Circuit SVGs */}
               <div className="absolute inset-0 pointer-events-none select-none -z-10 overflow-hidden">
                 {/* Tech Blueprint Grid SVG (Top Right) */}
@@ -283,11 +283,11 @@ export default function AboutUsPage() {
 
               </div>
             </section>
-<CosmicProcessSection />
+            <CosmicProcessSection className="py-[50px]" />
             {/* =========================================================================
                 4. PARTNERSHIP CTA
                 ========================================================================= */}
-            <section>
+            <section className="py-[50px]">
               <div className="rounded-[28px] border border-[#FFD400]/30 bg-gradient-to-r from-[#12141c] via-[#090a0f] to-[#12141c] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(255,212,0,0.1)]">
                 <div>
                   <span className="text-[10px] font-mono font-bold tracking-widest text-[#FFD400] uppercase block mb-1">
@@ -308,7 +308,7 @@ export default function AboutUsPage() {
           </div>
         </main>
     </section>
-    <WhyChooseSection />
+    <WhyChooseSection className="py-[50px]" />
       {/* Showreel Modal */}
       {isPlayingShowreel && (
         <div

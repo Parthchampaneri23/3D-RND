@@ -2,7 +2,11 @@
 
 import { ArrowUpRight, Headphones, Sparkles } from "lucide-react";
 
-export default function WhyChooseSection() {
+export default function WhyChooseSection({
+  className = "py-24 sm:py-32",
+}: {
+  className?: string;
+} = {}) {
   const avatars = [
     {
       src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
@@ -29,7 +33,7 @@ export default function WhyChooseSection() {
   return (
     <section
       id="why-choose"
-      className="relative py-24 sm:py-32 bg-[#060709] text-white overflow-hidden selection:bg-[#FFD400] selection:text-black"
+      className={`relative ${className} bg-[#060709] text-white overflow-hidden selection:bg-[#FFD400] selection:text-black`}
     >
       {/* Background Ambience */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#FFD400]/4 blur-[160px] rounded-full pointer-events-none" />

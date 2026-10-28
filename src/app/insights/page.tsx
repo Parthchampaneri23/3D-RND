@@ -298,9 +298,11 @@ export default function InsightsPage() {
                       <span>{art.date}</span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug mb-2 group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
-                      {art.title}
-                    </h3>
+                    <Link href={`/insights/${art.id}`}>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug mb-2 group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
+                        {art.title}
+                      </h3>
+                    </Link>
 
                     <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed mb-4 line-clamp-3">
                       {art.excerpt}
@@ -313,7 +315,7 @@ export default function InsightsPage() {
                         <span className="truncate max-w-[150px]">{art.author}</span>
                       </div>
 
-                      <CyberButton href="/#contact" size="sm">
+                      <CyberButton href={`/insights/${art.id}`} size="sm">
                         READ ARTICLE
                       </CyberButton>
                     </div>

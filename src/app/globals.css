@@ -141,3 +141,77 @@ body {
   animation: spin-slow 20s linear infinite;
 }
 
+
+/* ===============================================
+   CONTACT US PAGE — ANIMATION ENHANCEMENTS
+   =============================================== */
+
+/* Animated gradient text (shifting gold gradient) */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* Soft floating animation for decorative orbs */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+.animate-float-soft-delayed {
+  animation: float-soft 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Pulsing glow for nebulae and pills */
+@keyframes glow-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow-pulse-soft {
+  animation: glow-pulse-soft 4s ease-in-out infinite;
+}
+
+/* Smooth grid-rows accordion (used by FAQ) */
+.faq-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.faq-grid.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-grid > div {
+  overflow: hidden;
+}

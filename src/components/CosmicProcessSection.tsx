@@ -16,7 +16,11 @@ interface ProcessStep {
   kpis: string[];
 }
 
-export default function CosmicProcessSection() {
+export default function CosmicProcessSection({
+  className = "py-24 sm:py-32",
+}: {
+  className?: string;
+} = {}) {
   const [activeStep, setActiveStep] = useState<number>(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -154,7 +158,7 @@ export default function CosmicProcessSection() {
     <section
       id="process"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 bg-[#050608] text-white overflow-hidden border-t border-white/5 selection:bg-[#FFD400] selection:text-black"
+      className={`relative ${className} bg-[#050608] text-white overflow-hidden border-t border-white/5 selection:bg-[#FFD400] selection:text-black`}
     >
       {/* Background Ambient Galaxy Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-[#FFD400]/4 blur-[180px] rounded-full pointer-events-none" />

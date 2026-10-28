@@ -11,7 +11,11 @@ import {
   Compass,
 } from "lucide-react";
 
-export default function ConstellationMissionVision() {
+export default function ConstellationMissionVision({
+  className = "py-[50px]",
+}: {
+  className?: string;
+} = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Background Golden Starfield Canvas
@@ -113,7 +117,7 @@ export default function ConstellationMissionVision() {
   return (
     <section
       id="constellation-orbital-ecosystem"
-      className="relative w-full min-h-screen py-16 sm:py-24 flex flex-col justify-center overflow-hidden text-gray-100 selection:bg-[#FFD400] selection:text-black font-sans"
+      className={`relative w-full ${className} flex flex-col justify-center overflow-hidden text-gray-100 selection:bg-[#FFD400] selection:text-black font-sans`}
     >
       {/* Background Canvas & Radial Glows */}
       <div className="absolute inset-0 -z-10 pointer-events-none">

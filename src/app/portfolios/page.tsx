@@ -321,9 +321,11 @@ export default function PortfoliosPage() {
                   {/* Bottom Information Card Overlay */}
                   <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
                     <div className="flex items-baseline justify-between gap-4 mb-1">
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
-                        {project.title}
-                      </h3>
+                      <Link href={`/portfolios/${project.id}`}>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
+                          {project.title}
+                        </h3>
+                      </Link>
                       <span className="font-mono text-xs sm:text-sm text-neutral-400 font-bold shrink-0">
                         {project.year}
                       </span>
@@ -346,7 +348,7 @@ export default function PortfoliosPage() {
                         ))}
                       </div>
 
-                      <CyberButton href="/#contact" size="sm">
+                      <CyberButton href={`/portfolios/${project.id}`} size="sm">
                         VIEW MISSION
                       </CyberButton>
                     </div>

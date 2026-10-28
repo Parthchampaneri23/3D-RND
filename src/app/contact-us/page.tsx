@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
 import SpaceBackground from "@/components/SpaceBackground";
 import CyberButton from "@/components/CyberButton";
 import ContactCastBanner from "@/components/ContactCastBanner";
+import CursorGlow from "@/components/CursorGlow";
 import {
   Mail,
   Phone,
@@ -23,7 +23,6 @@ import {
   ChevronDown,
   Globe,
   Radio,
-  FileText,
   Lock,
   Layers,
   Cpu,
@@ -31,6 +30,7 @@ import {
   Palette,
   Camera,
   Bot,
+  Zap,
 } from "lucide-react";
 
 export default function ContactUsPage() {
@@ -107,8 +107,8 @@ export default function ContactUsPage() {
       region: "European Hub",
       tz: "CET (UTC+1)",
       status: "ACTIVE // 09:00 - 18:00",
-      address: "Bahnhofstrasse 28, 8001 Zürich, Switzerland",
-      coords: "47.3769° N, 8.5417° E",
+      address: "Bahnhofstrasse 28, 8001 Zurich, Switzerland",
+      coords: "47.3769 N, 8.5417 E",
     },
     {
       city: "San Francisco",
@@ -116,15 +116,15 @@ export default function ContactUsPage() {
       tz: "PST (UTC-8)",
       status: "ACTIVE // 08:00 - 17:00",
       address: "555 Mission St, San Francisco, CA 94105, USA",
-      coords: "37.7891° N, 122.3999° W",
+      coords: "37.7891 N, 122.3999 W",
     },
     {
       city: "Mumbai",
       region: "Asia Tech Campus",
       tz: "IST (UTC+5:30)",
       status: "ACTIVE // 09:30 - 19:30",
-      address: "Bandra Kurla Complex, Mumbai, Maharashtra 400051",
-      coords: "19.0600° N, 72.8656° E",
+      address: "Bandra Kurla Complex, Mumbai 400051",
+      coords: "19.0600 N, 72.8656 E",
     },
   ];
 
@@ -180,90 +180,96 @@ export default function ContactUsPage() {
 
   return (
     <div className="relative min-h-screen bg-[#050608] text-white selection:bg-[#FFD400] selection:text-black font-sans overflow-x-clip">
+      {/* Custom Glowing Cursor */}
+      <CursorGlow />
+
       {/* Interactive Galactic Particle Starfield Canvas */}
       <SpaceBackground />
 
       {/* Global Navbar */}
       <Navbar />
 
-      {/* Architectural Contact Us Banner (Matching About Us Banner) */}
+      {/* Architectural Contact Us Banner */}
       <ContactCastBanner />
 
-      {/* Ambient Radial Nebulae */}
+      {/* Ambient Radial Nebulae with soft float animation */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 -left-48 w-96 h-[600px] bg-[#FFD400]/12 rounded-full blur-[160px]" />
-        <div className="absolute top-1/3 -right-48 w-96 h-[600px] bg-[#FFD400]/12 rounded-full blur-[160px]" />
-        <div className="absolute bottom-10 left-1/3 w-[600px] h-64 bg-[#FFD400]/8 rounded-full blur-[150px]" />
+        <div className="absolute top-1/4 -left-48 w-96 h-[600px] bg-[#FFD400]/12 rounded-full blur-[160px] animate-glow-pulse-soft" />
+        <div className="absolute top-1/3 -right-48 w-96 h-[600px] bg-[#FFD400]/12 rounded-full blur-[160px] animate-glow-pulse-soft" style={{ animationDelay: "1.5s" }} />
+        <div className="absolute bottom-10 left-1/3 w-[600px] h-64 bg-[#FFD400]/8 rounded-full blur-[150px] animate-glow-pulse-soft" style={{ animationDelay: "3s" }} />
       </div>
 
+      {/* Floating Decorative Orbs */}
+      <div className="fixed left-8 top-1/2 w-3 h-3 rounded-full bg-[#FFD400]/30 blur-[2px] pointer-events-none z-0 animate-float-soft hidden lg:block" />
+      <div className="fixed right-12 top-2/3 w-4 h-4 rounded-full bg-[#FFD400]/20 blur-[3px] pointer-events-none z-0 animate-float-soft-delayed hidden lg:block" />
+      <div className="fixed left-1/4 bottom-20 w-2 h-2 rounded-full bg-[#FFD400]/40 blur-[1px] pointer-events-none z-0 animate-float-soft hidden lg:block" style={{ animationDelay: "4s" }} />
+
       <main className="relative z-10 pt-16 sm:pt-20 pb-24">
-        {/* =========================================================================
+        {/* ===================================================================
             1. HERO ATMOSPHERE & TELEMETRY HEADER
-            ========================================================================= */}
+            =================================================================== */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 mb-16 sm:mb-20">
           <div className="max-w-4xl">
             {/* Status Telemetry Pill */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-6 shadow-[0_0_25px_rgba(255,212,0,0.2)]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="relative flex w-2 h-2">
+                <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping" />
+                <span className="relative w-2 h-2 rounded-full bg-emerald-400" />
+              </span>
               <span>DIRECT ENCRYPTED COMMS // STATUS: ONLINE</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-5xl font-[family-name:var(--font-syne)] font-black tracking-tight uppercase text-white leading-[1.05] mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-black tracking-tight uppercase text-white leading-[1.05] mb-6">
               LET&apos;S ARCHITECT YOUR{" "}
-              <span className="bg-gradient-to-r from-white via-[#ffe34d] to-[#FFD400] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,212,0,0.35)]">
+              <span className="bg-gradient-to-r from-white via-[#ffe34d] to-[#FFD400] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,212,0,0.35)] animate-gradient-text">
                 DEFINING ADVANTAGE.
               </span>
             </h1>
 
-            <p className="text-base sm:text-xl text-neutral-300 font-light leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg lg:text-xl text-neutral-300 font-light leading-relaxed max-w-3xl">
               Whether you are architecting a category-defining spatial 3D web platform, scaling an enterprise cloud product, or directing high-impact commercial cinema — initiate a brief with our Principal Architects today.
             </p>
           </div>
 
           {/* Quick Telemetry Hub Bar */}
           <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs text-neutral-400">
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <div>
-                <span className="text-white font-bold block">ZURICH / LONDON</span>
-                <span className="text-[10px] text-neutral-400">CET // 09:00 - 18:00</span>
+            {[
+              { label: "ZURICH / LONDON", sub: "CET // 09:00 - 18:00" },
+              { label: "SAN FRANCISCO", sub: "PST // 08:00 - 17:00" },
+              { label: "MUMBAI CAMPUS", sub: "IST // 09:30 - 19:30" },
+            ].map((hub, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[#FFD400]/30 transition-all duration-300 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0 group-hover:scale-125 transition-transform" />
+                <div>
+                  <span className="text-white font-bold block">{hub.label}</span>
+                  <span className="text-[10px] text-neutral-400">{hub.sub}</span>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <div>
-                <span className="text-white font-bold block">SAN FRANCISCO</span>
-                <span className="text-[10px] text-neutral-400">PST // 08:00 - 17:00</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <div>
-                <span className="text-white font-bold block">MUMBAI CAMPUS</span>
-                <span className="text-[10px] text-neutral-400">IST // 09:30 - 19:30</span>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* =========================================================================
+        {/* ===================================================================
             2. THE COMMAND TERMINAL & DIRECT COMMS GRID (SPLIT SECTION)
-            ========================================================================= */}
+            =================================================================== */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 mb-24 sm:mb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-            
-            {/* -------------------------------------------------------------------
+
+            {/* ---------------------------------------------------------------
                 LEFT COLUMN: DIRECT SECURE CHANNELS & EXECUTIVE DISCOVERY (5 cols)
-                ------------------------------------------------------------------- */}
+                --------------------------------------------------------------- */}
             <div className="lg:col-span-5 space-y-6">
-              
+
               {/* Card 1: Direct Channels */}
               <div className="rounded-[32px] border border-white/10 hover:border-[#FFD400]/50 bg-[#0d0e14]/90 backdrop-blur-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden group transition-all duration-500">
                 <div className="absolute top-0 right-0 w-36 h-36 bg-[#FFD400]/10 rounded-full blur-[50px] pointer-events-none group-hover:scale-125 transition-transform duration-700" />
-                
-                <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                {/* Light sweep beam */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+                <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6 relative z-10">
                   <div className="flex items-center gap-2">
                     <Radio className="w-4 h-4 text-[#FFD400] animate-pulse" />
                     <span className="text-xs font-mono tracking-widest uppercase text-white font-bold">
@@ -275,9 +281,9 @@ export default function ContactUsPage() {
                   </span>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 relative z-10">
                   {/* Email Channel */}
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#FFD400]/40 transition-colors group/item">
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#FFD400]/40 transition-all duration-300 group/item hover:bg-white/[0.05]">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">
                         OFFICIAL ENQUIRY EMAIL
@@ -309,7 +315,7 @@ export default function ContactUsPage() {
                   </div>
 
                   {/* Telephone Channel */}
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#FFD400]/40 transition-colors group/item">
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#FFD400]/40 transition-all duration-300 group/item hover:bg-white/[0.05]">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">
                       DIRECT HOTLINE (GLOBAL)
                     </span>
@@ -324,7 +330,7 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Response Guarantee Callout */}
-                <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-3 text-xs text-neutral-300">
+                <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-3 text-xs text-neutral-300 relative z-10">
                   <ShieldCheck className="w-5 h-5 text-[#FFD400] shrink-0" />
                   <p className="font-light text-[11px] leading-relaxed">
                     Guaranteed response within <strong className="text-white">24 hours</strong> with mutual NDA & preliminary architectural feasibility.
@@ -333,51 +339,56 @@ export default function ContactUsPage() {
               </div>
 
               {/* Card 2: Executive Strategy Session */}
-              <div className="rounded-[32px] border border-[#FFD400]/30 bg-gradient-to-br from-[#12141c]/95 via-[#0c0d12]/95 to-[#08090d]/95 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#FFD400] font-bold uppercase tracking-widest mb-3">
+              <div className="rounded-[32px] border border-[#FFD400]/30 bg-gradient-to-br from-[#12141c]/95 via-[#0c0d12]/95 to-[#08090d]/95 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden group transition-all duration-500 hover:border-[#FFD400]/60">
+                {/* Light sweep beam */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+                <div className="flex items-center gap-2 text-xs font-mono text-[#FFD400] font-bold uppercase tracking-widest mb-3 relative z-10">
                   <Calendar className="w-4 h-4" />
                   <span>EXECUTIVE DISCOVERY</span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-[family-name:var(--font-syne)] font-bold uppercase text-white mb-2 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-[family-name:var(--font-syne)] font-bold uppercase text-white mb-2 leading-tight relative z-10">
                   Schedule A 30-Min Strategy Call
                 </h3>
 
-                <p className="text-xs text-neutral-300 leading-relaxed font-light mb-6">
+                <p className="text-xs text-neutral-300 leading-relaxed font-light mb-6 relative z-10">
                   Meet directly with our Founding Technical Directors to evaluate architectural trade-offs, feasibility, and deployment schedules.
                 </p>
 
-                <div className="p-3.5 rounded-xl bg-black/50 border border-white/10 mb-6 space-y-2 text-xs text-neutral-300">
+                <div className="p-3.5 rounded-xl bg-black/50 border border-white/10 mb-6 space-y-2 text-xs text-neutral-300 relative z-10">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD400]" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD400] shrink-0" />
                     <span>No pitch decks — pure architectural review</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD400]" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD400] shrink-0" />
                     <span>Preliminary tech stack & timeline evaluation</span>
                   </div>
                 </div>
 
-                <CyberButton href="mailto:contact@rndtechnosoft.com?subject=Book%20Architecture%20Call" variant="gold" size="md" fullWidth>
-                  REQUEST STRATEGY SESSION
-                </CyberButton>
+                <div className="relative z-10">
+                  <CyberButton href="mailto:contact@rndtechnosoft.com?subject=Book%20Architecture%20Call" variant="gold" size="md" fullWidth>
+                    REQUEST STRATEGY SESSION
+                  </CyberButton>
+                </div>
               </div>
 
               {/* Card 3: Global Hubs Compact Overview */}
-              <div className="rounded-[28px] border border-white/10 bg-[#0d0e14]/90 backdrop-blur-xl p-6 sm:p-7 shadow-xl">
-                <div className="text-xs font-mono uppercase tracking-widest text-[#FFD400] font-bold mb-4 flex items-center justify-between">
+              <div className="rounded-[28px] border border-white/10 bg-[#0d0e14]/90 backdrop-blur-xl p-6 sm:p-7 shadow-xl relative overflow-hidden group transition-all duration-500 hover:border-white/20">
+                <div className="text-xs font-mono uppercase tracking-widest text-[#FFD400] font-bold mb-4 flex items-center justify-between relative z-10">
                   <span>WORLDWIDE LOCATIONS</span>
                   <Globe className="w-4 h-4 text-[#FFD400]" />
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 relative z-10">
                   {globalHubs.map((hub, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
+                      className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#FFD400]/30 hover:bg-white/[0.04] transition-all duration-300 group/hub"
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-bold text-white font-[family-name:var(--font-syne)]">
+                        <span className="text-sm font-bold text-white font-[family-name:var(--font-syne)] group-hover/hub:text-[#FFD400] transition-colors">
                           {hub.city}
                         </span>
                         <span className="text-[10px] font-mono text-[#FFD400]">
@@ -397,16 +408,16 @@ export default function ContactUsPage() {
 
             </div>
 
-            {/* -------------------------------------------------------------------
+            {/* ---------------------------------------------------------------
                 RIGHT COLUMN: INTERACTIVE CYBER MISSION BRIEF CONFIGURATOR (7 cols)
-                ------------------------------------------------------------------- */}
+                --------------------------------------------------------------- */}
             <div className="lg:col-span-7">
-              <div className="rounded-[36px] border border-[#FFD400]/30 hover:border-[#FFD400]/60 bg-[#0d0e14]/95 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.85)] relative overflow-hidden transition-all duration-500">
+              <div className="rounded-[36px] border border-[#FFD400]/30 hover:border-[#FFD400]/60 bg-[#0d0e14]/95 backdrop-blur-2xl p-5 sm:p-8 lg:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.85)] relative overflow-hidden transition-all duration-500">
                 {/* Golden Corner Gradient Flash */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFD400]/10 rounded-full blur-[80px] pointer-events-none" />
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFD400] to-transparent shadow-[0_0_20px_#FFD400]" />
 
-                <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
+                <div className="flex items-center justify-between pb-5 sm:pb-6 border-b border-white/10 mb-6 sm:mb-8">
                   <div>
                     <div className="inline-flex items-center gap-2 text-xs font-mono text-[#FFD400] font-bold uppercase tracking-widest mb-1">
                       <Sparkles className="w-3.5 h-3.5" />
@@ -422,8 +433,8 @@ export default function ContactUsPage() {
                 </div>
 
                 {submitted ? (
-                  <div className="p-8 sm:p-12 rounded-3xl bg-[#FFD400]/10 border border-[#FFD400]/40 text-center animate-in fade-in zoom-in-95 duration-500">
-                    <div className="w-16 h-16 rounded-full bg-[#FFD400] text-black flex items-center justify-center mx-auto mb-5 shadow-[0_0_35px_rgba(255,212,0,0.5)]">
+                  <div className="p-8 sm:p-12 rounded-3xl bg-[#FFD400]/10 border border-[#FFD400]/40 text-center">
+                    <div className="w-16 h-16 rounded-full bg-[#FFD400] text-black flex items-center justify-center mx-auto mb-5 shadow-[0_0_35px_rgba(255,212,0,0.5)] animate-glow-pulse-soft">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <span className="text-xs font-mono text-[#FFD400] font-bold uppercase tracking-widest block mb-2">
@@ -444,8 +455,8 @@ export default function ContactUsPage() {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-8">
-                    
+                  <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+
                     {/* Step 1: Select Service Disciplines */}
                     <div>
                       <div className="flex items-center justify-between mb-3">
@@ -453,7 +464,7 @@ export default function ContactUsPage() {
                           <span>01 // SELECT TARGET CAPABILITIES</span>
                           <span className="text-[#FFD400]">*</span>
                         </label>
-                        <span className="text-[10px] font-mono text-neutral-500">
+                        <span className="text-[10px] font-mono text-neutral-500 hidden sm:block">
                           MULTI-SELECT ALLOWED
                         </span>
                       </div>
@@ -470,7 +481,7 @@ export default function ContactUsPage() {
                               className={`p-3 rounded-2xl border text-left transition-all duration-300 flex items-center gap-2.5 text-xs font-medium ${
                                 isSelected
                                   ? "bg-[#FFD400] text-black border-[#FFD400] font-bold shadow-[0_0_20px_rgba(255,212,0,0.35)] scale-[1.02]"
-                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-[#FFD400]/40 hover:text-white"
+                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-[#FFD400]/40 hover:text-white hover:bg-white/[0.05]"
                               }`}
                             >
                               <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-black" : "text-[#FFD400]"}`} />
@@ -497,7 +508,7 @@ export default function ContactUsPage() {
                               className={`py-2.5 px-3 rounded-xl border text-center font-mono text-xs transition-all duration-300 ${
                                 isSelected
                                   ? "bg-[#FFD400] text-black border-[#FFD400] font-bold shadow-[0_0_15px_rgba(255,212,0,0.3)]"
-                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-white/25 hover:text-white"
+                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-white/25 hover:text-white hover:bg-white/[0.05]"
                               }`}
                             >
                               {opt}
@@ -512,7 +523,7 @@ export default function ContactUsPage() {
                       <label className="block text-xs font-mono text-neutral-300 uppercase tracking-widest font-semibold mb-3">
                         03 // TARGET DEPLOYMENT TIMELINE
                       </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
                         {timelineOptions.map((time) => {
                           const isSelected = timeline === time;
                           return (
@@ -523,7 +534,7 @@ export default function ContactUsPage() {
                               className={`py-2.5 px-3 rounded-xl border text-center font-mono text-xs transition-all duration-300 ${
                                 isSelected
                                   ? "bg-[#FFD400] text-black border-[#FFD400] font-bold shadow-[0_0_15px_rgba(255,212,0,0.3)]"
-                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-white/25 hover:text-white"
+                                  : "bg-white/[0.03] text-neutral-300 border-white/10 hover:border-white/25 hover:text-white hover:bg-white/[0.05]"
                               }`}
                             >
                               {time}
@@ -548,7 +559,7 @@ export default function ContactUsPage() {
                             onChange={(e) =>
                               setFormData({ ...formData, name: e.target.value })
                             }
-                            className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-colors text-sm font-sans"
+                            className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-all text-sm font-sans"
                           />
                         </div>
 
@@ -564,7 +575,7 @@ export default function ContactUsPage() {
                             onChange={(e) =>
                               setFormData({ ...formData, email: e.target.value })
                             }
-                            className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-colors text-sm font-sans"
+                            className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-all text-sm font-sans"
                           />
                         </div>
                       </div>
@@ -580,7 +591,7 @@ export default function ContactUsPage() {
                           onChange={(e) =>
                             setFormData({ ...formData, company: e.target.value })
                           }
-                          className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-colors text-sm font-sans"
+                          className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-all text-sm font-sans"
                         />
                       </div>
 
@@ -596,19 +607,19 @@ export default function ContactUsPage() {
                           onChange={(e) =>
                             setFormData({ ...formData, brief: e.target.value })
                           }
-                          className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-colors text-sm font-sans leading-relaxed"
+                          className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-[#FFD400] focus:ring-1 focus:ring-[#FFD400] transition-all text-sm font-sans leading-relaxed formal-scroll"
                         />
                       </div>
 
                       {/* NDA Toggle */}
-                      <label className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors cursor-pointer select-none">
+                      <label className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#FFD400]/30 transition-colors cursor-pointer select-none group">
                         <input
                           type="checkbox"
                           checked={needsNDA}
                           onChange={(e) => setNeedsNDA(e.target.checked)}
-                          className="w-4 h-4 rounded border-white/20 text-[#FFD400] focus:ring-[#FFD400] bg-black accent-[#FFD400]"
+                          className="w-4 h-4 rounded border-white/20 text-[#FFD400] focus:ring-[#FFD400] bg-black accent-[#FFD400] shrink-0"
                         />
-                        <span className="text-xs text-neutral-300 font-light">
+                        <span className="text-xs text-neutral-300 font-light group-hover:text-white transition-colors">
                           Transmit Mutual Non-Disclosure Agreement (NDA) prior to technical briefing review.
                         </span>
                       </label>
@@ -644,9 +655,9 @@ export default function ContactUsPage() {
           </div>
         </section>
 
-        {/* =========================================================================
+        {/* ===================================================================
             3. ENTERPRISE TRUST PROTOCOLS
-            ========================================================================= */}
+            =================================================================== */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 mb-24 sm:mb-32">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold tracking-widest text-[#FFD400] uppercase mb-4 bg-[#FFD400]/10 border border-[#FFD400]/30">
@@ -664,20 +675,23 @@ export default function ContactUsPage() {
               return (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 rounded-3xl bg-[#0d0e14]/90 border border-white/10 hover:border-[#FFD400]/60 transition-all duration-300 hover:-translate-y-1 group shadow-xl hover:shadow-[0_0_35px_rgba(255,212,0,0.18)]"
+                  className="p-6 sm:p-7 rounded-3xl bg-[#0d0e14]/90 border border-white/10 hover:border-[#FFD400]/60 transition-all duration-300 hover:-translate-y-1.5 group shadow-xl hover:shadow-[0_0_35px_rgba(255,212,0,0.18)] relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#FFD400]/10 border border-[#FFD400]/30 flex items-center justify-center text-[#FFD400] group-hover:bg-[#FFD400] group-hover:text-black transition-all">
+                  {/* Light sweep beam */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+                  <div className="flex items-center justify-between mb-4 relative z-10">
+                    <div className="w-10 h-10 rounded-xl bg-[#FFD400]/10 border border-[#FFD400]/30 flex items-center justify-center text-[#FFD400] group-hover:bg-[#FFD400] group-hover:text-black group-hover:scale-110 transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-xs font-mono font-bold text-[#FFD400]">
                       {item.number}
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-[family-name:var(--font-syne)] font-bold text-white mb-2 group-hover:text-[#FFD400] transition-colors leading-snug">
+                  <h3 className="text-base sm:text-lg font-[family-name:var(--font-syne)] font-bold text-white mb-2 group-hover:text-[#FFD400] transition-colors leading-snug relative z-10">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-neutral-400 leading-relaxed font-light">
+                  <p className="text-xs text-neutral-400 leading-relaxed font-light relative z-10">
                     {item.desc}
                   </p>
                 </div>
@@ -686,9 +700,9 @@ export default function ContactUsPage() {
           </div>
         </section>
 
-        {/* =========================================================================
+        {/* ===================================================================
             4. FREQUENTLY ASKED QUESTIONS ACCORDION
-            ========================================================================= */}
+            =================================================================== */}
         <section className="max-w-4xl mx-auto px-4 sm:px-8 mb-20">
           <div className="text-center mb-12">
             <span className="text-xs font-mono font-bold tracking-widest text-[#FFD400] uppercase block mb-2">
@@ -726,11 +740,14 @@ export default function ContactUsPage() {
                     />
                   </button>
 
-                  {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 text-xs sm:text-sm text-neutral-300 leading-relaxed font-light border-t border-white/5 pt-4">
-                      {faq.a}
+                  {/* CSS Grid accordion for smooth height animation */}
+                  <div className={`faq-grid ${isOpen ? "open" : ""}`}>
+                    <div>
+                      <div className="px-5 sm:px-6 pb-6 text-xs sm:text-sm text-neutral-300 leading-relaxed font-light border-t border-white/5 pt-4">
+                        {faq.a}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
