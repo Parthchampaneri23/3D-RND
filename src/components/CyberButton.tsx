@@ -28,15 +28,15 @@ export default function CyberButton({
   fullWidth = false,
 }: CyberButtonProps) {
   const sizeStyles = {
-    sm: "px-4 py-2 text-xs gap-3",
-    md: "px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm gap-4 sm:gap-6",
-    lg: "px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base gap-6 sm:gap-8",
+    sm: "px-3.5 py-1.5 text-xs gap-2.5",
+    md: "px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm gap-3 sm:gap-4",
+    lg: "px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base gap-4 sm:gap-5",
   };
 
   const iconSizes = {
-    sm: "w-6 h-6",
-    md: "w-7 h-7 sm:w-8 sm:h-8",
-    lg: "w-8 h-8 sm:w-9 sm:h-9",
+    sm: "w-5 h-5",
+    md: "w-6 h-6 sm:w-7 sm:h-7",
+    lg: "w-7 h-7 sm:w-8 sm:h-8",
   };
 
   const variantStyles = {
@@ -51,12 +51,15 @@ export default function CyberButton({
 
   const content = (
     <div
-      className={`group relative inline-flex items-center justify-between rounded-full ${variantStyles[variant]} transition-all duration-300 cursor-pointer select-none ${sizeStyles[size]} ${
+      className={`group relative inline-flex items-center justify-between rounded-full overflow-hidden ${variantStyles[variant]} transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none ${sizeStyles[size]} ${
         fullWidth ? "w-full" : ""
       } ${className}`}
     >
+      {/* Dynamic Cyber Light Sweep / Shimmer Beam */}
+      <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none rounded-full" />
+
       {/* Left indicator + Button Text */}
-      <div className="flex items-center space-x-3 sm:space-x-3.5">
+      <div className="flex items-center space-x-3 sm:space-x-3.5 relative z-10">
         {showDot && (
           <span
             className={`w-2.5 h-2.5 rounded-full shrink-0 animate-pulse ${
@@ -79,9 +82,9 @@ export default function CyberButton({
 
       {/* Right Circular Icon Sub-Badge */}
       <div
-        className={`${iconSizes[size]} rounded-full ${badgeStyles[variant]} flex items-center justify-center transition-all duration-300 shrink-0 ml-2 shadow-inner`}
+        className={`${iconSizes[size]} rounded-full ${badgeStyles[variant]} flex items-center justify-center transition-all duration-300 shrink-0 ml-2 shadow-inner relative z-10`}
       >
-        <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:rotate-12 transition-transform duration-300" />
       </div>
     </div>
   );

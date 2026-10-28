@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono, Bebas_Neue } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono, Bebas_Neue, Syne } from "next/font/google";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -17,6 +17,12 @@ const bebasNeue = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-bebas",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${geistMono.variable} ${bebasNeue.variable} scroll-smooth dark`}
+      className={`${plusJakarta.variable} ${geistMono.variable} ${bebasNeue.variable} ${syne.variable} scroll-smooth dark`}
     >
       <body className="min-h-screen bg-[#06070a] text-white antialiased font-[family-name:var(--font-jakarta)] selection:bg-[#FFD400] selection:text-black">
         {children}

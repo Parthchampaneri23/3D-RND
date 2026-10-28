@@ -20,12 +20,9 @@ export default function RnDFooter() {
             <div className="flex items-center gap-3 mb-6">
               <div className="px-3.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-[#FFD400]/40 flex items-center">
                 <img
-                  src="https://www.rndtechnosoft.com/api/logo/download/photo_1743486518383.webp"
+                  src="/logo.svg"
                   alt="RND Technosoft Logo"
                   className="h-7 sm:h-8 w-auto object-contain"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = "/rnd_logo.webp";
-                  }}
                 />
               </div>
             </div>
