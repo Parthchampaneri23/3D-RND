@@ -44,18 +44,19 @@ export default function AboutUsSection() {
         <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#050608] to-transparent z-10" />
         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#050608] to-transparent z-10" />
 
-        {/* Full Colorful Agency Studio Photo Asset */}
+        {/* Full Background Astronaut & Workstation Asset */}
         <div className="relative w-full h-full max-w-7xl mx-auto flex items-center justify-end px-4 sm:px-6 lg:px-12">
-          <div className="relative w-[500px] sm:w-[580px] lg:w-[680px] xl:w-[760px] 2xl:w-[820px] aspect-[16/10] translate-y-4 sm:translate-y-6 lg:translate-y-2 opacity-95 rounded-3xl overflow-hidden border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
+          <div className="relative w-[500px] sm:w-[610px] lg:w-[740px] xl:w-[860px] 2xl:w-[920px] aspect-[612/408] translate-y-4 sm:translate-y-6 lg:translate-y-2 opacity-95">
             <Image
-              src="/images/agency_team_studio.jpg"
-              alt="RnD Technosoft Creative Team Studio"
+              src="/home-about2.png"
+              alt="RnD Technosoft Astronaut Workstation"
               fill
               priority
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 820px"
+              className="object-contain object-right"
+              sizes="(max-width: 1024px) 100vw, 920px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050608]/70 via-transparent to-transparent pointer-events-none" />
+            {/* Subtle Neon Floor Reflection */}
+            <div className="absolute -bottom-2 right-12 w-[390px] h-20 bg-[#FFD400]/20 blur-[50px] rounded-full pointer-events-none" />
           </div>
         </div>
 
