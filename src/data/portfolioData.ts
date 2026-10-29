@@ -1,3 +1,5 @@
+import { BeforeAfterData } from "@/components/BeforeAfterSection";
+
 export interface PortfolioProjectDetail {
   id: string;
   index: string;
@@ -29,6 +31,7 @@ export interface PortfolioProjectDetail {
     question: string;
     answer: string;
   }[];
+  beforeAfter?: BeforeAfterData;
 }
 
 export const portfolioData: PortfolioProjectDetail[] = [
@@ -106,6 +109,64 @@ export const portfolioData: PortfolioProjectDetail[] = [
         answer: "Yes. The WebGL canvas detects mobile GPU capability and dynamically scales shadow resolution and particle counts to sustain a rock-solid 60 FPS even on mid-tier mobile hardware.",
       },
     ],
+    beforeAfter: {
+      badge: "SPATIAL ARCHITECTURE TRANSFORMATION",
+      title: "Tactile Real-Time 3D",
+      highlightText: "Transformation",
+      description: "Comparing Lumen Sal's previous static 2D brochure website with the engineered Three.js / WebGL architectural showroom featuring real-time sunlight simulation.",
+      beforeLabel: "Legacy Static 2D Portfolio (2024)",
+      afterLabel: "RnD Spatial 3D Showroom (2026)",
+      beforeImage: "/images/about_blank_screen.jpg",
+      afterImage: "/images/project_lumen_sal.jpg",
+      beforeTagline: "Flat static JPEGs, 5.2s load, zero spatial immersion",
+      afterTagline: "Sub-second edge load, 60 FPS WebGL, real-time PBR lighting",
+      metrics: [
+        {
+          label: "Client Dwell Time / Session Depth",
+          before: "42 sec",
+          after: "5 min 18 sec",
+          improvement: "+657% Dwell",
+          subtext: "Interactive 3D camera spline exploration",
+          icon: "gauge",
+        },
+        {
+          label: "Inbound High-Ticket Inquiries",
+          before: "4 / month",
+          after: "31 / month",
+          improvement: "+675% Inbound",
+          subtext: "Direct architect commission requests",
+          icon: "trending",
+        },
+        {
+          label: "Asset Payload Optimization",
+          before: "18.4 MB",
+          after: "1.9 MB",
+          improvement: "-89.6% Size",
+          subtext: "Draco poly-compression & KTX2 textures",
+          icon: "zap",
+        },
+        {
+          label: "WebGL Frame Stability",
+          before: "18-24 FPS",
+          after: "60 FPS Locked",
+          improvement: "Silky Smooth",
+          subtext: "Dynamic shadow cascades & LOD switching",
+          icon: "shield",
+        },
+      ],
+      legacyPoints: [
+        "Flat, static catalog requiring clients to download 45MB PDF spec sheets",
+        "Zero real-time lighting interaction or material texture inspection",
+        "High bounce rate on smartphones due to uncompressed hero imagery",
+        "Disjointed brand presentation failing to communicate luxury craftsmanship",
+      ],
+      modernPoints: [
+        "Interactive WebGL viewport allowing clients to orbit spatial 3D interiors",
+        "Real-time celestial lighting toggle (Dawn, High Noon, Golden Hour)",
+        "Progressive sub-second streaming with instant tactile feedback",
+        "Sculptural design token typography commanding ultra-luxury prestige",
+      ],
+    },
   },
   {
     id: "toma-nota",

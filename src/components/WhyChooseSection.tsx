@@ -1,336 +1,250 @@
 "use client";
 
-import { ArrowUpRight, Headphones, Sparkles } from "lucide-react";
+import { Shield, ArrowRight, UserCircle } from "lucide-react";
+// import Image from "next/image"; // Uncomment when adding actual images
 
-export default function WhyChooseSection({
-  className = "py-24 sm:py-32",
-}: {
-  className?: string;
-} = {}) {
-  const avatars = [
-    {
-      src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
-      alt: "Senior Cloud Architect",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
-      alt: "Principal Full-Stack Engineer",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
-      alt: "Lead 3D & WebGL Developer",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
-      alt: "Staff UX/UI Systems Designer",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80",
-      alt: "AI & ML Pipeline Specialist",
-    },
-  ];
-
+export default function WhyChooseSection() {
   return (
-    <section
-      id="why-choose"
-      className={`relative ${className} bg-[#060709] text-white overflow-hidden selection:bg-[#FFD400] selection:text-black`}
-    >
-      {/* Background Ambience */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#FFD400]/4 blur-[160px] rounded-full pointer-events-none" />
+    <section className="relative py-[50px] bg-black text-white overflow-hidden">
+      <div className="relative max-w-[1400px] mx-auto px-6 sm:px-12">
+        {/* Grid Layout - 3 columns with center card taller */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-fr">
+          {/* Card 01 - Rapid Agile Delivery (Yellow - Top Left) */}
+          <div className="rounded-3xl bg-[#FFD400] text-black p-8 flex flex-col justify-between border border-[#FFD400]/30 hover:scale-[1.02] transition-transform">
+            <div>
+              <div className="text-5xl font-bold mb-3 opacity-90 font-[family-name:var(--font-bebas)] tracking-tight">01 /</div>
+              <h3 className="text-3xl font-bold mb-8 leading-tight font-[family-name:var(--font-jakarta)]">
+                Rapid Agile<br />Delivery
+              </h3>
 
-      {/* Subtle Background Cyber Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-4 sm:mb-6 shrink-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-[10px] sm:text-xs font-mono font-medium tracking-[0.25em] uppercase mb-2 shadow-[0_0_15px_rgba(255,212,0,0.15)]">
-            <Sparkles className="w-3 h-3" />
-            <span>THE RND ADVANTAGE // DIFFERENTIATORS</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-white mb-1.5 font-[family-name:var(--font-jakarta)] leading-tight">
-            Why Visionary Enterprises{" "}
-            <span className="text-[#FFD400]">Choose RnD</span>
-          </h2>
-          <p className="text-xs sm:text-[13px] text-neutral-400 font-light max-w-lg mx-auto leading-relaxed line-clamp-1 sm:line-clamp-none">
-            Eliminating vendor fragmentation with battle-tested sprint velocity, elite engineering talent, and guaranteed bank-grade uptime.
-          </p>
-        </div>
-
-        {/* ----------------- 5-CARD BENTO GRID (EQUAL COLUMNS) ----------------- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 flex-1 min-h-0 items-stretch">
-          
-          {/* ================= COLUMN 1 (LEFT): CARDS 01 & 02 ================= */}
-          <div className="flex flex-col gap-4 lg:gap-5 h-full">
-            
-            {/* CARD 01 - Rapid Agile Delivery (Solid Yellow) */}
-            <div className="rounded-[24px] lg:rounded-[28px] bg-[#FFD400] text-black p-5 sm:p-6 flex-1 flex flex-col justify-between shadow-[0_15px_40px_rgba(255,212,0,0.16)] hover:shadow-[0_20px_50px_rgba(255,212,0,0.25)] transition-all duration-300 group">
-              <div>
-                {/* Number */}
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-black mb-1.5">
-                  01 /
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-black tracking-tight leading-[1.12] mb-4 sm:mb-5 font-[family-name:var(--font-jakarta)]">
-                  Rapid Agile<br />Delivery
-                </h3>
-
-                {/* Segmented Sprint Progress Bar (4 distinct pills) */}
-                <div className="grid grid-cols-4 gap-1.5 mb-2">
-                  <div className="h-1.5 rounded-full bg-black" />
-                  <div className="h-1.5 rounded-full bg-black" />
-                  <div className="h-1.5 rounded-full bg-black" />
-                  <div className="h-1.5 rounded-full bg-black/25" />
-                </div>
-
-                {/* Sprint Labels */}
-                <div className="grid grid-cols-4 gap-1.5 text-[10px] font-bold text-black">
-                  <span>Sprint 01</span>
-                  <span>Sprint 02</span>
-                  <span>Sprint 03</span>
-                  <span className="text-black/55 font-medium">Deploy</span>
+              {/* Sprint Timeline */}
+              <div className="flex items-center gap-2 mb-6">
+                <div className="flex-1 h-1 bg-black/20 rounded-full overflow-hidden">
+                  <div className="h-full bg-black" style={{ width: '75%' }}></div>
                 </div>
               </div>
+              <div className="flex items-center justify-between text-xs font-semibold mb-8 font-[family-name:var(--font-jakarta)]">
+                <span>Sprint 01</span>
+                <span>Sprint 02</span>
+                <span>Sprint 03</span>
+                <span className="text-black/50">Deploy</span>
+              </div>
 
-              {/* Bottom Badge */}
-              <div className="pt-3">
-                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-black text-[#FFD400] text-[11px] font-bold tracking-wide shadow-sm">
-                  100% On-Time
-                </span>
+              {/* Badge */}
+              <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-black text-[#FFD400] text-sm font-bold font-[family-name:var(--font-jakarta)]">
+                100% On-Time
               </div>
             </div>
+          </div>
 
-            {/* CARD 02 - Top 1% Senior Engineers (Dark Matte) */}
-            <div className="rounded-[24px] lg:rounded-[28px] bg-[#0c0e14] border border-white/10 p-5 sm:p-6 flex-1 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] hover:border-[#FFD400]/40 transition-all duration-300 group">
-              <div>
-                {/* Header: Number & Badge */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-500">
-                    02 /
+          {/* Card 02 - Top 1% Senior Engineers (Dark - Bottom Left) */}
+          <div className="rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 p-8 flex flex-col justify-between hover:border-white/20 transition-all">
+            <div>
+              <div className="flex items-start justify-between mb-6">
+                <div className="text-5xl font-bold text-white/40 font-[family-name:var(--font-bebas)] tracking-tight">02 /</div>
+                <span className="px-3 py-1.5 rounded-full bg-white/10 text-white/60 text-xs font-medium font-[family-name:var(--font-jakarta)]">
+                  Vetted Talent
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-bold mb-8 font-[family-name:var(--font-jakarta)]">
+                Top 1% Senior<br />Engineers
+              </h3>
+
+              {/* Avatar Group */}
+              <div className="flex -space-x-3 mb-6">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div 
+                    key={i}
+                    className={`w-12 h-12 rounded-full border-2 border-[#0a0a0a] flex items-center justify-center text-white font-bold text-xs
+                      ${i === 1 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : ''}
+                      ${i === 2 ? 'bg-gradient-to-br from-blue-400 to-blue-600' : ''}
+                      ${i === 3 ? 'bg-gradient-to-br from-orange-400 to-orange-600' : ''}
+                      ${i === 4 ? 'bg-gradient-to-br from-purple-400 to-purple-600' : ''}
+                      ${i === 5 ? 'bg-gradient-to-br from-pink-400 to-pink-600' : ''}
+                      ${i === 6 ? 'bg-gradient-to-br from-teal-400 to-teal-600' : ''}
+                    `}
+                  >
+                    {/* Placeholder - replace with real images */}
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[10px] font-mono text-neutral-400">
-                    Vetted Talent
-                  </span>
-                </div>
+                ))}
+              </div>
 
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-[1.15] mb-4 font-[family-name:var(--font-jakarta)]">
-                  Top 1% Senior<br />Engineers
-                </h3>
-
-                {/* Avatar Stack */}
-                <div className="flex items-center -space-x-2.5 mb-4">
-                  {avatars.map((av, idx) => (
-                    <img
-                      key={idx}
-                      src={av.src}
-                      alt={av.alt}
-                      className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#0c0e14] ring-1 ring-white/10 hover:scale-110 hover:z-20 transition-all duration-200"
-                    />
-                  ))}
-                  {/* Dark 6th Placeholder Circle */}
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#0c0e14] bg-neutral-900 ring-1 ring-white/10 flex items-center justify-center text-[10px] text-neutral-500 font-bold">
-                    +45
-                  </div>
-                </div>
-
-                {/* Metric Stat */}
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-3xl sm:text-4xl font-bold text-[#FFD400] tracking-tight leading-none">
-                    10+
-                  </span>
-                  <span className="text-xs text-neutral-400 font-medium">
-                    Years Avg.
-                  </span>
-                </div>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-5xl font-bold text-[#FFD400] font-[family-name:var(--font-bebas)] tracking-tight">10+</span>
+                <span className="text-white/60 text-sm font-[family-name:var(--font-jakarta)]">Years Avg.</span>
               </div>
 
               {/* Tech Badges */}
-              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
-                {["React", "Node", "AWS", "Vetted Talent"].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-0.5 rounded-full bg-white/[0.03] border border-white/10 text-[10px] text-neutral-300 font-medium hover:border-[#FFD400]/40 transition-colors"
-                  >
+              <div className="flex flex-wrap gap-2">
+                {['React', 'Node', 'AWS', 'Vetted Talent'].map((tech) => (
+                  <span key={tech} className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-white/70 font-[family-name:var(--font-jakarta)]">
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
-
           </div>
 
-          {/* ================= COLUMN 2 (CENTER HERO): EQUAL HEIGHT TALL CARD ================= */}
-          <div className="h-full flex flex-col">
-            <div className="rounded-[24px] lg:rounded-[28px] bg-black border border-white/10 p-5 sm:p-6 h-full flex flex-col justify-between items-center text-center relative overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.9)] hover:border-[#FFD400]/40 transition-all duration-300 group">
-              
-              {/* Top Amber Ambient Glow */}
-              <div className="absolute top-0 inset-x-0 h-36 bg-gradient-to-b from-[#FFD400]/12 via-[#FFD400]/3 to-transparent pointer-events-none" />
-
-              {/* Astronaut Floating Over Golden 3D Shield (Filling Card Seamlessly) */}
-              <div className="relative z-10 w-full flex-1 min-h-[220px] lg:min-h-[260px] flex items-center justify-center overflow-hidden my-1">
-                <img
-                  src="/images/why_choose_astronaut_shield.jpg"
-                  alt="3D Astronaut with Glowing Golden Shield"
-                  className="w-full h-full object-contain transform group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+          {/* CENTER CARD - Astronaut with Shield (Tall - Spans 2 rows) */}
+          <div className="rounded-3xl bg-gradient-to-b from-[#3a3a2a] via-[#2a2a1a] to-black border border-[#FFD400]/20 p-8 flex flex-col items-center justify-between md:row-span-2 lg:row-span-2 relative overflow-hidden hover:border-[#FFD400]/40 transition-all">
+            {/* Floating particles effect */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(20)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-[#FFD400]/30 rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
                 />
-                {/* Seamless Bottom Vignette Blend into 3x Faster */}
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+              ))}
+            </div>
+
+            {/* Astronaut with Shield */}
+            <div className="relative z-10 flex-1 flex items-center justify-center w-full">
+              <div className="relative">
+                {/* Glowing shield placeholder */}
+                <div className="relative w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
+                  {/* Shield glow */}
+                  <div className="absolute inset-0 flex items-end justify-center">
+                    <div className="w-32 h-32 bg-[#FFD400]/30 blur-3xl rounded-full"></div>
+                  </div>
+                  
+                  {/* Shield icon */}
+                  <div className="relative z-10 text-[#FFD400]">
+                    <Shield className="w-24 h-24 sm:w-32 sm:h-32 fill-[#FFD400]/20 stroke-[#FFD400] stroke-[1.5]" />
+                  </div>
+
+                  {/* Astronaut placeholder - replace with actual image */}
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2">
+                    <UserCircle className="w-32 h-32 sm:w-40 sm:h-40 text-[#FFD400]/40" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 3x Faster Text */}
+            <div className="relative z-10 text-center mb-8">
+              <h2 className="text-6xl sm:text-7xl md:text-8xl font-bold text-[#FFD400] mb-3 tracking-tight font-[family-name:var(--font-bebas)]">
+                3x Faster
+              </h2>
+              <p className="text-white/60 text-lg sm:text-xl font-[family-name:var(--font-jakarta)]">
+                From Concept to<br />Scalable Launch
+              </p>
+            </div>
+
+            {/* CTA Button */}
+            <button className="relative z-10 w-full px-8 py-4 rounded-2xl bg-[#FFD400] text-black font-bold text-base flex items-center justify-center gap-2 hover:bg-[#FFD400]/90 transition-all group font-[family-name:var(--font-jakarta)]">
+              Book Free Consultation
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+          {/* Card 03 - Bank-Grade Cloud Security (Top Right) */}
+          <div className="rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 p-8 flex flex-col justify-between hover:border-white/20 transition-all">
+            <div>
+              <div className="flex items-start justify-between mb-6">
+                <div className="text-5xl font-bold text-white/40 font-[family-name:var(--font-bebas)] tracking-tight">03 /</div>
               </div>
 
-              {/* Typography Content */}
-              <div className="relative z-10 text-center mb-4 w-full shrink-0">
-                <h3 className="text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#FFD400] tracking-[-0.03em] leading-none mb-2 font-[family-name:var(--font-jakarta)] drop-shadow-[0_0_30px_rgba(255,212,0,0.35)]">
-                  3x Faster
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-400 font-normal leading-snug">
-                  From Concept to<br />Scalable Launch
-                </p>
+              <h3 className="text-2xl font-bold mb-8 font-[family-name:var(--font-jakarta)]">
+                Bank-Grade<br />Cloud Security
+              </h3>
+
+              {/* Graph */}
+              <div className="h-24 mb-6">
+                <svg className="w-full h-full" viewBox="0 0 200 80" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="securityGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#FFD400" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="#FFD400" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0,60 L20,58 L40,55 L60,50 L80,45 L100,42 L120,38 L140,30 L160,25 L180,22 L200,20"
+                    fill="url(#securityGradient)"
+                  />
+                  <path
+                    d="M0,60 L20,58 L40,55 L60,50 L80,45 L100,42 L120,38 L140,30 L160,25 L180,22 L200,20"
+                    fill="none"
+                    stroke="#FFD400"
+                    strokeWidth="2"
+                  />
+                </svg>
               </div>
 
-              {/* Solid Yellow Action Button */}
-              <a
-                href="#contact"
-                className="relative z-10 w-full py-3 sm:py-3.5 px-5 rounded-xl bg-[#FFD400] hover:bg-[#ffe34d] text-black font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,212,0,0.3)] hover:shadow-[0_0_30px_rgba(255,212,0,0.5)] shrink-0 group/btn"
-              >
-                <span>Book Free Consultation</span>
-                <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-              </a>
-
+              <div className="flex items-center justify-between">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-sm font-bold font-[family-name:var(--font-jakarta)]">
+                  99.99% SLA Uptime
+                </div>
+                <span className="text-xs text-white/40 font-[family-name:var(--font-jakarta)]">SOC2<br/>Compliant</span>
+              </div>
             </div>
           </div>
 
-          {/* ================= COLUMN 3 (RIGHT): CARDS 03 & 04 ================= */}
-          <div className="flex flex-col gap-4 lg:gap-5 h-full">
-            
-            {/* CARD 03 - Bank-Grade Cloud Security */}
-            <div className="rounded-[24px] lg:rounded-[28px] bg-[#0c0e14] border border-white/10 p-5 sm:p-6 flex-1 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] hover:border-[#FFD400]/40 transition-all duration-300 group">
-              <div>
-                {/* Number */}
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-500 mb-1.5">
-                  03 /
-                </div>
+          {/* Card 04 - 24/7 Dedicated Support (Bottom Right) */}
+          <div className="rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 p-8 flex flex-col justify-between hover:border-white/20 transition-all">
+            <div>
+              <div className="flex items-start justify-between mb-6">
+                <div className="text-5xl font-bold text-white/40 font-[family-name:var(--font-bebas)] tracking-tight">04 /</div>
+              </div>
 
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-[1.15] mb-3 font-[family-name:var(--font-jakarta)]">
-                  Bank-Grade<br />Cloud Security
-                </h3>
+              <h3 className="text-2xl font-bold mb-8 font-[family-name:var(--font-jakarta)]">
+                24/7 Dedicated<br />Support
+              </h3>
 
-                {/* Glowing Yellow Sine Wave Graph */}
-                <div className="relative h-14 sm:h-16 mb-2 flex items-center justify-center overflow-hidden">
-                  <svg
-                    className="w-full h-full overflow-visible"
-                    viewBox="0 0 320 90"
-                    preserveAspectRatio="none"
-                  >
-                    <defs>
-                      <linearGradient id="whySecurityGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#FFD400" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#FFD400" stopOpacity="0" />
-                      </linearGradient>
-                      <filter id="yellowGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                        <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#FFD400" floodOpacity="0.6" />
-                      </filter>
-                    </defs>
-
-                    {/* Area fill */}
-                    <path
-                      d="M 0,65 Q 25,68 50,55 T 100,58 T 150,38 T 200,45 T 250,22 T 300,18 L 320,18 L 320,90 L 0,90 Z"
-                      fill="url(#whySecurityGlow)"
-                    />
-
-                    {/* Glowing Stroke */}
-                    <path
-                      d="M 0,65 Q 25,68 50,55 T 100,58 T 150,38 T 200,45 T 250,22 T 300,18 L 320,18"
-                      fill="none"
-                      stroke="#FFD400"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      filter="url(#yellowGlowFilter)"
-                    />
+              {/* Support Network Diagram */}
+              <div className="relative h-24 mb-6 flex items-center justify-center">
+                <div className="relative">
+                  {/* Center node */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#FFD400]/20 border-2 border-[#FFD400] flex items-center justify-center">
+                    <UserCircle className="w-6 h-6 text-[#FFD400]" />
+                  </div>
+                  {/* Connection lines and nodes */}
+                  <svg className="w-48 h-24" viewBox="0 0 200 100">
+                    <line x1="100" y1="50" x2="40" y2="30" stroke="#FFD400" strokeWidth="1" opacity="0.3" />
+                    <line x1="100" y1="50" x2="160" y2="30" stroke="#FFD400" strokeWidth="1" opacity="0.3" />
+                    <line x1="100" y1="50" x2="40" y2="70" stroke="#FFD400" strokeWidth="1" opacity="0.3" />
+                    <line x1="100" y1="50" x2="160" y2="70" stroke="#FFD400" strokeWidth="1" opacity="0.3" />
+                    <circle cx="40" cy="30" r="4" fill="#FFD400" opacity="0.5" />
+                    <circle cx="160" cy="30" r="4" fill="#FFD400" opacity="0.5" />
+                    <circle cx="40" cy="70" r="4" fill="#FFD400" opacity="0.5" />
+                    <circle cx="160" cy="70" r="4" fill="#FFD400" opacity="0.5" />
                   </svg>
                 </div>
               </div>
 
-              {/* Bottom Badges */}
-              <div className="flex items-center justify-between gap-2 pt-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#FFD400] text-black text-[10px] sm:text-[11px] font-bold tracking-wide shadow-sm">
-                  99.99% SLA Uptime
-                </span>
-                <span className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[10px] text-neutral-400 font-mono">
-                  SOC2 Compliant
-                </span>
-              </div>
-            </div>
-
-            {/* CARD 04 - 24/7 Dedicated Support */}
-            <div className="rounded-[24px] lg:rounded-[28px] bg-[#0c0e14] border border-white/10 p-5 sm:p-6 flex-1 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] hover:border-[#FFD400]/40 transition-all duration-300 group">
-              <div>
-                {/* Number */}
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-500 mb-1.5">
-                  04 /
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-[1.15] mb-2 font-[family-name:var(--font-jakarta)]">
-                  24/7 Dedicated<br />Support
-                </h3>
-
-                {/* Telemetry Support Network Illustration */}
-                <div className="relative h-14 sm:h-16 mb-2 flex items-center justify-end pr-3">
-                  <div className="relative flex items-center justify-center">
-                    {/* Pulsing Outer Orbit */}
-                    <div className="absolute w-16 h-16 rounded-full border border-[#FFD400]/20 animate-spin" style={{ animationDuration: "20s" }}>
-                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FFD400] shadow-[0_0_8px_#FFD400]" />
-                    </div>
-
-                    {/* Orbit lines */}
-                    <div className="absolute w-11 h-11 rounded-full border border-dashed border-[#FFD400]/30" />
-
-                    {/* Center Headset Circle */}
-                    <div className="w-9 h-9 rounded-full bg-[#FFD400]/15 border border-[#FFD400] flex items-center justify-center text-[#FFD400] shadow-[0_0_15px_rgba(255,212,0,0.3)] z-10">
-                      <Headphones className="w-4 h-4 text-[#FFD400]" />
-                    </div>
-
-                    {/* Satellite nodes */}
-                    <div className="absolute -top-1 -right-6 w-1.5 h-1.5 rounded-full bg-[#FFD400]/80 shadow-[0_0_6px_#FFD400]" />
-                    <div className="absolute -bottom-1 -left-6 w-1.5 h-1.5 rounded-full bg-[#FFD400]/80 shadow-[0_0_6px_#FFD400]" />
-                  </div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-5xl font-bold text-[#FFD400] font-[family-name:var(--font-bebas)] tracking-tight">98%</span>
+                <div className="text-sm text-white/60 font-[family-name:var(--font-jakarta)]">
+                  Client Retention
                 </div>
               </div>
 
-              {/* Bottom Metric & Response Pill */}
-              <div className="flex items-end justify-between pt-2">
-                <div>
-                  <div className="text-3xl sm:text-4xl font-bold text-[#FFD400] tracking-tight leading-none mb-0.5">
-                    98%
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-neutral-400 font-medium">
-                    Client Retention
-                  </div>
-                </div>
-
-                <span className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[10px] text-neutral-300 font-mono">
+              <div className="mt-4">
+                <span className="text-xs text-white/40 bg-white/5 px-3 py-1.5 rounded-lg inline-block font-[family-name:var(--font-jakarta)]">
                   &lt;15m Response
                 </span>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+      `}</style>
     </section>
   );
 }

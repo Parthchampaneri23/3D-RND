@@ -33,6 +33,7 @@ import {
 import Navbar from "./Navbar";
 import RnDFooter from "./RnDFooter";
 import SpaceBackground from "./SpaceBackground";
+import BeforeAfterSection, { BeforeAfterData } from "./BeforeAfterSection";
 
 export interface UnifiedDetailItem {
   id: string;
@@ -67,6 +68,7 @@ export interface UnifiedDetailItem {
     question: string;
     answer: string;
   }[];
+  beforeAfter?: BeforeAfterData;
 }
 
 export interface RelatedItemSummary {
@@ -312,14 +314,23 @@ export default function UnifiedDetailsView({
               </span>
             </div>
 
-            {/* Right: Quick Action CTA */}
-            <a
-              href="#inquire-form"
-              className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
-            >
-              <span>Book Consultation</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            {/* Right: Quick Action CTAs */}
+            <div className="flex items-center space-x-2.5">
+              <a
+                href="#before-after"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-neutral-200 text-xs font-mono uppercase tracking-wider transition-all hover:text-[#FFD400] hover:border-[#FFD400]/40 cursor-pointer"
+              >
+                <Sparkles className="w-3 h-3 text-[#FFD400]" />
+                <span>Before &amp; After</span>
+              </a>
+              <a
+                href="#inquire-form"
+                className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>Book Consultation</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -485,6 +496,18 @@ export default function UnifiedDetailsView({
 
           </div>
         </section>
+
+        {/* =========================================================================
+            3.5. ATTRACTIVE INTERACTIVE BEFORE & AFTER TRANSFORMATION SHOWCASE
+            ========================================================================= */}
+        <div id="before-after">
+          <BeforeAfterSection
+            data={item.beforeAfter}
+            type={type}
+            category={item.category}
+            title={fullTitle}
+          />
+        </div>
 
         {/* =========================================================================
             4. DETAILED SCOPE OF WORKS (3-Column Execution Matrix)

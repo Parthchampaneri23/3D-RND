@@ -1,3 +1,5 @@
+import { BeforeAfterData } from "@/components/BeforeAfterSection";
+
 export interface ServicePillar {
   title: string;
   desc: string;
@@ -56,6 +58,7 @@ export interface ServiceDetail {
     tag: string;
   };
   faqs: ServiceFaq[];
+  beforeAfter?: BeforeAfterData;
 }
 
 export const servicesData: ServiceDetail[] = [
@@ -200,6 +203,64 @@ export const servicesData: ServiceDetail[] = [
         answer: "Absolutely. We operate transparent sprints via Jira and shared Slack/Teams channels. Your team can review PRs, join sprint ceremonies, and co-author code seamlessly.",
       },
     ],
+    beforeAfter: {
+      badge: "ENTERPRISE CLOUD ARCHITECTURE BENCHMARK",
+      title: "Full-Stack Web & Cloud",
+      highlightText: "Transformation",
+      description: "Direct comparative evaluation between a legacy single-instance monolithic server and our modern Next.js 15 multi-region edge mesh built for high concurrency.",
+      beforeLabel: "Legacy Monolith (Pre-Migration)",
+      afterLabel: "RnD Edge Next.js 15 (Post-Migration)",
+      beforeImage: "/images/about_blank_screen.jpg",
+      afterImage: "/images/service_webdev.jpg",
+      beforeTagline: "3.8s TTFB, single-server crash risk, 38 Lighthouse",
+      afterTagline: "Sub-400ms Edge SSR, 99.99% SLA, 99 Lighthouse Score",
+      metrics: [
+        {
+          label: "Time to First Byte (TTFB)",
+          before: "3.82s",
+          after: "0.38s",
+          improvement: "90% Faster",
+          subtext: "Global Cloudflare Edge SSR cache",
+          icon: "zap",
+        },
+        {
+          label: "Mobile Lighthouse Score",
+          before: "38 / 100",
+          after: "99 / 100",
+          improvement: "+161% Score",
+          subtext: "Zero layout shift & sub-100ms hydration",
+          icon: "gauge",
+        },
+        {
+          label: "E-Commerce / Conversion Rate",
+          before: "1.2%",
+          after: "4.8%",
+          improvement: "+300% Lift",
+          subtext: "Fast checkout & tactile micro-interactions",
+          icon: "trending",
+        },
+        {
+          label: "Max Concurrency Load",
+          before: "250 Req/sec",
+          after: "10M+ Req/min",
+          improvement: "Enterprise Grade",
+          subtext: "PostgreSQL read-replicas & Redis mesh",
+          icon: "shield",
+        },
+      ],
+      legacyPoints: [
+        "Monolithic single-point-of-failure server crashing during flash marketing sales",
+        "Sluggish 3.8s TTFB causing massive mobile abandonment before initial render",
+        "Cumulative Layout Shift (CLS > 0.35) frustrating users with jumping UI buttons",
+        "Opaque manual deployments requiring midnight maintenance downtime windows",
+      ],
+      modernPoints: [
+        "Distributed Next.js 15 edge serverless architecture with auto-healing pods",
+        "Sub-400ms worldwide Time to First Byte with intelligent stale-while-revalidate",
+        "Zero layout shift (CLS 0.00) with rock-solid responsive typography tokens",
+        "Zero-downtime blue/green deployments backed by our 99.99% enterprise SLA",
+      ],
+    },
   },
   {
     id: "seo-search",
@@ -330,6 +391,64 @@ export const servicesData: ServiceDetail[] = [
         answer: "Yes. Our engineers do not just deliver PDF audits; we submit ready-to-merge pull requests into your GitHub/GitLab repository with full test suites.",
       },
     ],
+    beforeAfter: {
+      badge: "ALGORITHMIC SEARCH DOMINANCE BENCHMARK",
+      title: "Technical SEO & Search",
+      highlightText: "Transformation",
+      description: "Observing the organic growth trajectory from invisible page-4 rankings to verified top-3 Google positions and programmatic entity authority.",
+      beforeLabel: "Legacy Organic Baseline",
+      afterLabel: "RnD Search Ops Dominance",
+      beforeImage: "/images/about_blank_screen.jpg",
+      afterImage: "/images/seoupdate.png",
+      beforeTagline: "Page 4 SERP obscurity, 1.1% conversion, unindexed URLs",
+      afterTagline: "#1 Google Rankings, 340% organic pipeline, 100 Core Web Vitals",
+      metrics: [
+        {
+          label: "Non-Brand Organic Search Traffic",
+          before: "1,240 / mo",
+          after: "48,900 / mo",
+          improvement: "+3,843% Growth",
+          subtext: "High-intent enterprise B2B buyer keywords",
+          icon: "trending",
+        },
+        {
+          label: "Google AI Overviews / Entity Citations",
+          before: "0 Featured",
+          after: "84 Featured",
+          improvement: "AI Dominance",
+          subtext: "Rich JSON-LD entity graph deployment",
+          icon: "shield",
+        },
+        {
+          label: "Mobile Core Web Vitals Score",
+          before: "41 / 100",
+          after: "100 / 100",
+          improvement: "+144% Score",
+          subtext: "Edge SSR with zero layout shift",
+          icon: "gauge",
+        },
+        {
+          label: "Inbound Pipeline Value Generated",
+          before: "$140,000",
+          after: "$2,850,000",
+          improvement: "+1,935% ROI",
+          subtext: "Audited closed-won deal attribution",
+          icon: "zap",
+        },
+      ],
+      legacyPoints: [
+        "Indexation blocked by JavaScript hydration waterfalls and render-blocking scripts",
+        "Orphaned URLs and redirect loops wasting 70%+ of search engine crawl budgets",
+        "Thin content architecture penalised by modern helpful content algorithmic filters",
+        "Zero structured data schema, rendering content invisible to AI-driven search models",
+      ],
+      modernPoints: [
+        "Edge-cached server-side rendered HTML returning instant status 200 responses to crawlers",
+        "Comprehensive JSON-LD semantic entity graph registered with Google Knowledge Vault",
+        "Programmatic landing page clusters addressing high-intent long-tail keyword queries",
+        "Automated continuous crawl monitoring detecting 404 regressions before index loss",
+      ],
+    },
   },
   {
     id: "mobile-apps",

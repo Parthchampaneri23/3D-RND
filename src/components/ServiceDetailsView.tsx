@@ -69,6 +69,7 @@ export default function ServiceDetailsView({ service }: ServiceDetailsViewProps)
     scope: scopeModules,
     techStack: service.techStack,
     faqs: service.faqs,
+    beforeAfter: service.beforeAfter,
   };
 
   // Map all services for the related section

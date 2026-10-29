@@ -67,6 +67,7 @@ export default async function PortfolioDetailPage({
     scope: project.scope,
     techStack: project.techStack,
     faqs: project.faqs,
+    beforeAfter: project.beforeAfter,
   };
 
   const relatedSummaries: RelatedItemSummary[] = portfolioData.map((p) => ({
