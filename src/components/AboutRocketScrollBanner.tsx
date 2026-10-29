@@ -329,7 +329,7 @@ export default function AboutRocketScrollBanner({
         {/* Foreground Content Container */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 w-full pt-20 sm:pt-24 pb-6 pointer-events-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             {/* =========================================================================
                 LEFT SIDE: ABOUT US DATA
                 - Initial state (0% to ~16%): NO text shown (clean video scrub).
@@ -337,11 +337,10 @@ export default function AboutRocketScrollBanner({
                 ========================================================================= */}
             <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center max-w-2xl">
               <div
-                className={`transition-all duration-700 ease-out flex flex-col space-y-4 sm:space-y-4.5 ${
-                  isRocketPassed
+                className={`transition-all duration-700 ease-out flex flex-col space-y-4 sm:space-y-4.5 ${isRocketPassed
                     ? "opacity-100 translate-y-0 pointer-events-auto scale-100"
                     : "opacity-0 translate-y-8 pointer-events-none scale-[0.97]"
-                }`}
+                  }`}
               >
                 {/* 1. Category Indicator Tag with Origin Badge */}
                 <div>

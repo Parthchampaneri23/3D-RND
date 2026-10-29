@@ -216,47 +216,49 @@ export default function UnifiedDetailsView({
       <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
 
         {/* =========================================================================
-            2. STICKY SUB-HEADER ACTION BAR (Matching Reference Page)
+            2. STICKY SUB-HEADER ACTION BAR (Hidden on Portfolio Details)
             ========================================================================= */}
-        <div className="border-b border-white/10 bg-[#0c0e14]/95 backdrop-blur-xl sticky top-16 sm:top-20 z-30 shadow-2xl rounded-t-[32px] sm:rounded-t-[44px]">
-          <div className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 py-3.5 flex items-center justify-between">
-            {/* Left: Back Link */}
-            <Link
-              href={parentPath}
-              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.18em] text-neutral-400 hover:text-[#FFD400] transition-colors group"
-            >
-              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1.5 transition-transform text-[#FFD400]" />
-              <span>All {parentLabel}</span>
-            </Link>
-
-            {/* Center: Index & Title Indicator */}
-            <div className="hidden sm:flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-neutral-400">
-              <span className="text-[#FFD400] font-bold">{item.index}</span>
-              <span>•</span>
-              <span className="truncate max-w-[320px] text-white">
-                {fullTitle}
-              </span>
-            </div>
-
-            {/* Right: Quick Action CTAs */}
-            <div className="flex items-center space-x-2.5">
-              <a
-                href="#before-after"
-                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-neutral-200 text-xs font-mono uppercase tracking-wider transition-all hover:text-[#FFD400] hover:border-[#FFD400]/40 cursor-pointer"
+        {type !== "portfolio" && (
+          <div className="border-b border-white/10 bg-[#0c0e14]/95 backdrop-blur-xl sticky top-16 sm:top-20 z-30 shadow-2xl rounded-t-[32px] sm:rounded-t-[44px]">
+            <div className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 py-3.5 flex items-center justify-between">
+              {/* Left: Back Link */}
+              <Link
+                href={parentPath}
+                className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.18em] text-neutral-400 hover:text-[#FFD400] transition-colors group"
               >
-                <Sparkles className="w-3 h-3 text-[#FFD400]" />
-                <span>Before &amp; After</span>
-              </a>
-              <a
-                href="#inquire-form"
-                className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <span>Book Consultation</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1.5 transition-transform text-[#FFD400]" />
+                <span>All {parentLabel}</span>
+              </Link>
+
+              {/* Center: Index & Title Indicator */}
+              <div className="hidden sm:flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-neutral-400">
+                <span className="text-[#FFD400] font-bold">{item.index}</span>
+                <span>•</span>
+                <span className="truncate max-w-[320px] text-white">
+                  {fullTitle}
+                </span>
+              </div>
+
+              {/* Right: Quick Action CTAs */}
+              <div className="flex items-center space-x-2.5">
+                <a
+                  href="#before-after"
+                  className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-neutral-200 text-xs font-mono uppercase tracking-wider transition-all hover:text-[#FFD400] hover:border-[#FFD400]/40 cursor-pointer"
+                >
+                  <Sparkles className="w-3 h-3 text-[#FFD400]" />
+                  <span>Before &amp; After</span>
+                </a>
+                <a
+                  href="#inquire-form"
+                  className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs font-mono uppercase tracking-wider font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <span>Book Consultation</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* =========================================================================
             3. MAIN 2-COLUMN SPLIT SECTION (7 Cols Left / 5 Cols Sticky Right)
@@ -266,10 +268,49 @@ export default function UnifiedDetailsView({
             
             {/* Left Column (7 cols): Methodology, Overview, Quote Card & Gallery */}
             <div className="lg:col-span-7 space-y-8">
+              {/* Project Intelligence & Specification Matrix (For Portfolio / Case Studies) */}
+              {(item.client || item.year || item.sla) && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-lg">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                      Client Partner
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold text-white truncate">
+                      {item.client || "Enterprise Atelier"}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                      Release Cycle
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold text-[#FFD400] font-mono">
+                      {item.year || "2026"} // PROD
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                      Discipline
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold text-white truncate">
+                      {item.category}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                      Performance SLA
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold text-emerald-400 font-mono flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                      <span className="truncate">{item.sla || "Sub-Second Edge"}</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+
               <div className="space-y-3">
                 <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono uppercase tracking-[0.2em] font-semibold">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Engineering Discipline &amp; Methodology</span>
+                  <span>{item.badge || "Engineering Discipline & Methodology"}</span>
                 </div>
                 <h2 className="font-[family-name:var(--font-syne)] text-3xl sm:text-4xl lg:text-5xl text-white font-bold leading-[1.15] uppercase">
                   The Architectural Craft Behind{" "}
@@ -836,6 +877,49 @@ export default function UnifiedDetailsView({
                   </Link>
                 ))}
             </div>
+
+            {/* Prev / Next Mission Control */}
+            {(prevItem || nextItem) && (
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10 mt-12 border-t border-white/10">
+                {prevItem ? (
+                  <Link
+                    href={`${parentPath}/${prevItem.id}`}
+                    className="group flex items-center gap-3.5 p-4 sm:px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#FFD400]/40 transition-all w-full sm:w-auto"
+                  >
+                    <ArrowLeft className="w-4 h-4 text-[#FFD400] group-hover:-translate-x-1 transition-transform" />
+                    <div className="text-left">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                        Previous Mission
+                      </span>
+                      <span className="text-sm font-bold text-white group-hover:text-[#FFD400] transition-colors">
+                        {prevItem.title}
+                      </span>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+
+                {nextItem ? (
+                  <Link
+                    href={`${parentPath}/${nextItem.id}`}
+                    className="group flex items-center justify-end gap-3.5 p-4 sm:px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#FFD400]/40 transition-all w-full sm:w-auto ml-auto"
+                  >
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                        Next Mission
+                      </span>
+                      <span className="text-sm font-bold text-white group-hover:text-[#FFD400] transition-colors">
+                        {nextItem.title}
+                      </span>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#FFD400] group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+              </div>
+            )}
           </section>
         )}
       </main>

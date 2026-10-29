@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
 import SpaceBackground from "@/components/SpaceBackground";
 import CyberButton from "@/components/CyberButton";
-import AboutCastBanner from "@/components/AboutCastBanner";
+import PageBanner from "@/components/PageBanner";
 import AboutRocketScrollBanner from "@/components/AboutRocketScrollBanner";
 import ConstellationMissionVision from "@/components/ConstellationMissionVision";
 import {
@@ -29,6 +31,94 @@ import CosmicProcessSection from "@/components/CosmicProcessSection";
 
 export default function AboutUsPage() {
   const [isPlayingShowreel, setIsPlayingShowreel] = useState(false);
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // 1. Who We Are Sticky Overview Card Entrance
+      gsap.fromTo(
+        ".about-who-card",
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-who-card",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 2. Core Disciplines / Pillars Cards Staggered Reveal
+      gsap.fromTo(
+        ".about-pillar-card",
+        { opacity: 0, y: 60, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          stagger: 0.16,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#pillars",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 3. Ambient Architectural Circuit SVGs Parallax Float
+      gsap.to(".about-blueprint-svg", {
+        y: -40,
+        rotate: 3,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#pillars",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+
+      gsap.to(".about-circuit-svg", {
+        y: 35,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#pillars",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+
+      // 4. Partnership CTA Card Reveal
+      gsap.fromTo(
+        ".about-cta-card",
+        { opacity: 0, y: 40, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-cta-card",
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const categories = [
     "VIDEO",
@@ -88,7 +178,7 @@ export default function AboutUsPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#050608] text-white selection:bg-[#FFD400] selection:text-black font-sans">
+    <div ref={pageRef} className="relative min-h-screen bg-[#050608] text-white selection:bg-[#FFD400] selection:text-black font-sans">
       {/* Background Starfield */}
       <SpaceBackground />
 
@@ -102,8 +192,8 @@ export default function AboutUsPage() {
       {/* Global Navbar */}
       <Navbar />
 
-      {/* Architectural About Us Banner (Restored) */}
-      <AboutCastBanner />
+      {/* Standard Page Banner matching Career, Portfolio & Services page size & animation */}
+      <PageBanner title="ABOUT RND" breadcrumb="ABOUT US" />
 
       {/* Dynamic Rocket Scroll Experience (Below Banner) */}
       <AboutRocketScrollBanner />
@@ -139,7 +229,7 @@ export default function AboutUsPage() {
               {/* Background Architectural & Circuit SVGs */}
               <div className="absolute inset-0 pointer-events-none select-none -z-10 overflow-hidden">
                 {/* Tech Blueprint Grid SVG (Top Right) */}
-                <svg className="absolute -top-10 -right-10 w-[550px] h-[550px] opacity-15" viewBox="0 0 600 600" fill="none">
+                <svg className="about-blueprint-svg absolute -top-10 -right-10 w-[550px] h-[550px] opacity-15 will-change-transform" viewBox="0 0 600 600" fill="none">
                   <defs>
                     <pattern id="pillar-grid" width="40" height="40" patternUnits="userSpaceOnUse">
                       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FFD400" strokeWidth="0.5" strokeOpacity="0.4" />
@@ -154,7 +244,7 @@ export default function AboutUsPage() {
                 </svg>
 
                 {/* Circuit Track Vectors (Bottom Left) */}
-                <svg className="absolute -bottom-16 -left-16 w-[520px] h-[520px] opacity-15" viewBox="0 0 500 500" fill="none">
+                <svg className="about-circuit-svg absolute -bottom-16 -left-16 w-[520px] h-[520px] opacity-15 will-change-transform" viewBox="0 0 500 500" fill="none">
                   <path d="M 40 460 L 140 460 L 210 390 L 340 390 L 390 340 L 480 340" stroke="#FFD400" strokeWidth="1.5" strokeDasharray="8 6" strokeOpacity="0.5" />
                   <path d="M 70 490 L 170 490 L 240 420 L 370 420 L 430 360 L 500 360" stroke="#FFD400" strokeWidth="1" strokeOpacity="0.3" />
                   <circle cx="210" cy="390" r="4" fill="#FFD400" />
@@ -174,7 +264,7 @@ export default function AboutUsPage() {
                 
                 {/* Left Column: Sticky Overview & Capabilities (4 cols) */}
                 <div className="lg:col-span-4 lg:sticky lg:top-28 z-20 self-start">
-                  <div className="rounded-[32px] border border-white/10 hover:border-[#FFD400]/50 bg-[#0d0e13]/90 backdrop-blur-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,212,0,0.15)]">
+                  <div className="about-who-card rounded-[32px] border border-white/10 hover:border-[#FFD400]/50 bg-[#0d0e13]/90 backdrop-blur-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,212,0,0.15)]">
                     {/* Ambient subtle glow */}
                     <div className="absolute top-0 right-0 w-44 h-44 bg-[#FFD400]/10 rounded-full blur-[50px] pointer-events-none group-hover:scale-125 transition-transform duration-700" />
                     {/* Hover Shimmer Light Sweep */}
@@ -212,7 +302,7 @@ export default function AboutUsPage() {
                     return (
                       <div
                         key={idx}
-                        className="rounded-[28px] border border-white/10 hover:border-[#FFD400]/70 bg-[#0d0e13]/90 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1 group shadow-xl hover:shadow-[0_0_45px_rgba(255,212,0,0.22)] flex flex-col md:flex-row items-stretch relative"
+                        className="about-pillar-card rounded-[28px] border border-white/10 hover:border-[#FFD400]/70 bg-[#0d0e13]/90 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:-translate-y-1 group shadow-xl hover:shadow-[0_0_45px_rgba(255,212,0,0.22)] flex flex-col md:flex-row items-stretch relative"
                       >
                         {/* Hover Light Sweep Beam */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none z-20" />
@@ -288,7 +378,7 @@ export default function AboutUsPage() {
                 4. PARTNERSHIP CTA
                 ========================================================================= */}
             <section className="py-[50px]">
-              <div className="rounded-[28px] border border-[#FFD400]/30 bg-gradient-to-r from-[#12141c] via-[#090a0f] to-[#12141c] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(255,212,0,0.1)]">
+              <div className="about-cta-card rounded-[28px] border border-[#FFD400]/30 bg-gradient-to-r from-[#12141c] via-[#090a0f] to-[#12141c] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(255,212,0,0.1)]">
                 <div>
                   <span className="text-[10px] font-mono font-bold tracking-widest text-[#FFD400] uppercase block mb-1">
                     READY FOR THE NEXT STEP?

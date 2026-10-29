@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ShieldCheck,
   Cpu,
@@ -16,6 +18,7 @@ export default function ConstellationMissionVision({
 }: {
   className?: string;
 } = {}) {
+  const containerRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Background Golden Starfield Canvas
@@ -114,8 +117,107 @@ export default function ConstellationMissionVision({
     },
   ];
 
+  // GSAP ScrollTrigger Animations
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // 1. Constellation Header
+      gsap.fromTo(
+        ".constellation-header",
+        { opacity: 0, y: 35, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".constellation-header",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 2. Left 4 Orbiting Value Nodes Stagger
+      gsap.fromTo(
+        ".constellation-value-node",
+        { opacity: 0, x: -35, scale: 0.96 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".constellation-value-node",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 3. Central Vision Core Sun
+      gsap.fromTo(
+        "#vision-core",
+        { opacity: 0, scale: 0.75 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.0,
+          ease: "back.out(1.4)",
+          scrollTrigger: {
+            trigger: "#vision-core",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 4. Mission Bridge Card
+      gsap.fromTo(
+        "#mission-bridge",
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#mission-bridge",
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 5. Right Strategic Vision Card
+      gsap.fromTo(
+        ".constellation-vision-card",
+        { opacity: 0, x: 40, scale: 0.96 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".constellation-vision-card",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={containerRef}
       id="constellation-orbital-ecosystem"
       className={`relative w-full ${className} flex flex-col justify-center overflow-hidden text-gray-100 selection:bg-[#FFD400] selection:text-black font-sans`}
     >
@@ -127,7 +229,7 @@ export default function ConstellationMissionVision({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         {/* Section Header with Glowing Orbital Title Animation */}
-        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+        <div className="constellation-header text-center max-w-2xl mx-auto mb-14 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-[#FFD400]/10 text-[#FFD400] border border-[#FFD400]/30 tracking-widest uppercase mb-4 shadow-[0_0_25px_rgba(255,212,0,0.2)] hover:border-[#FFD400]/60 transition-colors">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400] animate-ping" />
             <span className="tracking-[0.2em] font-mono">Constellation Architecture / 01</span>
@@ -161,7 +263,7 @@ export default function ConstellationMissionVision({
                 return (
                   <div
                     key={v.number}
-                    className={`bg-[#0a0a0c]/85 backdrop-blur-xl border border-[#FFD400]/20 hover:border-[#FFD400]/70 p-4 sm:p-4.5 rounded-2xl transition-all duration-300 hover:scale-[1.025] hover:shadow-[0_0_30px_rgba(255,212,0,0.25)] group relative overflow-hidden flex-1 flex flex-col justify-center ${
+                    className={`constellation-value-node bg-[#0a0a0c]/85 backdrop-blur-xl border border-[#FFD400]/20 hover:border-[#FFD400]/70 p-4 sm:p-4.5 rounded-2xl transition-all duration-300 hover:scale-[1.025] hover:shadow-[0_0_30px_rgba(255,212,0,0.25)] group relative overflow-hidden flex-1 flex flex-col justify-center ${
                       idx % 2 === 0 ? "hover:-translate-y-0.5" : "hover:translate-y-0.5"
                     }`}
                   >
@@ -244,7 +346,7 @@ export default function ConstellationMissionVision({
             </div>
 
             {/* Vision Card: Fills height so bottom edge matches left & center columns */}
-            <div className="flex-1 bg-[#0a0a0c]/85 backdrop-blur-2xl border border-[#FFD400]/30 hover:border-[#FFD400]/70 p-6 sm:p-8 rounded-3xl transition-all duration-300 shadow-[0_0_40px_rgba(255,212,0,0.15)] hover:shadow-[0_0_50px_rgba(255,212,0,0.3)] group relative overflow-hidden flex flex-col justify-between">
+            <div className="constellation-vision-card flex-1 bg-[#0a0a0c]/85 backdrop-blur-2xl border border-[#FFD400]/30 hover:border-[#FFD400]/70 p-6 sm:p-8 rounded-3xl transition-all duration-300 shadow-[0_0_40px_rgba(255,212,0,0.15)] hover:shadow-[0_0_50px_rgba(255,212,0,0.3)] group relative overflow-hidden flex flex-col justify-between">
               {/* Subtle Ambient Radial Highlight */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#FFD400]/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-125 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />

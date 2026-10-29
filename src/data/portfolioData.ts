@@ -32,17 +32,22 @@ export interface PortfolioProjectDetail {
     answer: string;
   }[];
   beforeAfter?: BeforeAfterData;
+  tags?: string[];
+  emoji?: string;
+  isFeatured?: boolean;
 }
 
 export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "lumen-sal",
     index: "01",
-    title: "Lumen Sal Spatial Architecture",
+    title: "Lumen Sal",
     subtitle: "Brand Identity & Spatial Architecture",
     tagline: "End-to-end spatial 3D experience, architectural design tokens, and immersive WebGL showroom for luxury interiors.",
     year: "2026",
-    category: "Branding & Spatial 3D",
+    category: "Branding",
+    isFeatured: true,
+    tags: ["Branding", "Spatial 3D", "Identity"],
     image: "/images/project_lumen_sal.jpg",
     galleryImages: [
       "/images/project_lumen_sal.jpg",
@@ -171,11 +176,13 @@ export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "toma-nota",
     index: "02",
-    title: "Toma Nota Studio Identity",
+    title: "Toma Nota",
     subtitle: "Brand Identity & Product Design",
     tagline: "Bold typography, interactive editorial layouts, and high-velocity digital product design for an avant-garde creative studio.",
     year: "2025",
     category: "Branding",
+    emoji: "🦉",
+    tags: ["Branding", "Creative Direction"],
     image: "/images/project_toma_nota.jpg",
     galleryImages: [
       "/images/project_toma_nota.jpg",
@@ -242,11 +249,13 @@ export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "kailua",
     index: "03",
-    title: "Kailua Living Storefront",
+    title: "Kailua",
     subtitle: "Development & E-commerce",
     tagline: "High-concurrency headless Shopify e-commerce platform with 3D product configurators and sub-second checkout.",
     year: "2025",
     category: "Development",
+    isFeatured: true,
+    tags: ["Development", "E-commerce", "Three.js"],
     image: "/images/service_ecommerce.jpg",
     galleryImages: [
       "/images/service_ecommerce.jpg",
@@ -313,11 +322,13 @@ export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "mission-ops",
     index: "04",
-    title: "Vanguard Outdoors Cinema",
+    title: "Vanguard Outdoors",
     subtitle: "Commercial Cinematography & Storytelling",
     tagline: "Cinematic commercial brand film, 8K drone cinematography, and immersive narrative storytelling for extreme expedition gear.",
     year: "2025",
-    category: "Media Production",
+    category: "Design",
+    emoji: "🎬",
+    tags: ["Cinematography", "Storytelling", "Video"],
     image: "/images/project_forest_film.jpg",
     galleryImages: [
       "/images/project_forest_film.jpg",
@@ -384,11 +395,13 @@ export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "apex-fintech",
     index: "05",
-    title: "Aura Creative Global Campaign",
+    title: "Aura Creative",
     subtitle: "Joyful Lifestyle Brand Campaign & Identity",
     tagline: "Vibrant multi-channel creative campaign, lifestyle photography, and digital social activation reaching 14M impressions.",
     year: "2026",
     category: "Branding",
+    emoji: "✨",
+    tags: ["Branding", "Campaign", "Lifestyle"],
     image: "/images/project_lifestyle.jpg",
     galleryImages: [
       "/images/project_lifestyle.jpg",
@@ -455,7 +468,7 @@ export const portfolioData: PortfolioProjectDetail[] = [
   {
     id: "nebula-cloud",
     index: "06",
-    title: "Core Web Platform Next.js 15",
+    title: "Core Web Platform",
     subtitle: "Modern Next.js 15 Web Applications & Cloud",
     tagline: "Enterprise cloud application mesh with distributed microservices, multi-tenant databases, and zero-trust authentication.",
     year: "2026",
@@ -516,10 +529,446 @@ export const portfolioData: PortfolioProjectDetail[] = [
       },
     ],
     techStack: ["Next.js 15", "PostgreSQL", "Redis", "Docker", "Kubernetes", "AWS"],
+    tags: ["Development", "Cloud", "Next.js"],
     faqs: [
       {
         question: "Can this system integrate with our legacy enterprise databases?",
         answer: "Yes, our microservices layer includes custom connector adaptors that interface with legacy SQL, Oracle, or SOAP services while exposing modern, type-safe GraphQL/REST APIs.",
+      },
+    ],
+  },
+  {
+    id: "astrafilm-studios",
+    index: "07",
+    title: "AstraFilm Studios",
+    subtitle: "Commercial 8K Film Production & Studio Sets",
+    tagline: "Commercial 8K film production, virtual production volumes, and visual narrative storytelling for global consumer brands.",
+    year: "2026",
+    category: "Design",
+    image: "/images/service_media.jpg",
+    galleryImages: [
+      "/images/service_media.jpg",
+      "/images/project_forest_film.jpg",
+    ],
+    client: "Astra International",
+    duration: "8 Weeks",
+    sla: "8K Virtual Volume",
+    badge: "VIRTUAL PRODUCTION // 8K MASTER",
+    isFeatured: true,
+    tags: ["Design", "Cinematography", "Media"],
+    overview: [
+      "AstraFilm Studios required a hyper-realistic virtual production pipeline combining Unreal Engine 5.4 in-camera visual effects with full robotic camera control.",
+      "We orchestrated an end-to-end studio setup featuring LED volume parallax tracking, real-time lighting synchronization, and high-throughput ACES color management.",
+    ],
+    quote: {
+      text: "The speed and fidelity of RnD's virtual production workflow transformed our entire commercial studio output.",
+      author: "Elena Rostova • Executive Producer, AstraFilm",
+    },
+    deliverables: [
+      "LED volume virtual set synchronization with Unreal Engine 5",
+      "Real-time camera tracking calibration and lens profiling",
+      "Broadcast-grade 8K ProRes 4444 XQ mastering pipeline",
+      "Comprehensive studio operational training manual",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Virtual Environment Asset Pipeline",
+        desc: "Nanite and Lumen scene construction optimized for real-time LED rendering.",
+      },
+      {
+        number: "02",
+        title: "In-Camera Visual Effects (ICVFX) Setup",
+        desc: "Syncing camera tracking data with camera frustum projections.",
+      },
+      {
+        number: "03",
+        title: "Dynamic Lighting & DMX Integration",
+        desc: "Automated studio lighting matching virtual world sun position.",
+      },
+      {
+        number: "04",
+        title: "High-Bitrate Edge Data Offloading",
+        desc: "100GbE SAN storage architecture for simultaneous multi-camera raw takes.",
+      },
+      {
+        number: "05",
+        title: "Color Science & ACES Workflow",
+        desc: "Strict chromatic calibration between sensor, display volume, and post pipeline.",
+      },
+      {
+        number: "06",
+        title: "Final Master Delivery & Archive",
+        desc: "LTO tape archiving and multi-format SDR/HDR client deliverables.",
+      },
+    ],
+    techStack: ["Unreal Engine 5", "RED V-Raptor", "DaVinci Resolve", "AJA Video Systems"],
+    faqs: [
+      {
+        question: "Can we shoot in real time without green screen post-production?",
+        answer: "Yes, ICVFX captures photorealistic backgrounds with realistic lighting reflections directly on the actors, eliminating keying entirely.",
+      },
+    ],
+  },
+  {
+    id: "zenith-social",
+    index: "08",
+    title: "Zenith Social",
+    subtitle: "Omnichannel Social Media & Creator Growth",
+    tagline: "Viral TikTok and Instagram content engine, algorithmic growth frameworks, and high-engagement creator activations.",
+    year: "2026",
+    category: "Social Media",
+    image: "/images/service_social.jpg",
+    galleryImages: [
+      "/images/service_social.jpg",
+      "/images/service_marketing.jpg",
+    ],
+    client: "Zenith Brands",
+    duration: "Continuous Retainer",
+    sla: "+450% Engagement",
+    badge: "TIKTOK & IG // CREATOR ENGINE",
+    emoji: "📱",
+    tags: ["Social Media", "Community", "Growth"],
+    overview: [
+      "Zenith needed to dominate short-form vertical video across TikTok, Instagram Reels, and YouTube Shorts to engage Gen-Z audiences at massive scale.",
+      "We built an agile creative production pod that turns cultural trends into viral video assets within 24 hours, driving millions of organic views weekly.",
+    ],
+    quote: {
+      text: "Our brand engagement skyrocketed within 60 days. The RnD social pod is our secret weapon.",
+      author: "Maya Lin • Head of Brand, Zenith",
+    },
+    deliverables: [
+      "Daily viral short-form video production (40+ assets/month)",
+      "Creator collaboration management and influencer seeding",
+      "Real-time social listening and trend capitalization",
+      "Weekly analytics dashboards with retention benchmarks",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Trend Spotting & Algorithmic Hook Formulation",
+        desc: "Daily analysis of breakout audio tracks and viral video structures.",
+      },
+      {
+        number: "02",
+        title: "Rapid Vertical Video Production & Motion FX",
+        desc: "Dynamic captions, kinetic typography, and fast-paced visual hooks.",
+      },
+      {
+        number: "03",
+        title: "Community Management & Comment Conversions",
+        desc: "Active banter, pinned response videos, and brand relationship building.",
+      },
+      {
+        number: "04",
+        title: "Creator Network Seeding & Whitelisting",
+        desc: "Scaling reach through authenticated micro-influencer collaborations.",
+      },
+      {
+        number: "05",
+        title: "Spark Ads & Paid Amplification",
+        desc: "Boosting organic winners with precision algorithmic ad spend.",
+      },
+      {
+        number: "06",
+        title: "Retention & Shareability Optimization",
+        desc: "Continuous A/B testing on initial 3-second hook metrics.",
+      },
+    ],
+    techStack: ["TikTok Creator Hub", "CapCut Pro", "Figma", "Sprout Social", "Meta Ads"],
+    faqs: [
+      {
+        question: "How fast can you respond to a breaking social media trend?",
+        answer: "Our sprint team can script, record, edit, and publish trending content within 12 to 24 hours of a trend emerging.",
+      },
+    ],
+  },
+  {
+    id: "pantone-identity",
+    index: "09",
+    title: "Pantone Identity Studio",
+    subtitle: "Comprehensive Design Systems & Packaging",
+    tagline: "Physical packaging architecture, luxury unboxing experiences, and global multi-sensory brand design systems.",
+    year: "2025",
+    category: "Branding",
+    image: "/images/service_branding.jpg",
+    galleryImages: [
+      "/images/service_branding.jpg",
+      "/images/project_toma_nota.jpg",
+    ],
+    client: "Pantone Design Lab",
+    duration: "10 Weeks",
+    sla: "Zero Tolerance Print",
+    badge: "LUXURY PACKAGING // BRAND SYSTEM",
+    isFeatured: true,
+    tags: ["Branding", "Packaging", "Design"],
+    overview: [
+      "Pantone Identity Studio partnered with us to engineer a next-generation tactile packaging system for limited-run artisan cosmetics.",
+      "We engineered sustainable molded-fiber structural packaging, custom embossing dies, and high-precision spot-UV varnish guidelines that received international acclaim.",
+    ],
+    quote: {
+      text: "The unboxing experience is sheer perfection. Every fold and texture conveys pure luxury.",
+      author: "Christophe Blanc • Design Principal, Pantone Lab",
+    },
+    deliverables: [
+      "Precision structural packaging CAD dielines and 3D renderings",
+      "Sustainable biodegradable paper pulp material formulations",
+      "Complete print specification manuals with Pantone ink matching",
+      "Interactive 3D unboxing viewer for digital previewing",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Structural Engineering & Unboxing Physics",
+        desc: "Designing ergonomic folds, magnetic closures, and tactile drawer slides.",
+      },
+      {
+        number: "02",
+        title: "Eco-Conscious Material Discovery",
+        desc: "Testing biodegradable sugarcane pulp and FSC-certified recyclable boards.",
+      },
+      {
+        number: "03",
+        title: "3D CAD Mockups & Photorealistic Renders",
+        desc: "Simulating foil stamping, blind debossing, and matte soft-touch coatings.",
+      },
+      {
+        number: "04",
+        title: "Press-Check Calibration & Print QC",
+        desc: "On-site press checks ensuring delta-E color tolerance under 1.5.",
+      },
+      {
+        number: "05",
+        title: "Global Production Scale Specification",
+        desc: "Vendor-ready vector dielines and high-volume assembly blueprints.",
+      },
+      {
+        number: "06",
+        title: "Digital 3D E-Commerce Integration",
+        desc: "Interactive 3D unboxing animation deployed on client web store.",
+      },
+    ],
+    techStack: ["Adobe Illustrator", "Esko ArtiosCAD", "KeyShot", "Blender 3D"],
+    faqs: [
+      {
+        question: "Are all materials fully recyclable and sustainable?",
+        answer: "Yes, 100% of the packaging materials are FSC-certified and use soy-based inks without harmful plastic lamination.",
+      },
+    ],
+  },
+  {
+    id: "omnigrowth-analytics",
+    index: "10",
+    title: "OmniGrowth Analytics",
+    subtitle: "Performance Marketing, SEO & Attribution",
+    tagline: "Algorithmic paid media bidding, multi-touch conversion attribution, and technical SEO scaling customer acquisition by 400%.",
+    year: "2026",
+    category: "Community",
+    image: "/images/service_marketing.jpg",
+    galleryImages: [
+      "/images/service_marketing.jpg",
+      "/images/service_webdev.jpg",
+    ],
+    client: "OmniGrowth Media",
+    duration: "12 Weeks",
+    sla: "4.8x Blended ROAS",
+    badge: "ATTRIBUTION ENGINE // SEO SCALE",
+    tags: ["Community", "SEO", "Analytics"],
+    overview: [
+      "OmniGrowth Media required a deterministic marketing attribution engine to measure blended customer acquisition costs across Google, Meta, and organic search.",
+      "We implemented server-side tracking via Cloudflare Workers, custom BigQuery attribution models, and programmatic SEO architecture that generated 85,000 monthly organic visits.",
+    ],
+    quote: {
+      text: "Our blended ROAS climbed to 4.8x while slashing our paid CPA in half. Unbelievable return on investment.",
+      author: "Rachel Sterling • CMO, OmniGrowth",
+    },
+    deliverables: [
+      "Server-side CAPI tracking engine with zero cookie degradation",
+      "BigQuery data warehouse with automated attribution dashboards",
+      "Programmatic SEO landing page mesh targeting 500+ long-tail keywords",
+      "Automated budget re-allocation scripts for Google Ads & Meta Ads",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Server-Side Tracking & Conversions API",
+        desc: "Eliminating ad-blocker loss with edge-computed first-party data.",
+      },
+      {
+        number: "02",
+        title: "Multi-Touch Attribution Modeling",
+        desc: "Shapley value and Markov chain models measuring genuine channel incrementality.",
+      },
+      {
+        number: "03",
+        title: "Programmatic SEO Architecture",
+        desc: "Dynamic Next.js 15 template generation for hundreds of hyper-targeted queries.",
+      },
+      {
+        number: "04",
+        title: "Core Web Vitals & Speed Optimization",
+        desc: "Achieving top SERP rankings with sub-1s Largest Contentful Paint (LCP).",
+      },
+      {
+        number: "05",
+        title: "High-Intent Creative Ad Refresh",
+        desc: "Weekly iterative multivariate testing on ad copy and video hooks.",
+      },
+      {
+        number: "06",
+        title: "Executive Looker Studio Dashboard",
+        desc: "Automated real-time visibility into customer lifetime value (LTV) and CAC.",
+      },
+    ],
+    techStack: ["Google BigQuery", "Cloudflare Workers", "Looker Studio", "Meta CAPI", "Google Ads API"],
+    faqs: [
+      {
+        question: "How do you track users after iOS 14.5 and third-party cookie deprecation?",
+        answer: "We deploy server-side CAPI on your own custom domain, bypassing client-side cookie blockers with 100% compliant first-party identity resolution.",
+      },
+    ],
+  },
+  {
+    id: "quantum-mobile-os",
+    index: "11",
+    title: "Quantum Mobile OS",
+    subtitle: "iOS & Android Cross-Platform Experience",
+    tagline: "Ultra-fluid React Native mobile application with biometric security, offline SQLite syncing, and 120Hz micro-animations.",
+    year: "2025",
+    category: "UX/UI",
+    image: "/images/service_mobile.jpg",
+    galleryImages: [
+      "/images/service_mobile.jpg",
+      "/images/nebula_cloud_os_3d.jpg",
+    ],
+    client: "Quantum Mobile Corp",
+    duration: "14 Weeks",
+    sla: "120 FPS Mobile",
+    badge: "REACT NATIVE // 120HZ FLUID",
+    tags: ["UX/UI", "Mobile", "React Native"],
+    overview: [
+      "Quantum Mobile required a mission-critical consumer app that feels truly native on both iOS and Android, featuring biometric authentication and offline-first capabilities.",
+      "We engineered a modern React Native architecture utilizing the new Bridgeless Fabric architecture, Skia graphics engine, and WatermelonDB for instantaneous local queries.",
+    ],
+    quote: {
+      text: "The application feels faster than native Swift. The animations and gestures are unbelievably smooth.",
+      author: "Tariq Mansoor • VP Engineering, Quantum Mobile",
+    },
+    deliverables: [
+      "Cross-platform iOS and Android apps with 98% shared codebase",
+      "Offline-first sync engine with conflict resolution algorithms",
+      "Biometric FaceID / TouchID authentication with hardware keystore",
+      "Automated Fastlane deployment pipeline to App Store & Google Play",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Fabric Architecture & Skia 2D Rendering",
+        desc: "Hardware-accelerated rendering achieving fluid 120 FPS frame rates.",
+      },
+      {
+        number: "02",
+        title: "Offline-First WatermelonDB Sync",
+        desc: "Local SQLite database syncing seamlessly when network connectivity restores.",
+      },
+      {
+        number: "03",
+        title: "Tactile Gesture & Haptic Engine",
+        desc: "Natural spring physics gestures paired with micro-haptic feedback.",
+      },
+      {
+        number: "04",
+        title: "Hardware Enclave Biometric Security",
+        desc: "Zero-knowledge cryptographic key storage in Secure Enclave.",
+      },
+      {
+        number: "05",
+        title: "Push Notification & Deeplinking Mesh",
+        desc: "Contextual personalized notifications with instant screen routing.",
+      },
+      {
+        number: "06",
+        title: "Automated Store Submissions & OTA Updates",
+        desc: "Continuous over-the-air updates via Expo EAS without waiting for app store reviews.",
+      },
+    ],
+    techStack: ["React Native", "Expo EAS", "React Native Skia", "TypeScript", "WatermelonDB"],
+    faqs: [
+      {
+        question: "Does the app support real-time over-the-air bug fixes?",
+        answer: "Yes, utilizing Expo EAS Update, JavaScript hotfixes and UI enhancements can be published directly to active users in minutes.",
+      },
+    ],
+  },
+  {
+    id: "synapse-digital",
+    index: "12",
+    title: "Synapse Digital Hub",
+    subtitle: "Dedicated Engineering & Design Pods",
+    tagline: "Bespoke engineering squads embedded within enterprise product teams to accelerate release cycles by 300%.",
+    year: "2026",
+    category: "Development",
+    image: "/images/agency_team_studio.jpg",
+    galleryImages: [
+      "/images/agency_team_studio.jpg",
+      "/images/service_webdev.jpg",
+    ],
+    client: "Synapse Ventures",
+    duration: "Annual Contract",
+    sla: "99.9% Sprint Velocity",
+    badge: "DEDICATED PODS // RAPID DEPLOY",
+    tags: ["Development", "Agency", "Team"],
+    overview: [
+      "Synapse Ventures required dedicated, senior-level engineering and design pods to rapidly prototype, build, and ship venture-backed SaaS products.",
+      "We embedded cross-functional pods consisting of lead architects, full-stack Next.js developers, and senior UI/UX designers working seamlessly inside the client's Jira and GitHub workflows.",
+    ],
+    quote: {
+      text: "RnD's dedicated engineering squad gave us enterprise-grade development velocity from day one.",
+      author: "David Vance • Partner, Synapse Ventures",
+    },
+    deliverables: [
+      "Fully integrated 6-person dedicated engineering and design pod",
+      "Two-week agile sprint cadence with transparent burn-down charts",
+      "Continuous CI/CD pipeline and automated pull-request code reviews",
+      "Complete IP transfer and on-demand team elasticity",
+    ],
+    scope: [
+      {
+        number: "01",
+        title: "Pod Assembly & Technical Alignment",
+        desc: "Matching domain-specialized engineers to client stack and architecture.",
+      },
+      {
+        number: "02",
+        title: "Sprint Cadence & Standup Integration",
+        desc: "Daily async standups, backlog grooming, and bi-weekly sprint demos.",
+      },
+      {
+        number: "03",
+        title: "Rapid Prototyping & MVP Execution",
+        desc: "Shipping validated functional prototypes to beta users in 14 days.",
+      },
+      {
+        number: "04",
+        title: "Code Review & Architecture Governance",
+        desc: "Zero-defect policies with strict linting, typechecks, and coverage standards.",
+      },
+      {
+        number: "05",
+        title: "Scalability Stress Testing & DevOps",
+        desc: "Automated load testing up to 50,000 concurrent virtual users.",
+      },
+      {
+        number: "06",
+        title: "Long-Term Knowledge Transfer & Handoff",
+        desc: "Pair programming sessions ensuring seamless internal ownership.",
+      },
+    ],
+    techStack: ["Next.js 15", "TypeScript", "Tailwind CSS", "PostgreSQL", "GitHub Actions", "Docker"],
+    faqs: [
+      {
+        question: "Can we scale the dedicated pod size up or down as project needs change?",
+        answer: "Yes, our flexible retainer model allows scaling team capacity up or down with 30 days notice.",
       },
     ],
   },

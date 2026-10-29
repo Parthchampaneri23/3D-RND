@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   ArrowRight,
   Menu,
@@ -21,6 +22,9 @@ import {
   Building2,
   Rocket,
   Plane,
+  Smartphone,
+  Users,
+  Share2,
 } from "lucide-react";
 import CyberButton from "@/components/CyberButton";
 
@@ -136,50 +140,46 @@ export default function Navbar() {
     },
   ];
 
-  const servicePillars = [
+  const serviceDropdownItems = [
     {
-      title: "Technology",
+      title: "Web & Enterprise Cloud",
+      href: "/services/web-cloud",
       icon: Cpu,
-      desc: "Enterprise Cloud & 3D Spatial Web",
-      items: [
-        { label: "Next.js & React 19 Web Apps", href: "/#services" },
-        { label: "Cloud ERP & SaaS Platforms", href: "/#services" },
-        { label: "Three.js / WebGL Spatial 3D", href: "/#services" },
-        { label: "Autonomous AI & RAG Pipelines", href: "/#services" },
-      ],
     },
     {
-      title: "Digital Marketing",
+      title: "Search Dominance & Technical SEO",
+      href: "/services/seo-search",
       icon: TrendingUp,
-      desc: "High-ROI Omnichannel Growth",
-      items: [
-        { label: "Omnichannel SMM (Meta, TikTok)", href: "/#services" },
-        { label: "High-Conversion Paid Ad Scaling", href: "/#services" },
-        { label: "Technical & Semantic SEO", href: "/#services" },
-        { label: "Viral Short-Form Content Creation", href: "/#services" },
-      ],
     },
     {
-      title: "Branding & Design",
+      title: "Mobile App Development",
+      href: "/services/mobile-apps",
+      icon: Smartphone,
+    },
+    {
+      title: "E-Commerce & Digital Storefronts",
+      href: "/services/ecommerce-platforms",
+      icon: ShoppingBag,
+    },
+    {
+      title: "Brand Strategy & Design Systems",
+      href: "/services/brand-identity",
       icon: Palette,
-      desc: "Visual Identity & Conversion UX/UI",
-      items: [
-        { label: "Complete Brand Identity Systems", href: "/#services" },
-        { label: "Interactive Figma Design Systems", href: "/#services" },
-        { label: "High-Fidelity UI/UX & Wireframing", href: "/#services" },
-        { label: "Conversion Rate Optimization (CRO)", href: "/#services" },
-      ],
     },
     {
-      title: "Media Production",
+      title: "Social Media & Community Building",
+      href: "/services/social-media",
+      icon: Share2,
+    },
+    {
+      title: "Commercial Film & Photography",
+      href: "/services/commercial-media",
       icon: Camera,
-      desc: "Cinematic Film, 3D & Campaigns",
-      items: [
-        { label: "Commercial Brand Video Production", href: "/#services" },
-        { label: "3D Animation & CGI Motion Design", href: "/#services" },
-        { label: "High-End E-Commerce Photography", href: "/#services" },
-        { label: "Executive Podcast & Broadcast Studio", href: "/#services" },
-      ],
+    },
+    {
+      title: "Dedicated Agency Squads",
+      href: "/services/dedicated-squads",
+      icon: Users,
     },
   ];
 
@@ -219,10 +219,10 @@ export default function Navbar() {
             const isActive =
               (link.href === "/about-us" && pathname === "/about-us") ||
               (link.href === "/contact-us" && pathname === "/contact-us") ||
-              (link.href === "/services" && pathname === "/services") ||
-              (link.href === "/portfolios" && pathname === "/portfolios") ||
+              (link.href === "/services" && pathname?.startsWith("/services")) ||
+              (link.href === "/portfolios" && pathname?.startsWith("/portfolio")) ||
               (link.href === "/career" && pathname === "/career") ||
-              (link.href === "/insights" && pathname === "/insights");
+              (link.href === "/insights" && pathname?.startsWith("/insights"));
 
             if (link.hasMega) {
               return (
@@ -254,18 +254,18 @@ export default function Navbar() {
                   {/* Single-Column Dropdown for Services */}
                   {servicesMenuOpen && (
                     <div
-                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[280px] animate-fadeIn"
+                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[310px] animate-fadeIn"
                       onMouseEnter={handleMouseEnterServices}
                       onMouseLeave={handleMouseLeaveServices}
                     >
-                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5">
+                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5 max-h-[460px] overflow-y-auto scrollbar-none">
                         <div className="flex flex-col gap-1.5">
-                          {servicePillars.map((item, idx) => {
+                          {serviceDropdownItems.map((item, idx) => {
                             const Icon = item.icon;
                             return (
-                              <a
+                              <Link
                                 key={idx}
-                                href="/services"
+                                href={item.href}
                                 onClick={() => setServicesMenuOpen(false)}
                                 className="flex items-center gap-3.5 px-3.5 py-2.5 hover:bg-white/[0.05] transition-all group rounded-md"
                               >
@@ -275,7 +275,7 @@ export default function Navbar() {
                                 <span className="text-[13.5px] font-medium text-neutral-100 group-hover:text-[#FFD400] transition-colors leading-snug">
                                   {item.title}
                                 </span>
-                              </a>
+                              </Link>
                             );
                           })}
                         </div>
@@ -418,12 +418,12 @@ export default function Navbar() {
                 {/* Mobile sub-links for Services (Single column, white rings, rounded-md) */}
                 {link.hasMega && (
                   <div className="py-2 grid grid-cols-1 gap-1.5 mt-1 border-t border-white/10 pt-2">
-                    {servicePillars.map((srv, i) => {
+                    {serviceDropdownItems.map((srv, i) => {
                       const Icon = srv.icon;
                       return (
-                        <a
+                        <Link
                           key={i}
-                          href="/services"
+                          href={srv.href}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-3 p-2.5 rounded-md bg-[#08090d] text-neutral-200 hover:text-[#FFD400] hover:bg-white/[0.06] transition-all group"
                         >
@@ -433,7 +433,7 @@ export default function Navbar() {
                           <span className="text-xs font-medium leading-tight group-hover:text-[#FFD400]">
                             {srv.title}
                           </span>
-                        </a>
+                        </Link>
                       );
                     })}
                   </div>

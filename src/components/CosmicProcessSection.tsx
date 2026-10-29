@@ -94,7 +94,42 @@ export default function CosmicProcessSection({
     if (!section || !container) return;
 
     const ctx = gsap.context(() => {
-      // 1. Frame entrance animation
+      // 1. Top Metadata Bar Entrance
+      gsap.fromTo(
+        ".process-meta-bar",
+        { opacity: 0, y: -20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 2. Giant Typography Title Reveal
+      gsap.fromTo(
+        ".process-title-reveal",
+        { opacity: 0, y: 35, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".process-title-reveal",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // 3. Frame entrance animation
       gsap.fromTo(
         container,
         {
@@ -116,7 +151,7 @@ export default function CosmicProcessSection({
         }
       );
 
-      // 2. Cascading Staircase Steps Entrance Animation
+      // 4. Cascading Staircase Steps Entrance Animation
       if (cards && cards.length > 0) {
         gsap.fromTo(
           cards,
@@ -167,7 +202,7 @@ export default function CosmicProcessSection({
       <div className="max-w-[1560px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         
         {/* ================= TOP METADATA BAR (Matching image header) ================= */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10 font-mono text-xs text-neutral-400 uppercase tracking-widest">
+        <div className="process-meta-bar flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10 font-mono text-xs text-neutral-400 uppercase tracking-widest">
           <div className="flex items-center space-x-3">
             <span className="text-[#FFD400] font-bold text-sm">➔</span>
             <span className="text-[#FFD400] font-semibold">// STAGES OF WORK</span>
@@ -177,7 +212,7 @@ export default function CosmicProcessSection({
 
           <div className="flex items-center space-x-4">
             <span className="text-neutral-500">ENGINEERING // AGENCY</span>
-            <span className="font-[family-name:var(--font-bebas)] text-xl sm:text-2xl text-[#FFD400] tracking-wider leading-none">
+            <span className="font-[family-name:var(--font-syne)] font-bold text-lg sm:text-xl text-[#FFD400] tracking-wider leading-none">
               RND TECHNOSOFT
             </span>
           </div>
@@ -207,9 +242,9 @@ export default function CosmicProcessSection({
 
           {/* Top Section: Giant Typography + 2 Architecture Telemetry Note Blocks */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12 sm:mb-16 relative z-10">
-            {/* Left/Middle: Giant Bold Condensed Heading */}
+            {/* Left/Middle: Giant Bold Syne Heading matching other section headers */}
             <div className="lg:col-span-8">
-              <h2 className="font-[family-name:var(--font-bebas)] text-4xl sm:text-6xl md:text-7xl lg:text-[88px] font-bold text-white tracking-wide sm:tracking-[0.035em] leading-[0.92] uppercase select-none">
+              <h2 className="process-title-reveal font-[family-name:var(--font-syne)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05] uppercase select-none">
                 STAGES OF
                 <br />
                 OUR WORK <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.4)]">WITH YOU</span>
@@ -287,7 +322,7 @@ export default function CosmicProcessSection({
                   >
                     {/* Top Step Number Label */}
                     <div>
-                      <div className="font-[family-name:var(--font-bebas)] text-xl sm:text-2xl tracking-wider leading-none mb-2.5">
+                      <div className="font-[family-name:var(--font-syne)] font-bold text-lg sm:text-xl tracking-tight leading-none mb-2.5">
                         {step.stepLabel}
                       </div>
 
@@ -347,7 +382,7 @@ export default function CosmicProcessSection({
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-[family-name:var(--font-bebas)] text-xl tracking-wider">
+                      <span className="font-[family-name:var(--font-syne)] font-bold text-base tracking-tight">
                         {step.stepLabel} // {step.phase}
                       </span>
                       <span className="font-mono text-xs font-bold">0{idx + 1}</span>
@@ -406,7 +441,7 @@ export default function CosmicProcessSection({
             </div>
 
             {/* Right: "OUR APPROACH" Massive Typography (Exact as in image footer) */}
-            <div className="font-[family-name:var(--font-bebas)] text-2xl sm:text-4xl lg:text-5xl tracking-widest text-white/30 uppercase select-none pointer-events-none">
+            <div className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-3xl lg:text-4xl tracking-widest text-white/30 uppercase select-none pointer-events-none">
               OUR APPROACH
             </div>
           </div>
