@@ -29,13 +29,32 @@ import Navbar from "./Navbar";
 import RnDFooter from "./RnDFooter";
 import SpaceBackground from "./SpaceBackground";
 import { BlogDetail, TechMatrixItem } from "@/data/blogsData";
-import BeforeAfterSection from "./BeforeAfterSection";
+import PageBanner from "./PageBanner";
 
 interface InsightDetailViewProps {
   article: BlogDetail;
   allArticles: BlogDetail[];
   prevArticle: BlogDetail | null;
   nextArticle: BlogDetail | null;
+}
+
+function formatSlugToTitle(slug: string): string {
+  if (!slug) return "";
+  return slug
+    .split("-")
+    .map((word) => {
+      const lower = word.toLowerCase();
+      if (lower === "3d") return "3D";
+      if (lower === "seo") return "SEO";
+      if (lower === "ux") return "UX";
+      if (lower === "ui") return "UI";
+      if (lower === "ai") return "AI";
+      if (lower === "api") return "API";
+      if (lower === "it") return "IT";
+      if (lower === "fps") return "FPS";
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 }
 
 export default function InsightDetailView({
@@ -46,6 +65,9 @@ export default function InsightDetailView({
 }: InsightDetailViewProps) {
   // Reading scroll progress percentage
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Formatted slug for banner title (e.g. "spatial-3d-conversion" -> "Spatial 3D Conversion")
+  const bannerTitle = formatSlugToTitle(article.id);
 
   // Active section for table of contents
   const [activeSection, setActiveSection] = useState("abstract");
@@ -87,7 +109,6 @@ export default function InsightDetailView({
         "narrative",
         "tech-matrix",
         "takeaways",
-        "before-after",
         "author",
         "inquiry-form",
       ];
@@ -96,7 +117,7 @@ export default function InsightDetailView({
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 100) {
+          if (rect.top <= 180 && rect.bottom >= 180) {
             setActiveSection(id);
             break;
           }
@@ -123,9 +144,8 @@ export default function InsightDetailView({
     { id: "narrative", number: "03", label: "Spatial Narrative" },
     { id: "tech-matrix", number: "04", label: "Architecture Matrix" },
     { id: "takeaways", number: "05", label: "Engineering Insights" },
-    { id: "before-after", number: "06", label: "Transformation Delta" },
-    { id: "author", number: "07", label: "Principal Profile" },
-    { id: "inquiry-form", number: "08", label: "Consultation Suite" },
+    { id: "author", number: "06", label: "Principal Profile" },
+    { id: "inquiry-form", number: "07", label: "Consultation Suite" },
   ];
 
   const activeTech: TechMatrixItem | undefined =
@@ -158,88 +178,14 @@ export default function InsightDetailView({
         />
       </div>
 
-      <main className="relative z-10 w-full pt-16">
-        {/* =========================================================================
-            1. HERO HEADER BANNER (Matching Reference Page)
-            ========================================================================= */}
-        <section className="relative w-full h-[340px] sm:h-[400px] md:h-[460px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#06070a]">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover object-center scale-105 transition-transform duration-1000 ease-out brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#050608]/75 to-[#050608]/50" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050608]/80 via-transparent to-[#050608]" />
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px]" />
-          </div>
+      {/* Page Banner with slug in Title Format */}
+      <PageBanner
+        title={bannerTitle}
+        breadcrumb={bannerTitle}
+        parentBreadcrumb={{ label: "Insights", href: "/insights" }}
+      />
 
-          {/* Architectural Grid Lines */}
-          <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="max-w-[1560px] h-full mx-auto px-6 sm:px-10 lg:px-14 flex justify-between">
-              <div className="w-[1px] h-full bg-white/40" />
-              <div className="w-[1px] h-full bg-white/20 hidden md:block" />
-              <div className="w-[1px] h-full bg-white/40" />
-            </div>
-          </div>
-
-          <div className="relative z-10 max-w-[1560px] w-full mx-auto px-6 sm:px-10 lg:px-14 text-center flex flex-col items-center pt-16 sm:pt-20">
-            {/* Breadcrumb Navigation Pill */}
-            <nav
-              aria-label="Breadcrumb"
-              className="inline-flex items-center space-x-2 sm:space-x-2.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 mb-4 sm:mb-6 shadow-lg"
-            >
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <Home className="w-3.5 h-3.5 text-[#FFD400]" />
-                <Link
-                  href="/"
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-medium text-white/80 hover:text-[#FFD400] transition-colors"
-                >
-                  Home
-                </Link>
-                <ChevronRight className="w-3 h-3 text-white/40 shrink-0" />
-              </div>
-
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <Link
-                  href="/insights"
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-medium text-white/80 hover:text-[#FFD400] transition-colors"
-                >
-                  Insights
-                </Link>
-                <ChevronRight className="w-3 h-3 text-white/40 shrink-0" />
-              </div>
-
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <span
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-bold text-[#FFD400] truncate max-w-[200px] sm:max-w-[340px]"
-                  aria-current="page"
-                >
-                  {article.title}
-                </span>
-              </div>
-            </nav>
-
-            {/* Grand Sculptural Title */}
-            <h1 className="font-[family-name:var(--font-syne)] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] max-w-4xl uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]">
-              {article.title}
-            </h1>
-
-            {/* Subtitle Metadata */}
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-neutral-300 font-light max-w-2xl tracking-wide">
-              {article.category} • Published {article.date} • {article.readTime}
-            </p>
-
-            {/* Signature Brand Divider (Line — Dot — Line) */}
-            <div className="mt-6 sm:mt-8 flex items-center space-x-3">
-              <span className="w-12 h-[1.5px] bg-[#FFD400]/70" />
-              <span className="w-2 h-2 rounded-full bg-[#FFD400] shadow-[0_0_10px_#FFD400]" />
-              <span className="w-12 h-[1.5px] bg-[#FFD400]/70" />
-            </div>
-          </div>
-        </section>
+      <main className="relative z-10 w-full">
 
         {/* =========================================================================
             2. SUB-HEADER BAR (Archive Navigation & Mobile Outline Trigger)
@@ -392,9 +338,9 @@ export default function InsightDetailView({
             </aside>
 
             {/* -------------------------------------------------------------------
-                CENTER COLUMN (6 COLS): DEEP TECHNICAL ARTICLE CONTENT
+                CENTER COLUMN (9 COLS): DEEP TECHNICAL ARTICLE CONTENT
                 ------------------------------------------------------------------- */}
-            <article className="lg:col-span-5 xl:col-span-6 space-y-10">
+            <article className="lg:col-span-9 space-y-10">
               
               {/* Audio Briefing Player */}
               <div className="p-4 bg-[#0c0e14] border border-white/10 shadow-lg flex items-center justify-between gap-4">
@@ -439,6 +385,20 @@ export default function InsightDetailView({
                     />
                   ))}
                 </div>
+              </div>
+
+              {/* Full Article Editorial Headline */}
+              <div className="space-y-4 pb-6 border-b border-white/10">
+                <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{article.category} • {article.readTime}</span>
+                </div>
+                <h1 className="font-[family-name:var(--font-syne)] text-2xl sm:text-3xl lg:text-4xl text-white font-bold leading-snug uppercase">
+                  {article.title}
+                </h1>
+                <p className="text-xs sm:text-sm md:text-base text-neutral-300 font-light leading-relaxed">
+                  {article.tagline}
+                </p>
               </div>
 
               {/* SECTION 01: EDITORIAL THESIS / ABSTRACT */}
@@ -611,16 +571,7 @@ export default function InsightDetailView({
                 </ul>
               </div>
 
-              {/* SECTION 06: BEFORE & AFTER TRANSFORMATION SHOWCASE */}
-              <div id="before-after" className="scroll-mt-36">
-                <BeforeAfterSection
-                  data={article.beforeAfter}
-                  category={article.category}
-                  title={article.title}
-                />
-              </div>
-
-              {/* SECTION 07: PRINCIPAL PROFILE / AUTHOR CARD */}
+              {/* SECTION 06: PRINCIPAL PROFILE / AUTHOR CARD */}
               <div
                 id="author"
                 className="p-7 bg-[#0c0e14] border border-white/10 shadow-lg flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left scroll-mt-36"
@@ -699,56 +650,86 @@ export default function InsightDetailView({
                 )}
               </div>
             </article>
+          </div>
+        </section>
 
-            {/* -------------------------------------------------------------------
-                RIGHT COLUMN (3 COLS): STICKY INQUIRY SUITE & CONCIERGE CARD
-                ------------------------------------------------------------------- */}
-            <aside className="lg:col-span-4 xl:col-span-3 space-y-6 sticky top-24 self-start">
-              {/* Private Commission Inquiry Form */}
-              <div
-                id="inquiry-form"
-                className="bg-[#0c0e14] border border-white/15 shadow-2xl p-5 sm:p-6 relative overflow-hidden scroll-mt-36"
-              >
-                <div className="space-y-1 pb-4 border-b border-white/10 mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center space-x-1.5">
-                    <Building2 className="w-3.5 h-3.5" />
-                    <span>Private Commission</span>
-                  </span>
-                  <h3 className="font-[family-name:var(--font-syne)] text-lg sm:text-xl text-white font-bold uppercase leading-tight">
-                    Discuss Your Architecture
-                  </h3>
-                  <p className="text-xs text-neutral-300 leading-relaxed font-light">
-                    Connect with our principal software architects and engineering leads for confidential scoping.
+        {/* =========================================================================
+            3.5 BOTTOM ARCHITECTURAL CONSULTATION & INQUIRY SUITE
+            ========================================================================= */}
+        <section id="inquiry-form" className="max-w-[1560px] mx-auto px-5 md:px-8 lg:px-12 py-16 border-t border-white/10 scroll-mt-24">
+          <div className="bg-[#0c0e14] border border-white/15 p-8 sm:p-12 shadow-2xl relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            
+            {/* Left Column (5 cols): Briefing Thesis & Direct Atelier Concierge */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="space-y-3">
+                <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center space-x-2">
+                  <Building2 className="w-4 h-4" />
+                  <span>Private Commission // Consultation Suite</span>
+                </span>
+                <h2 className="font-[family-name:var(--font-syne)] text-2xl sm:text-3xl lg:text-4xl text-white font-bold uppercase leading-tight">
+                  Discuss Your Architecture
+                </h2>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light">
+                  Connect with our principal software architects and engineering leads for confidential scoping, system audit, or spatial 3D implementation.
+                </p>
+              </div>
+
+              {/* Atelier Concierge Details */}
+              <div className="p-5 bg-white/[0.02] border border-white/10 shadow-lg space-y-3 text-xs font-mono">
+                <span className="text-[11px] uppercase tracking-widest text-[#FFD400] font-semibold block pb-2 border-b border-white/10">
+                  Direct Atelier Concierge
+                </span>
+                <div className="space-y-2 text-neutral-300">
+                  <p className="flex items-center justify-between">
+                    <span className="text-neutral-500">Inquiry:</span>
+                    <strong className="text-white hover:text-[#FFD400] transition-colors">private@rndtechnosoft.com</strong>
+                  </p>
+                  <p className="flex items-center justify-between">
+                    <span className="text-neutral-500">Studio Phone:</span>
+                    <strong className="text-white">+91 22 2490 8800</strong>
+                  </p>
+                  <p className="flex items-center justify-between">
+                    <span className="text-neutral-500">HQ Nodes:</span>
+                    <strong className="text-white">Mumbai &amp; Global Cloud Nodes</strong>
+                  </p>
+                  <p className="flex items-center justify-between pt-1 border-t border-white/5">
+                    <span className="text-neutral-500">Response SLA:</span>
+                    <span className="text-[#FFD400] font-bold">Within 4 business hours</span>
                   </p>
                 </div>
+              </div>
+            </div>
 
-                {formSubmitted ? (
-                  <div className="py-8 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-full bg-[#FFD400] text-black mx-auto flex items-center justify-center shadow-[0_0_20px_rgba(255,212,0,0.5)]">
-                      <Check className="w-6 h-6 stroke-[3]" />
-                    </div>
-                    <h4 className="text-lg font-[family-name:var(--font-syne)] font-bold text-white uppercase">
-                      Transmission Confirmed
-                    </h4>
-                    <p className="text-xs text-neutral-300 max-w-xs mx-auto leading-relaxed">
-                      Thank you. Your project brief has been encrypted and routed directly to our Principal Architecture Squad. We respond within 4 business hours.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setFormSubmitted(false)}
-                      className="mt-3 px-4 py-1.5 rounded-full border border-white/20 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:text-white"
-                    >
-                      Send Another
-                    </button>
+            {/* Right Column (7 cols): Consultation Form */}
+            <div className="lg:col-span-7">
+              {formSubmitted ? (
+                <div className="py-12 text-center space-y-4 bg-white/[0.02] border border-white/10 p-8 rounded-xl">
+                  <div className="w-14 h-14 rounded-full bg-[#FFD400] text-black mx-auto flex items-center justify-center shadow-[0_0_25px_rgba(255,212,0,0.5)]">
+                    <Check className="w-7 h-7 stroke-[3]" />
                   </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-3">
+                  <h4 className="text-xl font-[family-name:var(--font-syne)] font-bold text-white uppercase">
+                    Transmission Confirmed
+                  </h4>
+                  <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed">
+                    Thank you. Your project brief has been encrypted and routed directly to our Principal Architecture Squad. We respond within 4 business hours.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setFormSubmitted(false)}
+                    className="mt-4 px-6 py-2 rounded-full border border-white/20 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:text-white hover:border-[#FFD400] transition-colors cursor-pointer"
+                  >
+                    Send Another Transmission
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
                         Full Name *
                       </label>
                       <div className="relative">
-                        <User className="w-3.5 h-3.5 text-[#FFD400] absolute left-3 top-1/2 -translate-y-1/2" />
+                        <User className="w-4 h-4 text-[#FFD400] absolute left-3.5 top-1/2 -translate-y-1/2" />
                         <input
                           type="text"
                           required
@@ -757,17 +738,17 @@ export default function InsightDetailView({
                           onChange={(e) =>
                             setFormData({ ...formData, name: e.target.value })
                           }
-                          className="w-full pl-8 pr-3 py-2 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
+                          className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
                         Work Email *
                       </label>
                       <div className="relative">
-                        <Mail className="w-3.5 h-3.5 text-[#FFD400] absolute left-3 top-1/2 -translate-y-1/2" />
+                        <Mail className="w-4 h-4 text-[#FFD400] absolute left-3.5 top-1/2 -translate-y-1/2" />
                         <input
                           type="email"
                           required
@@ -776,17 +757,19 @@ export default function InsightDetailView({
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className="w-full pl-8 pr-3 py-2 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
+                          className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
                         />
                       </div>
                     </div>
+                  </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
                         Phone / WhatsApp
                       </label>
                       <div className="relative">
-                        <Phone className="w-3.5 h-3.5 text-[#FFD400] absolute left-3 top-1/2 -translate-y-1/2" />
+                        <Phone className="w-4 h-4 text-[#FFD400] absolute left-3.5 top-1/2 -translate-y-1/2" />
                         <input
                           type="tel"
                           placeholder="+91 98200 12345"
@@ -794,13 +777,13 @@ export default function InsightDetailView({
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
-                          className="w-full pl-8 pr-3 py-2 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
+                          className="w-full pl-10 pr-3.5 py-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
                         Service Typology
                       </label>
                       <select
@@ -811,7 +794,7 @@ export default function InsightDetailView({
                             serviceType: e.target.value,
                           })
                         }
-                        className="w-full px-2.5 py-2 text-xs font-mono bg-[#0c0e14] border border-white/15 text-white focus:outline-none focus:border-[#FFD400] transition-colors"
+                        className="w-full px-3 py-2.5 text-xs font-mono bg-[#0c0e14] border border-white/15 text-white focus:outline-none focus:border-[#FFD400] transition-colors"
                       >
                         <option value="Full-Stack Web & Cloud">
                           Full-Stack Web &amp; Cloud (Next.js 15)
@@ -830,26 +813,32 @@ export default function InsightDetailView({
                         </option>
                       </select>
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">
-                        Technical Scope &amp; Target Milestones
-                      </label>
-                      <textarea
-                        rows={2}
-                        placeholder="Share your technical goals, stack requirements, and launch timeline..."
-                        value={formData.scale}
-                        onChange={(e) =>
-                          setFormData({ ...formData, scale: e.target.value })
-                        }
-                        className="w-full p-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors resize-none"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
+                      Technical Scope &amp; Target Milestones
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="Share your technical goals, stack requirements, and launch timeline..."
+                      value={formData.scale}
+                      onChange={(e) =>
+                        setFormData({ ...formData, scale: e.target.value })
+                      }
+                      className="w-full p-3 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors resize-none"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                    <p className="text-[11px] text-neutral-400 font-mono">
+                      Strict bilateral NDA confidentiality assured.
+                    </p>
 
                     <button
                       type="submit"
                       disabled={formLoading}
-                      className="w-full py-3 bg-[#FFD400] hover:bg-[#ffe34d] text-black text-[11px] font-mono uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.3)] flex items-center justify-center space-x-2 group cursor-pointer disabled:opacity-60"
+                      className="px-8 py-3.5 bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs font-mono uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_20px_rgba(255,212,0,0.3)] flex items-center justify-center space-x-2 group cursor-pointer disabled:opacity-60"
                     >
                       {formLoading ? (
                         <span>Encrypting Brief...</span>
@@ -860,35 +849,10 @@ export default function InsightDetailView({
                         </>
                       )}
                     </button>
-
-                    <p className="text-[10px] text-neutral-400 text-center font-mono">
-                      Strict bilateral NDA confidentiality assured.
-                    </p>
-                  </form>
-                )}
-              </div>
-
-              {/* Direct Technical Concierge Card */}
-              <div className="p-4 bg-[#0c0e14] border border-white/10 shadow-lg space-y-2 text-xs font-mono">
-                <span className="text-[10px] uppercase tracking-widest text-[#FFD400] font-semibold block">
-                  Direct Atelier Concierge:
-                </span>
-                <div className="space-y-1 text-neutral-300">
-                  <p>
-                    <strong className="text-white">Inquiry:</strong>{" "}
-                    private@rndtechnosoft.com
-                  </p>
-                  <p>
-                    <strong className="text-white">Studio:</strong> +91 22 2490
-                    8800
-                  </p>
-                  <p>
-                    <strong className="text-white">HQ:</strong> Mumbai &amp;
-                    Global Cloud Nodes
-                  </p>
-                </div>
-              </div>
-            </aside>
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
         </section>
 

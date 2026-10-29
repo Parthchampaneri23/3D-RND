@@ -18,11 +18,11 @@ export default function RnDFooter() {
           {/* Brand Info & Mission */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-6">
-              <div className="px-3.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-[#FFD400]/40 flex items-center">
+              <div className="px-3.5 py-1.5 rounded-xl flex items-center">
                 <img
                   src="/logo.svg"
                   alt="RND Technosoft Logo"
-                  className="h-7 sm:h-8 w-auto object-contain"
+                  className="h-7 sm:h-16 w-auto object-contain"
                 />
               </div>
             </div>

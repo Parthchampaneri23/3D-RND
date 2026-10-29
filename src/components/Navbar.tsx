@@ -13,6 +13,14 @@ import {
   Camera,
   Sparkles,
   ArrowUpRight,
+  HeartPulse,
+  UtensilsCrossed,
+  ShoppingBag,
+  Hotel,
+  GraduationCap,
+  Building2,
+  Rocket,
+  Plane,
 } from "lucide-react";
 import CyberButton from "@/components/CyberButton";
 
@@ -21,7 +29,9 @@ export default function Navbar() {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
+  const [industriesMenuOpen, setIndustriesMenuOpen] = useState(false);
   const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,12 +39,9 @@ export default function Navbar() {
       const heroSection = document.getElementById("home");
       if (heroSection) {
         const rect = heroSection.getBoundingClientRect();
-        // The hero section finishes when its bottom reaches the viewport.
-        // As long as the user is anywhere inside the hero section, navbar remains transparent.
         const isPastHero = rect.bottom <= window.innerHeight + 20;
         setIsSticky(isPastHero);
       } else {
-        // Fallback for subpages without hero section: sticky when scrolled past top
         setIsSticky(window.scrollY > 60);
       }
     };
@@ -46,6 +53,8 @@ export default function Navbar() {
 
   const handleMouseEnterServices = () => {
     if (megaMenuTimeoutRef.current) clearTimeout(megaMenuTimeoutRef.current);
+    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+    setIndustriesMenuOpen(false);
     setServicesMenuOpen(true);
   };
 
@@ -54,6 +63,78 @@ export default function Navbar() {
       setServicesMenuOpen(false);
     }, 200);
   };
+
+  const handleMouseEnterIndustries = () => {
+    if (industriesTimeoutRef.current) clearTimeout(industriesTimeoutRef.current);
+    if (megaMenuTimeoutRef.current) clearTimeout(megaMenuTimeoutRef.current);
+    setServicesMenuOpen(false);
+    setIndustriesMenuOpen(true);
+  };
+
+  const handleMouseLeaveIndustries = () => {
+    industriesTimeoutRef.current = setTimeout(() => {
+      setIndustriesMenuOpen(false);
+    }, 200);
+  };
+
+  const industryDropdownItems = [
+    {
+      num: "8.3",
+      title: "Healthcare & Dental",
+      category: "Medical Telemetry & Practice ERP",
+      href: "/industries/healthcare",
+      icon: HeartPulse,
+    },
+    {
+      num: "8.4",
+      title: "Food & FMCG",
+      category: "Supply Chain & D2C Delivery",
+      href: "/industries/food-fmcg",
+      icon: UtensilsCrossed,
+    },
+    {
+      num: "8.5",
+      title: "Retail & E-commerce",
+      category: "60 FPS 3D Stores & Headless Cart",
+      href: "/industries/retail-ecommerce",
+      icon: ShoppingBag,
+    },
+    {
+      num: "8.6",
+      title: "Hospitality & Resorts",
+      category: "3D Virtual Tours & Direct Booking",
+      href: "/industries/hospitality",
+      icon: Hotel,
+    },
+    {
+      num: "8.7",
+      title: "Education & Training",
+      category: "3D STEM Labs & Scalable LMS",
+      href: "/industries/education",
+      icon: GraduationCap,
+    },
+    {
+      num: "8.8",
+      title: "Real Estate & Construction",
+      category: "Architectural 3D Twins & PropTech",
+      href: "/industries/real-estate",
+      icon: Building2,
+    },
+    {
+      num: "8.9",
+      title: "Startups & Professional Services",
+      category: "14-Day MVPs & Venture SaaS",
+      href: "/industries/startups-professional-services",
+      icon: Rocket,
+    },
+    {
+      num: "8.10",
+      title: "Travel & Tourism",
+      category: "Sub-Second Fares & AI Itineraries",
+      href: "/industries/travel-tourism",
+      icon: Plane,
+    },
+  ];
 
   const servicePillars = [
     {
@@ -106,8 +187,8 @@ export default function Navbar() {
     { name: "About us", href: "/about-us" },
     { name: "Services", href: "/services", hasMega: true },
     { name: "Portfolios", href: "/portfolios" },
-    { name: "Career", href: "/#career" },
-    { name: "Industries", href: "/#industries" },
+    { name: "Career", href: "/career" },
+    { name: "Industries", href: "/industries", hasIndustriesMega: true },
     { name: "Insights", href: "/insights" },
     { name: "Contact us", href: "/contact-us" },
   ];
@@ -140,6 +221,7 @@ export default function Navbar() {
               (link.href === "/contact-us" && pathname === "/contact-us") ||
               (link.href === "/services" && pathname === "/services") ||
               (link.href === "/portfolios" && pathname === "/portfolios") ||
+              (link.href === "/career" && pathname === "/career") ||
               (link.href === "/insights" && pathname === "/insights");
 
             if (link.hasMega) {
@@ -167,6 +249,101 @@ export default function Navbar() {
                   </a>
                   {(isActive || servicesMenuOpen) && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FFD400] shadow-[0_0_8px_#FFD400] rounded-full" />
+                  )}
+
+                  {/* Single-Column Dropdown for Services */}
+                  {servicesMenuOpen && (
+                    <div
+                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[280px] animate-fadeIn"
+                      onMouseEnter={handleMouseEnterServices}
+                      onMouseLeave={handleMouseLeaveServices}
+                    >
+                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5">
+                        <div className="flex flex-col gap-1.5">
+                          {servicePillars.map((item, idx) => {
+                            const Icon = item.icon;
+                            return (
+                              <a
+                                key={idx}
+                                href="/services"
+                                onClick={() => setServicesMenuOpen(false)}
+                                className="flex items-center gap-3.5 px-3.5 py-2.5 hover:bg-white/[0.05] transition-all group rounded-md"
+                              >
+                                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white shadow-[0_0_12px_rgba(255,255,255,0.15)] group-hover:border-[#FFD400] group-hover:shadow-[0_0_20px_rgba(255,212,0,0.4)] group-hover:scale-105 transition-all">
+                                  <Icon className="w-4 h-4 text-[#FFD400] transition-colors" />
+                                </div>
+                                <span className="text-[13.5px] font-medium text-neutral-100 group-hover:text-[#FFD400] transition-colors leading-snug">
+                                  {item.title}
+                                </span>
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            if (link.hasIndustriesMega) {
+              const isIndustryActive = pathname?.startsWith("/industries");
+              return (
+                <div
+                  key={link.name}
+                  onMouseEnter={handleMouseEnterIndustries}
+                  onMouseLeave={handleMouseLeaveIndustries}
+                  className="relative py-1"
+                >
+                  <a
+                    href={link.href}
+                    className={`inline-flex items-center gap-1.5 transition-colors hover:text-[#FFD400] drop-shadow-md ${isIndustryActive || industriesMenuOpen
+                        ? "text-[#FFD400] font-bold"
+                        : "text-white/90"
+                      }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${industriesMenuOpen
+                          ? "rotate-180 text-[#FFD400]"
+                          : "text-white/70 group-hover:text-[#FFD400]"
+                        }`}
+                    />
+                  </a>
+                  {(isIndustryActive || industriesMenuOpen) && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FFD400] shadow-[0_0_8px_#FFD400] rounded-full" />
+                  )}
+
+                  {/* 2-Column Grid Dropdown: #08090d bg, no outer border, rounded-md */}
+                  {industriesMenuOpen && (
+                    <div
+                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[580px] animate-fadeIn"
+                      onMouseEnter={handleMouseEnterIndustries}
+                      onMouseLeave={handleMouseLeaveIndustries}
+                    >
+                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5">
+                        <div className="grid grid-cols-2 gap-1.5">
+                          {industryDropdownItems.map((item, idx) => {
+                            const Icon = item.icon;
+                            return (
+                              <a
+                                key={idx}
+                                href={item.href}
+                                onClick={() => setIndustriesMenuOpen(false)}
+                                className="flex items-center gap-3.5 px-3.5 py-3 hover:bg-white/[0.05] transition-all group rounded-md"
+                              >
+                                <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white shadow-[0_0_12px_rgba(255,255,255,0.15)] group-hover:border-[#FFD400] group-hover:shadow-[0_0_20px_rgba(255,212,0,0.4)] group-hover:scale-105 transition-all">
+                                  <Icon className="w-5 h-5 text-[#FFD400] transition-colors" />
+                                </div>
+                                <span className="text-[13.5px] font-medium text-neutral-100 group-hover:text-[#FFD400] transition-colors leading-snug">
+                                  {item.title}
+                                </span>
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               );
@@ -209,95 +386,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ----------------- SERVICE MEGA-MENU (DESKTOP DARK VERSION) ----------------- */}
-      {servicesMenuOpen && (
-        <div
-          onMouseEnter={handleMouseEnterServices}
-          onMouseLeave={handleMouseLeaveServices}
-          className="hidden lg:block absolute top-full left-0 right-0 pt-2 animate-fadeIn"
-        >
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="rounded-2xl bg-[#090c14]/98 backdrop-blur-2xl border border-white/15 p-8 shadow-[0_25px_60px_rgba(0,0,0,0.85)] text-white">
-              {/* Header Badge in Mega Menu */}
-              <div className="flex items-center justify-between pb-5 mb-6 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFD400] animate-pulse shadow-[0_0_8px_#FFD400]" />
-                  <span className="text-xs font-mono tracking-widest text-[#FFD400] font-bold uppercase">
-                    SERVICE UNIVERSE // INTEGRATED DELIVERY
-                  </span>
-                </div>
-                <a
-                  href="/services"
-                  onClick={() => setServicesMenuOpen(false)}
-                  className="text-xs text-neutral-300 hover:text-[#FFD400] flex items-center gap-1 group font-mono font-semibold transition-colors"
-                >
-                  <span>Explore Full Capabilities</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD400] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-
-              {/* 4 Pillars Grid */}
-              <div className="grid grid-cols-4 gap-6">
-                {servicePillars.map((pillar, idx) => {
-                  const Icon = pillar.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#FFD400]/50 transition-all group"
-                    >
-                      <div className="flex items-center gap-2.5 mb-2">
-                        <div className="p-2 rounded-lg bg-[#FFD400]/15 border border-[#FFD400]/30 text-[#FFD400]">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-white group-hover:text-[#FFD400] transition-colors">
-                            {pillar.title}
-                          </h4>
-                          <span className="text-[10px] text-neutral-400 block line-clamp-1 font-mono">
-                            {pillar.desc}
-                          </span>
-                        </div>
-                      </div>
-
-                      <ul className="mt-4 space-y-2 border-t border-white/10 pt-3">
-                        {pillar.items.map((item, i) => (
-                          <li key={i}>
-                            <a
-                              href={item.href}
-                              onClick={() => setServicesMenuOpen(false)}
-                              className="text-xs text-neutral-300 hover:text-white flex items-center justify-between py-0.5 group/item transition-colors font-medium"
-                            >
-                              <span>{item.label}</span>
-                              <ArrowRight className="w-3 h-3 text-[#FFD400] opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Bottom Mega-Menu Quick Callout */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400 font-mono">
-                <span className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FFD400]" />
-                  <span>Looking for an integrated enterprise mission plan?</span>
-                </span>
-                <a
-                  href="/contact-us"
-                  onClick={() => setServicesMenuOpen(false)}
-                  className="text-white hover:text-[#FFD400] hover:underline flex items-center gap-1 font-bold transition-colors"
-                >
-                  <span>Book Principal Architect Review</span>
-                  <ArrowRight className="w-3 h-3 text-[#FFD400]" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ----------------- MOBILE DRAWER NAVIGATION (DARK VERSION) ----------------- */}
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-[#07090e]/98 backdrop-blur-2xl border-b border-white/15 px-6 py-6 flex flex-col gap-3 shadow-2xl max-h-[85vh] overflow-y-auto animate-fadeIn text-white">
@@ -307,6 +395,8 @@ export default function Navbar() {
               (link.href === "/contact-us" && pathname === "/contact-us") ||
               (link.href === "/services" && pathname === "/services") ||
               (link.href === "/portfolios" && pathname === "/portfolios") ||
+              (link.href === "/career" && pathname === "/career") ||
+              (link.href === "/industries" && pathname?.startsWith("/industries")) ||
               (link.href === "/insights" && pathname === "/insights");
 
             return (
@@ -320,10 +410,58 @@ export default function Navbar() {
                     }`}
                 >
                   <span>{link.name}</span>
-                  {link.hasMega && (
+                  {(link.hasMega || link.hasIndustriesMega) && (
                     <ChevronDown className="w-4 h-4 text-neutral-400" />
                   )}
                 </a>
+
+                {/* Mobile sub-links for Services (Single column, white rings, rounded-md) */}
+                {link.hasMega && (
+                  <div className="py-2 grid grid-cols-1 gap-1.5 mt-1 border-t border-white/10 pt-2">
+                    {servicePillars.map((srv, i) => {
+                      const Icon = srv.icon;
+                      return (
+                        <a
+                          key={i}
+                          href="/services"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-3 p-2.5 rounded-md bg-[#08090d] text-neutral-200 hover:text-[#FFD400] hover:bg-white/[0.06] transition-all group"
+                        >
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white text-[#FFD400] group-hover:border-[#FFD400] transition-colors">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <span className="text-xs font-medium leading-tight group-hover:text-[#FFD400]">
+                            {srv.title}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Mobile sub-links for Industries (White rings, no inner borders, rounded-md) */}
+                {link.hasIndustriesMega && (
+                  <div className="py-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-1 border-t border-white/10 pt-2">
+                    {industryDropdownItems.map((ind, i) => {
+                      const Icon = ind.icon;
+                      return (
+                        <a
+                          key={i}
+                          href={ind.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-3 p-2.5 rounded-md bg-[#08090d] text-neutral-200 hover:text-[#FFD400] hover:bg-white/[0.06] transition-all group"
+                        >
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white text-[#FFD400] group-hover:border-[#FFD400] transition-colors">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <span className="text-xs font-medium leading-tight group-hover:text-[#FFD400]">
+                            {ind.title}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}

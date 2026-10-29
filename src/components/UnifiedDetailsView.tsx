@@ -34,6 +34,7 @@ import Navbar from "./Navbar";
 import RnDFooter from "./RnDFooter";
 import SpaceBackground from "./SpaceBackground";
 import BeforeAfterSection, { BeforeAfterData } from "./BeforeAfterSection";
+import PageBanner from "./PageBanner";
 
 export interface UnifiedDetailItem {
   id: string;
@@ -205,96 +206,19 @@ export default function UnifiedDetailsView({
       {/* Global Navbar */}
       <Navbar />
 
-      <main className="relative z-10 w-full pt-16">
-        {/* =========================================================================
-            1. HERO BANNER SECTION (Matching Reference Page Architectural Design)
-            ========================================================================= */}
-        <section className="relative w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[520px] flex items-center justify-center overflow-hidden bg-[#06070a]">
-          {/* Hero Cover Image with Smooth Multi-Stop Gradient Overlays */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={item.image || "/images/service_webdev.jpg"}
-              alt={fullTitle}
-              fill
-              priority
-              className="object-cover object-center scale-105 transition-transform duration-1000 ease-out brightness-90"
-            />
-            {/* Multi-stop dark gradient for high contrast & seamless blending */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#050608]/75 to-[#050608]/50" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050608]/80 via-transparent to-[#050608]" />
-            <div className="absolute inset-0 bg-black/35 backdrop-blur-[0.5px]" />
-          </div>
+      {/* Page Banner - Compact 2-line title matching Contact Us banner height */}
+      <PageBanner
+        title={item.title}
+        breadcrumb={item.title}
+        parentBreadcrumb={{ label: parentLabel, href: parentPath }}
+      />
 
-          {/* Subtle Vertical Architectural Grid Lines Overlay */}
-          <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="max-w-[1560px] h-full mx-auto px-6 sm:px-10 lg:px-14 flex justify-between">
-              <div className="w-[1px] h-full bg-white/40" />
-              <div className="w-[1px] h-full bg-white/20 hidden md:block" />
-              <div className="w-[1px] h-full bg-white/40" />
-            </div>
-          </div>
-
-          {/* Central Hero Content */}
-          <div className="relative z-10 max-w-[1560px] w-full mx-auto px-6 sm:px-10 lg:px-14 text-center flex flex-col items-center pt-8 sm:pt-14">
-            {/* Breadcrumb Navigation Pill */}
-            <nav
-              aria-label="Breadcrumb"
-              className="inline-flex items-center space-x-2 sm:space-x-2.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 mb-4 sm:mb-6 shadow-lg"
-            >
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <Home className="w-3.5 h-3.5 text-[#FFD400]" />
-                <Link
-                  href="/"
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-medium text-white/80 hover:text-[#FFD400] transition-colors"
-                >
-                  Home
-                </Link>
-                <ChevronRight className="w-3 h-3 text-white/40 shrink-0" />
-              </div>
-
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <Link
-                  href={parentPath}
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-medium text-white/80 hover:text-[#FFD400] transition-colors"
-                >
-                  {parentLabel}
-                </Link>
-                <ChevronRight className="w-3 h-3 text-white/40 shrink-0" />
-              </div>
-
-              <div className="inline-flex items-center space-x-1.5 sm:space-x-2">
-                <span className="text-[11px] sm:text-xs uppercase tracking-[0.16em] font-bold text-[#FFD400] truncate max-w-[180px] sm:max-w-[320px]">
-                  {fullTitle}
-                </span>
-              </div>
-            </nav>
-
-            {/* Sculptural Headline */}
-            <h1 className="font-[family-name:var(--font-syne)] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] max-w-5xl uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]">
-              {fullTitle}
-            </h1>
-
-            {/* Tagline */}
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-neutral-300 font-light max-w-3xl tracking-wide leading-relaxed">
-              <span className="text-[#FFD400] font-mono font-bold mr-2">
-                {item.index} //
-              </span>
-              {item.tagline}
-            </p>
-
-            {/* Signature Brand Divider (Line — Dot — Line) */}
-            <div className="mt-6 sm:mt-8 flex items-center space-x-3">
-              <span className="w-12 h-[1.5px] bg-[#FFD400]/70" />
-              <span className="w-2 h-2 rounded-full bg-[#FFD400] shadow-[0_0_10px_#FFD400]" />
-              <span className="w-12 h-[1.5px] bg-[#FFD400]/70" />
-            </div>
-          </div>
-        </section>
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
 
         {/* =========================================================================
             2. STICKY SUB-HEADER ACTION BAR (Matching Reference Page)
             ========================================================================= */}
-        <div className="border-b border-white/10 bg-[#0c0e14]/95 backdrop-blur-xl sticky top-16 sm:top-20 z-30 shadow-2xl">
+        <div className="border-b border-white/10 bg-[#0c0e14]/95 backdrop-blur-xl sticky top-16 sm:top-20 z-30 shadow-2xl rounded-t-[32px] sm:rounded-t-[44px]">
           <div className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 py-3.5 flex items-center justify-between">
             {/* Left: Back Link */}
             <Link

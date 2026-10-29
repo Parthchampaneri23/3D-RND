@@ -45,7 +45,7 @@ export interface BeforeAfterData {
 
 interface BeforeAfterSectionProps {
   data?: BeforeAfterData;
-  type?: "service" | "portfolio" | "general";
+  type?: "service" | "portfolio" | "blog" | "general";
   category?: string;
   title?: string;
 }

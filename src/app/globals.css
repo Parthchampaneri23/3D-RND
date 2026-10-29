@@ -215,3 +215,26 @@ body {
 .faq-grid > div {
   overflow: hidden;
 }
+
+/* Smooth Wave Typography Motion */
+@keyframes smooth-wave-motion {
+  0%, 100% {
+    transform: translateY(0px);
+    color: inherit;
+    text-shadow: none;
+  }
+  35% {
+    transform: translateY(-7px);
+    color: #FFD400;
+    text-shadow: 0 0 16px rgba(255, 212, 0, 0.55), 0 0 28px rgba(255, 212, 0, 0.2);
+  }
+  65% {
+    transform: translateY(1.5px);
+  }
+}
+
+.animate-smooth-wave {
+  display: inline-block;
+  will-change: transform, color;
+  animation: smooth-wave-motion 2.4s ease-in-out infinite;
+}

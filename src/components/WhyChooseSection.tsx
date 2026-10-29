@@ -3,9 +3,9 @@
 import { Shield, ArrowRight, UserCircle } from "lucide-react";
 // import Image from "next/image"; // Uncomment when adding actual images
 
-export default function WhyChooseSection() {
+export default function WhyChooseSection({ className = "" }: { className?: string } = {}) {
   return (
-    <section className="relative py-[50px] bg-black text-white overflow-hidden">
+    <section className={`relative py-[50px] bg-black text-white overflow-hidden ${className}`}>
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-12">
         {/* Grid Layout - 3 columns with center card taller */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-fr">
