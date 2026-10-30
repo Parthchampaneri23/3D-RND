@@ -123,6 +123,7 @@ export default function PrintRevealImage({
           src={src}
           alt={alt}
           fill={fill}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
           priority={priority}
           className="object-cover w-full h-full group-hover/print:scale-105 transition-transform duration-700 ease-out brightness-95"
         />
