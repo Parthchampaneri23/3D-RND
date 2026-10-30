@@ -1,37 +1,177 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CyberButton from "@/components/CyberButton";
 
+/**
+ * WaveText component renders text character-by-character with staggered delays
+ * producing a smooth undulating sine-wave ripple across the title.
+ */
+function WaveText({
+  text,
+  className = "",
+  delayOffset = 0,
+}: {
+  text: string;
+  className?: string;
+  delayOffset?: number;
+}) {
+  return (
+    <span className={`inline-block ${className}`}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block animate-text-wave"
+          style={{
+            animationDelay: `${(delayOffset + i) * 0.07}s`,
+            whiteSpace: char === " " ? "pre" : "normal",
+          }}
+        >
+          {char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/**
+ * ScrollCounter smoothly animates a number from 0 to target on scroll into view
+ * and resets on scroll-back so it counts up every time the user reaches the section.
+ */
+function ScrollCounter({
+  target,
+  decimals = 0,
+  suffix = "",
+}: {
+  target: number;
+  decimals?: number;
+  suffix?: string;
+}) {
+  const [val, setVal] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const el = ref.current;
+    if (!el) return;
+
+    const counterObj = { current: 0 };
+
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top 92%",
+      toggleActions: "restart none none reset",
+      onEnter: () => {
+        counterObj.current = 0;
+        gsap.to(counterObj, {
+          current: target,
+          duration: 2.0,
+          ease: "power2.out",
+          onUpdate: () => {
+            setVal(counterObj.current);
+          },
+        });
+      },
+      onLeaveBack: () => {
+        counterObj.current = 0;
+        setVal(0);
+      },
+    });
+
+    return () => st.kill();
+  }, [target]);
+
+  const formatted =
+    decimals > 0 ? val.toFixed(decimals) : Math.floor(val);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {formatted}
+      {suffix}
+    </span>
+  );
+}
+
 export default function AboutUsSection() {
-  const [activeStoryHover, setActiveStoryHover] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
 
   const stats = [
     {
-      value: "250+",
+      numericValue: 250,
+      decimals: 0,
+      suffix: "+",
       label: "PROJECTS",
       subLabel: "DELIVERED",
       highlight: "Cloud & Web",
     },
     {
-      value: "99.9%",
+      numericValue: 99.9,
+      decimals: 1,
+      suffix: "%",
       label: "CLOUD",
       subLabel: "UPTIME",
       highlight: "SLA Guaranteed",
     },
     {
-      value: "60+",
+      numericValue: 60,
+      decimals: 0,
+      suffix: "+",
       label: "IT",
       subLabel: "SPECIALISTS",
       highlight: "In-House Squads",
     },
   ];
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const headline = headlineRef.current;
+    if (!headline) return;
+
+    const chars = headline.querySelectorAll(".animate-text-wave");
+    if (chars.length > 0) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headline,
+          start: "top 85%",
+          toggleActions: "restart none none reset",
+        },
+      });
+
+      tl.fromTo(
+        chars,
+        { opacity: 0, y: 35, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.02,
+          ease: "back.out(1.8)",
+        }
+      ).to(chars, {
+        y: -12,
+        color: "#FFD400",
+        duration: 0.35,
+        stagger: {
+          each: 0.03,
+          repeat: 1,
+          yoyo: true,
+        },
+        ease: "sine.inOut",
+      });
+    }
+  }, []);
+
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="relative z-20 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-20 sm:pt-28 pb-20 sm:pb-32 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-[#FFD400] selection:text-black shadow-[0_-50px_140px_rgba(0,0,0,0.99)] flex items-center"
     >
       {/* ----------------- FULL SECTION BACKGROUND: home-about2.png ----------------- */}
@@ -89,11 +229,17 @@ export default function AboutUsSection() {
                 <span className="text-[#FFD400] tracking-[0.3em]">ABOUT US</span>
               </div>
 
-              {/* Primary Headline */}
-              <h2 className="text-3xl sm:text-5xl lg:text-[46px] xl:text-[54px] font-bold text-white tracking-[-0.003em] leading-[1.15] font-[family-name:var(--font-jakarta)] mb-5">
-                Engineering 
-                the Next Era 
-                of Digital.
+              {/* Primary Headline with Undulating Wave Animation */}
+              <h2
+                ref={headlineRef}
+                data-no-gsap
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-bold text-white tracking-tight leading-[1.15] font-[family-name:var(--font-syne)] mb-5 uppercase"
+              >
+                <WaveText text="Engineering " delayOffset={0} />
+                <br className="hidden sm:inline" />
+                <WaveText text="the Next Era " delayOffset={12} />
+                <br className="hidden sm:inline" />
+                <WaveText text="of Digital." delayOffset={25} />
               </h2>
 
               {/* Body Paragraph */}
@@ -110,9 +256,13 @@ export default function AboutUsSection() {
                     key={idx}
                     className="px-2 sm:px-4 group cursor-default transition-all duration-300"
                   >
-                    {/* Number Metric */}
-                    <div className="text-2xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-bold text-white tracking-tight leading-none mb-2 group-hover:text-[#FFD400] transition-colors duration-300">
-                      {stat.value}
+                    {/* Number Metric with Scroll Counter */}
+                    <div className="text-2xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-bold text-white tracking-tight leading-none mb-2 group-hover:text-[#FFD400] transition-colors duration-300 font-mono">
+                      <ScrollCounter
+                        target={stat.numericValue}
+                        decimals={stat.decimals}
+                        suffix={stat.suffix}
+                      />
                     </div>
 
                     {/* Label */}
@@ -144,3 +294,4 @@ export default function AboutUsSection() {
     </section>
   );
 }
+

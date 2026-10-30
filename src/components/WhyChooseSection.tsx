@@ -1,17 +1,87 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Headphones, ArrowUpRight, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+/**
+ * WaveText component renders text character-by-character with staggered delays
+ * producing a smooth, fluid undulating sine-wave ripple across the title.
+ */
+function WaveText({
+  text,
+  className = "",
+  delayOffset = 0,
+}: {
+  text: string;
+  className?: string;
+  delayOffset?: number;
+}) {
+  return (
+    <span className={`inline-block ${className}`}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block animate-text-wave"
+          style={{
+            animationDelay: `${(delayOffset + i) * 0.07}s`,
+            whiteSpace: char === " " ? "pre" : "normal",
+          }}
+        >
+          {char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function WhyChooseSection({ className = "" }: { className?: string } = {}) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsGridRef = useRef<HTMLDivElement>(null);
   const wavePathRef = useRef<SVGPathElement>(null);
+
+  // Typewriter animation state for the main heading
+  const typewriterPhrases = [
+    "VELOCITY & IMPACT",
+    "SCALE & RELIABILITY",
+    "ENGINEERING EXCELLENCE",
+    "RAPID LAUNCH SPEED",
+  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("VELOCITY & IMPACT");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = typewriterPhrases[phraseIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting && currentText === currentPhrase) {
+      // Pause after typing the full phrase
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2200);
+    } else if (isDeleting && currentText === "") {
+      // Switch phrase after deleting
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % typewriterPhrases.length);
+    } else {
+      // Character-by-character typing or backspacing
+      const typingSpeed = isDeleting ? 40 : 85;
+      timer = setTimeout(() => {
+        setCurrentText((prev) =>
+          isDeleting
+            ? currentPhrase.substring(0, prev.length - 1)
+            : currentPhrase.substring(0, prev.length + 1)
+        );
+      }, typingSpeed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, phraseIndex]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +90,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // 1. Header reveal
+      // 1. Header reveal & Typewriter Reset on Scroll
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current.children,
@@ -34,7 +104,13 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: headerRef.current,
               start: "top 85%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
+              onEnter: () => {
+                // Restart typewriter animation from the beginning whenever scrolling top-to-bottom
+                setCurrentText("");
+                setPhraseIndex(0);
+                setIsDeleting(false);
+              },
             },
           }
         );
@@ -56,7 +132,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 80%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
             },
           }
         );
@@ -77,7 +153,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 75%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
             },
           }
         );
@@ -98,7 +174,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 75%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
             },
           }
         );
@@ -119,7 +195,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
           scrollTrigger: {
             trigger: wavePathRef.current,
             start: "top 80%",
-            toggleActions: "play none none none",
+            toggleActions: "restart none none reset",
           },
         });
       }
@@ -142,21 +218,25 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
       id="why-choose"
       className={`relative py-16 sm:py-24 bg-black text-white overflow-hidden ${className}`}
     >
-      {/* Background radial atmosphere */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#FFD400]/[0.025] blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute top-1/4 right-10 w-[350px] h-[350px] bg-[#FFD400]/[0.015] blur-[120px] pointer-events-none rounded-full" />
+      {/* Background radial atmosphere with infinite subtle ambient breathing */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#FFD400]/[0.03] blur-[140px] pointer-events-none rounded-full animate-ambient-pulse" />
+      <div className="absolute top-1/4 right-10 w-[350px] h-[350px] bg-[#FFD400]/[0.02] blur-[120px] pointer-events-none rounded-full animate-ambient-drift" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-12">
-        {/* Section Header: Tagline, Title, Subtitle */}
+        {/* Section Header: Tagline, Title with Typewriter, Subtitle */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#FFD400]/30 bg-[#FFD400]/10 text-[#FFD400] text-xs font-mono font-semibold uppercase tracking-wider mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400] animate-ping" />
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 animate-spin-slow" />
             <span>WHY CHOOSE RND // PROVEN ENGINEERING EDGE</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold uppercase font-[family-name:var(--font-syne)] tracking-tight text-white mb-3">
-            BUILT FOR MAXIMUM <span className="text-[#FFD400]">VELOCITY & IMPACT</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold uppercase font-[family-name:var(--font-syne)] tracking-tight text-white mb-3 min-h-[52px] sm:min-h-[60px] md:min-h-[68px]">
+            BUILT FOR MAXIMUM{" "}
+            <span className="text-[#FFD400] inline-block">
+              {currentText}
+              <span className="inline-block w-[3px] sm:w-[4px] h-[0.85em] bg-[#FFD400] ml-1.5 align-middle animate-cursor-blink shadow-[0_0_10px_#FFD400]" />
+            </span>
           </h2>
 
           <p className="text-xs sm:text-sm md:text-base text-white/60 font-[family-name:var(--font-jakarta)] leading-relaxed">
@@ -172,33 +252,57 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
           {/* ========================================================
               CARD 01 - Rapid Agile Delivery (Left Column - Top)
           ======================================================== */}
-          <div className="why-choose-card rounded-[28px] bg-[#FFD400] text-black p-7 sm:p-8 flex flex-col justify-between border border-[#FFD400] shadow-[0_15px_35px_rgba(255,212,0,0.18)] hover:scale-[1.015] transition-all duration-300 lg:col-start-1 lg:row-start-1">
+          <div className="why-choose-card rounded-[28px] bg-[#FFD400] text-black p-7 sm:p-8 flex flex-col justify-between border border-[#FFD400] shadow-[0_15px_35px_rgba(255,212,0,0.18)] hover:scale-[1.015] transition-all duration-300 lg:col-start-1 lg:row-start-1 group">
             <div>
               <div className="text-2xl sm:text-3xl font-black mb-1.5 text-black font-[family-name:var(--font-syne)] tracking-tight">
                 01 /
               </div>
               <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-6 leading-tight font-[family-name:var(--font-syne)] text-black">
-                Rapid Agile<br />Delivery
+                <WaveText text="Rapid Agile" />
+                <br />
+                <WaveText text="Delivery" delayOffset={12} />
               </h3>
 
-              {/* Segmented Sprint Timeline */}
+              {/* Segmented Sprint Timeline with Infinite Scanner Pulse */}
               <div className="grid grid-cols-4 gap-2 mb-2.5">
-                <div className="sprint-segment-bar h-1.5 sm:h-2 bg-black rounded-full" />
-                <div className="sprint-segment-bar h-1.5 sm:h-2 bg-black rounded-full" />
-                <div className="sprint-segment-bar h-1.5 sm:h-2 bg-black rounded-full" />
-                <div className="sprint-segment-bar h-1.5 sm:h-2 bg-black/25 rounded-full" />
+                <div className="sprint-segment-bar relative h-1.5 sm:h-2 bg-black rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-bar-shimmer" />
+                </div>
+                <div className="sprint-segment-bar relative h-1.5 sm:h-2 bg-black rounded-full overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-bar-shimmer"
+                    style={{ animationDelay: "0.4s" }}
+                  />
+                </div>
+                <div className="sprint-segment-bar relative h-1.5 sm:h-2 bg-black rounded-full overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-bar-shimmer"
+                    style={{ animationDelay: "0.8s" }}
+                  />
+                </div>
+                <div className="sprint-segment-bar relative h-1.5 sm:h-2 bg-black/25 rounded-full overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-transparent animate-bar-shimmer"
+                    style={{ animationDelay: "1.2s" }}
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-4 gap-2 text-[11px] sm:text-xs font-bold text-black font-[family-name:var(--font-jakarta)] mb-8">
                 <span>Sprint 01</span>
                 <span>Sprint 02</span>
                 <span>Sprint 03</span>
-                <span className="text-black/50">Deploy</span>
+                <span className="text-black/50 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-black/60 animate-ping inline-block" />
+                  Deploy
+                </span>
               </div>
 
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-black text-[#FFD400] text-xs sm:text-sm font-bold font-[family-name:var(--font-jakarta)] shadow-sm">
-                100% On-Time
+              {/* Badge with infinite light sheen reflection */}
+              <div className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-[#FFD400] text-xs sm:text-sm font-bold font-[family-name:var(--font-jakarta)] shadow-sm overflow-hidden">
+                <span className="w-2 h-2 rounded-full bg-[#FFD400] animate-ping" />
+                <span>100% On-Time</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-pass pointer-events-none" />
               </div>
             </div>
           </div>
@@ -212,13 +316,16 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                 <div className="text-2xl sm:text-3xl font-black text-white/40 font-[family-name:var(--font-syne)] tracking-tight">
                   02 /
                 </div>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-mono">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Vetted Talent
                 </span>
               </div>
 
               <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-5 leading-tight font-[family-name:var(--font-syne)] text-white">
-                Top 1% Senior<br />Engineers
+                <WaveText text="Top 1% Senior" />
+                <br />
+                <WaveText text="Engineers" delayOffset={14} />
               </h3>
 
               {/* Avatar Group with Real Engineer Portraits */}
@@ -226,7 +333,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                 {teamAvatars.map((person, idx) => (
                   <div
                     key={idx}
-                    className="team-avatar-pill relative w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 border-[#0c0d12] overflow-hidden bg-neutral-800 shadow-md"
+                    className="team-avatar-pill relative w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 border-[#0c0d12] overflow-hidden bg-neutral-800 shadow-md transition-transform hover:scale-110 hover:z-20 duration-200"
                   >
                     <Image
                       src={person.src}
@@ -237,8 +344,9 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                     />
                   </div>
                 ))}
-                <div className="team-avatar-pill w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#181920] border-2 border-[#0c0d12] flex items-center justify-center text-xs text-white/75 font-bold font-mono shadow-md">
-                  +45
+                <div className="team-avatar-pill relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#181920] border-2 border-[#0c0d12] flex items-center justify-center text-xs text-white/85 font-bold font-mono shadow-md overflow-hidden">
+                  <span>+45</span>
+                  <div className="absolute inset-0 bg-[#FFD400]/10 rounded-full animate-pulse-glow pointer-events-none" />
                 </div>
               </div>
 
@@ -254,10 +362,10 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
 
               {/* Tech Badges */}
               <div className="flex flex-wrap gap-2">
-                {["React", "Node", "AWS", "Vetted Talent"].map((tech) => (
+                {["React", "Node", "AWS", "Spatial 3D"].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-white/70 font-mono"
+                    className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-white/70 font-mono hover:border-[#FFD400]/40 transition-colors"
                   >
                     {tech}
                   </span>
@@ -270,8 +378,14 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
               CENTER HERO CARD - Astronaut with Golden Shield (Center Column - Spans 2 Rows, Pure Black BG)
           ======================================================== */}
           <div className="why-choose-card rounded-[28px] bg-black border border-white/10 hover:border-[#FFD400]/40 p-6 sm:p-8 flex flex-col items-center justify-between md:col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 relative overflow-hidden transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group">
-            {/* Floating Cyber Astronaut + Golden Energy Shield Image */}
+            {/* Floating Cyber Astronaut + Golden Energy Shield Image & Hologram Rings */}
             <div className="relative z-10 w-full flex-1 flex items-center justify-center min-h-[340px] sm:min-h-[400px] py-4">
+              {/* Infinite Rotating Cyber Halo Rings behind the shield */}
+              <div className="absolute w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] rounded-full border border-[#FFD400]/10 animate-spin-slow pointer-events-none" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[250px] sm:h-[250px] rounded-full border border-dashed border-[#FFD400]/20 animate-spin-reverse pointer-events-none" />
+              {/* Golden Core Pulse Aura */}
+              <div className="absolute w-[180px] h-[180px] rounded-full bg-[#FFD400]/[0.08] blur-[40px] animate-pulse-glow pointer-events-none" />
+
               <div className="relative w-full h-full max-w-[340px] sm:max-w-[380px] aspect-[3/4] flex items-center justify-center animate-subtle-float">
                 <Image
                   src="/images/why_choose_astronaut_shield.jpg"
@@ -284,23 +398,25 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
               </div>
             </div>
 
-            {/* 3x Faster Text & Subtitle */}
+            {/* 3x Faster Text & Subtitle with Neon Golden Breathing Glow & Wave Animation */}
             <div className="relative z-10 text-center mb-6">
-              <h3 className="text-4xl sm:text-5xl md:text-[50px] font-black text-[#FFD400] mb-1.5 tracking-tight font-[family-name:var(--font-syne)] drop-shadow-[0_0_20px_rgba(255,212,0,0.35)]">
-                3x Faster
+              <h3 className="text-4xl sm:text-5xl md:text-[50px] font-black text-[#FFD400] mb-1.5 tracking-tight font-[family-name:var(--font-syne)] animate-glow-pulse">
+                <WaveText text="3x Faster" />
               </h3>
               <p className="text-white/70 text-xs sm:text-sm font-[family-name:var(--font-jakarta)] leading-snug">
                 From Concept to<br />Scalable Launch
               </p>
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button with Infinite Radiant Sheen Sweep */}
             <Link
               href="/#contact"
-              className="relative z-10 w-full py-4 px-6 rounded-2xl bg-[#FFD400] text-black font-extrabold text-xs sm:text-sm md:text-base flex items-center justify-center gap-2 hover:bg-[#ffe033] transition-all group/btn font-[family-name:var(--font-syne)] uppercase tracking-wider shadow-[0_0_25px_rgba(255,212,0,0.3)] hover:shadow-[0_0_35px_rgba(255,212,0,0.5)]"
+              className="relative z-10 w-full py-4 px-6 rounded-2xl bg-[#FFD400] text-black font-extrabold text-xs sm:text-sm md:text-base flex items-center justify-center gap-2 hover:bg-[#ffe033] transition-all group/btn font-[family-name:var(--font-syne)] uppercase tracking-wider shadow-[0_0_25px_rgba(255,212,0,0.3)] hover:shadow-[0_0_40px_rgba(255,212,0,0.55)] overflow-hidden"
             >
-              <span>Book Free Consultation</span>
-              <ArrowUpRight className="w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              {/* Continuous Light Sweep Sheen */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent animate-cta-sheen pointer-events-none" />
+              <span className="relative z-10">Book Free Consultation</span>
+              <ArrowUpRight className="relative z-10 w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -313,13 +429,19 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                 <div className="text-2xl sm:text-3xl font-black text-white/40 font-[family-name:var(--font-syne)] tracking-tight">
                   03 /
                 </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  Live Monitoring
+                </span>
               </div>
 
               <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-5 leading-tight font-[family-name:var(--font-syne)] text-white">
-                Bank-Grade<br />Cloud Security
+                <WaveText text="Bank-Grade" />
+                <br />
+                <WaveText text="Cloud Security" delayOffset={11} />
               </h3>
 
-              {/* Glowing Yellow Sine / Spline Wave Graph */}
+              {/* Glowing Yellow Sine / Spline Wave Graph with Traveling Data Packet */}
               <div className="h-28 mb-8 relative flex items-center">
                 <svg
                   className="w-full h-full overflow-visible"
@@ -332,8 +454,8 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                       <stop offset="0%" stopColor="#FFD400" stopOpacity="0.3" />
                       <stop offset="100%" stopColor="#FFD400" stopOpacity="0" />
                     </linearGradient>
-                    <filter id="yellowGlow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#FFD400" floodOpacity="0.8" />
+                    <filter id="yellowGlow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#FFD400" floodOpacity="0.9" />
                     </filter>
                   </defs>
 
@@ -343,7 +465,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                     fill="url(#cloudSecurityGradient)"
                   />
 
-                  {/* Neon Spline Line matching the user screenshot */}
+                  {/* Neon Spline Line */}
                   <path
                     ref={wavePathRef}
                     d="M 0,82 C 40,82 60,80 90,74 C 120,68 140,42 165,42 C 190,42 205,88 230,88 C 255,88 275,28 295,28 L 320,28"
@@ -353,15 +475,33 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                     strokeLinejoin="round"
                     filter="url(#yellowGlow)"
                   />
+
+                  {/* Infinite Traveling Glowing Telemetry Photon */}
+                  <circle r="4" fill="#FFFFFF" filter="url(#yellowGlow)">
+                    <animateMotion
+                      path="M 0,82 C 40,82 60,80 90,74 C 120,68 140,42 165,42 C 190,42 205,88 230,88 C 255,88 275,28 295,28 L 320,28"
+                      dur="3.2s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle r="7.5" fill="#FFD400" opacity="0.35">
+                    <animateMotion
+                      path="M 0,82 C 40,82 60,80 90,74 C 120,68 140,42 165,42 C 190,42 205,88 230,88 C 255,88 275,28 295,28 L 320,28"
+                      dur="3.2s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
                 </svg>
               </div>
 
               {/* Badges */}
               <div className="flex items-center justify-between">
-                <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#FFD400] text-black text-xs font-bold font-mono tracking-tight shadow-[0_0_15px_rgba(255,212,0,0.25)]">
-                  99.99% SLA Uptime
+                <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FFD400] text-black text-xs font-bold font-mono tracking-tight shadow-[0_0_15px_rgba(255,212,0,0.25)]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-black animate-ping" />
+                  <span>99.99% SLA Uptime</span>
                 </div>
-                <span className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/50 text-[11px] font-mono">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/60 text-[11px] font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   SOC2 Compliant
                 </span>
               </div>
@@ -381,22 +521,30 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
 
               <div className="flex items-start justify-between mb-6">
                 <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold leading-tight font-[family-name:var(--font-syne)] text-white">
-                  24/7 Dedicated<br />Support
+                  <WaveText text="24/7 Dedicated" />
+                  <br />
+                  <WaveText text="Support" delayOffset={15} />
                 </h3>
 
-                {/* Glowing Concentric Radar / Telemetry Node */}
+                {/* Glowing Concentric Radar / Telemetry Node with Active Orbiting Sensors */}
                 <div className="relative w-20 h-20 shrink-0 flex items-center justify-center">
                   {/* Outer pulse circle */}
-                  <div className="absolute inset-0 rounded-full border border-[#FFD400]/25 animate-ping opacity-35" />
+                  <div className="absolute inset-0 rounded-full border border-[#FFD400]/30 animate-ping opacity-30" />
                   {/* Mid dashed radar ring */}
-                  <div className="absolute inset-2 rounded-full border border-dashed border-[#FFD400]/50 animate-spin-slow" />
+                  <div className="absolute inset-2 rounded-full border border-dashed border-[#FFD400]/40 animate-spin-slow" />
+                  {/* Rotating radar sweep ray */}
+                  <div className="absolute inset-1 rounded-full animate-spin-slow pointer-events-none overflow-hidden opacity-30">
+                    <div className="w-1/2 h-1/2 origin-bottom-right bg-gradient-to-br from-transparent to-[#FFD400]/40 rounded-tl-full" />
+                  </div>
                   {/* Center glowing circle with headphone icon */}
-                  <div className="relative w-11 h-11 rounded-full bg-[#FFD400]/15 border border-[#FFD400] flex items-center justify-center shadow-[0_0_20px_rgba(255,212,0,0.4)]">
+                  <div className="relative z-10 w-11 h-11 rounded-full bg-[#FFD400]/15 border border-[#FFD400] flex items-center justify-center shadow-[0_0_20px_rgba(255,212,0,0.4)]">
                     <Headphones className="w-5 h-5 text-[#FFD400]" />
                   </div>
-                  {/* Orbiting accent dots */}
-                  <span className="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-[#FFD400] shadow-[0_0_8px_#FFD400]" />
-                  <span className="absolute bottom-2 left-1 w-1.5 h-1.5 rounded-full bg-[#FFD400]/80 shadow-[0_0_8px_#FFD400]" />
+                  {/* Orbiting accent dots rotating around perimeter */}
+                  <div className="absolute inset-0 animate-orbit pointer-events-none">
+                    <span className="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-[#FFD400] shadow-[0_0_8px_#FFD400]" />
+                    <span className="absolute bottom-2 left-1 w-1.5 h-1.5 rounded-full bg-[#FFD400]/80 shadow-[0_0_8px_#FFD400]" />
+                  </div>
                 </div>
               </div>
 
@@ -411,7 +559,8 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
                   </div>
                 </div>
 
-                <div className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/60 text-xs font-mono">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/70 text-xs font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                   &lt;15m Response
                 </div>
               </div>
@@ -421,6 +570,41 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
       </div>
 
       <style jsx>{`
+        @keyframes textWave {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          20% {
+            transform: translateY(-5px);
+          }
+          40% {
+            transform: translateY(2px);
+          }
+          60% {
+            transform: translateY(0px);
+          }
+        }
+        .animate-text-wave {
+          display: inline-block;
+          animation: textWave 2.8s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes cursorBlink {
+          0%, 45% {
+            opacity: 1;
+          }
+          50%, 95% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        .animate-cursor-blink {
+          animation: cursorBlink 0.9s infinite;
+        }
+
         @keyframes subtleFloat {
           0%, 100% {
             transform: translateY(0px);
@@ -432,6 +616,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
         .animate-subtle-float {
           animation: subtleFloat 6s ease-in-out infinite;
         }
+
         @keyframes spinSlow {
           from {
             transform: rotate(0deg);
@@ -442,6 +627,118 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
         }
         .animate-spin-slow {
           animation: spinSlow 18s linear infinite;
+        }
+
+        @keyframes spinReverse {
+          from {
+            transform: rotate(360deg);
+          }
+          to {
+            transform: rotate(0deg);
+          }
+        }
+        .animate-spin-reverse {
+          animation: spinReverse 24s linear infinite;
+        }
+
+        @keyframes orbit {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .animate-orbit {
+          animation: orbit 10s linear infinite;
+        }
+
+        @keyframes glowPulse {
+          0%, 100% {
+            filter: drop-shadow(0 0 16px rgba(255, 212, 0, 0.35));
+          }
+          50% {
+            filter: drop-shadow(0 0 32px rgba(255, 212, 0, 0.75));
+          }
+        }
+        .animate-glow-pulse {
+          animation: glowPulse 3.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+          0%, 100% {
+            opacity: 0.35;
+            transform: scale(0.95);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(1.08);
+          }
+        }
+        .animate-pulse-glow {
+          animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes ambientPulse {
+          0%, 100% {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(0.95);
+          }
+          50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.08);
+          }
+        }
+        .animate-ambient-pulse {
+          animation: ambientPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes ambientDrift {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-20px) scale(1.12);
+          }
+        }
+        .animate-ambient-drift {
+          animation: ambientDrift 10s ease-in-out infinite;
+        }
+
+        @keyframes barShimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          50%, 100% {
+            transform: translateX(100%);
+          }
+        }
+        .animate-bar-shimmer {
+          animation: barShimmer 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes shimmerPass {
+          0%, 20% {
+            transform: translateX(-150%);
+          }
+          60%, 100% {
+            transform: translateX(200%);
+          }
+        }
+        .animate-shimmer-pass {
+          animation: shimmerPass 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ctaSheen {
+          0%, 25% {
+            transform: translateX(-150%) skewX(-20deg);
+          }
+          65%, 100% {
+            transform: translateX(250%) skewX(-20deg);
+          }
+        }
+        .animate-cta-sheen {
+          animation: ctaSheen 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
       `}</style>
     </section>

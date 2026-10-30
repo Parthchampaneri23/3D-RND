@@ -16,6 +16,37 @@ interface ProcessStep {
   kpis: string[];
 }
 
+/**
+ * WaveText component renders text character-by-character with staggered delays
+ * producing a smooth, fluid undulating sine-wave ripple across titles.
+ */
+function WaveText({
+  text,
+  className = "",
+  delayOffset = 0,
+}: {
+  text: string;
+  className?: string;
+  delayOffset?: number;
+}) {
+  return (
+    <span className={`inline-block ${className}`}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block animate-text-wave"
+          style={{
+            animationDelay: `${(delayOffset + i) * 0.06}s`,
+            whiteSpace: char === " " ? "pre" : "normal",
+          }}
+        >
+          {char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function CosmicProcessSection({
   className = "py-24 sm:py-32",
 }: {
@@ -83,7 +114,7 @@ export default function CosmicProcessSection({
     },
   ];
 
-  // GSAP Scroll Animations: Entrance & Stagger on Scroll (Visual entrance only, steps managed by hover)
+  // GSAP Scroll Animations: Replays fresh on scroll top-to-bottom
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -106,28 +137,46 @@ export default function CosmicProcessSection({
           scrollTrigger: {
             trigger: section,
             start: "top 85%",
-            toggleActions: "play none none none",
+            toggleActions: "restart none none reset",
           },
         }
       );
 
-      // 2. Giant Typography Title Reveal
-      gsap.fromTo(
-        ".process-title-reveal",
-        { opacity: 0, y: 35, scale: 0.96 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.9,
-          ease: "power3.out",
+      // 2. Giant Typography Title Letter Wave Animation on Scroll (plays each time)
+      const titleChars = section.querySelectorAll(".process-title-reveal .animate-text-wave");
+      if (titleChars && titleChars.length > 0) {
+        const titleTl = gsap.timeline({
           scrollTrigger: {
             trigger: ".process-title-reveal",
             start: "top 85%",
-            toggleActions: "play none none none",
+            toggleActions: "restart none none reset",
           },
-        }
-      );
+        });
+
+        titleTl
+          .fromTo(
+            titleChars,
+            { opacity: 0, y: 45, scale: 0.8 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.65,
+              stagger: 0.025,
+              ease: "back.out(1.8)",
+            }
+          )
+          .to(titleChars, {
+            y: -18,
+            duration: 0.32,
+            stagger: {
+              each: 0.035,
+              repeat: 1,
+              yoyo: true,
+            },
+            ease: "sine.inOut",
+          });
+      }
 
       // 3. Frame entrance animation
       gsap.fromTo(
@@ -146,35 +195,50 @@ export default function CosmicProcessSection({
           scrollTrigger: {
             trigger: section,
             start: "top 82%",
-            toggleActions: "play none none none",
+            toggleActions: "restart none none reset",
           },
         }
       );
 
-      // 4. Cascading Staircase Steps Entrance Animation
+      // 4. Cascading Staircase Steps Entrance & Wave Roll Animation
       if (cards && cards.length > 0) {
-        gsap.fromTo(
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: cardsContainerRef.current,
+            start: "top 85%",
+            toggleActions: "restart none none reset",
+          },
+        });
+
+        // Entrance pop up
+        tl.fromTo(
           cards,
           {
             opacity: 0,
-            y: 60,
-            scaleY: 0.88,
+            y: 65,
+            scaleY: 0.85,
             transformOrigin: "bottom center",
           },
           {
             opacity: 1,
             y: 0,
             scaleY: 1,
-            duration: 1.0,
+            duration: 0.75,
             stagger: 0.08,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: cardsContainerRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
           }
-        );
+        )
+        // Fluid undulating wave roll across all staircase cards!
+        .to(cards, {
+          y: -16,
+          duration: 0.35,
+          stagger: {
+            each: 0.09,
+            repeat: 1,
+            yoyo: true,
+          },
+          ease: "sine.inOut",
+        });
       }
     }, section);
 
@@ -245,9 +309,14 @@ export default function CosmicProcessSection({
             {/* Left/Middle: Giant Bold Syne Heading matching other section headers */}
             <div className="lg:col-span-8">
               <h2 className="process-title-reveal font-[family-name:var(--font-syne)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05] uppercase select-none">
-                STAGES OF
+                <WaveText text="STAGES OF" />
                 <br />
-                OUR WORK <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.4)]">WITH YOU</span>
+                <WaveText text="OUR WORK " delayOffset={10} />
+                <WaveText
+                  text="WITH YOU"
+                  className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.4)]"
+                  delayOffset={19}
+                />
               </h2>
             </div>
 
@@ -323,14 +392,14 @@ export default function CosmicProcessSection({
                     {/* Top Step Number Label */}
                     <div>
                       <div className="font-[family-name:var(--font-syne)] font-bold text-lg sm:text-xl tracking-tight leading-none mb-2.5">
-                        {step.stepLabel}
+                        <WaveText text={step.stepLabel} delayOffset={idx * 3} />
                       </div>
 
                       {/* Title: Show full title & desc when active, clean phase label when collapsed */}
                       {isActive ? (
                         <div className="space-y-2.5">
                           <h3 className="font-bold text-lg xl:text-xl uppercase leading-snug tracking-tight">
-                            {step.title}
+                            <WaveText text={step.title} />
                           </h3>
                           <p className="text-sm sm:text-base xl:text-[16px] font-normal leading-relaxed text-black/90">
                             {step.desc}
@@ -338,7 +407,7 @@ export default function CosmicProcessSection({
                         </div>
                       ) : (
                         <div className="truncate font-bold text-xs uppercase opacity-85 mt-1.5">
-                          {step.phase}
+                          <WaveText text={step.phase} delayOffset={idx * 2} />
                         </div>
                       )}
                     </div>
@@ -383,7 +452,7 @@ export default function CosmicProcessSection({
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-[family-name:var(--font-syne)] font-bold text-base tracking-tight">
-                        {step.stepLabel} // {step.phase}
+                        <WaveText text={`${step.stepLabel} // ${step.phase}`} />
                       </span>
                       <span className="font-mono text-xs font-bold">0{idx + 1}</span>
                     </div>
@@ -391,7 +460,7 @@ export default function CosmicProcessSection({
                     {isActive && (
                       <div className="mt-3 pt-3 border-t border-black/15 space-y-2.5">
                         <h4 className="font-bold text-base leading-tight uppercase">
-                          {step.title}
+                          <WaveText text={step.title} />
                         </h4>
                         <p className="text-sm leading-relaxed font-normal text-black/90">
                           {step.desc}
@@ -448,6 +517,28 @@ export default function CosmicProcessSection({
 
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes textWave {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          20% {
+            transform: translateY(-5px);
+          }
+          40% {
+            transform: translateY(2px);
+          }
+          60% {
+            transform: translateY(0px);
+          }
+        }
+        .animate-text-wave {
+          display: inline-block;
+          animation: textWave 2.8s ease-in-out infinite;
+          will-change: transform;
+        }
+      `}</style>
     </section>
   );
 }

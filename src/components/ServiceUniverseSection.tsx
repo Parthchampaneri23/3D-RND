@@ -138,7 +138,7 @@ export default function ServiceUniverseSection() {
               <span>SERVICE UNIVERSE // INTEGRATED CAPABILITIES</span>
             </div>
 
-            <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-[family-name:var(--font-bebas)] text-white font-bold tracking-wide sm:tracking-[0.04em] leading-[0.96] uppercase select-none">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-syne)] text-white font-bold tracking-tight leading-[1.05] uppercase select-none">
               ENGINEERED SOLUTIONS &amp;{" "}
               <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.35)]">
                 SERVICES.

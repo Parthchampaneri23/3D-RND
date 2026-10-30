@@ -103,18 +103,33 @@ body {
 
 /* Marquee & Spin Animations */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes marquee-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 @keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-marquee {
@@ -148,10 +163,12 @@ body {
 
 /* Animated gradient text (shifting gold gradient) */
 @keyframes gradient-shift {
+
   0%,
   100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -164,10 +181,12 @@ body {
 
 /* Soft floating animation for decorative orbs */
 @keyframes float-soft {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -184,11 +203,13 @@ body {
 
 /* Pulsing glow for nebulae and pills */
 @keyframes glow-pulse-soft {
+
   0%,
   100% {
     opacity: 0.4;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.7;
     transform: scale(1.05);
@@ -212,22 +233,26 @@ body {
   opacity: 1;
 }
 
-.faq-grid > div {
+.faq-grid>div {
   overflow: hidden;
 }
 
 /* Smooth Wave Typography Motion */
 @keyframes smooth-wave-motion {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
     color: inherit;
     text-shadow: none;
   }
+
   35% {
     transform: translateY(-7px);
     color: #FFD400;
     text-shadow: 0 0 16px rgba(255, 212, 0, 0.55), 0 0 28px rgba(255, 212, 0, 0.2);
   }
+
   65% {
     transform: translateY(1.5px);
   }
@@ -237,4 +262,27 @@ body {
   display: inline-block;
   will-change: transform, color;
   animation: smooth-wave-motion 2.4s ease-in-out infinite;
+}
+
+/* Undulating Text Wave Ripple */
+@keyframes textWave {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-8px);
+    color: #FFD400;
+  }
+  40% {
+    transform: translateY(2px);
+  }
+  60% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-text-wave {
+  display: inline-block;
+  animation: textWave 2.8s ease-in-out infinite;
+  will-change: transform, color;
 }

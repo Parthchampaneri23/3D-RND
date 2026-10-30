@@ -38,7 +38,7 @@ export default function MissionCTASection() {
                 <span>INITIATE MISSION // CONTACT</span>
               </div>
 
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-bebas)] tracking-tight leading-[0.92] uppercase text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-bold tracking-tight leading-tight uppercase text-white mb-6">
                 READY FOR YOUR{" "}
                 <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.4)]">
                   NEXT BIG MISSION?

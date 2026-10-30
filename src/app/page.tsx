@@ -49,7 +49,7 @@ export default function Home() {
         <CosmicProcessSection />
 
         {/* 1.9 Results and trust: Approved client logos, verified metrics, testimonials and experience */}
-        <ResultsTrustSection />
+        {/* <ResultsTrustSection /> */}
 
         {/* 1.10 Creative showreel: Videography, photography, brand films and selected campaigns */}
         <CreativeShowreelSection />

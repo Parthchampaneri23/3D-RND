@@ -206,7 +206,7 @@ export default function IndustriesServedSection() {
                 DOMAIN EXCELLENCE // INDUSTRY VERTICALS
               </span>
             </div>
-            <h2 className="font-[family-name:var(--font-bebas)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-wide sm:tracking-[0.04em] leading-[0.95] uppercase">
+            <h2 className="font-[family-name:var(--font-syne)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.05] uppercase">
               INDUSTRIES EMPOWERED BY{" "}
               <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.35)]">
                 OUR ARCHITECTURE
