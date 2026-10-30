@@ -150,14 +150,14 @@ export default function TeamCulturePage() {
       />
 
       {/* Overlapping Main Content */}
-      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-24 space-y-24">
 
           {/* =========================================================================
               1. FOUNDER & OWNER SPOTLIGHT
               ========================================================================= */}
           <section>
-            <div className="rounded-[32px] bg-gradient-to-br from-[#0e1017] via-[#090b10] to-[#121520] border border-[#FFD400]/30 p-8 sm:p-12 lg:p-14 shadow-[0_20px_70px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+            <div className="rounded-[32px] bg-black/30 backdrop-blur-md border border-[#FFD400]/30 hover:border-[#FFD400]/50 p-8 sm:p-12 lg:p-14 shadow-[0_20px_70px_rgba(0,0,0,0.5)] relative overflow-hidden group transition-all duration-500">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFD400] to-transparent shadow-[0_0_20px_#FFD400]" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
@@ -259,9 +259,9 @@ export default function TeamCulturePage() {
               {squadLeaders.map((member) => (
                 <div
                   key={member.id}
-                  className="group rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
+                  className="group rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
                 >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/60">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-transparent">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -269,7 +269,7 @@ export default function TeamCulturePage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
                       className="object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14]/50 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                   </div>
 
                   <div className="p-5 text-center sm:text-left">
@@ -307,7 +307,7 @@ export default function TeamCulturePage() {
               {engineeringSquads.map((squad, idx) => (
                 <div
                   key={idx}
-                  className="p-7 rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/40 transition-colors space-y-4"
+                  className="p-7 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-[#FFD400]/40 transition-colors space-y-4"
                 >
                   <div className="flex items-center justify-between border-b border-white/10 pb-3">
                     <h3 className="font-[family-name:var(--font-syne)] text-xl font-bold text-white uppercase">
@@ -346,7 +346,7 @@ export default function TeamCulturePage() {
               4. WORKPLACE CULTURE & ETHOS
               ========================================================================= */}
           <section className="border-t border-white/10 pt-16">
-            <div className="rounded-[32px] bg-[#0c0e14] border border-white/10 p-8 sm:p-12 overflow-hidden shadow-2xl">
+            <div className="rounded-[32px] bg-white/[0.02] backdrop-blur-md border border-white/10 p-8 sm:p-12 overflow-hidden shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div className="lg:col-span-5 relative">
                   <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-2xl overflow-hidden border border-white/15 shadow-2xl">
@@ -410,7 +410,7 @@ export default function TeamCulturePage() {
           {/* =========================================================================
               5. CAREER CALL TO ACTION
               ========================================================================= */}
-          <section className="rounded-3xl border border-[#FFD400]/30 bg-gradient-to-r from-[#12141c] via-[#090a0f] to-[#12141c] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+          <section className="rounded-3xl border border-[#FFD400]/30 bg-black/40 backdrop-blur-md p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-2 text-center md:text-left">
               <span className="text-xs font-mono font-bold tracking-widest text-[#FFD400] uppercase block">
                 CAREERS &amp; CULTURE

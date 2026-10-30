@@ -216,7 +216,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
     <section
       ref={sectionRef}
       id="why-choose"
-      className={`relative py-16 sm:py-24 bg-black text-white overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 bg-transparent text-white overflow-hidden ${className}`}
     >
       {/* Background radial atmosphere with infinite subtle ambient breathing */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#FFD400]/[0.03] blur-[140px] pointer-events-none rounded-full animate-ambient-pulse" />
@@ -375,9 +375,9 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
           </div>
 
           {/* ========================================================
-              CENTER HERO CARD - Astronaut with Golden Shield (Center Column - Spans 2 Rows, Pure Black BG)
+              CENTER HERO CARD - Astronaut with Golden Shield (Center Column - Spans 2 Rows, Glass BG)
           ======================================================== */}
-          <div className="why-choose-card rounded-[28px] bg-black border border-white/10 hover:border-[#FFD400]/40 p-6 sm:p-8 flex flex-col items-center justify-between md:col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 relative overflow-hidden transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group">
+          <div className="why-choose-card rounded-[28px] bg-black/40 backdrop-blur-md border border-white/10 hover:border-[#FFD400]/40 p-6 sm:p-8 flex flex-col items-center justify-between md:col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 relative overflow-hidden transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group">
             {/* Floating Cyber Astronaut + Golden Energy Shield Image & Hologram Rings */}
             <div className="relative z-10 w-full flex-1 flex items-center justify-center min-h-[340px] sm:min-h-[400px] py-4">
               {/* Infinite Rotating Cyber Halo Rings behind the shield */}

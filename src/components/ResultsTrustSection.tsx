@@ -49,7 +49,7 @@ export default function ResultsTrustSection() {
   ];
 
   return (
-    <section className="relative py-28 sm:py-36 bg-[#050608] text-white overflow-hidden border-t border-white/5">
+    <section className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden border-t border-white/5">
       {/* Ambient Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FFD400]/5 blur-[160px] rounded-full pointer-events-none" />
 

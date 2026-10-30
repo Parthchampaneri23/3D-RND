@@ -296,7 +296,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <div ref={containerRef} className="relative w-full bg-[#050608] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-[#FFD400] selection:text-black font-sans">
+    <div ref={containerRef} className="relative w-full bg-transparent text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-[#FFD400] selection:text-black font-sans">
       {/* Background Soft Glow Accents */}
       <div className="absolute top-1/4 left-1/4 w-[750px] h-[500px] bg-[#FFD400]/5 blur-[180px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[600px] h-[400px] bg-white/[0.03] blur-[150px] rounded-full pointer-events-none" />

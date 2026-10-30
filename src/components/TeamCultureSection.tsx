@@ -149,7 +149,7 @@ export default function TeamCultureSection({
           1. FOUNDER & OWNER SPOTLIGHT (UNIQUE EDITORIAL COMMAND CARD)
           ========================================================================= */}
       <div className="mb-20">
-        <div className="rounded-[32px] bg-gradient-to-br from-[#0e1017] via-[#090b10] to-[#121520] border border-[#FFD400]/30 p-8 sm:p-12 lg:p-14 shadow-[0_20px_70px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+        <div className="rounded-[32px] bg-black/30 backdrop-blur-md border border-[#FFD400]/30 hover:border-[#FFD400]/50 p-8 sm:p-12 lg:p-14 shadow-[0_20px_70px_rgba(0,0,0,0.5)] relative overflow-hidden group transition-all duration-500">
           {/* Top Amber Radiant Accent */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFD400] to-transparent shadow-[0_0_20px_#FFD400]" />
 
@@ -292,10 +292,10 @@ export default function TeamCultureSection({
           {squadLeaders.map((member) => (
             <div
                 key={member.id}
-                className="group rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
+                className="group rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
               >
                 {/* Member Photo Frame - Pure Clean Image with No Symbols or Text */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/60">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-transparent">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -303,7 +303,7 @@ export default function TeamCultureSection({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
                     className="object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14]/50 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                 </div>
 
                 {/* Member Details: Name & Designation Only */}
@@ -324,7 +324,7 @@ export default function TeamCultureSection({
           3. WORKPLACE CULTURE & CORE ETHOS (COLLABORATIVE STUDIO + 4 VALUES)
           ========================================================================= */}
       <div>
-        <div className="rounded-[32px] bg-[#0c0e14] border border-white/10 p-8 sm:p-12 overflow-hidden shadow-2xl">
+        <div className="rounded-[32px] bg-white/[0.02] backdrop-blur-md border border-white/10 p-8 sm:p-12 overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left: Studio Collaboration Photo */}
             <div className="lg:col-span-5 relative">

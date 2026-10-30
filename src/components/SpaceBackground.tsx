@@ -28,7 +28,7 @@ export default function SpaceBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     // Star Particles
-    const particlesCount = 850;
+    const particlesCount = 1200;
     const particlesGeometry = new THREE.BufferGeometry();
     const posArray = new Float32Array(particlesCount * 3);
     const colorsArray = new Float32Array(particlesCount * 3);
@@ -52,10 +52,10 @@ export default function SpaceBackground() {
     particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colorsArray, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.026,
+      size: 0.032,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.85,
       blending: THREE.AdditiveBlending,
     });
 
@@ -112,7 +112,7 @@ export default function SpaceBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-60 w-full h-full"
+      className="fixed inset-0 pointer-events-none z-0 opacity-90 w-full h-full"
     />
   );
 }

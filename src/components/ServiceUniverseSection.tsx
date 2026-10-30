@@ -124,7 +124,7 @@ export default function ServiceUniverseSection() {
   return (
     <section
       id="services"
-      className="py-20 md:py-28 bg-[#050608] text-white overflow-visible relative border-t border-white/5 px-4 sm:px-8 lg:px-12"
+      className="py-20 md:py-28 bg-transparent text-white overflow-visible relative border-t border-white/5 px-4 sm:px-8 lg:px-12"
     >
       {/* Background Ambient Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#FFD400]/4 blur-[180px] rounded-full pointer-events-none" />

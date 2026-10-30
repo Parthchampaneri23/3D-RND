@@ -97,7 +97,7 @@ export default function FeaturedProjectsSection() {
   return (
     <section
       id="work"
-      className="relative bg-[#050608] text-white overflow-hidden py-20 sm:py-28 lg:py-32 selection:bg-[#FFD400] selection:text-black border-t border-white/5"
+      className="relative bg-transparent text-white overflow-hidden py-20 sm:py-28 lg:py-32 selection:bg-[#FFD400] selection:text-black border-t border-white/5"
     >
       {/* Background Starfield and Ambient Glowing Nebulae */}
       <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#c59a58]/5 blur-[180px] rounded-full pointer-events-none" />

@@ -218,6 +218,8 @@ export default function AboutUsPage() {
               ========================================================================= */}
           <ConstellationMissionVision className="py-[50px]" />
 
+        </main>
+    </section>
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
 
             {/* =========================================================================
@@ -398,8 +400,6 @@ export default function AboutUsPage() {
               </div>
             </section>
           </div>
-        </main>
-    </section>
     <WhyChooseSection className="py-[50px]" />
       {/* Showreel Modal */}
       {isPlayingShowreel && (

@@ -172,17 +172,13 @@ export default function AboutUsSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative z-20 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-20 sm:pt-28 pb-20 sm:pb-32 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-[#FFD400] selection:text-black shadow-[0_-50px_140px_rgba(0,0,0,0.99)] flex items-center"
+      className="relative z-20 -mt-[100vh] min-h-screen bg-transparent text-white pt-20 sm:pt-28 pb-20 sm:pb-32 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-[#FFD400] selection:text-black shadow-[0_-50px_140px_rgba(0,0,0,0.99)] flex items-center"
     >
       {/* ----------------- FULL SECTION BACKGROUND: home-about2.png ----------------- */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
         {/* Ambient Glows */}
         <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFD400]/6 blur-[160px] rounded-full pointer-events-none" />
         <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-white/5 blur-[120px] pointer-events-none" />
-
-        {/* Section Edge Vignettes for Seamless Blending */}
-        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#050608] to-transparent z-10" />
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#050608] to-transparent z-10" />
 
         {/* Full Background Astronaut & Workstation Asset */}
         <div className="relative w-full h-full max-w-7xl mx-auto flex items-center justify-end px-4 sm:px-6 lg:px-12">

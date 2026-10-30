@@ -108,7 +108,7 @@ export default function IndustryDetailClientView({
       />
 
       {/* Overlapping Main Content */}
-      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
         {/* =========================================================================
             1. SHORT INFO & ARCHITECTURAL SUMMARY SECTION
             ========================================================================= */}

@@ -213,7 +213,7 @@ export default function UnifiedDetailsView({
         parentBreadcrumb={{ label: parentLabel, href: parentPath }}
       />
 
-      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
 
         {/* =========================================================================
             2. STICKY SUB-HEADER ACTION BAR (Hidden on Portfolio Details)

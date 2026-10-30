@@ -190,7 +190,7 @@ export default function IndustriesServedSection() {
   return (
     <section
       id="industries"
-      className="relative py-24 sm:py-32 bg-[#050608] text-white overflow-hidden border-t border-white/5"
+      className="relative py-24 sm:py-32 bg-transparent text-white overflow-hidden border-t border-white/5"
     >
       {/* Background Ambient Cosmic Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-[#FFD400]/4 blur-[180px] rounded-full pointer-events-none" />

@@ -302,7 +302,7 @@ export default function AboutRocketScrollBanner({
     <section
       id="about-us-scroll-experience"
       ref={containerRef}
-      className="relative w-full h-[280vh] bg-[#050608] text-white selection:bg-[#FFD400] selection:text-black z-20"
+      className="relative w-full h-[280vh] bg-transparent text-white selection:bg-[#FFD400] selection:text-black z-20"
       style={{ contain: "paint" }}
     >
       {/* Sticky Fullscreen Stage (Stays pinned & freezes while next section overlaps) */}
@@ -316,11 +316,7 @@ export default function AboutRocketScrollBanner({
         {/* Ambient Dark Gradient Overlays for Maximum Text Legibility & Section Blending */}
         <div className="absolute inset-0 z-10 pointer-events-none">
           {/* Deep Left Shadow: Keeps left side text 100% crisp while rocket is visible on the right */}
-          <div className="absolute inset-y-0 left-0 w-full md:w-3/5 lg:w-[58%] bg-gradient-to-r from-[#050608]/98 via-[#050608]/90 via-60% to-transparent" />
-
-          {/* Top & Bottom Vignettes to blend with previous & subsequent sections */}
-          <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#050608] to-transparent" />
-          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#050608] to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-full md:w-3/5 lg:w-[58%] bg-gradient-to-r from-black/75 via-black/40 via-60% to-transparent" />
 
           {/* Golden Ambient Glow Accent */}
           <div className="absolute top-1/3 left-10 w-[480px] h-[480px] bg-[#FFD400]/7 rounded-full blur-[150px]" />

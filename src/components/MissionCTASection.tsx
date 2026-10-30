@@ -20,7 +20,7 @@ export default function MissionCTASection() {
   };
 
   return (
-    <section id="contact" className="relative py-28 sm:py-36 bg-[#06070a] text-white overflow-hidden border-t border-white/5">
+    <section id="contact" className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden border-t border-white/5">
       {/* Warp Portal Ambient Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-[#FFD400]/8 blur-[200px] rounded-full pointer-events-none" />
       <div className="absolute -bottom-20 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 blur-[180px] rounded-full pointer-events-none" />

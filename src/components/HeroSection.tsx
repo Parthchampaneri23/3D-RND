@@ -209,7 +209,7 @@ export default function HeroSection() {
     <div
       id="home"
       ref={containerRef}
-      className="relative w-full h-[600vh] bg-[#050608] z-10"
+      className="relative w-full h-[600vh] bg-transparent z-10"
     >
       {/* Pinned Sticky Stage during the entire scroll journey */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
