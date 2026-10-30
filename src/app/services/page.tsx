@@ -28,6 +28,7 @@ import ServiceCaseStudies from "@/components/ServiceCaseStudies";
 import ServiceFaqSection from "@/components/ServiceFaqSection";
 import ServiceConversionCTA from "@/components/ServiceConversionCTA";
 import { servicesData, ServiceDetail } from "@/data/servicesData";
+import ServiceUniverseSection from "@/components/ServiceUniverseSection";
 
 const CATEGORIES = [
   "All",
@@ -165,31 +166,7 @@ export default function ServicesPage() {
         {/* =========================================================================
             2.2 SERVICE CATEGORY NAVIGATION: Sticky / Fast Jump Navigation Bar
             ========================================================================= */}
-        <section className="sticky top-20 z-40 bg-[#050608]/95 backdrop-blur-xl border-y border-white/10 py-3.5 shadow-xl">
-          <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <span className="text-[11px] font-mono text-[#FFD400] uppercase tracking-widest hidden md:inline-block mr-2">
-                2.2 JUMP TO:
-              </span>
-              {NAVIGATION_DIVISIONS.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase transition-all duration-300 bg-white/[0.04] hover:bg-white/[0.1] text-neutral-300 hover:text-white border border-white/10 hover:border-[#FFD400]/50 whitespace-nowrap group"
-                  >
-                    <span className="text-[10px] text-[#FFD400] font-bold group-hover:scale-110 transition-transform">
-                      {item.num}
-                    </span>
-                    <Icon className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#FFD400] transition-colors" />
-                    <span>{item.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <ServiceUniverseSection />
 
         {/* =========================================================================
             SECTIONS 2.3 - 2.6: THE FOUR MAIN SERVICE DIVISIONS SHOWCASE
