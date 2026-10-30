@@ -1,13 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import {
   Sparkles,
-  Layers,
+  ArrowUpRight,
   Code2,
   TrendingUp,
   Palette,
   Video,
+  RotateCw,
+  Play,
+  Pause,
+  Layers,
+  Eye,
+  Check,
 } from "lucide-react";
 
 // ============================================================================
@@ -594,11 +601,203 @@ const SERVICE_DIVISIONS: ServiceDivision[] = [
 ];
 
 // ============================================================================
-// MAIN SERVICE UNIVERSE COMPONENT (TECHNOLOGY & TOOLS MATRICES)
+// INDIVIDUAL TIER DISC COMPONENT WITH CENTER SERVICE NAME & ORBITING LOGOS
+// ============================================================================
+
+function ServiceTierDisc({
+  division,
+  rotationAngle,
+  hoveredTool,
+  setHoveredTool,
+  speedMultiplier = 1,
+}: {
+  division: ServiceDivision;
+  rotationAngle: number;
+  hoveredTool: ToolItem | null;
+  setHoveredTool: (t: ToolItem | null) => void;
+  speedMultiplier?: number;
+}) {
+  const tools = division.tools;
+  const count = tools.length;
+
+  return (
+    <div className="relative w-full max-w-[880px] h-[220px] sm:h-[250px] flex items-center justify-center my-4 sm:my-6">
+      {/* 3D PERSPECTIVE ELLIPTICAL DISC CONTAINER */}
+      <div
+        className="relative w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] lg:w-[680px] lg:h-[680px] rounded-full flex items-center justify-center"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: "perspective(1200px) rotateX(68deg)",
+        }}
+      >
+        {/* Glowing Outer Elliptical Rim Border */}
+        <div
+          className="absolute inset-0 rounded-full border-2 transition-all duration-500 pointer-events-none"
+          style={{
+            borderColor: division.accentGlow,
+            boxShadow: `0 0 45px ${division.accentGlow}45, inset 0 0 30px ${division.accentGlow}20`,
+          }}
+        />
+
+        {/* Concentric Inner Dashed Orbital Guideline */}
+        <div
+          className="absolute inset-2 rounded-full border border-dashed pointer-events-none"
+          style={{ borderColor: `${division.accentGlow}50` }}
+        />
+
+        {/* Inner Celestial Translucent Disc Surface */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#07090e]/95 via-[#121622]/90 to-[#07090e]/95 backdrop-blur-md pointer-events-none" />
+
+        {/* =====================================================================
+            CENTER SERVICE NAME DISPLAY:
+            Counter-rotated so it faces the viewer directly upright in 3D!
+            ===================================================================== */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+          style={{ transform: "translate(-50%, -50%) rotateX(-68deg)" }}
+        >
+          <div
+            className="px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#0a0c12]/95 border-2 shadow-2xl backdrop-blur-xl flex items-center gap-2.5 sm:gap-3 whitespace-nowrap"
+            style={{
+              borderColor: division.accentGlow,
+              boxShadow: `0 0 30px ${division.accentGlow}55`,
+            }}
+          >
+            {/* Glowing Accent Core Dot */}
+            <span
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full shrink-0 animate-pulse"
+              style={{
+                backgroundColor: division.accentGlow,
+                boxShadow: `0 0 12px ${division.accentGlow}`,
+              }}
+            />
+
+            {/* PROMINENT SERVICE NAME */}
+            <span className="font-mono font-bold tracking-[0.16em] uppercase text-xs sm:text-sm text-white drop-shadow-md">
+              0{division.tierNumber} {division.serviceName.toUpperCase()}
+            </span>
+
+            {/* Tool Count Badge */}
+            <span className="text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-white/10 text-neutral-300">
+              {division.tools.length} Tools
+            </span>
+          </div>
+        </div>
+
+        {/* =====================================================================
+            ORBITING LOGOS IN ACTUAL OFFICIAL BRAND COLORS (NO TEXT IN NODE)
+            ===================================================================== */}
+        {tools.map((tool, tIdx) => {
+          const baseAngle = (tIdx / count) * 360;
+          const currentAngle = (baseAngle + rotationAngle * speedMultiplier) % 360;
+          const rad = (currentAngle * Math.PI) / 180;
+
+          // Responsive radius
+          const radius =
+            typeof window !== "undefined" && window.innerWidth < 640 ? 155 : 275;
+          const x = Math.cos(rad) * radius;
+          const y = Math.sin(rad) * radius;
+
+          const isHovered = hoveredTool?.id === tool.id;
+
+          return (
+            <div
+              key={tool.id}
+              onMouseEnter={() => setHoveredTool(tool)}
+              onMouseLeave={() => setHoveredTool(null)}
+              className={`group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 cursor-pointer pointer-events-auto ${isHovered ? "z-40 scale-135" : "z-20 hover:scale-120"
+                }`}
+              style={{
+                transform: `translate(${x}px, ${y}px) rotateX(-68deg)`,
+              }}
+            >
+              {/* PURE LOGO NODE IN ACTUAL BRAND COLORS - NO TEXT NAME */}
+              <div
+                className={`relative w-12 h-12 sm:w-15 sm:h-15 rounded-full flex items-center justify-center p-2.5 sm:p-3 transition-all duration-300 shadow-2xl ${isHovered
+                    ? "bg-[#0d1017] border-2 shadow-[0_0_25px_rgba(255,255,255,0.6)] scale-110"
+                    : "bg-[#08090d]/95 hover:bg-[#121622] border border-white/20 hover:border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
+                  } backdrop-blur-xl`}
+                style={{
+                  borderColor: isHovered ? division.accentGlow : undefined,
+                }}
+              >
+                {/* GENUINE OFFICIAL BRAND LOGO */}
+                <FullColorToolLogo name={tool.name} className="w-full h-full object-contain" />
+
+                {/* Subtle Glow Ring */}
+                {isHovered && (
+                  <div
+                    className="absolute inset-0 rounded-full border animate-ping pointer-events-none opacity-40"
+                    style={{ borderColor: division.accentGlow }}
+                  />
+                )}
+              </div>
+
+              {/* TOOLTIP ON HOVER REVEALING TOOL NAME & SERVICE */}
+              {isHovered && (
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-50 px-3 py-1 rounded-md bg-black/95 border border-white/30 text-white text-[11px] font-mono whitespace-nowrap shadow-2xl pointer-events-none">
+                  <span className="font-bold" style={{ color: division.accentGlow }}>
+                    {tool.name}
+                  </span>
+                  <span className="text-neutral-400 ml-1.5">// {division.serviceName}</span>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// MAIN SERVICE UNIVERSE COMPONENT
 // ============================================================================
 
 export default function ServiceUniverseSection() {
   const [activeTab, setActiveTab] = useState<string>("all");
+  const [rotationAngle, setRotationAngle] = useState<number>(0);
+  const [isAutoRotating, setIsAutoRotating] = useState<boolean>(true);
+  const [hoveredTool, setHoveredTool] = useState<ToolItem | null>(null);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragStartX, setDragStartX] = useState<number>(0);
+
+  // Continuous smooth 360-degree rotation loop
+  useEffect(() => {
+    if (!isAutoRotating || isDragging) return;
+
+    let animId: number;
+    let lastTime = performance.now();
+
+    const updateRotation = (currentTime: number) => {
+      const delta = currentTime - lastTime;
+      lastTime = currentTime;
+      // ~20 degrees per second
+      setRotationAngle((prev) => (prev + delta * 0.022) % 360);
+      animId = requestAnimationFrame(updateRotation);
+    };
+
+    animId = requestAnimationFrame(updateRotation);
+    return () => cancelAnimationFrame(animId);
+  }, [isAutoRotating, isDragging]);
+
+  // Pointer drag controls to rotate 360 degrees
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true);
+    setDragStartX(e.clientX);
+    setIsAutoRotating(false);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - dragStartX;
+    setRotationAngle((prev) => (prev + deltaX * 0.4 + 360) % 360);
+    setDragStartX(e.clientX);
+  };
+
+  const handlePointerUp = () => {
+    setIsDragging(false);
+  };
 
   // Filter divisions based on active tab
   const displayedDivisions =
@@ -609,25 +808,26 @@ export default function ServiceUniverseSection() {
   return (
     <section
       id="service-universe"
-      className="relative py-16 sm:py-24 text-white overflow-hidden scroll-mt-20 select-none"
+      className="relative py-20 sm:py-28 lg:py-32 text-white overflow-hidden scroll-mt-20 select-none"
     >
-      {/* Background Celestial Mist (Dark Theme) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[900px] bg-gradient-to-b from-[#38bdf8]/[0.025] via-[#FFD400]/[0.02] to-transparent rounded-full blur-[220px] pointer-events-none" />
+      {/* Background Celestial Mist (Dark Theme / Matching Given Image) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1000px] bg-gradient-to-b from-[#38bdf8]/[0.025] via-[#FFD400]/[0.02] to-transparent rounded-full blur-[220px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+
         {/* =========================================================================
             HEADER: TITLE & DARK CYBER BADGE
             ========================================================================= */}
-        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium tracking-[0.25em] uppercase mb-4 bg-black/70 border border-[#FFD400]/40 text-[#FFD400] backdrop-blur-md shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>2.2 SERVICE UNIVERSE // CORE STACK &amp; TOOLS</span>
+            <span>2.2 SERVICE UNIVERSE // ALL 4 SERVICE TIERS ACTIVE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+          <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
             MULTIVERSE <span className="text-[#FFD400]">TECHNOLOGY ARCHITECTURE</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base font-normal mt-3 leading-relaxed text-neutral-300 max-w-2xl mx-auto font-[family-name:var(--font-jakarta)]">
-            Explore our verified tools and enterprise platforms across Technology, Digital Marketing, Branding &amp; Design, and Media Production. Official brand logos in genuine colors.
+            Every service tier is active with its official brand logos rotating in 360 degrees. The service name is displayed in the center of each disc so you know exactly which tools belong to each service.
           </p>
         </div>
 
@@ -637,13 +837,11 @@ export default function ServiceUniverseSection() {
         <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-10">
           {/* ALL 4 TIERS VIEW BUTTON */}
           <button
-            type="button"
             onClick={() => setActiveTab("all")}
-            className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-              activeTab === "all"
+            className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer ${activeTab === "all"
                 ? "bg-[#FFD400] text-black font-bold shadow-[0_0_25px_rgba(255,212,0,0.4)]"
                 : "bg-white/[0.04] text-neutral-300 hover:text-white border border-white/10 hover:border-white/30"
-            }`}
+              }`}
           >
             <Layers className="w-4 h-4" />
             <span>ALL 4 SERVICE TIERS (STACKED)</span>
@@ -657,13 +855,11 @@ export default function ServiceUniverseSection() {
             return (
               <button
                 key={div.id}
-                type="button"
                 onClick={() => setActiveTab(div.id)}
-                className={`group inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-                  isActive
+                className={`group inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer ${isActive
                     ? "bg-[#0c0e14] text-[#FFD400] border-2 border-[#FFD400] shadow-[0_0_20px_rgba(255,212,0,0.3)] font-bold"
                     : "bg-white/[0.03] text-neutral-400 hover:text-white border border-white/10 hover:border-white/30"
-                }`}
+                  }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[#FFD400]" : "text-neutral-400"}`} />
                 <span>{div.serviceName}</span>
@@ -676,79 +872,197 @@ export default function ServiceUniverseSection() {
         </div>
 
         {/* =========================================================================
+            3D COSMIC STACKED DISCS STAGE (EXACT LAYOUT OF REFERENCE IMAGE)
+            - Vertically stacked glowing discs (all 4 services shown)
+            - Central vertical light beam connecting through all service names
+            - Suspended vertical side threads with hanging planets and atomic rings
+            - Center of each disc displays its SERVICE NAME
+            - Orbiting around each disc: Its respective logos in ACTUAL BRAND COLORS
+            ========================================================================= */}
+        <div className="relative rounded-[32px] sm:rounded-[44px] bg-[#07080c]/90 border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.9)] overflow-hidden p-4 sm:p-8 lg:p-12 mb-14">
+
+          {/* Subtle Cyber Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+
+          {/* Top Control Strip */}
+          <div className="relative z-30 flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10 text-xs font-mono">
+            <div className="flex items-center gap-3">
+              <span className="px-3.5 py-1.5 rounded-full bg-[#FFD400]/15 border border-[#FFD400]/40 text-[#FFD400] font-bold text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(255,212,0,0.2)]">
+                {activeTab === "all" ? "SHOWING ALL 4 SERVICE TIERS" : `FOCUSED: ${activeTab.toUpperCase()}`}
+              </span>
+              <span className="text-neutral-300 hidden md:inline">
+                Drag horizontally to rotate all discs 360°
+              </span>
+            </div>
+
+            {/* 360° Controls */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-neutral-400 tracking-wider">
+                ORBIT: <span className="text-[#FFD400] font-bold">{Math.round(rotationAngle)}°</span>
+              </span>
+
+              <button
+                onClick={() => setIsAutoRotating(!isAutoRotating)}
+                className="p-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white transition-colors cursor-pointer"
+                title={isAutoRotating ? "Pause 360° Rotation" : "Resume 360° Rotation"}
+              >
+                {isAutoRotating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 text-[#FFD400]" />}
+              </button>
+
+              <button
+                onClick={() => setRotationAngle((prev) => (prev + 45) % 360)}
+                className="px-2.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white text-[11px] font-mono transition-colors cursor-pointer flex items-center gap-1"
+                title="Rotate +45°"
+              >
+                <RotateCw className="w-3 h-3 text-[#FFD400]" />
+                <span>+45°</span>
+              </button>
+            </div>
+          </div>
+
+          {/* MAIN 3D COSMIC STAGE (Drag horizontally to rotate 360°) */}
+          <div
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            className={`relative w-full flex flex-col items-center justify-center cursor-grab active:cursor-grabbing py-8 ${activeTab === "all" ? "min-h-[1100px] lg:min-h-[1250px]" : "min-h-[580px] sm:min-h-[640px]"
+              }`}
+          >
+            {/* Center Vertical Light Beam (Passing through all disc centers) */}
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-gradient-to-b from-transparent via-[#FFD400]/40 to-transparent pointer-events-none" />
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[18px] bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent blur-[8px] pointer-events-none" />
+
+            {/* Suspended Vertical Side Threads (Left & Right hanging threads with bead planets matching reference image) */}
+            {/* Left Thread 1 */}
+            <div className="absolute top-6 bottom-6 left-[10%] sm:left-[14%] w-[1px] bg-white/15 pointer-events-none">
+              <div className="absolute top-[18%] -left-2 w-4 h-4 rounded-full bg-[#141a29] border border-cyan-400/60 shadow-[0_0_12px_rgba(56,189,248,0.6)]" />
+              <div className="absolute top-[42%] -left-1.5 w-3 h-3 rounded-full bg-[#1b1f2e] border border-white/30" />
+              <div className="absolute top-[68%] -left-2 w-4 h-4 rounded-full bg-[#151c2e] border border-blue-400/50" />
+              <div className="absolute top-[88%] -left-1.5 w-3 h-3 rounded-full bg-white/40" />
+            </div>
+
+            {/* Left Thread 2 (With Atomic Ring like reference image) */}
+            <div className="absolute top-4 bottom-4 left-[20%] sm:left-[24%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
+              <div
+                className="absolute top-[32%] -left-3.5 w-7 h-7 rounded-full border border-[#FFD400]/50 flex items-center justify-center animate-spin"
+                style={{ animationDuration: "14s" }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400]" />
+              </div>
+              <div className="absolute top-[62%] -left-2 w-4 h-4 rounded-full bg-cyan-950 border border-cyan-400/40" />
+              <div className="absolute top-[82%] -left-1.5 w-3 h-3 rounded-full bg-neutral-800 border border-white/20" />
+            </div>
+
+            {/* Right Thread 1 */}
+            <div className="absolute top-6 bottom-6 right-[10%] sm:right-[14%] w-[1px] bg-white/15 pointer-events-none">
+              <div className="absolute top-[22%] -left-3 w-6 h-6 rounded-full bg-[#121622] border border-[#FFD400]/60 shadow-[0_0_15px_rgba(255,212,0,0.5)]" />
+              <div className="absolute top-[52%] -left-1.5 w-3 h-3 rounded-full bg-neutral-900 border border-white/30" />
+              <div className="absolute top-[75%] -left-2.5 w-5 h-5 rounded-full bg-[#1c1829] border border-purple-400/50" />
+            </div>
+
+            {/* Right Thread 2 (With Atomic Ring & Orb) */}
+            <div className="absolute top-4 bottom-4 right-[20%] sm:right-[24%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
+              <div className="absolute top-[38%] -left-2.5 w-5 h-5 rounded-full bg-[#161a26] border border-purple-400/50 shadow-[0_0_12px_rgba(192,132,252,0.5)]" />
+              <div
+                className="absolute top-[68%] -left-3.5 w-7 h-7 rounded-full border border-cyan-400/40 flex items-center justify-center animate-spin"
+                style={{ animationDuration: "16s" }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              </div>
+            </div>
+
+            {/* =========================================================================
+                RENDER THE 4 STACKED TIERS
+                Each tier has its CENTER SERVICE NAME and its ORBITING LOGOS!
+                ========================================================================= */}
+            <div className="relative w-full flex flex-col items-center justify-center z-20 space-y-8 sm:space-y-12">
+              {displayedDivisions.map((division, idx) => (
+                <ServiceTierDisc
+                  key={division.id}
+                  division={division}
+                  rotationAngle={rotationAngle}
+                  hoveredTool={hoveredTool}
+                  setHoveredTool={setHoveredTool}
+                  speedMultiplier={1 + idx * 0.15}
+                />
+              ))}
+            </div>
+
+            {/* Bottom 360 Drag Prompt */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+              <div className="px-4 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300 flex items-center gap-2 shadow-xl">
+                <RotateCw className="w-3.5 h-3.5 text-[#FFD400] animate-spin" style={{ animationDuration: "8s" }} />
+                <span>DRAG HORIZONTALLY TO ROTATE ALL 4 SERVICE TIERS 360°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
             COMPLETE 4-SERVICE ECOSYSTEM MATRIX:
             SHOWS ALL 4 SERVICE NAMES + ALL TOOL LOGOS IN ACTUAL COLOR (NO TEXT NAMES)
             ========================================================================= */}
-        <div className="space-y-8">
-          <div
-            className={`grid gap-6 sm:gap-8 ${
-              activeTab === "all"
-                ? "grid-cols-1 lg:grid-cols-2"
-                : "grid-cols-1 max-w-4xl mx-auto"
-            }`}
-          >
-            {displayedDivisions.map((division) => {
+        <div className="mt-8 space-y-8">
+          <div className="text-center max-w-2xl mx-auto mb-6">
+            <div className="text-xs font-mono text-[#FFD400] uppercase tracking-widest mb-1">
+              ALL 4 SERVICE DIVISIONS // OFFICIAL BRAND LOGOS
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-[family-name:var(--font-bebas)] tracking-wide uppercase text-white">
+              INTEGRATED <span className="text-[#FFD400]">TOOLS MATRICES</span>
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {SERVICE_DIVISIONS.map((division) => {
               const Icon = division.icon;
 
               return (
                 <div
                   key={division.id}
-                  className={`relative rounded-3xl p-6 sm:p-8 bg-[#08090d]/85 border transition-all duration-300 shadow-xl ${
-                    activeTab === division.id
-                      ? "border-[#FFD400]/70 shadow-[0_0_35px_rgba(255,212,0,0.18)]"
-                      : "border-white/10 hover:border-white/30"
-                  }`}
+                  onClick={() => {
+                    setActiveTab(division.id);
+                  }}
+                  className="relative rounded-3xl p-6 sm:p-8 bg-[#08090d]/85 hover:bg-[#0c0e14] border border-white/10 hover:border-white/30 shadow-xl transition-all duration-300 cursor-pointer"
                 >
                   {/* SERVICE NAME HEADER */}
                   <div className="flex items-center justify-between gap-4 pb-4 mb-6 border-b border-white/10">
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center p-2 shadow-lg"
-                        style={{
-                          backgroundColor: `${division.accentGlow}20`,
-                          color: division.accentGlow,
-                        }}
+                        className="w-10 h-10 rounded-xl flex items-center justify-center p-2"
+                        style={{ backgroundColor: `${division.accentGlow}20`, color: division.accentGlow }}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span
-                          className="text-[10px] font-mono uppercase tracking-widest block font-bold"
-                          style={{ color: division.accentGlow }}
-                        >
-                          DIVISION 0{division.tierNumber} // ACTIVE ECOSYSTEM
+                        <span className="text-[10px] font-mono uppercase tracking-widest block" style={{ color: division.accentGlow }}>
+                          DIVISION 0{division.tierNumber}
                         </span>
                         {/* PROMINENT SERVICE NAME */}
-                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
+                        <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
                           {division.serviceName}
-                        </h3>
+                        </h4>
                       </div>
                     </div>
 
-                    <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white/10 text-white border border-white/10">
+                    <span className="text-xs font-mono px-2.5 py-1 rounded bg-white/10 text-neutral-300">
                       {division.tools.length} Logos
                     </span>
                   </div>
 
                   {/* LOGOS ONLY - ACTUAL OFFICIAL BRAND COLORS - NO NAMES */}
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-3.5">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                     {division.tools.map((t) => (
                       <div
                         key={t.id}
-                        className="group relative aspect-square rounded-2xl bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 hover:border-[#FFD400]/70 flex flex-col items-center justify-center p-3 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-[0_0_20px_rgba(255,212,0,0.2)] cursor-default"
+                        className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 hover:border-[#FFD400]/70 flex items-center justify-center p-2.5 sm:p-3 transition-all duration-300 hover:scale-110 shadow-md"
                         title={t.name}
                       >
                         {/* ACTUAL BRAND LOGO IN FULL OFFICIAL COLOR */}
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
-                          <FullColorToolLogo
-                            name={t.name}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
+                        <FullColorToolLogo name={t.name} className="w-full h-full object-contain" />
 
                         {/* Floating tooltip on hover */}
-                        <div className="absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none px-2.5 py-1 rounded-md bg-black/95 border border-white/20 text-[11px] font-mono text-white whitespace-nowrap z-30 shadow-2xl">
-                          <span className="text-[#FFD400] font-bold">{t.name}</span>
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none px-2 py-0.5 rounded bg-black/95 border border-white/20 text-[10px] font-mono text-white whitespace-nowrap z-30">
+                          {t.name}
                         </div>
                       </div>
                     ))}
@@ -757,22 +1071,16 @@ export default function ServiceUniverseSection() {
                   {/* Bottom selection prompt */}
                   <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
                     <span className="text-neutral-400">{division.tagline}</span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setActiveTab(activeTab === division.id ? "all" : division.id)
-                      }
-                      className="flex items-center gap-1 font-bold hover:underline cursor-pointer"
-                      style={{ color: division.accentGlow }}
-                    >
-                      {activeTab === division.id ? "SHOW ALL TIERS" : "FOCUS THIS TIER →"}
-                    </button>
+                    <span className="flex items-center gap-1 font-bold" style={{ color: division.accentGlow }}>
+                      FOCUS THIS TIER →
+                    </span>
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
+
       </div>
     </section>
   );
