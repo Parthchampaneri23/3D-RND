@@ -21,6 +21,8 @@ import {
     Layers,
     TrendingUp,
     Quote,
+    AlertTriangle,
+    Clock,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
@@ -181,9 +183,127 @@ export default function IndustryDetailClientView({
                 </section>
 
                 {/* =========================================================================
-            2. LIST OF WORKS RELATED TO THIS INDUSTRY (With Project Images)
+            2. INDUSTRY-SPECIFIC CHALLENGES & BOTTLENECKS
             ========================================================================= */}
-                <section className="max-w-7xl mx-auto px-6 md:px-12 py-12">
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-12 border-t border-white/10">
+                    <div className="mb-10 max-w-3xl">
+                        <span className="text-xs font-mono uppercase tracking-[0.25em] text-red-400 font-semibold flex items-center gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-400" />
+                            <span>SECTOR PAIN POINTS &amp; ARCHITECTURAL BOTTLENECKS</span>
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-syne)] font-bold text-white uppercase mt-2">
+                            Core Challenges Facing {industry.title}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-neutral-400 font-mono mt-2">
+                            Legacy software and fragmented systems create compounding technical debt in this vertical. Here is what modern engineering must overcome:
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {industry.challenges?.map((challenge, cIdx) => (
+                            <div
+                                key={cIdx}
+                                className="group p-6 sm:p-7 bg-gradient-to-b from-white/[0.03] to-[#0c0e14] border border-white/10 hover:border-red-500/40 transition-all duration-300 relative flex flex-col justify-between"
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+                                            CHALLENGE 0{cIdx + 1}
+                                        </span>
+                                        <span className="px-2.5 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-mono font-bold">
+                                            {challenge.impactMetric}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="font-[family-name:var(--font-syne)] text-lg sm:text-xl font-bold text-white group-hover:text-red-300 transition-colors uppercase leading-snug">
+                                        {challenge.title}
+                                    </h3>
+
+                                    <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+                                        {challenge.description}
+                                    </p>
+                                </div>
+
+                                <div className="pt-4 mt-4 border-t border-white/5 flex items-center text-[10px] font-mono text-neutral-400">
+                                    <span className="text-red-400 mr-2">▲</span> High Operational Risk
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =========================================================================
+            3. RELEVANT SERVICE COMBINATIONS (HOW RnD SOLVES SECTOR NEEDS)
+            ========================================================================= */}
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-12 border-t border-white/10">
+                    <div className="mb-10 max-w-3xl">
+                        <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center gap-2">
+                            <Zap className="w-4 h-4 text-[#FFD400]" />
+                            <span>SYNERGISTIC ARCHITECTURAL CAPABILITIES</span>
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-syne)] font-bold text-white uppercase mt-2">
+                            How RnD&apos;s Services Solve {industry.title}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-neutral-400 font-mono mt-2">
+                            Rather than isolated point-solutions, we deploy coordinated service combinations tailored to the regulatory, UX, and operational demands of this sector.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {industry.serviceCombinations?.map((combo, sIdx) => (
+                            <div
+                                key={sIdx}
+                                className="group p-6 sm:p-7 bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-300 relative flex flex-col justify-between"
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="px-2.5 py-0.5 rounded-full bg-[#FFD400]/15 border border-[#FFD400]/30 text-[#FFD400] text-[10px] font-mono font-bold tracking-wider uppercase">
+                                            {combo.badge}
+                                        </span>
+                                        <Link
+                                            href={combo.serviceHref}
+                                            className="text-neutral-400 group-hover:text-[#FFD400] transition-colors"
+                                            title={`Explore ${combo.serviceTitle}`}
+                                        >
+                                            <ArrowUpRight className="w-4 h-4" />
+                                        </Link>
+                                    </div>
+
+                                    <div>
+                                        <Link
+                                            href={combo.serviceHref}
+                                            className="font-[family-name:var(--font-syne)] text-lg sm:text-xl font-bold text-white group-hover:text-[#FFD400] transition-colors uppercase leading-tight block"
+                                        >
+                                            {combo.serviceTitle}
+                                        </Link>
+                                        <span className="text-xs font-mono text-[#FFD400] block mt-1">
+                                            {combo.role}
+                                        </span>
+                                    </div>
+
+                                    <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+                                        {combo.deliverablesSummary}
+                                    </p>
+                                </div>
+
+                                <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+                                    <Link
+                                        href={combo.serviceHref}
+                                        className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white flex items-center gap-1 transition-colors"
+                                    >
+                                        <span>Inspect Service Capabilities</span>
+                                        <ArrowRight className="w-3 h-3 text-[#FFD400]" />
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =========================================================================
+            4. LIST OF WORKS RELATED TO THIS INDUSTRY (With Project Images)
+            ========================================================================= */}
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-12 border-t border-white/10">
                     <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                         <div>
                             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold">
@@ -293,9 +413,69 @@ export default function IndustryDetailClientView({
                 </section>
 
                 {/* =========================================================================
-            3. ATTRACTIVE CASE STUDY DEEP DIVE SECTION
+            5. TAILORED ENGINEERING PROCESS ROADMAP
             ========================================================================= */}
-                <section className="max-w-7xl mx-auto px-6 md:px-12 py-14">
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-14 border-t border-white/10">
+                    <div className="mb-10 max-w-3xl">
+                        <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-[#FFD400]" />
+                            <span>PHASED DEPLOYMENT ROADMAP</span>
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-syne)] font-bold text-white uppercase mt-2">
+                            Tailored Engineering Process for {industry.title}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-neutral-400 font-mono mt-2">
+                            A battle-tested 4-stage sprint methodology balancing rapid prototyping with strict industry compliance, security audits, and zero-downtime cutover.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {industry.process?.map((stepItem, pIdx) => (
+                            <div
+                                key={pIdx}
+                                className="p-6 bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                                        <span className="font-[family-name:var(--font-syne)] text-2xl font-bold text-[#FFD400]">
+                                            {stepItem.step}
+                                        </span>
+                                        <span className="px-2 py-0.5 bg-white/[0.04] border border-white/10 text-[10px] font-mono text-neutral-300">
+                                            {stepItem.duration}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="font-[family-name:var(--font-syne)] text-base font-bold text-white uppercase leading-snug">
+                                        {stepItem.title}
+                                    </h3>
+
+                                    <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                                        {stepItem.description}
+                                    </p>
+                                </div>
+
+                                <div className="pt-4 mt-5 border-t border-white/5 space-y-1.5">
+                                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#FFD400] font-bold block">
+                                        Key Outputs:
+                                    </span>
+                                    <ul className="space-y-1 text-[11px] font-mono text-neutral-400">
+                                        {stepItem.keyOutputs?.map((output, oIdx) => (
+                                            <li key={oIdx} className="flex items-start gap-1.5">
+                                                <span className="text-[#FFD400] shrink-0">›</span>
+                                                <span className="leading-tight text-neutral-300">{output}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =========================================================================
+            6. ATTRACTIVE CASE STUDY DEEP DIVE SECTION
+            ========================================================================= */}
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-14 border-t border-white/10">
                     <div className="p-8 sm:p-12 bg-[#090b10] border border-[#FFD400]/30 shadow-2xl relative overflow-hidden">
                         {/* Background Aesthetic Watermark */}
                         <div className="absolute right-4 bottom-2 text-white/[0.02] text-8xl sm:text-9xl font-black select-none pointer-events-none font-mono">
@@ -375,7 +555,7 @@ export default function IndustryDetailClientView({
                 </section>
 
                 {/* =========================================================================
-            4. TECHNICAL CONSULTATION / INQUIRY FORM
+            7. TECHNICAL CONSULTATION / INQUIRY FORM (PROJECT ENQUIRY CTA)
             ========================================================================= */}
                 <section
                     id="consultation-section"
@@ -435,7 +615,7 @@ export default function IndustryDetailClientView({
                                             <input
                                                 type="text"
                                                 required
-                                                placeholder="Dr. Arjun Kapoor"
+                                                placeholder="Executive Name"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                 className="w-full px-3.5 py-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
@@ -448,7 +628,7 @@ export default function IndustryDetailClientView({
                                             <input
                                                 type="email"
                                                 required
-                                                placeholder="arjun@enterprise.com"
+                                                placeholder="executive@enterprise.com"
                                                 value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                 className="w-full px-3.5 py-2.5 text-xs font-mono bg-white/[0.04] border border-white/15 text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FFD400] transition-colors"
@@ -523,7 +703,7 @@ export default function IndustryDetailClientView({
                 </section>
 
                 {/* =========================================================================
-            5. INDUSTRY TECHNICAL FAQS (ACCORDION)
+            8. INDUSTRY TECHNICAL FAQS (ACCORDION)
             ========================================================================= */}
                 <section className="max-w-7xl mx-auto px-6 md:px-12 py-14 border-t border-white/10">
                     <div className="mb-8">
@@ -570,7 +750,7 @@ export default function IndustryDetailClientView({
                 </section>
 
                 {/* =========================================================================
-            6. SEAMLESS NEXT INDUSTRY BROWSE BAR
+            9. SEAMLESS NEXT INDUSTRY BROWSE BAR
             ========================================================================= */}
                 <section className="border-t border-white/10 bg-black/40 py-10 px-6 md:px-12">
                     <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">

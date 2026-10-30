@@ -25,6 +25,7 @@ import {
   Smartphone,
   Users,
   Share2,
+  Factory,
 } from "lucide-react";
 import CyberButton from "@/components/CyberButton";
 
@@ -82,6 +83,13 @@ export default function Navbar() {
   };
 
   const industryDropdownItems = [
+    {
+      num: "8.2",
+      title: "Manufacturing & Industrial",
+      category: "Digital Twins & SCADA Telemetry",
+      href: "/industries/manufacturing",
+      icon: Factory,
+    },
     {
       num: "8.3",
       title: "Healthcare & Dental",

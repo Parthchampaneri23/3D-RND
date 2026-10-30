@@ -1,3 +1,25 @@
+export interface IndustryChallenge {
+  title: string;
+  description: string;
+  impactMetric: string;
+}
+
+export interface IndustryServiceCombination {
+  serviceTitle: string;
+  serviceHref: string;
+  role: string;
+  deliverablesSummary: string;
+  badge: string;
+}
+
+export interface IndustryProcessStep {
+  step: string;
+  title: string;
+  duration: string;
+  description: string;
+  keyOutputs: string[];
+}
+
 export interface IndustryProjectWork {
   id: string;
   title: string;
@@ -40,6 +62,9 @@ export interface IndustryData {
   tagline: string;
   shortInfo: string;
   heroMetrics: { label: string; value: string }[];
+  challenges: IndustryChallenge[];
+  serviceCombinations: IndustryServiceCombination[];
+  process: IndustryProcessStep[];
   pillars: { title: string; desc: string; icon: string }[];
   works: IndustryProjectWork[];
   caseStudy: IndustryCaseStudy;
@@ -48,8 +73,175 @@ export interface IndustryData {
 
 export const industriesList: IndustryData[] = [
   {
+    slug: "manufacturing",
+    number: "8.2",
+    title: "Manufacturing & Industrial",
+    category: "Industry 4.0 & Digital Twin Telemetry",
+    badge: "SCADA & ISO 9001 COMPLIANT",
+    tagline: "Industrial Digital Twins & Sub-Second Shopfloor Telemetry.",
+    shortInfo: "We bridge legacy PLC/SCADA industrial machinery with high-performance 3D WebGL plant twins, edge IoT telemetry pipelines, and predictive maintenance dashboards. From discrete automotive assembly lines to process chemicals, our systems eradicate unplanned downtime and deliver complete operational transparency.",
+    heroMetrics: [
+      { label: "Unplanned Downtime", value: "-74% Reduction" },
+      { label: "Telemetry Latency", value: "<40ms Ingestion" },
+      { label: "OEE Performance Lift", value: "+38% Efficiency" },
+    ],
+    challenges: [
+      {
+        title: "Legacy PLC & Proprietary Fieldbus Silos",
+        description: "Industrial facilities operate dozens of incompatible proprietary controller protocols (Modbus, Profinet, EtherCAT) with zero unified web APIs, trapping critical machine telemetry on physical factory floors.",
+        impactMetric: "82% Trapped Data",
+      },
+      {
+        title: "Devastating Cost of Unplanned Machine Stoppages",
+        description: "Without automated predictive failure algorithms, mechanical bearing fatigue and thermal anomalies trigger sudden conveyor or CNC halts that cascade into millions in lost production shifts.",
+        impactMetric: "$260K/Hr Downtime",
+      },
+      {
+        title: "Bulky Engineering CAD Files Unusable in Field",
+        description: "Original SolidWorks or STEP machine assemblies exceed 600MB, preventing maintenance crews and field technicians from viewing interactive part breakdowns on tablets and mobile devices.",
+        impactMetric: "600MB+ File Bottleneck",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Central Telemetry Command & Microservices Mesh",
+        deliverablesSummary: "Sub-40ms WebSocket and Kafka streaming ingestion engines, multi-tenant plant dashboards, and automated SCADA protocol bridges.",
+        badge: "Edge Architecture",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Field Maintenance PWA & AR Parts Inspector",
+        deliverablesSummary: "Offline-capable technician mobile app with QR-code equipment diagnostic scanning, instant fault logging, and tactile parts schematics.",
+        badge: "Mobile Telemetry",
+      },
+      {
+        serviceTitle: "Dedicated Agency Squads",
+        serviceHref: "/services/dedicated-squads",
+        role: "Embedded Systems & Industrial Protocol Engineers",
+        deliverablesSummary: "Specialized senior pods deployed on-site or remote to integrate OPC-UA gateways, calibrate vibration sensors, and configure ISO 9001 compliance logs.",
+        badge: "Dedicated Pods",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Shopfloor Sensor & Fieldbus Topology Audit",
+        duration: "Weeks 1 - 2",
+        description: "We conduct an exhaustive audit of your plant PLC controllers, sensor protocols (OPC-UA, Modbus, MQTT), and network isolation constraints to architect secure edge gateways.",
+        keyOutputs: ["Industrial Interface Blueprint", "Network Air-Gap Security Audit", "Telemetry Data Schema Specification"],
+      },
+      {
+        step: "02",
+        title: "Lightweight 3D CAD Quantization & Digital Twin Design",
+        duration: "Weeks 3 - 5",
+        description: "Heavy STEP and SolidWorks machine assemblies are decimated and quantized via Draco compression into sub-5MB in-browser 3D twins operating at 60 FPS.",
+        keyOutputs: ["Draco-Quantized 3D Assembly", "Exploded Part Hierarchy Viewer", "Sensor Node Mapping Matrix"],
+      },
+      {
+        step: "03",
+        title: "Kafka Streaming Ingest & Predictive Model Calibration",
+        duration: "Weeks 6 - 9",
+        description: "We implement fault-tolerant event streaming pipelines processing thousands of sensor readings per second, backed by anomaly detection models that flag thermal excursions.",
+        keyOutputs: ["Edge Gateway Container Deployment", "Sub-40ms Real-Time Dashboard", "Automated SMS/Email Alerting Webhooks"],
+      },
+      {
+        step: "04",
+        title: "Plant Floor Pilot, ISO Validation & Squad Handover",
+        duration: "Weeks 10 - 12",
+        description: "Live rollout across pilot assembly cells, operator training, security penetration testing, and full documentation handover with complete IP ownership transfer.",
+        keyOutputs: ["ISO 9001 Compliance Report", "Maintenance PWA Production Launch", "Full Source Code & Repository Transfer"],
+      },
+    ],
+    pillars: [
+      {
+        title: "Sub-40ms SCADA Ingestion",
+        desc: "Distributed event brokers streaming live RPM, amperage, and temperature telemetry directly into browser viewports.",
+        icon: "Cpu",
+      },
+      {
+        title: "60 FPS WebGL Plant Twins",
+        desc: "Full interactive 3D shopfloor twins with color-coded thermal heatmaps and exploded parts breakdowns.",
+        icon: "Layers",
+      },
+      {
+        title: "Predictive Anomaly Triggers",
+        desc: "Machine learning heuristics detecting subtle harmonic vibrations days before mechanical component seizure.",
+        icon: "Shield",
+      },
+    ],
+    works: [
+      {
+        id: "aeroforged-twin",
+        title: "AeroForged 3D // Industrial Turbine Digital Twin",
+        client: "Titan Aerospace Propulsion",
+        category: "Aeronautical Manufacturing & Digital Twin",
+        image: "/images/industries/work_manufacturing_1.jpg",
+        highlightMetric: "-74% Unplanned Downtime",
+        desc: "A browser-based 3D digital twin platform synchronizing 4,200 real-time vibration and thermal sensor nodes across precision aerospace titanium forging cells.",
+        techStack: ["Next.js 15", "Three.js WebGL", "Rust Edge Broker", "Kafka", "TimescaleDB"],
+        deliverables: [
+          "Interactive exploded-view 3D turbine model with real-time heat mapping",
+          "Sub-40ms telemetry ingestion from OPC-UA industrial gateways",
+          "Automated predictive maintenance scheduling and ERP work-order dispatch",
+        ],
+        year: "2026",
+      },
+      {
+        id: "kinetix-plant-os",
+        title: "Kinetix Plant OS // Shopfloor Telemetry & Predictive Maintenance",
+        client: "Kinetix Robotics GmbH",
+        category: "Industrial Robotics & Automation ERP",
+        image: "/images/industries/work_manufacturing_2.jpg",
+        highlightMetric: "+38% Overall Equipment Effectiveness",
+        desc: "Cloud-native manufacturing execution portal tracking cycle times, robot arm positional accuracy, and scrap rates across 6 automotive assembly plants.",
+        techStack: ["React 19", "WebSockets", "Go Microservices", "PostgreSQL", "Docker"],
+        deliverables: [
+          "Multi-plant comparative OEE telemetry and cycle-time analytics",
+          "Automated shift yield reporting and ISO 9001 compliance logs",
+          "Mobile-responsive tablet interface for assembly floor supervisors",
+        ],
+        year: "2026",
+      },
+    ],
+    caseStudy: {
+      title: "Eliminating Costly Production Stoppages Across 14 Automotive Press Plants",
+      client: "Apex Global Automotives",
+      period: "12 Weeks Deployment",
+      overview: "Apex Global suffered recurring hydraulic press breakdowns costing over $1.4M annually in lost production shifts due to blind spots in legacy analog telemetry.",
+      challenge: "Their 14 regional manufacturing plants ran isolated SCADA systems with no unified monitoring, causing maintenance teams to react only after catastrophic mechanical failures occurred.",
+      solution: "RnD Technosoft deployed unified edge IoT brokers streaming vibration and oil pressure data into a centralized 3D digital twin dashboard with predictive harmonic vibration alerts.",
+      metrics: [
+        { label: "Unplanned Stoppages", value: "-74%", change: "Historic Low" },
+        { label: "OEE Machine Efficiency", value: "+38.4%", change: "Measured Gain" },
+        { label: "Annual Cost Savings", value: "$1.85M", change: "Direct Recovery" },
+      ],
+      quote: {
+        text: "RnD Technosoft transformed our manufacturing operations from purely reactive repairs into predictive engineering. We can now pinpoint machine fatigue days before it causes downtime.",
+        author: "Klaus Von Berg",
+        role: "VP of Global Manufacturing, Apex Automotives",
+      },
+    },
+    faqs: [
+      {
+        question: "How do you securely extract telemetry from air-gapped industrial SCADA machines?",
+        answer: "We deploy isolated unidirectional edge gateways with hardware-enforced DMZ segmentation and TLS 1.3 encryption, ensuring read-only data extraction with zero inbound attack surface to machine controllers.",
+      },
+      {
+        question: "Can our engineers view complex 500MB+ CAD machine models in a standard web browser?",
+        answer: "Yes. Our automated pipeline converts SolidWorks, STEP, and Inventor CAD assemblies using Draco mesh compression and texture instancing into lightweight sub-5MB WebGL payloads that render at silky-smooth 60 FPS.",
+      },
+      {
+        question: "Does the system function when the factory internet connection drops?",
+        answer: "Yes, our edge gateways run local time-series buffers with automated synchronization queues. All plant floor dashboards and PWA tablet apps operate seamlessly offline, resyncing telemetry automatically when network connectivity restores.",
+      },
+    ],
+  },
+  {
     slug: "healthcare",
-    number: "01",
+    number: "8.3",
     title: "Healthcare & Dental",
     category: "Medical Telemetry & Practice ERP",
     badge: "HIPAA & HL7 VERIFIED",
@@ -59,6 +251,76 @@ export const industriesList: IndustryData[] = [
       { label: "Compliance Standard", value: "100% HIPAA Safe" },
       { label: "Real-time Telemetry", value: "<85ms Latency" },
       { label: "Diagnostic Accuracy", value: "99.8% Precision" },
+    ],
+    challenges: [
+      {
+        title: "Severe Patient Check-In & Scheduling Bottlenecks",
+        description: "Legacy hospital front desks and dental clinics struggle with manual paper intake, insurance pre-authorizations, and fragmented phone scheduling that balloon patient wait times.",
+        impactMetric: "45-Min Wait Times",
+      },
+      {
+        title: "Complex HIPAA / HL7 Regulatory Compliance Risks",
+        description: "Transmitting clinical notes, diagnostic imaging, and biometric telemetry across mobile apps exposes organizations to severe regulatory penalties without end-to-end encryption.",
+        impactMetric: "$50K/Day Penalties",
+      },
+      {
+        title: "Inability to Render 3D Dental Scans in Web Browsers",
+        description: "Intraoral STL scans and orthodontic crown CAD files are locked within bulky desktop workstations, preventing patients from visualizing treatment plans on smartphones.",
+        impactMetric: "Zero Mobile 3D Access",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "HIPAA-Grade Cloud Architecture & EHR Interoperability",
+        deliverablesSummary: "FHIR and HL7 compliant database schemas, zero-knowledge patient vaults, and sub-100ms WebRTC encrypted consultation streams.",
+        badge: "HIPAA Cloud",
+      },
+      {
+        serviceTitle: "Search Dominance & Technical SEO",
+        serviceHref: "/services/seo-search",
+        role: "High-Intent Patient Acquisition & Local Practice Dominance",
+        deliverablesSummary: "Local clinic map pack optimization, medical schema markup, and specialized high-conversion doctor profile funnels.",
+        badge: "Patient Growth",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Patient Health Portal & Contactless Check-In",
+        deliverablesSummary: "Biometrically secured mobile patient apps with digital consent signatures, instant billing, and tele-triage messaging.",
+        badge: "Patient Portal",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Clinical Workflow & HIPAA / FHIR Architecture Audit",
+        duration: "Weeks 1 - 2",
+        description: "We map your EHR software constraints (Epic, Cerner, Dentrix), patient intake pathways, and regulatory audit criteria to establish a zero-knowledge cloud posture.",
+        keyOutputs: ["HIPAA Compliance Blueprint", "FHIR / HL7 Data Map", "EHR Interoperability Spec"],
+      },
+      {
+        step: "02",
+        title: "In-Browser 3D Viewport & Interactive Telehealth Prototype",
+        duration: "Weeks 3 - 5",
+        description: "We build hardware-accelerated WebGL intraoral tooth scan viewers and low-latency WebRTC encrypted consultation video rooms.",
+        keyOutputs: ["Draco-Optimized STL Scan Viewer", "Encrypted WebRTC Audio/Video Room", "UX Intake Wireframes"],
+      },
+      {
+        step: "03",
+        title: "Practice Management ERP & Payment Integration",
+        duration: "Weeks 6 - 9",
+        description: "Complete development of patient scheduling calendar, automated SMS/WhatsApp recall sequences, and PCI-DSS Level 1 co-pay processing.",
+        keyOutputs: ["Automated Appointment Engine", "PCI-DSS Payment Gateway", "Automated Insurance Verification API"],
+      },
+      {
+        step: "04",
+        title: "Security Penetration Testing & Clinical Staff Onboarding",
+        duration: "Weeks 10 - 12",
+        description: "Third-party HIPAA penetration auditing, hospital staff training, production cutover with zero downtime, and complete IP transfer.",
+        keyOutputs: ["Independent Security Audit Certificate", "Staff Protocol Handbook", "100% Code Ownership Transfer"],
+      },
     ],
     pillars: [
       {
@@ -146,7 +408,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "food-fmcg",
-    number: "02",
+    number: "8.4",
     title: "Food & FMCG",
     category: "Supply Chain & D2C Delivery",
     badge: "IOT SENSOR MESH",
@@ -156,6 +418,76 @@ export const industriesList: IndustryData[] = [
       { label: "Order Velocity", value: "3.8x Accelerated" },
       { label: "Supply Telemetry", value: "100% Real-time" },
       { label: "Checkout Conversion", value: "5.4% Rate" },
+    ],
+    challenges: [
+      {
+        title: "Perishable Inventory Spoilage in Transit",
+        description: "Temperature excursions and delivery delays during transit ruin sensitive chilled food, dairy, and beverage shipments without automated cold-chain IoT telemetry.",
+        impactMetric: "-42% Spoilage Risk",
+      },
+      {
+        title: "Cart Abandonment During High-Volume Flash Sales",
+        description: "Legacy monolithic e-commerce platforms collapse when influencer campaigns direct tens of thousands of shoppers simultaneously, causing cart timeouts and lost revenue.",
+        impactMetric: "71% Abandonment",
+      },
+      {
+        title: "Complex Recurring Subscription Churn",
+        description: "Rigid subscription billing engines make it hard for customers to swap flavors, adjust delivery dates, or pause boxes, leading to immediate subscription cancellations.",
+        impactMetric: "35% Churn Rate",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "E-Commerce & Digital Storefronts",
+        serviceHref: "/services/ecommerce-platforms",
+        role: "Headless Sub-Second D2C Commerce & Subscription Engine",
+        deliverablesSummary: "Ultra-fast headless Shopify or BigCommerce storefronts with 1-click reordering, smart bundle builders, and dynamic delivery pause triggers.",
+        badge: "Headless D2C",
+      },
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "IoT Cold-Chain Telemetry & Warehouse Inventory Mesh",
+        deliverablesSummary: "MQTT sensor event streams tracking temperature, ambient humidity, and container GPS in real time with automated FIFO dispatch routing.",
+        badge: "Cold-Chain IoT",
+      },
+      {
+        serviceTitle: "Commercial Film & Photography",
+        serviceHref: "/services/commercial-media",
+        role: "Appetite-Appeal Visual Media & Sensory Storytelling",
+        deliverablesSummary: "High-speed macro cinematography, commercial product photography, and interactive 3D culinary package mockups.",
+        badge: "Visual Media",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "D2C Funnel Audit & Fulfillment Pipeline Mapping",
+        duration: "Weeks 1 - 2",
+        description: "We analyze your subscription churn metrics, shipping radius constraints, and cold-chain inventory handoffs to define a high-velocity headless architecture.",
+        keyOutputs: ["D2C Growth Strategy", "Warehouse WMS Integration Spec", "Customer Journey Wireframes"],
+      },
+      {
+        step: "02",
+        title: "Headless Storefront & Sub-Second Cart Prototype",
+        duration: "Weeks 3 - 5",
+        description: "We engineer Next.js 15 edge-rendered storefront components, sub-400ms cart checkouts, and custom flavor bundle configuration widgets.",
+        keyOutputs: ["Next.js 15 Headless Front-End", "Algorithmic Bundle Builder", "1-Click Subscription Portal"],
+      },
+      {
+        step: "03",
+        title: "Cold-Chain IoT Integration & Dynamic Logistics Routing",
+        duration: "Weeks 6 - 9",
+        description: "Real-time telemetry integration with temperature sensors and third-party logistics (3PL) APIs for automated dispatch and spoilage alerts.",
+        keyOutputs: ["Cold-Chain Telemetry Dashboard", "Automated 3PL Dispatch Webhooks", "Real-Time Order Tracking View"],
+      },
+      {
+        step: "04",
+        title: "Flash-Sale Load Testing & Global CDN Deployment",
+        duration: "Weeks 10 - 12",
+        description: "Stress testing against 100,000 concurrent virtual shoppers, edge Redis caching optimization, and payment gateway failover validation.",
+        keyOutputs: ["100K Concurrent Stress Audit", "Core Web Vitals 99+ Score", "Production Launch & Handoff"],
+      },
     ],
     pillars: [
       {
@@ -239,7 +571,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "retail-ecommerce",
-    number: "03",
+    number: "8.5",
     title: "Retail & E-commerce",
     category: "Spatial Web & Omnichannel Commerce",
     badge: "60 FPS SPATIAL VIEWPORTS",
@@ -249,6 +581,76 @@ export const industriesList: IndustryData[] = [
       { label: "Revenue Lift", value: "+340% Conversions" },
       { label: "Return Rate (RMA)", value: "-82% Reduction" },
       { label: "Core Web Vitals", value: "99/100 Score" },
+    ],
+    challenges: [
+      {
+        title: "High Customer Return Rates from Flat Photography",
+        description: "Shoppers struggle to assess true material textures, scale, and finishes through static photos, resulting in staggering return rates that decimate retail profit margins.",
+        impactMetric: "-82% RMA Reduction",
+      },
+      {
+        title: "Sluggish Storefront Speeds Hurting Conversions",
+        description: "Bloated e-commerce themes and heavy third-party tracking scripts lead to 4-second load times that bleed mobile shoppers at every stage of the purchase funnel.",
+        impactMetric: "53% Bounce Rate",
+      },
+      {
+        title: "Disconnected Showroom & Online Inventory Systems",
+        description: "Retail brands lose sales when physical boutique inventory fails to synchronize instantaneously with online store carts and warehouse allocation systems.",
+        impactMetric: "22% Out-of-Stock Loss",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "E-Commerce & Digital Storefronts",
+        serviceHref: "/services/ecommerce-platforms",
+        role: "Sub-Second Headless Commerce & GraphQL Mesh",
+        deliverablesSummary: "Custom Shopify Plus or BigCommerce headless architectures delivering sub-400ms time to first byte and frictionless biometric checkout.",
+        badge: "Headless Retail",
+      },
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Photorealistic In-Browser 3D Spatial Configurator",
+        deliverablesSummary: "Custom WebGL GLSL shaders, physical ambient occlusion, and Draco-quantized geometry allowing real-time material and finish customization.",
+        badge: "3D Spatial Web",
+      },
+      {
+        serviceTitle: "Brand Strategy & Design Systems",
+        serviceHref: "/services/brand-identity",
+        role: "Luxury Retail Design Systems & Omnichannel Typography",
+        deliverablesSummary: "Unified design tokens, micro-animations, and bespoke digital flagship interfaces reflecting luxury boutique aesthetics.",
+        badge: "Luxury Branding",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Retail UX & Material Texture Digitation Audit",
+        duration: "Weeks 1 - 2",
+        description: "We audit your product catalog, physical samples, and existing commerce backend to determine optimal 3D geometry quantization and cart performance benchmarks.",
+        keyOutputs: ["3D CAD Conversion Matrix", "Omnichannel UX Wireframes", "Headless Tech Stack Spec"],
+      },
+      {
+        step: "02",
+        title: "Photorealistic WebGL Shaders & Customizer Prototype",
+        duration: "Weeks 3 - 5",
+        description: "We engineer physical rendering shaders simulating leather grain, gold beveling, and textile sheens running at a constant 60 FPS in browsers.",
+        keyOutputs: ["In-Browser 3D Product Configurator", "GLSL Micro-facet Shaders", "Mobile Multi-Touch Gestures"],
+      },
+      {
+        step: "03",
+        title: "Headless Cart & Omnichannel ERP Synchronization",
+        duration: "Weeks 6 - 9",
+        description: "Seamless integration with Shopify Plus, Netsuite ERP, and Stripe payment gateways for instant real-time inventory locking and tax automation.",
+        keyOutputs: ["GraphQL Headless Commerce Bridge", "Omnichannel Stock Syncer", "1-Click Express Checkout Funnel"],
+      },
+      {
+        step: "04",
+        title: "Global CDN Acceleration & Conversion Optimization",
+        duration: "Weeks 10 - 12",
+        description: "Rigorous Core Web Vitals optimization, automated responsive image sets, and A/B testing on checkout funnel velocity.",
+        keyOutputs: ["Lighthouse 99+ Performance Audit", "Automated Draco Geometry Pipeline", "Production Launch & Sign-Off"],
+      },
     ],
     pillars: [
       {
@@ -332,7 +734,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "hospitality",
-    number: "04",
+    number: "8.6",
     title: "Hospitality & Resorts",
     category: "Luxury Travel & Digital Concierge",
     badge: "3D VIRTUAL RESORT TOURS",
@@ -342,6 +744,76 @@ export const industriesList: IndustryData[] = [
       { label: "Direct Bookings", value: "+260% Growth" },
       { label: "OTA Commission Savings", value: "$420K Saved" },
       { label: "Guest Satisfaction", value: "4.9 / 5 Rating" },
+    ],
+    challenges: [
+      {
+        title: "Hefty OTA Commission Fees (Up to 25%)",
+        description: "Hotels and luxury resorts sacrifice millions in annual revenue to online travel agencies (Booking.com, Expedia) because their own direct websites fail to convert prospective guests.",
+        impactMetric: "25% OTA Margin Loss",
+      },
+      {
+        title: "High-Ticket Guest Purchase Hesitation",
+        description: "Luxury travelers paying $2,500+ per night hesitate to reserve suites sight-unseen without experiencing exact room dimensions, balcony sightlines, and sunset orientations.",
+        impactMetric: "68% Pre-Booking Drop",
+      },
+      {
+        title: "Fragmented On-Property Guest Services",
+        description: "Paper service menus, busy front desk phone lines, and disjointed spa reservation systems cause long queues and frustrating guest experiences.",
+        impactMetric: "32% Missed Ancillary Rev",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Zero-Commission Direct Reservation Engine & PMS Bridge",
+        deliverablesSummary: "Sub-second multi-currency booking checkout integrating bidirectionally with Opera, Mews, and Cloudbeds PMS for instant rate parity.",
+        badge: "Direct Booking",
+      },
+      {
+        serviceTitle: "Commercial Film & Photography",
+        serviceHref: "/services/commercial-media",
+        role: "Cinematic Resort Drone & Spatial 360 Photography",
+        deliverablesSummary: "Golden-hour aerial cinematography, architectural interior photography, and high-fidelity 360-degree immersive panoramic environments.",
+        badge: "Visual Production",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Digital Guest Key & Contactless Concierge PWA",
+        deliverablesSummary: "Zero-download web mobile app for mobile room entry, in-room Michelin dining ordering, and private excursion concierge chat.",
+        badge: "Guest Concierge",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Resort Spatial Capture & PMS Architecture Mapping",
+        duration: "Weeks 1 - 2",
+        description: "We review your property layout, villa types, and existing PMS software (Opera, Cloudbeds) to architect seamless two-way inventory and room synchronization.",
+        keyOutputs: ["Resort Spatial Map Wireframe", "PMS API Integration Blueprint", "Luxury Guest Journey Map"],
+      },
+      {
+        step: "02",
+        title: "Photorealistic 3D Spatial Walkthrough & Room Visualizer",
+        duration: "Weeks 3 - 5",
+        description: "We craft an interactive in-browser 3D property map allowing guests to orbit the island or estate, inspect suite interiors, and verify sunset sightlines.",
+        keyOutputs: ["Interactive 3D Property Map", "Virtual Suite Walkthrough Viewer", "Dynamic Daylight Lighting Engine"],
+      },
+      {
+        step: "03",
+        title: "High-Conversion Multi-Currency Booking Funnel",
+        duration: "Weeks 6 - 9",
+        description: "Direct reservation checkout supporting 30+ international payment methods, dynamic currency conversion, and automated upgrade upsell suggestions.",
+        keyOutputs: ["Direct Booking Engine", "Stripe Multi-Currency Checkout", "Automated Upsell & Ancillary Engine"],
+      },
+      {
+        step: "04",
+        title: "PMS Synchronization, Staff Training & Live Cutover",
+        duration: "Weeks 10 - 12",
+        description: "Complete validation of two-way booking queues with your front-desk PMS, concierge tablet rollout, and worldwide CDN launch.",
+        keyOutputs: ["Two-Way PMS Synced Gateway", "Concierge Staff Training Portal", "Production Launch & SEO Handover"],
+      },
     ],
     pillars: [
       {
@@ -425,7 +897,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "education",
-    number: "05",
+    number: "8.7",
     title: "Education & Training",
     category: "EdTech & Interactive Simulation",
     badge: "ADAPTIVE AI LEARNING",
@@ -435,6 +907,76 @@ export const industriesList: IndustryData[] = [
       { label: "Active Students", value: "250K+ Learners" },
       { label: "Course Completion", value: "94% Rate" },
       { label: "Server Availability", value: "99.999% Uptime" },
+    ],
+    challenges: [
+      {
+        title: "Prohibitive Costs of Physical Laboratory Equipment",
+        description: "Equipping physical physics, chemistry, and engineering training labs for thousands of students requires millions in capital expenditure and routine maintenance.",
+        impactMetric: "-64% CapEx Savings",
+      },
+      {
+        title: "Disengagement & Plunging Online Completion Rates",
+        description: "Static video lectures and text PDFs fail to hold modern learner attention, resulting in industry-wide completion rates hovering below 15%.",
+        impactMetric: "85% Dropout Rate",
+      },
+      {
+        title: "Platform Crashes During Simultaneous Examination Spikes",
+        description: "When 50,000+ university students log on simultaneously for midterm or certification exams, legacy LMS servers crash, invalidating test results.",
+        impactMetric: "High Exam Failure Risk",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Scalable Examination Mesh & Interactive 3D SimLab",
+        deliverablesSummary: "WebAssembly physics engines, Three.js chemistry apparatus simulations, and auto-scaling Kubernetes test delivery clusters.",
+        badge: "Interactive SimLab",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Micro-Learning Mobile Companion & Offline Sync",
+        deliverablesSummary: "Native mobile learning apps with bite-sized lesson streaks, offline video downloads, and automated push notifications.",
+        badge: "Mobile LMS",
+      },
+      {
+        serviceTitle: "Dedicated Agency Squads",
+        serviceHref: "/services/dedicated-squads",
+        role: "SCORM / xAPI Compliance & EdTech Architecture Squads",
+        deliverablesSummary: "Specialized engineers deploying interoperability bridges for Canvas, Moodle, and Blackboard LMS systems.",
+        badge: "LTI / SCORM Squad",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Pedagogical Curriculum & LMS Interoperability Audit",
+        duration: "Weeks 1 - 2",
+        description: "We review your syllabus, examination proctoring needs, and integration requirements for SCORM 1.2/2004, xAPI, and LTI 1.3 standards.",
+        keyOutputs: ["EdTech Architecture Blueprint", "SCORM / xAPI Integration Spec", "Gamified Learning Roadmap"],
+      },
+      {
+        step: "02",
+        title: "Interactive 3D Virtual Lab & WebAssembly Physics Prototype",
+        duration: "Weeks 3 - 5",
+        description: "We build browser-native simulation engines where students manipulate mechanical assemblies, fluid dynamics, and electronic circuits with zero lag.",
+        keyOutputs: ["WebAssembly Physics Lab", "3D Chemical Compound Sandbox", "Student Interactive Telemetry"],
+      },
+      {
+        step: "03",
+        title: "Adaptive AI Quiz Engine & Examination Lockdown",
+        duration: "Weeks 6 - 9",
+        description: "Implementation of dynamic question difficulty calibration, browser lockdown proctoring, and automated gradebook synchronization.",
+        keyOutputs: ["AI-Adaptive Pacing Engine", "Secure Examination Engine", "Instant Grading Webhooks"],
+      },
+      {
+        step: "04",
+        title: "High-Concurrency Stress Testing & Campus Rollout",
+        duration: "Weeks 10 - 12",
+        description: "Simulating 100,000 simultaneous test submissions, automated failover verification, instructor training, and global academic rollout.",
+        keyOutputs: ["100K Concurrent Test Audit", "Instructor Administrative Dashboard", "Production Cutover & IP Transfer"],
+      },
     ],
     pillars: [
       {
@@ -518,7 +1060,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "real-estate",
-    number: "06",
+    number: "8.8",
     title: "Real Estate & Construction",
     category: "Architectural 3D & PropTech",
     badge: "BIM & 3D DIGITAL TWINS",
@@ -528,6 +1070,76 @@ export const industriesList: IndustryData[] = [
       { label: "Pre-Sales Volume", value: "$180M+ Sold" },
       { label: "Digital Walkthroughs", value: "Sub-50ms Orbit" },
       { label: "Lead Quality Lift", value: "8x Qualified" },
+    ],
+    challenges: [
+      {
+        title: "Difficulty Pre-Selling Off-Plan Units Sight Unseen",
+        description: "Static architectural 2D floorplans fail to convey scale, balcony sightlines, or sunlight angles, causing prospective luxury buyers to delay high-value purchase commitments.",
+        impactMetric: "-55% Longer Sales Cycle",
+      },
+      {
+        title: "Construction Jobsite Delay & Rework Costs",
+        description: "Subcontractor miscommunications, misaligned CAD specs, and late delivery tracking cause construction schedule slippages that cost millions in penalties.",
+        impactMetric: "-35% Delays Avoided",
+      },
+      {
+        title: "High Friction in Online Unit Reservation & Escrow",
+        description: "Requiring buyers to visit sales galleries physically to place deposits limits sales reach and excludes international investors seeking rapid digital reservations.",
+        impactMetric: "48% International Loss",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "In-Browser 3D Building Digital Twin & Inventory Engine",
+        deliverablesSummary: "Three.js and WebGL2 building orbit visualizer with real-time apartment availability, floor selection, and live lighting simulation.",
+        badge: "3D PropTech",
+      },
+      {
+        serviceTitle: "Search Dominance & Technical SEO",
+        serviceHref: "/services/seo-search",
+        role: "High-Net-Worth Investor Acquisition & International SEO",
+        deliverablesSummary: "Multi-regional real estate search indexing, schema markup for luxury developments, and targeted lead funnels.",
+        badge: "Investor Lead Gen",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Jobsite Drone Telemetry & Field Inspection Portal",
+        deliverablesSummary: "Offline tablet app syncing BIM IFC models, drone photogrammetry overlays, and automated safety milestone verification.",
+        badge: "BIM Field App",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Revit / BIM Architectural Model Ingestion & Optimization",
+        duration: "Weeks 1 - 2",
+        description: "We ingest your complex architectural CAD, Revit, or ArchiCAD models and convert them into lightweight WebGL Draco meshes with optimized draw calls.",
+        keyOutputs: ["Quantized 3D Building Geometry", "Inventory Data Schema", "PropTech UX Wireframes"],
+      },
+      {
+        step: "02",
+        title: "In-Browser Building Orbit & Balcony Sightline Engine",
+        duration: "Weeks 3 - 5",
+        description: "We engineer realistic sky daylight cycles, apartment filter controls, and interactive 2D-to-3D floorplan transitions in browser.",
+        keyOutputs: ["3D Exterior Orbit Visualizer", "Interactive Unit Selector", "Balcony View Simulation"],
+      },
+      {
+        step: "03",
+        title: "Digital Reservation Escrow & CRM Pipeline Integration",
+        duration: "Weeks 6 - 9",
+        description: "Integration with Stripe, Plaid, DocuSign, and Salesforce CRM for instant token deposits, identity verification, and legal contract signing.",
+        keyOutputs: ["Secure Escrow Deposit Portal", "DocuSign Contract Pipeline", "Real-Time CRM Sync"],
+      },
+      {
+        step: "04",
+        title: "International Sales Gallery Launch & Global CDN Edge",
+        duration: "Weeks 10 - 12",
+        description: "Testing across touchscreens, iPads, and mobile devices, edge caching deployment for sub-second international loading, and staff training.",
+        keyOutputs: ["Touchscreen Kiosk Compatibility", "Global Edge CDN Deployment", "Final Source Handover"],
+      },
     ],
     pillars: [
       {
@@ -611,7 +1223,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "startups-professional-services",
-    number: "07",
+    number: "8.9",
     title: "Startups & Professional Services",
     category: "High-Growth SaaS & Venture Tech",
     badge: "14-DAY MVP DEPLOYMENT",
@@ -621,6 +1233,76 @@ export const industriesList: IndustryData[] = [
       { label: "Time-to-Market", value: "14-Day MVP" },
       { label: "Client Funding", value: "$45M+ Raised" },
       { label: "Security Tier", value: "SOC2 Type II" },
+    ],
+    challenges: [
+      {
+        title: "Slow Development Cycles Burning Pre-Seed Runway",
+        description: "Early-stage founders burn scarce capital hiring fragmented freelance contractors or junior developers who take 9 months to ship buggy, unscalable products.",
+        impactMetric: "14-Day MVP Solution",
+      },
+      {
+        title: "Failing Institutional Investor Due Diligence Audits",
+        description: "Venture capitalists reject startups during technical due diligence because of sloppy database architecture, security vulnerabilities, or missing SOC2 posture.",
+        impactMetric: "$45M Capital at Stake",
+      },
+      {
+        title: "Complex Enterprise Billing & Multi-Tenant Isolation",
+        description: "Implementing seat-based pricing, Stripe usage metering, and multi-tenant database isolation delays product launch by several engineering quarters.",
+        impactMetric: "68% Time Saved",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Investor-Grade SaaS Core & Multi-Tenant Database Mesh",
+        deliverablesSummary: "Production Next.js 15 App Router architecture, PostgreSQL schemas with Row-Level Security (RLS), and sub-50ms global API routes.",
+        badge: "Venture SaaS",
+      },
+      {
+        serviceTitle: "Dedicated Agency Squads",
+        serviceHref: "/services/dedicated-squads",
+        role: "Full-Stack Senior Engineering Squad on Demand",
+        deliverablesSummary: "Autonomous squads consisting of a Principal Architect, Senior Frontend Lead, and Backend DevOps engineer moving at 2-week sprint speed.",
+        badge: "Rapid Squads",
+      },
+      {
+        serviceTitle: "Brand Strategy & Design Systems",
+        serviceHref: "/services/brand-identity",
+        role: "Pitch-Ready Brand Identity & High-Converting Landing Pages",
+        deliverablesSummary: "Investor pitch decks, component-driven design systems in Figma, and high-converting marketing landing pages that secure early signups.",
+        badge: "Investor Brand",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Product Scope & Enterprise Technical Scaffolding",
+        duration: "Days 1 - 3",
+        description: "We define your core user journey, strip unnecessary feature bloat, and deploy enterprise infrastructure (authentication, multi-tenancy, CI/CD pipeline).",
+        keyOutputs: ["Scoped MVP Spec", "Database ERD & RLS Security Rules", "Live Staging Environment"],
+      },
+      {
+        step: "02",
+        title: "Rapid Sprint Execution & Core Feature Build",
+        duration: "Days 4 - 9",
+        description: "Daily automated builds, clean TypeScript code, Stripe billing integration, and interactive user onboarding flows developed with relentless focus.",
+        keyOutputs: ["Core Product Features", "Stripe Billing & Subscriptions", "Daily Working Demos"],
+      },
+      {
+        step: "03",
+        title: "SOC2 Compliance Hardening & Analytics Telemetry",
+        duration: "Days 10 - 12",
+        description: "We implement immutable audit logging, role-based access control (RBAC), and product analytics tracking activation and cohort retention.",
+        keyOutputs: ["SOC2 Compliance Ready Spec", "PostHog / Mixpanel Telemetry", "Automated E2E Test Suite"],
+      },
+      {
+        step: "04",
+        title: "Investor Demo Launch & Full IP Code Handover",
+        duration: "Days 13 - 14",
+        description: "Production launch on scalable cloud infrastructure, full source code handover, and repository transfer with zero vendor lock-in.",
+        keyOutputs: ["Production Deployment", "Full Git Repository Ownership", "Investor Technical Briefing Packet"],
+      },
     ],
     pillars: [
       {
@@ -704,7 +1386,7 @@ export const industriesList: IndustryData[] = [
   },
   {
     slug: "travel-tourism",
-    number: "08",
+    number: "8.10",
     title: "Travel & Tourism",
     category: "Global Travel & Experience Tech",
     badge: "SUB-SECOND FARE ENGINE",
@@ -714,6 +1396,76 @@ export const industriesList: IndustryData[] = [
       { label: "Monthly Queries", value: "1.8M Searches" },
       { label: "Search Latency", value: "<120ms Speed" },
       { label: "Mobile Bookings", value: "4.8x Accelerated" },
+    ],
+    challenges: [
+      {
+        title: "Extreme API Latency from Legacy GDS Systems",
+        description: "Querying major Global Distribution Systems (Amadeus, Sabre) for flight and hotel availability takes 4+ seconds, driving impatient mobile travelers to competitor sites.",
+        impactMetric: "-65% Search Latency",
+      },
+      {
+        title: "Complex Multi-Currency FX & Tax Compliance",
+        description: "Handling global payments across 40+ currencies with volatile exchange rates and regional value-added tax (VAT) creates margin leakage and reconciliation headaches.",
+        impactMetric: "8.4% Forex Margin Leak",
+      },
+      {
+        title: "Static Itinerary Formats That Fail to Convert",
+        description: "Flat PDF travel schedules leave travelers confused about local transfer times, trail conditions, and weather changes, leading to customer support overload.",
+        impactMetric: "4.8x Mobile Lift",
+      },
+    ],
+    serviceCombinations: [
+      {
+        serviceTitle: "Web & Enterprise Cloud",
+        serviceHref: "/services/web-cloud",
+        role: "Distributed Edge Search Caching & GDS Connector Mesh",
+        deliverablesSummary: "Redis edge caching layer caching hundreds of thousands of flight and hotel routes with sub-120ms response times and zero rate-limit drops.",
+        badge: "Edge Travel Engine",
+      },
+      {
+        serviceTitle: "Mobile App Development",
+        serviceHref: "/services/mobile-apps",
+        role: "Interactive 3D Destination Map & Offline Trail App",
+        deliverablesSummary: "Progressive mobile app with Mapbox GL 3D topographic terrain elevation, offline GPS wayfinding, and digital RFID boarding passes.",
+        badge: "Spatial Guide",
+      },
+      {
+        serviceTitle: "Search Dominance & Technical SEO",
+        serviceHref: "/services/seo-search",
+        role: "Programmatic Destination & Route SEO Dominance",
+        deliverablesSummary: "Automated generation of thousands of indexable, high-ranking travel route and city attraction pages with dynamic pricing schema.",
+        badge: "Travel SEO",
+      },
+    ],
+    process: [
+      {
+        step: "01",
+        title: "GDS API Benchmark & Fare Cache Architecture Audit",
+        duration: "Weeks 1 - 2",
+        description: "We audit your third-party inventory feeds (Amadeus, Sabre, Hotelbeds), rate limitations, and booking transaction drop-off points.",
+        keyOutputs: ["GDS API Architecture Map", "Distributed Cache Topology", "Travel UX Wireframes"],
+      },
+      {
+        step: "02",
+        title: "Sub-120ms Search Engine & AI Itinerary Prototype",
+        duration: "Weeks 3 - 5",
+        description: "We deploy Redis edge memory clusters to pre-warm fare searches, combined with generative itinerary planning algorithms balancing travel styles.",
+        keyOutputs: ["Sub-120ms Fare Search Engine", "AI Trip Builder Prototype", "3D Topographic Terrain View"],
+      },
+      {
+        step: "03",
+        title: "Multi-Currency Checkout & Group Split-Payment Integration",
+        duration: "Weeks 6 - 9",
+        description: "Integration with Stripe, Klarna, and local Asian e-wallets (Alipay, WeChat Pay) with automated Forex hedging and split-payment checkout.",
+        keyOutputs: ["Multi-Currency Checkout Funnel", "Split-Payment Group Booking", "Automated Booking Confirmation Email/SMS"],
+      },
+      {
+        step: "04",
+        title: "Global CDN Stress Testing & Airport/PWA Rollout",
+        duration: "Weeks 10 - 12",
+        description: "Simulating millions of monthly searches across multi-region CDNs, progressive offline app testing, and production launch.",
+        keyOutputs: ["1.8M Monthly Search Load Audit", "Offline PWA Mobile App", "Full Repository Ownership Transfer"],
+      },
     ],
     pillars: [
       {

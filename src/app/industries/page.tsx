@@ -21,6 +21,7 @@ import {
     GraduationCap,
     Rocket,
     Plane,
+    Factory,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import RnDFooter from "@/components/RnDFooter";
@@ -190,6 +191,8 @@ export default function IndustriesIndexPage() {
 
     const getIndustryIcon = (slug: string) => {
         switch (slug) {
+            case "manufacturing":
+                return Factory;
             case "healthcare":
                 return HeartPulse;
             case "food-fmcg":
@@ -243,7 +246,7 @@ export default function IndustriesIndexPage() {
                                 Software Engineered For Regulated &amp; High-Stakes Verticals
                             </h1>
                             <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
-                                We combine deep sector-specific compliance (HIPAA, PCI-DSS, SOC2) with cutting-edge 3D spatial web capabilities and sub-second cloud performance. Explore our specialized engineering blueprints across 8 core industry domains.
+                                We combine deep sector-specific compliance (SCADA, HIPAA, PCI-DSS, SOC2) with cutting-edge 3D spatial web capabilities and sub-second cloud performance. Explore our specialized engineering blueprints across 9 core industry domains.
                             </p>
                         </div>
 
