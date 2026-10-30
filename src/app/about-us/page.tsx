@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import CosmicProcessSection from "@/components/CosmicProcessSection";
+import TeamCultureSection from "@/components/TeamCultureSection";
 
 export default function AboutUsPage() {
   const [isPlayingShowreel, setIsPlayingShowreel] = useState(false);
@@ -374,6 +375,7 @@ export default function AboutUsPage() {
               </div>
             </section>
             <CosmicProcessSection className="py-[50px]" />
+            <TeamCultureSection className="py-[50px]" />
             {/* =========================================================================
                 4. PARTNERSHIP CTA
                 ========================================================================= */}
