@@ -9,34 +9,98 @@ export default function GSAPScrollAnimations() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // 1. ANIMS FOR ALL SECTION HEADINGS & TITLES
+      // 1. WAVES ANIMATION FOR ALL MAIN H2 & H3 TITLES ON SCROLL TOP TO BOTTOM
+      function wrapTextInWaveSpans(el: HTMLElement) {
+        if (el.dataset.waveProcessed) {
+          return el.querySelectorAll<HTMLElement>(".global-wave-char");
+        }
+        el.dataset.waveProcessed = "true";
+
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const textNodes: Text[] = [];
+        let node: Text | null;
+        while ((node = walker.nextNode() as Text | null)) {
+          if (node.nodeValue && node.nodeValue.trim().length > 0) {
+            textNodes.push(node);
+          }
+        }
+
+        textNodes.forEach((textNode) => {
+          const text = textNode.nodeValue || "";
+          const span = document.createElement("span");
+          span.className = "inline-block";
+          span.innerHTML = text
+            .split("")
+            .map((char) =>
+              char === " "
+                ? "&nbsp;"
+                : `<span class="global-wave-char inline-block will-change-transform">${char}</span>`
+            )
+            .join("");
+          textNode.parentNode?.replaceChild(span, textNode);
+        });
+
+        return el.querySelectorAll<HTMLElement>(".global-wave-char");
+      }
+
       const headings = document.querySelectorAll<HTMLElement>(
-        "section h2:not([data-no-gsap]), section h3.section-title"
+        "section h2, section h3"
       );
 
       headings.forEach((heading) => {
         // Skip hero headline which has its own entry
         if (heading.closest("#hero")) return;
 
-        gsap.fromTo(
-          heading,
-          {
-            opacity: 0,
-            y: 50,
-            filter: "blur(6px)",
+        // If already handled by custom WaveText or typewriter, skip
+        if (
+          heading.querySelector(".wave-char-span, .animate-text-wave, .animate-cursor-blink")
+        ) {
+          return;
+        }
+
+        const chars = wrapTextInWaveSpans(heading);
+        if (!chars || chars.length === 0) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 88%",
+            toggleActions: "restart none none reset",
           },
+        });
+
+        // 1. Initial State before wave enters: slightly lower, soft blur
+        tl.set(chars, {
+          opacity: 0,
+          y: 22,
+          filter: "blur(4px)",
+        });
+
+        // 2. Wave Crest: characters rise up to the wave crest, highlight in gold
+        tl.to(chars, {
+          opacity: 1,
+          y: -10,
+          color: "#FFD400",
+          filter: "blur(0px)",
+          duration: 0.45,
+          ease: "power2.out",
+          stagger: 0.028,
+        });
+
+        // 3. Wave Settle: smooth glide down into baseline and settle with original color
+        tl.to(
+          chars,
           {
-            opacity: 1,
             y: 0,
-            filter: "blur(0px)",
-            duration: 1.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 88%",
-              toggleActions: "play none none none",
+            color: "inherit",
+            duration: 0.42,
+            ease: "power2.inOut",
+            stagger: 0.028,
+            onComplete: () => {
+              gsap.set(chars, { clearProps: "color,transform,filter" });
             },
-          }
+          },
+          "<0.18"
         );
       });
 
@@ -64,7 +128,7 @@ export default function GSAPScrollAnimations() {
             scrollTrigger: {
               trigger: badge,
               start: "top 90%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
             },
           }
         );
@@ -92,7 +156,7 @@ export default function GSAPScrollAnimations() {
             scrollTrigger: {
               trigger: para,
               start: "top 88%",
-              toggleActions: "play none none none",
+              toggleActions: "restart none none reset",
             },
           }
         );

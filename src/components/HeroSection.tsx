@@ -287,7 +287,7 @@ export default function HeroSection() {
                     textShadow:
                       "0 4px 15px rgba(0, 0, 0, 0.95), 0 12px 40px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.95)",
                   }}
-                  className="text-[#ffd400] text-[9vw] sm:text-[8vw] md:text-[7vw] lg:text-[90px] xl:text-[115px] 2xl:text-[135px] font-[family-name:var(--font-syne)] font-extrabold tracking-tight leading-none uppercase select-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] whitespace-nowrap"
+                  className="text-[#ffd400] text-[11vw] sm:text-[9vw] md:text-[8vw] lg:text-[110px] xl:text-[140px] 2xl:text-[165px] font-[family-name:var(--font-bebas)] tracking-tight leading-none uppercase select-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] whitespace-nowrap"
                 >
                   DIGITAL
                 </h1>
@@ -298,7 +298,7 @@ export default function HeroSection() {
                     textShadow:
                       "0 4px 15px rgba(0, 0, 0, 0.95), 0 12px 40px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.95)",
                   }}
-                  className="text-[#ffd400] text-[9vw] sm:text-[8vw] md:text-[7vw] lg:text-[90px] xl:text-[115px] 2xl:text-[135px] font-[family-name:var(--font-syne)] font-extrabold tracking-tight leading-none uppercase select-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] whitespace-nowrap text-right"
+                  className="text-[#ffd400] text-[11vw] sm:text-[9vw] md:text-[8vw] lg:text-[110px] xl:text-[140px] 2xl:text-[165px] font-[family-name:var(--font-bebas)] tracking-tight leading-none uppercase select-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] whitespace-nowrap text-right"
                 >
                   AGENCY
                 </h1>
