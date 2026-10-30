@@ -236,7 +236,7 @@ export default function ConstellationMissionVision({
           </div>
           <h1 className="font-[family-name:var(--font-syne)] text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
             The Orbital{" "}
-            <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.45)]">
+            <span className="bg-gradient-to-r from-white via-[#ffe34d] to-[#FFD400] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(255,212,0,0.3)]">
               Ecosystem
             </span>
           </h1>
@@ -247,7 +247,7 @@ export default function ConstellationMissionVision({
 
         {/* Constellation Interactive Stage: 3-Column Layout Aligned to Exact Same Bottom Baseline */}
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
+
           {/* =========================================================================
               LEFT COLUMN: ALL 4 VALUES (Evenly Spaced, Bottom Aligned with Center & Right)
               ========================================================================= */}
@@ -263,9 +263,8 @@ export default function ConstellationMissionVision({
                 return (
                   <div
                     key={v.number}
-                    className={`constellation-value-node bg-black/30 backdrop-blur-md border border-[#FFD400]/20 hover:border-[#FFD400]/70 p-4 sm:p-4.5 rounded-2xl transition-all duration-300 hover:scale-[1.025] shadow-[0_8px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(255,212,0,0.06)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.7),0_0_35px_rgba(255,212,0,0.25)] group relative overflow-hidden flex-1 flex flex-col justify-center ${
-                      idx % 2 === 0 ? "hover:-translate-y-0.5" : "hover:translate-y-0.5"
-                    }`}
+                    className={`constellation-value-node bg-[#0a0a0c]/85 backdrop-blur-xl border border-[#FFD400]/20 hover:border-[#FFD400]/70 p-4 sm:p-4.5 rounded-2xl transition-all duration-300 hover:scale-[1.025] hover:shadow-[0_0_30px_rgba(255,212,0,0.25)] group relative overflow-hidden flex-1 flex flex-col justify-center ${idx % 2 === 0 ? "hover:-translate-y-0.5" : "hover:translate-y-0.5"
+                      }`}
                   >
                     {/* Hover Light Sweep Beam */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
@@ -296,7 +295,7 @@ export default function ConstellationMissionVision({
               CENTER COLUMN: CORE SUN (VISION) + MISSION BRIDGE CARD (Bottom Anchored)
               ========================================================================= */}
           <div className="lg:col-span-4 flex flex-col justify-between items-center text-center relative py-1 h-full">
-            
+
             {/* Connecting SVG Orbits behind Center */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
               <div className="w-80 h-80 rounded-full border border-dashed border-[#FFD400]/30 animate-spin-slow" />
@@ -306,7 +305,7 @@ export default function ConstellationMissionVision({
             {/* Central Sun */}
             <div id="vision-core" className="relative group my-auto select-none py-6">
               <div className="absolute inset-0 rounded-full bg-[#FFD400]/30 blur-2xl group-hover:blur-3xl transition-all duration-500 animate-pulse" />
-              <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-black/40 backdrop-blur-2xl border-2 border-[#FFD400] flex flex-col items-center justify-center p-6 shadow-[0_0_60px_rgba(255,212,0,0.45)] group-hover:scale-105 transition-transform duration-500">
+              <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-[#0a0a0c]/90 backdrop-blur-2xl border-2 border-[#FFD400] flex flex-col items-center justify-center p-6 shadow-[0_0_45px_-5px_rgba(255,212,0,0.4)] group-hover:scale-105 transition-transform duration-500">
                 <span className="text-[10px] font-mono tracking-widest text-[#FFD400] uppercase mb-1 font-bold">
                   North Star Vision
                 </span>
@@ -317,7 +316,7 @@ export default function ConstellationMissionVision({
             </div>
 
             {/* The Bridge: Mission Card (Anchored to exact bottom baseline) */}
-            <div id="mission-bridge" className="w-full bg-black/30 backdrop-blur-md border border-[#FFD400]/25 hover:border-[#FFD400]/70 p-6 rounded-2xl transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(255,212,0,0.06)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.7),0_0_35px_rgba(255,212,0,0.25)] group text-left mt-auto relative overflow-hidden">
+            <div id="mission-bridge" className="w-full bg-[#0a0a0c]/85 backdrop-blur-xl border border-[#FFD400]/25 hover:border-[#FFD400]/70 p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_35px_rgba(255,212,0,0.25)] group text-left mt-auto relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
               <div className="flex items-center justify-between mb-2 relative z-10">
@@ -346,7 +345,7 @@ export default function ConstellationMissionVision({
             </div>
 
             {/* Vision Card: Fills height so bottom edge matches left & center columns */}
-            <div className="constellation-vision-card flex-1 bg-black/30 backdrop-blur-md border border-[#FFD400]/30 hover:border-[#FFD400]/70 p-6 sm:p-8 rounded-3xl transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.6),0_0_45px_rgba(255,212,0,0.15)] hover:shadow-[0_16px_50px_rgba(0,0,0,0.8),0_0_60px_rgba(255,212,0,0.35)] group relative overflow-hidden flex flex-col justify-between">
+            <div className="constellation-vision-card flex-1 bg-[#0a0a0c]/85 backdrop-blur-2xl border border-[#FFD400]/30 hover:border-[#FFD400]/70 p-6 sm:p-8 rounded-3xl transition-all duration-300 shadow-[0_0_40px_rgba(255,212,0,0.15)] hover:shadow-[0_0_50px_rgba(255,212,0,0.3)] group relative overflow-hidden flex flex-col justify-between">
               {/* Subtle Ambient Radial Highlight */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#FFD400]/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-125 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFD400]/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />

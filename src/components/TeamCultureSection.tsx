@@ -250,7 +250,7 @@ export default function TeamCultureSection({
                     aria-label="Founder LinkedIn"
                   >
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
                     </svg>
                   </a>
                   <a
@@ -291,31 +291,31 @@ export default function TeamCultureSection({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {squadLeaders.map((member) => (
             <div
-                key={member.id}
-                className="group rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
-              >
-                {/* Member Photo Frame - Pure Clean Image with No Symbols or Text */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-transparent">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
-                    className="object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Member Details: Name & Designation Only */}
-                <div className="p-5 text-center sm:text-left">
-                  <h4 className="text-lg font-[family-name:var(--font-syne)] font-bold text-white uppercase group-hover:text-[#FFD400] transition-colors tracking-tight">
-                    {member.name}
-                  </h4>
-                  <p className="text-xs font-mono text-neutral-400 mt-1 uppercase tracking-wider">
-                    {member.role}
-                  </p>
-                </div>
+              key={member.id}
+              className="group rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
+            >
+              {/* Member Photo Frame - Pure Clean Image with No Symbols or Text */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-transparent">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+                  className="object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
+
+              {/* Member Details: Name & Designation Only */}
+              <div className="p-5 text-center sm:text-left">
+                <h4 className="text-lg font-[family-name:var(--font-syne)] font-bold text-white uppercase group-hover:text-[#FFD400] transition-colors tracking-tight">
+                  {member.name}
+                </h4>
+                <p className="text-xs font-mono text-neutral-400 mt-1 uppercase tracking-wider">
+                  {member.role}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
