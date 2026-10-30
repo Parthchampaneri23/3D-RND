@@ -14,6 +14,9 @@ export interface PageBannerProps {
   parentBreadcrumb?: { label: string; href: string };
   imageSrc?: string;
   className?: string;
+  imagePosition?: string;
+  imageClassName?: string;
+  imageStyle?: React.CSSProperties;
 }
 
 export default function PageBanner({
@@ -23,6 +26,9 @@ export default function PageBanner({
   parentBreadcrumb,
   imageSrc = "/banner.png",
   className = "",
+  imagePosition = "object-bottom",
+  imageClassName = "",
+  imageStyle,
 }: PageBannerProps) {
   const bannerRef = useRef<HTMLElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
@@ -47,21 +53,29 @@ export default function PageBanner({
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // 1. Slow, ultra-smooth cinematic zoom out on open (starts at 1.2 and zooms out to 1.0)
+      // 1. Slow, ultra-smooth cinematic zoom out on open (starts at 1.08 and zooms out to 1.0)
       if (imageRef.current) {
+        const isRightAligned =
+          imagePosition.includes("right") ||
+          imagePosition.includes("%") ||
+          imageClassName.includes("right");
+
         gsap.fromTo(
           imageRef.current,
-          { scale: 1.2 },
           {
-            scale: 0.90,
-            duration: 9,
+            scale: 1.08,
+            transformOrigin: isRightAligned ? "92% 50%" : "center bottom",
+          },
+          {
+            scale: 1.0,
+            duration: 8,
             ease: "power1.out",
           }
         );
 
         // 2. Parallax effect on scroll
         gsap.to(imageRef.current, {
-          yPercent: 25,
+          yPercent: 20,
           ease: "none",
           scrollTrigger: {
             trigger: bannerRef.current,
@@ -169,7 +183,7 @@ export default function PageBanner({
     }, bannerRef);
 
     return () => ctx.revert();
-  }, [firstLine, secondLine]);
+  }, [firstLine, secondLine, imagePosition, imageClassName]);
 
   const isLong = secondLine.length > 22;
   const titleSizeClass = isLong
@@ -196,7 +210,8 @@ export default function PageBanner({
             fill
             priority
             unoptimized
-            className="object-cover object-bottom"
+            className={`object-cover ${imagePosition} ${imageClassName}`}
+            style={imageStyle}
           />
         </div>
       </div>

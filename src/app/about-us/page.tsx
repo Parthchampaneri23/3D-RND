@@ -10,7 +10,6 @@ import RnDFooter from "@/components/RnDFooter";
 import SpaceBackground from "@/components/SpaceBackground";
 import CyberButton from "@/components/CyberButton";
 import PageBanner from "@/components/PageBanner";
-import AboutRocketScrollBanner from "@/components/AboutRocketScrollBanner";
 import ConstellationMissionVision from "@/components/ConstellationMissionVision";
 import {
   Play,
@@ -193,22 +192,20 @@ export default function AboutUsPage() {
       {/* Global Navbar */}
       <Navbar />
 
-      {/* Standard Page Banner matching Career, Portfolio & Services page size & animation */}
-      <PageBanner title="ABOUT RND" breadcrumb="ABOUT US" imageSrc="/banner/about.png" />
+      {/* Standard Page Banner matching Career page size & animation, with image shifted left */}
+      <PageBanner
+        title="ABOUT RND"
+        breadcrumb="ABOUT US"
+        imageSrc="/banner/about.png"
+        imagePosition="object-right"
+        imageStyle={{ objectPosition: "88% center" }}
+        imageClassName="scale-105 -translate-x-3 sm:-translate-x-6 md:-translate-x-10"
+      />
 
-      {/* Dynamic Rocket Scroll Experience (Below Banner) */}
-      <AboutRocketScrollBanner />
-
-      {/* =========================================================================
-          POST-BANNER OVERLAPPING CONTENT SECTION
-          - Overlaps the frozen rocket banner section via -mt-[100vh]
-          - Pinned at z-30 with dark background, rounded top, top border & deep shadow
-          ========================================================================= */}
-      <section className="relative z-30 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-[50px] pb-[50px] shadow-[0_-50px_140px_rgba(0,0,0,0.99)] border-t border-white/[0.08] rounded-t-[36px] sm:rounded-t-[48px]">
+      {/* Main Content Overlapping Banner identically to Career page */}
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
         {/* Subtle Ambient Top Border Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#FFD400]/6 blur-[160px] rounded-full pointer-events-none" />
-
-        <main className="relative z-10 w-full">
           {/* =========================================================================
               CONCEPT 2: THE "CONSTELLATION / ORBITAL" STORYBOARD
               - Full-width immersive section with sticky telemetry sidebar & floating canvas
@@ -397,10 +394,9 @@ export default function AboutUsPage() {
             </div>
           </div>
         </section>
-      </div>
-    </main>
-  </section>
-      <WhyChooseSection className="py-[50px]" />
+        </div>
+        <WhyChooseSection className="py-[50px]" />
+      </main>
       {/* Showreel Modal */}
       {isPlayingShowreel && (
         <div
