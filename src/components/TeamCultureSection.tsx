@@ -188,20 +188,6 @@ export default function TeamCultureSection({
                   className="object-cover object-top filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
-
-                {/* Founder Telemetry Badge */}
-                <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md border border-white/15 p-3 rounded-xl flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#FFD400] font-bold block">
-                      EXECUTIVE LEADERSHIP
-                    </span>
-                    <span className="text-xs font-mono text-white font-medium">
-                      FOUNDER &amp; MANAGING DIRECTOR
-                    </span>
-                  </div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-                </div>
               </div>
 
               {/* Corner Cyber Accents */}
@@ -335,84 +321,34 @@ export default function TeamCultureSection({
 
         {/* 4 Specialized Squad Leads Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredSquad.map((member) => {
-            const Icon = member.icon;
-            return (
-              <div
+          {filteredSquad.map((member) => (
+            <div
                 key={member.id}
-                className="group rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden flex flex-col justify-between shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)]"
+                className="group rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
               >
-                <div>
-                  {/* Member Photo Frame */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/60">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 320px"
-                      className="object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-105 transition-all duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-transparent to-transparent pointer-events-none" />
-
-                    {/* Squad Beacon Icon */}
-                    <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-black/80 backdrop-blur-md border border-white/15 flex items-center justify-center text-[#FFD400]">
-                      <Icon className="w-4 h-4" />
-                    </div>
-
-                    {/* Live Metric Badge */}
-                    <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-[#FFD400]/40 text-right">
-                      <span className="text-xs font-mono font-bold text-[#FFD400] block leading-none">
-                        {member.metric.value}
-                      </span>
-                      <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-tighter">
-                        {member.metric.label}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Member Details */}
-                  <div className="p-5 space-y-3">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#FFD400] font-bold block">
-                        {member.squad}
-                      </span>
-                      <h4 className="text-lg font-[family-name:var(--font-syne)] font-bold text-white uppercase group-hover:text-[#FFD400] transition-colors">
-                        {member.name}
-                      </h4>
-                      <p className="text-xs font-mono text-neutral-400">
-                        {member.role}
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-neutral-300 font-light leading-relaxed line-clamp-3">
-                      {member.bio}
-                    </p>
-
-                    {/* Skills pills */}
-                    <div className="flex flex-wrap gap-1 pt-1">
-                      {member.expertise.map((skill, sIdx) => (
-                        <span
-                          key={sIdx}
-                          className="px-2 py-0.5 rounded text-[9px] font-mono bg-white/[0.03] border border-white/5 text-neutral-300"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                {/* Member Photo Frame - Pure Clean Image with No Symbols or Text */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/60">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+                    className="object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14]/50 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Card Footer */}
-                <div className="px-5 py-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-neutral-400">
-                  <span className="text-[#FFD400] font-bold">VERIFIED LEAD</span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>Active Squad</span>
-                  </div>
+                {/* Member Details: Name & Designation Only */}
+                <div className="p-5 text-center sm:text-left">
+                  <h4 className="text-lg font-[family-name:var(--font-syne)] font-bold text-white uppercase group-hover:text-[#FFD400] transition-colors tracking-tight">
+                    {member.name}
+                  </h4>
+                  <p className="text-xs font-mono text-neutral-400 mt-1 uppercase tracking-wider">
+                    {member.role}
+                  </p>
                 </div>
               </div>
-            );
-          })}
+          ))}
         </div>
       </div>
 
