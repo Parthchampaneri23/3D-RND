@@ -194,7 +194,7 @@ export default function AboutUsPage() {
       <Navbar />
 
       {/* Standard Page Banner matching Career, Portfolio & Services page size & animation */}
-      <PageBanner title="ABOUT RND" breadcrumb="ABOUT US" />
+      <PageBanner title="ABOUT RND" breadcrumb="ABOUT US" imageSrc="/banner/about.png" />
 
       {/* Dynamic Rocket Scroll Experience (Below Banner) */}
       <AboutRocketScrollBanner />
