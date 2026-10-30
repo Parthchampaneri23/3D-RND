@@ -823,7 +823,7 @@ export default function ServiceUniverseSection() {
             <Sparkles className="w-3.5 h-3.5" />
             <span>2.2 SERVICE UNIVERSE // ALL 4 SERVICE TIERS ACTIVE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+          <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[0.98] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
             MULTIVERSE <span className="text-[#FFD400]">TECHNOLOGY ARCHITECTURE</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base font-normal mt-3 leading-relaxed text-neutral-300 max-w-2xl mx-auto font-[family-name:var(--font-jakarta)]">
@@ -1007,7 +1007,7 @@ export default function ServiceUniverseSection() {
             <div className="text-xs font-mono text-[#FFD400] uppercase tracking-widest mb-1">
               ALL 4 SERVICE DIVISIONS // OFFICIAL BRAND LOGOS
             </div>
-            <h3 className="text-2xl sm:text-4xl font-[family-name:var(--font-bebas)] tracking-wide uppercase text-white">
+            <h3 className="text-2xl sm:text-4xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase text-white">
               INTEGRATED <span className="text-[#FFD400]">TOOLS MATRICES</span>
             </h3>
           </div>
@@ -1038,7 +1038,7 @@ export default function ServiceUniverseSection() {
                           DIVISION 0{division.tierNumber}
                         </span>
                         {/* PROMINENT SERVICE NAME */}
-                        <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
+                        <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-syne)]">
                           {division.serviceName}
                         </h4>
                       </div>

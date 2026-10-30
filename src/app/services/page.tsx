@@ -101,7 +101,7 @@ export default function ServicesPage() {
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>2.1 SERVICES HERO // INTEGRATED CAPABILITIES MATRIX</span>
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[1.02] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
                 HIGH-PERFORMANCE ENGINEERING &amp;{" "}
                 <span className="text-[#FFD400] drop-shadow-[0_0_35px_rgba(255,212,0,0.45)]">
                   DIGITAL ACCELERATION
@@ -199,7 +199,7 @@ export default function ServicesPage() {
                 <Compass className="w-3.5 h-3.5" />
                 <span>ALL PRACTICES // DETAILED SPEC DIRECTORY</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.95] text-white">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[1.05] text-white">
                 EXPLORE COMPLETE <span className="text-[#FFD400]">SERVICE CATALOG</span>
               </h2>
               <p className="text-xs sm:text-sm text-neutral-300 font-light mt-2 max-w-xl">
@@ -299,7 +299,7 @@ export default function ServicesPage() {
                     <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
                       <div className="flex items-baseline justify-between gap-4 mb-1">
                         <Link href={`/services/${service.id}`}>
-                          <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
+                          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-syne)] uppercase">
                             {service.title} {service.highlightText}
                           </h3>
                         </Link>

@@ -79,7 +79,7 @@ export default function ServiceFaqSection() {
             <HelpCircle className="w-3.5 h-3.5" />
             <span>2.9 SERVICE FAQS // CLARITY &amp; STANDARDS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.95] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[1.02] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
             FREQUENTLY ASKED <span className="text-[#FFD400]">SERVICE QUESTIONS</span>
           </h2>
           <p className="text-sm sm:text-base font-normal mt-4 leading-relaxed text-neutral-300">
@@ -115,7 +115,7 @@ export default function ServiceFaqSection() {
                       <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 block mb-1">
                         {faq.category}
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
+                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight font-[family-name:var(--font-syne)]">
                         {faq.question}
                       </h3>
                     </div>

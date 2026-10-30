@@ -131,7 +131,7 @@ export default function ServiceCaseStudies() {
               <Sparkles className="w-3.5 h-3.5" />
               <span>2.8 RELATED CASE STUDIES // PROVEN IMPACT</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.95] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[1.02] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               MEASURABLE SUCCESS <span className="text-[#FFD400]">PER CATEGORY</span>
             </h2>
             <p className="text-sm sm:text-base font-normal max-w-2xl mt-3 leading-relaxed text-neutral-300">
@@ -195,7 +195,7 @@ export default function ServiceCaseStudies() {
               {/* Study Info */}
               <div className="p-6 sm:p-8 pt-2 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase mb-2 group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-syne)]">
                     {study.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed mb-6">
