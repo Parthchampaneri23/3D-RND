@@ -40,8 +40,6 @@ export default function TeamCultureSection({
 }: {
   className?: string;
 }) {
-  const [activeTab, setActiveTab] = useState<"all" | "engineering" | "creative" | "ai" | "growth">("all");
-
   const squadLeaders: TeamMember[] = [
     {
       id: "cto",
@@ -115,17 +113,6 @@ export default function TeamCultureSection({
       desc: "Every squad lead takes holistic responsibility for the client's commercial victory from initial sprint to long-term scale.",
     },
   ];
-
-  const filteredSquad =
-    activeTab === "all"
-      ? squadLeaders
-      : squadLeaders.filter((m) => {
-          if (activeTab === "engineering") return m.id === "cto";
-          if (activeTab === "creative") return m.id === "design-lead";
-          if (activeTab === "ai") return m.id === "ai-lead";
-          if (activeTab === "growth") return m.id === "growth-lead";
-          return true;
-        });
 
   return (
     <section id="team-culture" className={`relative w-full ${className}`}>
@@ -294,34 +281,15 @@ export default function TeamCultureSection({
             </h3>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2">
-            {[
-              { id: "all", label: "ALL SQUADS" },
-              { id: "engineering", label: "ENGINEERING" },
-              { id: "creative", label: "3D & DESIGN" },
-              { id: "ai", label: "COGNITIVE AI" },
-              { id: "growth", label: "GROWTH & SEO" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-[#FFD400] text-black font-bold shadow-[0_0_15px_rgba(255,212,0,0.35)]"
-                    : "bg-white/[0.04] text-neutral-300 border border-white/10 hover:border-white/30"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          {/* Attractive Show More Button redirecting to /about-us/team-culture */}
+          <CyberButton href="/about-us/team-culture" size="md">
+            SHOW MORE
+          </CyberButton>
         </div>
 
         {/* 4 Specialized Squad Leads Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredSquad.map((member) => (
+          {squadLeaders.map((member) => (
             <div
                 key={member.id}
                 className="group rounded-2xl bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 overflow-hidden shadow-xl hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(255,212,0,0.15)] flex flex-col"
