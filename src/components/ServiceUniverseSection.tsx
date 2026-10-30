@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -12,26 +12,28 @@ import {
   RotateCw,
   Play,
   Pause,
-  Compass,
   Layers,
-  ChevronRight,
-  Info,
-  CheckCircle2,
 } from "lucide-react";
 
 // ============================================================================
-// GENUINE BRAND SVG ICONS (Clean Dark Theme / Silver & Amber Halos)
+// GENUINE BRAND SVG LOGOS (IN ACTUAL OFFICIAL BRAND COLORS)
 // ============================================================================
 
-export function ToolBrandIcon({ name, className = "w-6 h-6" }: { name: string; className?: string }) {
+export function FullColorToolLogo({
+  name,
+  className = "w-7 h-7 sm:w-8 sm:h-8",
+}: {
+  name: string;
+  className?: string;
+}) {
   const norm = name.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  // React
+  // React.js (Cyan #61DAFB)
   if (norm.includes("react")) {
     return (
-      <svg className={className} viewBox="-11.5 -10.23174 23 20.46348" fill="currentColor">
-        <circle cx="0" cy="0" r="2.05" />
-        <g stroke="currentColor" strokeWidth="1" fill="none">
+      <svg className={className} viewBox="-11.5 -10.23174 23 20.46348">
+        <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+        <g stroke="#61DAFB" strokeWidth="1" fill="none">
           <ellipse rx="11" ry="4.2" />
           <ellipse rx="11" ry="4.2" transform="rotate(60)" />
           <ellipse rx="11" ry="4.2" transform="rotate(120)" />
@@ -40,286 +42,452 @@ export function ToolBrandIcon({ name, className = "w-6 h-6" }: { name: string; c
     );
   }
 
-  // Next.js
+  // Next.js (Black & White circle)
   if (norm.includes("next")) {
     return (
-      <svg className={className} viewBox="0 0 180 180" fill="currentColor">
-        <mask height="180" id="mask-next" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style={{ maskType: "alpha" }}>
-          <circle cx="90" cy="90" fill="black" r="90" />
-        </mask>
-        <g mask="url(#mask-next)">
-          <circle cx="90" cy="90" data-theme="dark" fill="none" r="90" stroke="currentColor" strokeWidth="6" />
-          <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" />
-          <rect height="72" width="12" x="115" y="54" />
-        </g>
+      <svg className={className} viewBox="0 0 180 180" fill="none">
+        <circle cx="90" cy="90" r="90" fill="#000000" stroke="#333333" strokeWidth="3" />
+        <path
+          d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z"
+          fill="#FFFFFF"
+        />
+        <rect x="115" y="54" width="12" height="72" fill="#FFFFFF" />
       </svg>
     );
   }
 
-  // Node.js
+  // Node.js (Green #539E43)
   if (norm.includes("node")) {
     return (
-      <svg className={className} viewBox="0 0 256 289" fill="currentColor">
-        <path d="M128 0L24 60v120l104 60 104-60V60L128 0zm79 164l-79 45-79-45V75l79-45 79 45v89z" />
-        <path d="M128 72l-48 28v56l48 28 48-28v-56l-48-28zm26 67l-26 15-26-15v-30l26-15 26 15v30z" opacity="0.6" />
+      <svg className={className} viewBox="0 0 256 289">
+        <path fill="#539E43" d="M128 0L24 60v120l104 60 104-60V60L128 0z" />
+        <path fill="#333333" d="M128 20L44 68v104l84 48 84-48V68L128 20z" opacity="0.3" />
+        <path fill="#FFFFFF" d="M128 65l-50 29v58l50 29 50-29V94l-50-29zm28 71l-28 16-28-16v-32l28-16 28 16v32z" />
       </svg>
     );
   }
 
-  // MongoDB
+  // MongoDB (Leaf #00ED64 and #00684A)
   if (norm.includes("mongo")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0C11.66 0 11.23.16 10.95.42C8.6 2.5 4.5 7.6 4.5 12.87C4.5 17.65 8.1 21.6 12 24C15.9 21.6 19.5 17.65 19.5 12.87C19.5 7.6 15.4 2.5 13.05.42C12.77.16 12.34 0 12 0ZM12 2.37C13.2 4.07 17.2 9.5 17.2 12.87C17.2 16.5 14.5 19.8 12 21.75V2.37ZM12 21.75C9.5 19.8 6.8 16.5 6.8 12.87C6.8 9.5 10.8 4.07 12 2.37V21.75Z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#00ED64"
+          d="M12 0C11.66 0 11.23.16 10.95.42C8.6 2.5 4.5 7.6 4.5 12.87C4.5 17.65 8.1 21.6 12 24C15.9 21.6 19.5 17.65 19.5 12.87C19.5 7.6 15.4 2.5 13.05.42C12.77.16 12.34 0 12 0Z"
+        />
+        <path
+          fill="#00684A"
+          d="M12 0v24c3.9-2.4 7.5-6.35 7.5-11.13C19.5 7.6 15.4 2.5 13.05.42C12.77.16 12.34 0 12 0Z"
+        />
+        <path
+          fill="#FFFFFF"
+          d="M12 2.37v19.38C12 21.75 9.5 19.8 6.8 12.87c0-3.37 4-8.8 5.2-10.5Z"
+          opacity="0.25"
+        />
       </svg>
     );
   }
 
-  // PostgreSQL / SQL
+  // SQL / PostgreSQL (Royal Blue #336791 and Cyan #4B8BBE)
   if (norm.includes("sql") || norm.includes("postgres")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <ellipse cx="12" cy="5" rx="8" ry="3" fill="none" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <svg className={className} viewBox="0 0 24 24">
+        <ellipse cx="12" cy="5" rx="8" ry="3" fill="#5A9FD4" />
+        <path d="M4 5v5c0 1.66 3.58 3 8 3s8-1.34 8-3V5" fill="#336791" />
+        <ellipse cx="12" cy="10" rx="8" ry="3" fill="#4B8BBE" />
+        <path d="M4 10v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5" fill="#295172" />
+        <ellipse cx="12" cy="15" rx="8" ry="3" fill="#336791" />
+        <path d="M4 15v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" fill="#1C3D5A" />
+        <ellipse cx="12" cy="19" rx="8" ry="3" fill="#295172" />
       </svg>
     );
   }
 
-  // Flutter
+  // Flutter (#02569B, #0175C2, #47C5FB)
   if (norm.includes("flutter")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372zM14.314 11.143L7.743 17.714l3.7 3.7 2.871-2.871 4.572 4.571H22.6l-8.286-8.271v.286z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path fill="#47C5FB" d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372z" />
+        <path fill="#02569B" d="M14.314 11.143L7.743 17.714l3.7 3.7 2.871-2.871 4.572 4.571H22.6l-8.286-8.271v.286z" />
+        <path fill="#0175C2" d="M11.443 21.414l2.871-2.871 4.572 4.571H14.314l-2.871-1.7z" />
       </svg>
     );
   }
 
-  // Figma
+  // Figma (Iconic 5 colors: #F24E1E, #FF7262, #A259FF, #1ABCFE, #0ACF83)
   if (norm.includes("figma")) {
     return (
-      <svg className={className} viewBox="0 0 38 57" fill="currentColor">
-        <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" />
-        <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" />
-        <path d="M0 28.5C0 23.2533 4.25329 19 9.5 19H19V38H9.5C4.25329 38 0 33.7467 0 28.5Z" />
-        <path d="M0 9.5C0 4.25329 4.25329 0 9.5 0H19V19H9.5C4.25329 19 0 14.7467 0 9.5Z" />
-        <path d="M19 0H28.5C33.7467 0 38 4.25329 38 9.5C38 14.7467 33.7467 19 28.5 19H19V0Z" />
+      <svg className={className} viewBox="0 0 38 57">
+        <path fill="#1ABCFE" d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" />
+        <path fill="#0ACF83" d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" />
+        <path fill="#A259FF" d="M0 28.5C0 23.2533 4.25329 19 9.5 19H19V38H9.5C4.25329 38 0 33.7467 0 28.5Z" />
+        <path fill="#F24E1E" d="M0 9.5C0 4.25329 4.25329 0 9.5 0H19V19H9.5C4.25329 19 0 14.7467 0 9.5Z" />
+        <path fill="#FF7262" d="M19 0H28.5C33.7467 0 38 4.25329 38 9.5C38 14.7467 33.7467 19 28.5 19H19V0Z" />
       </svg>
     );
   }
 
-  // PHP
+  // PHP (#777BB4 oval with white typography)
   if (norm.includes("php")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 3C4.5 3 0 7.5 0 12s4.5 9 12 9 12-4.5 12-9-4.5-9-12-9zm-6.2 12.3H4.1l1.4-6.6h2.8c1.3 0 2.2.6 1.9 2-.4 1.8-1.5 2.6-2.9 2.6H6.1l-.3 2zm2.1-3.6h.8c.8 0 1.3-.4 1.5-1.1.2-.6 0-1-.6-1h-.9l-.8 2.1zm5.2 3.6h-1.6l1.4-6.6h1.6l-.5 2.3h1.8c1.3 0 2.1.6 1.8 2-.4 1.8-1.5 2.6-2.9 2.6h-1.2l-.4 1.7zm2.1-3.6h.8c.8 0 1.3-.4 1.5-1.1.2-.6 0-1-.6-1h-.9l-.8 2.1zm5.2 3.6h-1.7l1.4-6.6h2.8c1.3 0 2.2.6 1.9 2-.4 1.8-1.5 2.6-2.9 2.6h-1.2l-.3 2zm2.1-3.6h.8c.8 0 1.3-.4 1.5-1.1.2-.6 0-1-.6-1h-.9l-.8 2.1z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <ellipse cx="12" cy="12" rx="11.5" ry="7.5" fill="#777BB4" />
+        <path
+          fill="#FFFFFF"
+          d="M6 14.5h1.2l.5-2.5h1.5c1.4 0 2.2-.6 2.5-1.8.3-1.1-.3-1.8-1.7-1.8H6.5L6 14.5zm1.9-3.2l.3-1.5h1.2c.6 0 .9.3.8.7-.1.5-.4.8-1 .8h-1.3zm5.6 3.2h1.2l.5-2.5h1.5c1.4 0 2.2-.6 2.5-1.8.3-1.1-.3-1.8-1.7-1.8h-3.5l-1.5 6.1zm1.9-3.2l.3-1.5h1.2c.6 0 .9.3.8.7-.1.5-.4.8-1 .8h-1.3zM10.8 14.5h1.2l1.2-6.1H12l-1.2 6.1z"
+        />
       </svg>
     );
   }
 
-  // Laravel
+  // Laravel (Vibrant Red #FF2D20)
   if (norm.includes("laravel")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M21.7 6.4L13.1 1.4c-.7-.4-1.5-.4-2.2 0L2.3 6.4c-.7.4-1.1 1.1-1.1 1.9v9.9c0 .8.4 1.5 1.1 1.9l8.6 5c.7.4 1.5.4 2.2 0l8.6-5c.7-.4 1.1-1.1 1.1-1.9V8.3c0-.8-.4-1.5-1.1-1.9zM12 3.6l7.1 4.1-3.2 1.8-7.1-4.1L12 3.6zm-1 16.8l-7.1-4.1V9.5l7.1 4.1v6.8zm2 0v-6.8l7.1-4.1v6.8l-7.1 4.1z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#FF2D20"
+          d="M21.7 6.4L13.1 1.4c-.7-.4-1.5-.4-2.2 0L2.3 6.4c-.7.4-1.1 1.1-1.1 1.9v9.9c0 .8.4 1.5 1.1 1.9l8.6 5c.7.4 1.5.4 2.2 0l8.6-5c.7-.4 1.1-1.1 1.1-1.9V8.3c0-.8-.4-1.5-1.1-1.9zM12 3.6l7.1 4.1-3.2 1.8-7.1-4.1L12 3.6zm-1 16.8l-7.1-4.1V9.5l7.1 4.1v6.8zm2 0v-6.8l7.1-4.1v6.8l-7.1 4.1z"
+        />
       </svg>
     );
   }
 
-  // TypeScript
-  if (norm.includes("type") || norm.includes("ts")) {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M6 8h6m-3 0v9m4-5c1 0 2.5-.2 3.3.4.6.5.7 1.2.5 1.8-.4 1.4-2.5 1.8-3.8 1.8-1.2 0-2.3-.2-3-.6m0-6.4c.8-.4 1.9-.6 3-.6 1.5 0 3 .5 3 2 0 1.2-.9 1.8-2 2.2l-2 .8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      </svg>
-    );
-  }
-
-  // Docker
+  // Docker (Docker Blue #2496ED)
   if (norm.includes("docker")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M13 3h2v2h-2zm-3 0h2v2h-2zm6 3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm9 3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm-3 0h2v2H4zm17.9 2.5c-.3-.2-1.3-.4-2.4-.2-.2-.6-.5-1.1-.9-1.5l-.6.4c.4.6.6 1.4.5 2.1-.5.3-1.6.4-2.5.4H1c-.3 1.8.2 5.5 3.3 7.8 2.6 1.9 6.2 1.9 9.8 1.9 6.4 0 9.8-3.5 9.8-7.7 0-.9-.2-2.3-2-3.2z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#2496ED"
+          d="M13 3h2v2h-2zm-3 0h2v2h-2zm6 3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm9 3h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm-3 0h2v2H4zm17.9 2.5c-.3-.2-1.3-.4-2.4-.2-.2-.6-.5-1.1-.9-1.5l-.6.4c.4.6.6 1.4.5 2.1-.5.3-1.6.4-2.5.4H1c-.3 1.8.2 5.5 3.3 7.8 2.6 1.9 6.2 1.9 9.8 1.9 6.4 0 9.8-3.5 9.8-7.7 0-.9-.2-2.3-2-3.2z"
+        />
       </svg>
     );
   }
 
-  // Python
+  // TypeScript (Blue #3178C6 with white TS)
+  if (norm.includes("type") || norm.includes("ts")) {
+    return (
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="3.5" fill="#3178C6" />
+        <path
+          d="M5 9h6m-3 0v9m4.5-5.5c.8-.5 1.8-.8 2.8-.8 1.8 0 2.8.9 2.8 2.1 0 1.4-1.1 1.9-2.4 2.2-1.4.3-1.8.6-1.8 1.2 0 .6.5.9 1.4.9 1 0 2-.4 2.6-.9m-5.2-4.7c.6-.4 1.5-.6 2.4-.6"
+          stroke="#FFFFFF"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    );
+  }
+
+  // Python (Blue #3776AB and Yellow #FFD43B)
   if (norm.includes("python")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M11.9 1.2c-5.2 0-4.9 2.3-4.9 2.3v2.4h5v.7H4.9s-3.7-.4-3.7 4.9 3.2 5.1 3.2 5.1h1.9v-2.7s-.1-3.2 3.2-3.2h5.1s3.1.1 3.1-3.1V4.4s.4-3.2-5.8-3.2zm-2.7 1.8c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm2.9 19.8c5.2 0 4.9-2.3 4.9-2.3v-2.4h-5v-.7h7.1s3.7.4 3.7-4.9-3.2-5.1-3.2-5.1h-1.9v2.7s.1 3.2-3.2 3.2h-5.1s-3.1-.1-3.1 3.1v3.2s-.4 3.2 5.8 3.2zm2.7-1.8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#3776AB"
+          d="M11.9 1.2c-5.2 0-4.9 2.3-4.9 2.3v2.4h5v.7H4.9s-3.7-.4-3.7 4.9 3.2 5.1 3.2 5.1h1.9v-2.7s-.1-3.2 3.2-3.2h5.1s3.1.1 3.1-3.1V4.4s.4-3.2-5.8-3.2zm-2.7 1.8c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"
+        />
+        <path
+          fill="#FFD43B"
+          d="M12.1 22.8c5.2 0 4.9-2.3 4.9-2.3v-2.4h-5v-.7h7.1s3.7.4 3.7-4.9-3.2-5.1-3.2-5.1h-1.9v2.7s.1 3.2-3.2 3.2h-5.1s-3.1-.1-3.1 3.1v3.2s-.4 3.2 5.8 3.2zm2.7-1.8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"
+        />
       </svg>
     );
   }
 
-  // Google Analytics / GA4
+  // Google Analytics 4 (Amber/Orange #F9AB00 and #E37400)
   if (norm.includes("analytics") || norm.includes("ga4")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M21 21H3V3h2v16h16v2zM7 17h2v-5H7v5zm5 0h2V7h-2v10zm5 0h2v-8h-2v8z" />
-        <circle cx="18" cy="6" r="2" fill="currentColor" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect x="2.5" y="13.5" width="4.5" height="8" rx="2.2" fill="#F9AB00" />
+        <rect x="9.5" y="7.5" width="4.5" height="14" rx="2.2" fill="#E37400" />
+        <rect x="16.5" y="2.5" width="4.5" height="19" rx="2.2" fill="#F9AB00" />
+        <circle cx="5" cy="5.5" r="2.8" fill="#E37400" />
       </svg>
     );
   }
 
-  // Google Ads
-  if (norm.includes("googleads") || norm.includes("ads")) {
+  // Google Ads (Google Quad Colors #4285F4, #FBBC04, #34A853)
+  if (norm.includes("googleads") || (norm.includes("ads") && !norm.includes("meta"))) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M3.5 14.5l5.8-10.1c.8-1.4 2.6-1.9 4-1.1l1.5.9c1.4.8 1.9 2.6 1.1 4L10.1 18.3c-.8 1.4-2.6 1.9-4 1.1l-1.5-.9c-1.4-.8-1.9-2.6-1.1-4z" opacity="0.8" />
-        <circle cx="17.5" cy="17.5" r="4.5" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M10.1 18.3l7.4-4.3" stroke="currentColor" strokeWidth="2" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#4285F4"
+          d="M3.5 14.5l5.8-10.1c.8-1.4 2.6-1.9 4-1.1l1.5.9c1.4.8 1.9 2.6 1.1 4L10.1 18.3c-.8 1.4-2.6 1.9-4 1.1l-1.5-.9c-1.4-.8-1.9-2.6-1.1-4z"
+        />
+        <path
+          fill="#FBBC04"
+          d="M10.1 18.3l5.8-10.1c.8-1.4 2.6-1.9 4-1.1l1.5.9c1.4.8 1.9 2.6 1.1 4L16.7 22c-.8 1.4-2.6 1.9-4 1.1l-1.5-.9c-1.4-.8-1.9-2.6-1.1-4z"
+        />
+        <circle cx="5.5" cy="18.5" r="3.5" fill="#34A853" />
       </svg>
     );
   }
 
-  // Meta Ads / Meta
+  // Meta Ads (Meta Official Blue Gradient #0668E1 / #0081FB)
   if (norm.includes("meta")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M16.8 5.4c-1.9 0-3.6 1.1-4.8 2.8-1.2-1.7-2.9-2.8-4.8-2.8C3.2 5.4 0 8.5 0 12.8c0 4.6 3.7 8.2 7.7 8.2 2.6 0 4.3-1.4 5.1-2.4.8 1 2.5 2.4 5.1 2.4 4 0 7.7-3.6 7.7-8.2-.1-4.3-3.3-7.4-7.8-7.4zm-9.6 13c-2.8 0-5.1-2.4-5.1-5.6 0-3.1 2.2-5.4 5.1-5.4 2.3 0 4 1.9 4.9 3.8-.9 2.1-2.5 7.2-4.9 7.2zm10.4 0c-2.4 0-4-5.1-4.9-7.2.9-1.9 2.6-3.8 4.9-3.8 2.9 0 5.1 2.3 5.1 5.4 0 3.2-2.3 5.6-5.1 5.6z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="meta-blue-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#0081FB" />
+            <stop offset="100%" stopColor="#0668E1" />
+          </linearGradient>
+        </defs>
+        <path
+          fill="url(#meta-blue-grad)"
+          d="M16.8 5.4c-1.9 0-3.6 1.1-4.8 2.8-1.2-1.7-2.9-2.8-4.8-2.8C3.2 5.4 0 8.5 0 12.8c0 4.6 3.7 8.2 7.7 8.2 2.6 0 4.3-1.4 5.1-2.4.8 1 2.5 2.4 5.1 2.4 4 0 7.7-3.6 7.7-8.2-.1-4.3-3.3-7.4-7.8-7.4zm-9.6 13c-2.8 0-5.1-2.4-5.1-5.6 0-3.1 2.2-5.4 5.1-5.4 2.3 0 4 1.9 4.9 3.8-.9 2.1-2.5 7.2-4.9 7.2zm10.4 0c-2.4 0-4-5.1-4.9-7.2.9-1.9 2.6-3.8 4.9-3.8 2.9 0 5.1 2.3 5.1 5.4 0 3.2-2.3 5.6-5.1 5.6z"
+        />
       </svg>
     );
   }
 
-  // SEMrush
+  // SEMrush (Vibrant Coral/Orange #FF642D flame crown)
   if (norm.includes("semrush")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.5v-3.8l3.3 2.2-4.3-8.4v4.4L8.7 9.7 13 17.5z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="11" fill="#FF642D" />
+        <path
+          fill="#FFFFFF"
+          d="M12 4.2c-4.3 0-7.8 3.5-7.8 7.8 0 4.3 3.5 7.8 7.8 7.8 4.3 0 7.8-3.5 7.8-7.8 0-4.3-3.5-7.8-7.8-7.8zm1.3 12.2l-2.6-4.5V16.4H9.3V7.6h1.4l2.6 4.5V7.6h1.4v8.8h-1.4z"
+        />
       </svg>
     );
   }
 
-  // Ahrefs
+  // Ahrefs (Deep Blue #0071E3 & Bright Orange #FF5A36)
   if (norm.includes("ahrefs")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 22h5l2.5-5.5h5L17 22h5L12 2zm-1.2 11.5L12 7.8l1.2 5.7h-2.4z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="11" fill="#0071E3" />
+        <path
+          fill="#FF5A36"
+          d="M6.5 18l4.8-12h1.4l4.8 12h-2.2l-1.2-3.2H9.9l-1.2 3.2H6.5zm4-5h3l-1.5-4-1.5 4z"
+        />
+        <path fill="#FFFFFF" d="M10.5 13h3L12 9l-1.5 4z" />
       </svg>
     );
   }
 
-  // HubSpot
+  // HubSpot (Coral/Orange #FF7A59 sprocket)
   if (norm.includes("hubspot")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.5 7.5c-.8 0-1.5.4-1.9 1l-3.3-2.1c.1-.4.2-.9.2-1.4 0-2.2-1.8-4-4-4s-4 1.8-4 4c0 1.9 1.3 3.5 3.1 3.9v5.2c-.8.4-1.4 1.1-1.7 2l-2.4-.7c-.2-.6-.8-1-1.5-1-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8c.8 0 1.5-.5 1.7-1.2l2.5.7c.3 1.2 1.3 2.1 2.6 2.1 1.5 0 2.8-1.3 2.8-2.8 0-.9-.5-1.8-1.2-2.3V12c.7-.2 1.3-.7 1.6-1.3l3.3 2.1c0 .2-.1.5-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3zm-9-4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path
+          fill="#FF7A59"
+          d="M18.5 7.5c-.8 0-1.5.4-1.9 1l-3.3-2.1c.1-.4.2-.9.2-1.4 0-2.2-1.8-4-4-4s-4 1.8-4 4c0 1.9 1.3 3.5 3.1 3.9v5.2c-.8.4-1.4 1.1-1.7 2l-2.4-.7c-.2-.6-.8-1-1.5-1-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8c.8 0 1.5-.5 1.7-1.2l2.5.7c.3 1.2 1.3 2.1 2.6 2.1 1.5 0 2.8-1.3 2.8-2.8 0-.9-.5-1.8-1.2-2.3V12c.7-.2 1.3-.7 1.6-1.3l3.3 2.1c0 .2-.1.5-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3zm-9-4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"
+        />
       </svg>
     );
   }
 
-  // Google Tag Manager
+  // Google Tag Manager (Blue #246FDB & Cyan #8AB4F8 diamond)
   if (norm.includes("tagmanager") || norm.includes("gtm")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 12l10 10 10-10L12 2zm0 4.2L17.8 12 12 17.8 6.2 12 12 6.2z" />
-        <circle cx="12" cy="12" r="2.5" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path fill="#246FDB" d="M12 2L2 12l10 10 10-10L12 2z" />
+        <path fill="#8AB4F8" d="M12 5.5L18.5 12 12 18.5 5.5 12 12 5.5z" />
+        <circle cx="12" cy="12" r="2.8" fill="#FFFFFF" />
       </svg>
     );
   }
 
-  // Adobe Illustrator
+  // Google Search Console (Google Quad Colors #4285F4, #FBBC04, #34A853, #EA4335)
+  if (norm.includes("searchconsole") || norm.includes("console")) {
+    return (
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="5" fill="#4285F4" />
+        <path fill="#FBBC04" d="M5 18h14v2H5z" />
+        <path fill="#FFFFFF" d="M5 14h5v2H5zm7-5h7v2h-7zm0 4h7v2h-7zM5 9h5v2H5z" />
+        <circle cx="15.5" cy="9.5" r="3.5" fill="#34A853" />
+        <path fill="#EA4335" d="M17.8 11.8L20.5 14.5l-1.4 1.4-2.7-2.7z" />
+      </svg>
+    );
+  }
+
+  // Adobe Illustrator (Dark Maroon #330000 & Bright Orange #FF9A00)
   if (norm.includes("illustrator")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M6 16.5l3.5-9h1L14 16.5h-1.6l-.8-2.3H8.4l-.8 2.3H6zm2.8-3.8h2.4l-1.2-3.6-1.2 3.6zm8.2 3.8h-1.6V10h1.6v6.5zm0-8h-1.6V7h1.6v1.5z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4.5" fill="#330000" stroke="#FF9A00" strokeWidth="1.6" />
+        <text
+          x="4.2"
+          y="16.5"
+          fill="#FF9A00"
+          fontFamily="system-ui, -apple-system, sans-serif"
+          fontWeight="900"
+          fontSize="11.5"
+          letterSpacing="-0.5"
+        >
+          Ai
+        </text>
       </svg>
     );
   }
 
-  // Adobe Photoshop
+  // Adobe Photoshop (Deep Blue #001E36 & Bright Cyan #31A8FF)
   if (norm.includes("photoshop")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M6 7.5h4.2c1.8 0 3 1.1 3 2.7s-1.2 2.8-3 2.8H7.8v3.5H6V7.5zm1.8 4h2.2c.9 0 1.5-.5 1.5-1.3s-.6-1.3-1.5-1.3H7.8v2.6zm6.8 5c.8.3 1.8.5 2.6.5 1.5 0 2.4-.7 2.4-1.8 0-1-.7-1.5-2.1-2-1.4-.5-2.5-1.2-2.5-2.4 0-1.5 1.2-2.5 3-2.5.9 0 1.8.2 2.4.5l-.5 1.4c-.6-.3-1.2-.4-1.9-.4-1 0-1.6.6-1.6 1.3 0 .8.6 1.2 1.9 1.7 1.6.6 2.7 1.3 2.7 2.6 0 1.7-1.3 2.7-3.3 2.7-1.1 0-2.2-.3-2.9-.6l.3-1.6z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4.5" fill="#001E36" stroke="#31A8FF" strokeWidth="1.6" />
+        <text
+          x="3.8"
+          y="16.5"
+          fill="#31A8FF"
+          fontFamily="system-ui, -apple-system, sans-serif"
+          fontWeight="900"
+          fontSize="11.5"
+          letterSpacing="-0.5"
+        >
+          Ps
+        </text>
       </svg>
     );
   }
 
-  // Blender
+  // Blender 3D / Blender CGI (Orange #EA7600 & Blue #265787)
   if (norm.includes("blender")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12.5 10.5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 7.8c-1.5 0-2.8-1.2-2.8-2.8s1.2-2.8 2.8-2.8 2.8 1.2 2.8 2.8-1.3 2.8-2.8 2.8zM4.2 10.2L9 13.5l-1.5 2.6L2.7 12.8c-.5-.3-.7-.9-.4-1.4.3-.5.9-.7 1.4-.4l.5-.8zm15.6 0l-.5.8c.5-.3 1.1-.1 1.4.4.3.5.1 1.1-.4 1.4L16.5 16.1 15 13.5l4.8-3.3zM12 2.5l1.5 6.5h-3L12 2.5z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <circle cx="12.5" cy="15" r="4.5" fill="#265787" />
+        <circle cx="12.5" cy="15" r="2.2" fill="#FFFFFF" />
+        <path
+          fill="#EA7600"
+          d="M12.5 10.5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 7.8c-1.5 0-2.8-1.2-2.8-2.8s1.2-2.8 2.8-2.8 2.8 1.2 2.8 2.8-1.3 2.8-2.8 2.8zM4.2 10.2L9 13.5l-1.5 2.6L2.7 12.8c-.5-.3-.7-.9-.4-1.4.3-.5.9-.7 1.4-.4l.5-.8zm15.6 0l-.5.8c.5-.3 1.1-.1 1.4.4.3.5.1 1.1-.4 1.4L16.5 16.1 15 13.5l4.8-3.3zM12 2.5l1.5 6.5h-3L12 2.5z"
+        />
       </svg>
     );
   }
 
-  // Spline 3D
+  // Spline 3D (Vibrant Pink/Purple/Blue Gradient #FF59B3, #7928CA, #4E80EE)
   if (norm.includes("spline")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3c3.9 0 7 3.1 7 7 0 2.2-1 4.2-2.6 5.5-1.2-1.8-3.2-3-5.4-3-2.2 0-4.2 1.2-5.4 3C4 16.2 3 14.2 3 12c0-3.9 3.1-7 7-7zm0 6.5c1.4 0 2.5 1.1 2.5 2.5S13.4 16.5 12 16.5 9.5 15.4 9.5 14s1.1-2.5 2.5-2.5z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="spline-neon-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FF59B3" />
+            <stop offset="50%" stopColor="#7928CA" />
+            <stop offset="100%" stopColor="#4E80EE" />
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="10.5" fill="url(#spline-neon-grad)" />
+        <path
+          fill="#FFFFFF"
+          d="M12 6c-2.5 0-4.5 1.5-4.5 3.5 0 2.5 4.5 2.5 4.5 5 0 1-1 1.5-2 1.5s-2.5-.8-3-1.5l-1.5 1.5c.8 1.2 2.5 2 4.5 2 2.5 0 4.5-1.5 4.5-3.5 0-2.5-4.5-2.5-4.5-5 0-1 1-1.5 2-1.5s2.5.8 3 1.5l1.5-1.5C15.7 6.8 14 6 12 6z"
+        />
       </svg>
     );
   }
 
-  // Framer
+  // Framer (Vibrant Electric Blue #0055FF)
   if (norm.includes("framer")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <path fill="#0055FF" d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
       </svg>
     );
   }
 
-  // Premiere Pro
+  // Adobe Premiere Pro (Deep Wine #260033 & Violet/Magenta #EA77FF)
   if (norm.includes("premiere")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M6 7.5h4c1.8 0 3 1 3 2.6s-1.2 2.6-3 2.6H7.8v3.8H6V7.5zm1.8 3.8h2c.8 0 1.4-.4 1.4-1.2s-.6-1.2-1.4-1.2H7.8v2.4zm7.2 5.2h-1.6V10h1.5v1.2c.4-.8 1.2-1.3 2.1-1.3h.5v1.6h-.6c-1.1 0-1.9.8-1.9 2.1v2.9z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4.5" fill="#260033" stroke="#EA77FF" strokeWidth="1.6" />
+        <text
+          x="4.2"
+          y="16.5"
+          fill="#EA77FF"
+          fontFamily="system-ui, -apple-system, sans-serif"
+          fontWeight="900"
+          fontSize="11.5"
+          letterSpacing="-0.5"
+        >
+          Pr
+        </text>
       </svg>
     );
   }
 
-  // DaVinci Resolve
+  // DaVinci Resolve (Tri-Color Aperture: Red #FF3E3E, Green #00E676, Blue #2979FF)
   if (norm.includes("davinci") || norm.includes("resolve")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M12 6a6 6 0 0 1 6 6h-6V6zm0 12a6 6 0 0 1-6-6h6v6zm-6-6a6 6 0 0 1 6-6v6H6z" opacity="0.7" />
+      <svg className={className} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="11" fill="#0c0e14" stroke="#ffffff25" strokeWidth="1.2" />
+        <circle cx="12" cy="7.2" r="3.4" fill="#FF3E3E" />
+        <circle cx="7.8" cy="15" r="3.4" fill="#00E676" />
+        <circle cx="16.2" cy="15" r="3.4" fill="#2979FF" />
       </svg>
     );
   }
 
-  // After Effects
+  // Adobe After Effects (Deep Navy #00005B & Violet #9999FF)
   if (norm.includes("aftereffects") || norm.includes("ae")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M5.5 16.5l3.2-9h1.1l3.2 9h-1.6l-.7-2.3H7.8l-.7 2.3H5.5zm2.7-3.8h2.1l-1-3.4-1.1 3.4zm6.6 2.3c.7.4 1.6.6 2.4.6 1.8 0 2.8-.9 2.8-2.2 0-2.3-3.2-1.9-3.2-3.1 0-.5.4-.8 1.1-.8.7 0 1.4.2 2 .5l.5-1.2c-.6-.4-1.5-.6-2.4-.6-1.7 0-2.8.9-2.8 2.2 0 2.2 3.2 1.8 3.2 3.1 0 .6-.5.9-1.2.9-.8 0-1.7-.3-2.3-.7l-.6 1.3z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4.5" fill="#00005B" stroke="#9999FF" strokeWidth="1.6" />
+        <text
+          x="4.2"
+          y="16.5"
+          fill="#9999FF"
+          fontFamily="system-ui, -apple-system, sans-serif"
+          fontWeight="900"
+          fontSize="11.5"
+          letterSpacing="-0.5"
+        >
+          Ae
+        </text>
       </svg>
     );
   }
 
-  // RED Digital Cinema
+  // RED Digital Cinema (8K) (Cinema Red #E50914 Badge with Bold White RED)
   if (norm.includes("red")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M3 5h6c3 0 5 1.5 5 4s-1.8 3.8-4.2 4L14 20h-3.2l-3.8-6.5H5.8V20H3V5zm2.8 6.2h3c1.4 0 2.2-.7 2.2-1.7s-.8-1.7-2.2-1.7h-3v3.4zm10.2-6.2H21v15h-5v-2.8h2.2V7.8H16V5z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <rect width="24" height="24" rx="4.5" fill="#E50914" />
+        <text
+          x="2.4"
+          y="15.8"
+          fill="#FFFFFF"
+          fontFamily="Impact, Arial Black, sans-serif"
+          fontWeight="900"
+          fontSize="9.8"
+          letterSpacing="0.4"
+        >
+          RED
+        </text>
+        <text
+          x="7.8"
+          y="21"
+          fill="#000000"
+          fontFamily="system-ui, sans-serif"
+          fontWeight="900"
+          fontSize="4.2"
+        >
+          8K
+        </text>
       </svg>
     );
   }
 
-  // Unreal Engine
+  // Unreal Engine (Dark Circle #0E1128 with Crisp White U Shield)
   if (norm.includes("unreal")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M12 4c-4.4 0-8 3.6-8 8 0 2.7 1.4 5.1 3.5 6.5l1.6-2.5C7.9 15.1 7 13.7 7 12c0-2.8 2.2-5 5-5s5 2.2 5 5c0 1.7-.9 3.1-2.1 4l1.6 2.5C18.6 17.1 20 14.7 20 12c0-4.4-3.6-8-8-8zm-2 5v5.5c0 1.1.9 2 2 2s2-.9 2-2V9h-1.5v5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V9H10z" />
+      <svg className={className} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="11" fill="#0E1128" stroke="#3b4458" strokeWidth="1.2" />
+        <path
+          fill="#FFFFFF"
+          d="M12 3a9 9 0 0 0-9 9c0 3 1.5 5.8 3.9 7.4l1.8-2.8c-1.6-1.1-2.7-2.8-2.7-4.6 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.8-1.1 3.5-2.7 4.6l1.8 2.8C18.5 17.8 20 15 20 12a9 9 0 0 0-9-9zm-2 5.5v6.5c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5V8.5H13v6c0 .6-.4 1-1 1s-1-.4-1-1v-6h-1z"
+        />
       </svg>
     );
   }
 
-  // Default fallback chip
+  // Fallback
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#FFD400" strokeWidth="2">
       <rect x="4" y="4" width="16" height="16" rx="2" />
       <path d="M9 9h6v6H9z" />
     </svg>
@@ -327,29 +495,23 @@ export function ToolBrandIcon({ name, className = "w-6 h-6" }: { name: string; c
 }
 
 // ============================================================================
-// DATA: 4 CORE SERVICE DIVISIONS & TOOLS
+// DATA: 4 SERVICES & EXACT REQUESTED TOOLS
 // ============================================================================
 
 interface ToolItem {
   id: string;
   name: string;
   tagline: string;
-  role: string;
-  badge: string;
-  version: string;
 }
 
 interface ServiceDivision {
   id: string;
   index: string;
+  serviceName: string;
   tierNumber: number;
-  title: string;
-  shortTitle: string;
   tagline: string;
-  description: string;
   icon: React.ElementType;
   accentGlow: string;
-  discTheme: string;
   tools: ToolItem[];
 }
 
@@ -357,94 +519,78 @@ const SERVICE_DIVISIONS: ServiceDivision[] = [
   {
     id: "technology-solutions",
     index: "01",
+    serviceName: "Technology solutions",
     tierNumber: 1,
-    title: "Technology Solutions",
-    shortTitle: "Technology",
-    tagline: "High-Performance Full-Stack & Cloud Frameworks",
-    description:
-      "Enterprise microservices, reactive frontend architectures, scalable distributed databases, and fault-tolerant cloud deployments engineered for sub-second latency.",
+    tagline: "Enterprise Full-Stack, Cloud Platforms & Reactive Architecture",
     icon: Code2,
     accentGlow: "#FFD400",
-    discTheme: "from-[#FFD400]/25 via-blue-500/15 to-transparent",
     tools: [
-      { id: "react", name: "React.js", tagline: "60 FPS Virtual DOM & Component Architecture", role: "Frontend Engine", badge: "Reactive", version: "v19.0" },
-      { id: "nextjs", name: "Next.js", tagline: "Server Components & Edge Caching", role: "Full-Stack Web", badge: "Production", version: "v15.2" },
-      { id: "nodejs", name: "Node.js", tagline: "Asynchronous High-Throughput I/O Runtime", role: "Backend Microservices", badge: "V8 Engine", version: "v22 LTS" },
-      { id: "mongodb", name: "MongoDB", tagline: "Document Database with Auto-Sharding", role: "NoSQL Database", badge: "High-Scale", version: "v7.0" },
-      { id: "postgresql", name: "SQL & PostgreSQL", tagline: "ACID Relational Storage & JSONB indexing", role: "Core Database", badge: "Zero-Loss", version: "v16.1" },
-      { id: "flutter", name: "Flutter", tagline: "Cross-Platform Native iOS & Android Engine", role: "Mobile Native", badge: "Single Codebase", version: "v3.24" },
-      { id: "figma-tech", name: "Figma", tagline: "Design Tokens & Design-to-Code Pipeline", role: "Design Token Sync", badge: "Collaborative", version: "Cloud" },
-      { id: "php", name: "PHP", tagline: "Modern Modernized Backend Runtime & APIs", role: "Server Runtime", badge: "Reliable", version: "v8.3" },
-      { id: "laravel", name: "Laravel", tagline: "Elegant MVC Backend with Eloquent ORM", role: "Enterprise API", badge: "Robust", version: "v11.x" },
-      { id: "docker", name: "Docker", tagline: "Containerization & Multi-Arch Builds", role: "Cloud DevOps", badge: "Immutable", version: "Engine" },
-      { id: "typescript", name: "TypeScript", tagline: "Strict Type Safety & Compiler Contracts", role: "Language", badge: "Zero Runtime Bugs", version: "v5.6" },
-      { id: "python", name: "Python", tagline: "AI Model Serving & Data Pipelines", role: "AI / Backend", badge: "Neural Mesh", version: "v3.12" },
+      { id: "react", name: "React.js", tagline: "Frontend Reactive Engine" },
+      { id: "nodejs", name: "Node.js", tagline: "Asynchronous I/O Runtime" },
+      { id: "mongodb", name: "MongoDB", tagline: "High-Scale Document DB" },
+      { id: "sql", name: "SQL", tagline: "ACID Relational Storage" },
+      { id: "nextjs", name: "NEXT JS", tagline: "Server Components & Edge" },
+      { id: "flutter", name: "Flutter", tagline: "Native iOS & Android Engine" },
+      { id: "figma-tech", name: "Figma", tagline: "Design Token Pipeline" },
+      { id: "php", name: "PHP", tagline: "Modern Backend Runtime" },
+      { id: "laravel", name: "LARAVEL", tagline: "Elegant MVC API Framework" },
+      { id: "docker", name: "Docker", tagline: "Containerization & DevOps" },
+      { id: "typescript", name: "TypeScript", tagline: "Strict Contract Safety" },
+      { id: "python", name: "Python", tagline: "Neural Mesh & AI Serving" },
     ],
   },
   {
     id: "digital-marketing",
     index: "02",
+    serviceName: "Digital marketing",
     tierNumber: 2,
-    title: "Digital Marketing",
-    shortTitle: "Marketing",
-    tagline: "Programmatic Search, Attribution & Multi-Channel Funnels",
-    description:
-      "Algorithmic audience discovery, automated bid tuning, deep-crawl technical backlink telemetry, and multi-touch attribution delivering compounding return on capital.",
+    tagline: "Programmatic Search, High-ROI Paid Acquisition & Attribution",
     icon: TrendingUp,
     accentGlow: "#38bdf8",
-    discTheme: "from-[#38bdf8]/25 via-indigo-500/15 to-transparent",
     tools: [
-      { id: "ga4", name: "Google Analytics 4", tagline: "Event-Driven Telemetry & Funnel Dropoff Audits", role: "Analytics", badge: "Telemetry", version: "GA4 Enterprise" },
-      { id: "gads", name: "Google Ads", tagline: "Search, Shopping & High-Intent Intent Bidding", role: "Paid PPC", badge: "High-ROI", version: "Smart Bidding" },
-      { id: "metaads", name: "Meta Ads", tagline: "Hyper-Targeted Social Acquisition & CBO", role: "Paid Social", badge: "Lookalike", version: "Advantage+" },
-      { id: "semrush", name: "SEMrush", tagline: "Keyword Topology, SERP Gap & Organic Intelligence", role: "SEO Research", badge: "SERP Dominance", version: "Suite" },
-      { id: "ahrefs", name: "Ahrefs", tagline: "Deep Backlink Graph Exploration & Domain Authority", role: "Authority SEO", badge: "Crawler", version: "v3 Mesh" },
-      { id: "hubspot", name: "HubSpot", tagline: "Inbound Pipeline Automation & Lifecycle Lead Routing", role: "CRM & Funnel", badge: "Automation", version: "Enterprise" },
-      { id: "gtm", name: "Google Tag Manager", tagline: "Server-Side Event Pipelines & Conversions API", role: "Tag Governance", badge: "Sub-10ms", version: "Serverless" },
-      { id: "search-console", name: "Search Console", tagline: "Indexation Health, Core Web Vitals & Crawl Budget", role: "Crawl Diagnostics", badge: "Real-Time", version: "Cloud" },
+      { id: "ga4", name: "Google Analytics 4", tagline: "Event Telemetry & Funnels" },
+      { id: "google-ads", name: "Google Ads", tagline: "High-Intent Intent Bidding" },
+      { id: "meta-ads", name: "Meta Ads", tagline: "Social Growth & Lookalikes" },
+      { id: "semrush", name: "SEMrush", tagline: "Keyword & SERP Intelligence" },
+      { id: "ahrefs", name: "Ahrefs", tagline: "Backlink Graph Topology" },
+      { id: "hubspot", name: "HubSpot", tagline: "Inbound Pipeline Automation" },
+      { id: "gtm", name: "Google Tag Manager", tagline: "Serverless Event Routing" },
+      { id: "search-console", name: "Search Console", tagline: "Crawl Diagnostics & Health" },
     ],
   },
   {
     id: "branding-design",
     index: "03",
+    serviceName: "Branding and design",
     tierNumber: 3,
-    title: "Branding and design",
-    shortTitle: "Branding",
-    tagline: "Spatial 3D Design Systems, Identity & High-Prestige Typography",
-    description:
-      "Transforming raw concepts into iconic luxury identities, spatial WebGL visual frameworks, and unified multi-touchpoint brand token architectures.",
+    tagline: "Spatial 3D Design Systems, Key Visuals & Brand Identities",
     icon: Palette,
     accentGlow: "#c084fc",
-    discTheme: "from-[#c084fc]/25 via-pink-500/15 to-transparent",
     tools: [
-      { id: "figma-brand", name: "Figma", tagline: "Vector Design Systems & Interactive Prototyping", role: "UI/UX Master", badge: "Live Canvas", version: "Auto-Layout" },
-      { id: "illustrator", name: "Adobe Illustrator", tagline: "Precision Vector Identity & Geometric Glyphs", role: "Identity Craft", badge: "Vector Math", version: "CC 2026" },
-      { id: "photoshop", name: "Adobe Photoshop", tagline: "Editorial Retouching, Key Visuals & Textures", role: "Key Visuals", badge: "Pixel Master", version: "CC 2026" },
-      { id: "blender-design", name: "Blender 3D", tagline: "Photorealistic PBR Asset Baking & Volumetric CGI", role: "Spatial 3D", badge: "Cycles Render", version: "v4.2" },
-      { id: "spline", name: "Spline 3D", tagline: "Real-Time Interactive 3D for Modern Browsers", role: "Interactive WebGL", badge: "60 FPS", version: "Engine" },
-      { id: "framer", name: "Framer", tagline: "High-Velocity Spatial Interactive Landing Experiences", role: "Motion Web", badge: "Live Code", version: "React Mesh" },
-      { id: "aftereffects-design", name: "After Effects", tagline: "Kinetic Typography & Brand Micro-Interactions", role: "Motion Branding", badge: "Timeline", version: "CC 2026" },
+      { id: "figma-brand", name: "Figma", tagline: "Vector Design Systems" },
+      { id: "illustrator", name: "Adobe Illustrator", tagline: "Precision Vector Identity" },
+      { id: "photoshop", name: "Adobe Photoshop", tagline: "Key Visuals & Retouching" },
+      { id: "blender-3d", name: "Blender 3D", tagline: "Photorealistic PBR 3D" },
+      { id: "spline-3d", name: "Spline 3D", tagline: "Interactive WebGL 3D" },
+      { id: "framer", name: "Framer", tagline: "Spatial Interaction Design" },
+      { id: "after-effects-design", name: "After Effects", tagline: "Kinetic Motion Typography" },
     ],
   },
   {
     id: "media-production",
     index: "04",
+    serviceName: "Media production",
     tierNumber: 4,
-    title: "Media production",
-    shortTitle: "Media",
-    tagline: "8K Cinema Cameras, VFX, DaVinci Grading & Immersive Audio",
-    description:
-      "High-production commercial films, extreme-environment drone cinematography, Hollywood-grade color grading, and Dolby Atmos spatial audio mixing.",
+    tagline: "8K Cinema Cameras, Color Grading, Virtual Production & Sound",
     icon: Video,
     accentGlow: "#f43f5e",
-    discTheme: "from-[#f43f5e]/25 via-amber-500/15 to-transparent",
     tools: [
-      { id: "premiere", name: "Premiere Pro", tagline: "Cinema Narrative Assembly & Multi-Cam Sync", role: "Video Editorial", badge: "8K Timeline", version: "CC 2026" },
-      { id: "davinci", name: "DaVinci Resolve", tagline: "ACES Color Grading & Fairlight Sound Mastery", role: "Color & Audio", badge: "Studio Grade", version: "Studio 19" },
-      { id: "aftereffects", name: "After Effects", tagline: "3D Camera Tracking, Screen Replace & Compositing", role: "VFX & Motion", badge: "Compositor", version: "CC 2026" },
-      { id: "red-cinema", name: "RED Digital Cinema", tagline: "8K Monstro Sensor & 16-Bit RAW Film Mastering", role: "Cinema Camera", badge: "8K DCI", version: "V-Raptor" },
-      { id: "unreal", name: "Unreal Engine", tagline: "Real-Time Virtual Production & In-Camera VFX", role: "Virtual Stages", badge: "Lumen & Nanite", version: "v5.4" },
-      { id: "blender-media", name: "Blender CGI", tagline: "Particle Simulations, Rigid Body Dynamics & FX", role: "3D Animation", badge: "GPU Accelerated", version: "v4.2" },
+      { id: "premiere", name: "Adobe Premiere Pro", tagline: "Cinema Narrative Assembly" },
+      { id: "davinci", name: "DaVinci Resolve", tagline: "ACES Color Science & Audio" },
+      { id: "after-effects-media", name: "Adobe After Effects", tagline: "3D VFX & Screen Tracking" },
+      { id: "red-cinema", name: "RED Digital Cinema (8K)", tagline: "8K RAW Film Sensors" },
+      { id: "unreal", name: "Unreal Engine", tagline: "In-Camera Virtual Production" },
+      { id: "blender-cgi", name: "Blender CGI", tagline: "Particle Simulations & FX" },
     ],
   },
 ];
@@ -453,19 +599,14 @@ export default function ServiceUniverseSection() {
   const [activeDivisionIdx, setActiveDivisionIdx] = useState<number>(0);
   const [rotationAngle, setRotationAngle] = useState<number>(0);
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(true);
-  const [selectedTool, setSelectedTool] = useState<ToolItem | null>(null);
+  const [hoveredTool, setHoveredTool] = useState<ToolItem | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStartX, setDragStartX] = useState<number>(0);
 
   const activeDivision = SERVICE_DIVISIONS[activeDivisionIdx];
   const totalTools = activeDivision.tools.length;
 
-  // Set default selected tool on division change
-  useEffect(() => {
-    setSelectedTool(activeDivision.tools[0]);
-  }, [activeDivisionIdx, activeDivision.tools]);
-
-  // Smooth continuous auto-rotation loop
+  // Continuous smooth celestial 360 rotation loop
   useEffect(() => {
     if (!isAutoRotating || isDragging) return;
 
@@ -475,8 +616,8 @@ export default function ServiceUniverseSection() {
     const updateRotation = (currentTime: number) => {
       const delta = currentTime - lastTime;
       lastTime = currentTime;
-      // ~18 degrees per second for silky celestial spin
-      setRotationAngle((prev) => (prev + (delta * 0.018)) % 360);
+      // ~20 degrees per second
+      setRotationAngle((prev) => (prev + delta * 0.02) % 360);
       animId = requestAnimationFrame(updateRotation);
     };
 
@@ -484,7 +625,7 @@ export default function ServiceUniverseSection() {
     return () => cancelAnimationFrame(animId);
   }, [isAutoRotating, isDragging]);
 
-  // Drag interaction to spin 360 degrees manually
+  // Pointer drag controls to rotate 360 degrees
   const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     setDragStartX(e.clientX);
@@ -494,7 +635,7 @@ export default function ServiceUniverseSection() {
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging) return;
     const deltaX = e.clientX - dragStartX;
-    setRotationAngle((prev) => (prev + deltaX * 0.35 + 360) % 360);
+    setRotationAngle((prev) => (prev + deltaX * 0.4 + 360) % 360);
     setDragStartX(e.clientX);
   };
 
@@ -507,8 +648,8 @@ export default function ServiceUniverseSection() {
       id="service-universe"
       className="relative py-20 sm:py-28 lg:py-32 text-white overflow-hidden scroll-mt-20 select-none"
     >
-      {/* Background Celestial Mist (Dark Theme / Subtle Cyan-Amber Glow Matching Image) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[700px] bg-gradient-to-b from-[#38bdf8]/[0.03] via-[#FFD400]/[0.02] to-transparent rounded-full blur-[180px] pointer-events-none" />
+      {/* Background Celestial Mist (Dark Theme / Matching Given Image) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[750px] bg-gradient-to-b from-[#38bdf8]/[0.025] via-[#FFD400]/[0.02] to-transparent rounded-full blur-[190px] pointer-events-none" />
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         
@@ -518,18 +659,18 @@ export default function ServiceUniverseSection() {
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium tracking-[0.25em] uppercase mb-4 bg-black/70 border border-[#FFD400]/40 text-[#FFD400] backdrop-blur-md shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>2.2 SERVICE UNIVERSE // MULTIVERSE TECH STACK</span>
+            <span>2.2 SERVICE UNIVERSE // 360° COSMIC STACK</span>
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-7xl font-[family-name:var(--font-bebas)] tracking-wide uppercase leading-[0.92] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
             MULTIVERSE <span className="text-[#FFD400]">TECHNOLOGY ARCHITECTURE</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base font-normal mt-3 leading-relaxed text-neutral-300 max-w-2xl mx-auto font-[family-name:var(--font-jakarta)]">
-            Explore our specialized tools across all 4 service divisions. The multi-tiered cosmic discs rotate in 360 degrees—drag to explore or inspect genuine tool specifications.
+            Explore genuine production tools across all 4 service divisions. The multi-tiered cosmic discs rotate in 360 degrees—drag to spin or click any tier to inspect.
           </p>
         </div>
 
         {/* =========================================================================
-            DIVISION SWITCHER PILLS (DARK THEME - NO COLORFUL CLUTTER)
+            SERVICE NAME SELECTOR PILLS
             ========================================================================= */}
         <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-10">
           {SERVICE_DIVISIONS.map((div, dIdx) => {
@@ -545,15 +686,20 @@ export default function ServiceUniverseSection() {
                 }}
                 className={`group relative inline-flex items-center gap-2.5 px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-[#0c0e14] text-[#FFD400] border border-[#FFD400] shadow-[0_0_25px_rgba(255,212,0,0.25)] font-bold"
+                    ? "bg-[#0c0e14] text-[#FFD400] border-2 border-[#FFD400] shadow-[0_0_25px_rgba(255,212,0,0.3)] font-bold scale-105"
                     : "bg-white/[0.03] text-neutral-400 hover:text-white border border-white/10 hover:border-white/30 hover:bg-white/[0.06]"
                 }`}
               >
                 <span className="text-[10px] font-mono text-[#FFD400]">{div.index}</span>
-                <Icon className={`w-4 h-4 transition-transform ${isActive ? "text-[#FFD400]" : "text-neutral-400 group-hover:text-white"}`} />
-                <span>{div.title}</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/10 text-neutral-300 ml-1">
-                  {div.tools.length}
+                <Icon
+                  className={`w-4 h-4 transition-transform ${
+                    isActive ? "text-[#FFD400]" : "text-neutral-400 group-hover:text-white"
+                  }`}
+                />
+                {/* PROMINENT SERVICE NAME */}
+                <span className="font-bold">{div.serviceName}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-neutral-300 ml-1">
+                  {div.tools.length} Tools
                 </span>
               </button>
             );
@@ -562,28 +708,25 @@ export default function ServiceUniverseSection() {
 
         {/* =========================================================================
             3D COSMIC STACKED DISCS STAGE (EXACT LAYOUT OF REFERENCE IMAGE)
-            - Vertically stacked glowing discs in 3D perspective
-            - Vertical luminous threads running through the discs with bead nodes
-            - Suspended planetary spheres & atomic rings on the side threads
-            - 360-degree rotating orbital tool ring around the active disc
             ========================================================================= */}
-        <div className="relative rounded-[32px] sm:rounded-[44px] bg-[#07080c]/90 border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.9)] overflow-hidden p-4 sm:p-8 lg:p-12 mb-12">
+        <div className="relative rounded-[32px] sm:rounded-[44px] bg-[#07080c]/90 border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.9)] overflow-hidden p-4 sm:p-8 lg:p-12 mb-14">
           
-          {/* Subtle Cyber Grid Background */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+          {/* Subtle Cyber Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
 
-          {/* Top Stage Control Strip */}
+          {/* Top Bar with SERVICE NAME & 360° Controls */}
           <div className="relative z-30 flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10 text-xs font-mono">
             <div className="flex items-center gap-3">
-              <span className="px-2.5 py-1 rounded bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] font-bold">
-                TIER 0{activeDivision.tierNumber} // {activeDivision.shortTitle.toUpperCase()}
+              {/* CLEAR SERVICE NAME DISPLAY */}
+              <span className="px-3.5 py-1.5 rounded-full bg-[#FFD400]/15 border border-[#FFD400]/40 text-[#FFD400] font-bold text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(255,212,0,0.2)]">
+                TIER 0{activeDivision.tierNumber} // {activeDivision.serviceName.toUpperCase()}
               </span>
-              <span className="text-neutral-400 hidden sm:inline">
+              <span className="text-neutral-300 hidden md:inline">
                 {activeDivision.tagline}
               </span>
             </div>
 
-            {/* 360° Controls: Play/Pause, Angle readout, Step rotation */}
+            {/* 360° Rotation Controls */}
             <div className="flex items-center gap-2">
               <span className="text-[11px] text-neutral-400 tracking-wider">
                 ORBIT: <span className="text-[#FFD400] font-bold">{Math.round(rotationAngle)}°</span>
@@ -608,83 +751,81 @@ export default function ServiceUniverseSection() {
             </div>
           </div>
 
-          {/* MAIN 3D VISUAL VIEWPORT (Interactive Drag to Rotate 360°) */}
+          {/* MAIN 3D VIEWPORT (Drag horizontally to rotate 360°) */}
           <div
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            className="relative w-full h-[540px] sm:h-[620px] lg:h-[680px] flex items-center justify-center cursor-grab active:cursor-grabbing perspective-[1200px]"
+            className="relative w-full h-[560px] sm:h-[640px] lg:h-[700px] flex items-center justify-center cursor-grab active:cursor-grabbing perspective-[1200px]"
           >
-            {/* Center Vertical Light Shaft (Cosmic Beam passing through all discs) */}
+            {/* Center Vertical Light Beam (Passing through all tiers) */}
             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-gradient-to-b from-transparent via-[#FFD400]/40 to-transparent pointer-events-none" />
-            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[16px] bg-gradient-to-b from-transparent via-blue-400/10 to-transparent blur-[6px] pointer-events-none" />
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[16px] bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent blur-[8px] pointer-events-none" />
 
-            {/* Suspended Vertical Side Threads (Left & Right hanging threads with bead planets) */}
+            {/* Suspended Vertical Side Threads (Left & Right hanging threads with bead planets like reference image) */}
             {/* Left Thread 1 */}
-            <div className="absolute top-8 bottom-8 left-[12%] sm:left-[18%] w-[1px] bg-white/15 pointer-events-none">
-              <div className="absolute top-[20%] -left-2 w-4 h-4 rounded-full bg-[#141a29] border border-cyan-400/50 shadow-[0_0_12px_rgba(56,189,248,0.5)]" />
-              <div className="absolute top-[55%] -left-1.5 w-3 h-3 rounded-full bg-[#1b1f2e] border border-white/30" />
+            <div className="absolute top-6 bottom-6 left-[12%] sm:left-[16%] w-[1px] bg-white/15 pointer-events-none">
+              <div className="absolute top-[22%] -left-2 w-4 h-4 rounded-full bg-[#141a29] border border-cyan-400/60 shadow-[0_0_12px_rgba(56,189,248,0.6)]" />
+              <div className="absolute top-[60%] -left-1.5 w-3 h-3 rounded-full bg-[#1b1f2e] border border-white/30" />
             </div>
 
             {/* Left Thread 2 (With Atomic Ring like reference image) */}
-            <div className="absolute top-4 bottom-4 left-[24%] sm:left-[28%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
-              <div className="absolute top-[35%] -left-3 w-6 h-6 rounded-full border border-[#FFD400]/40 flex items-center justify-center animate-spin" style={{ animationDuration: "12s" }}>
+            <div className="absolute top-4 bottom-4 left-[22%] sm:left-[26%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
+              <div
+                className="absolute top-[38%] -left-3.5 w-7 h-7 rounded-full border border-[#FFD400]/50 flex items-center justify-center animate-spin"
+                style={{ animationDuration: "14s" }}
+              >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400]" />
               </div>
-              <div className="absolute top-[75%] -left-1.5 w-3 h-3 rounded-full bg-cyan-950 border border-cyan-400/30" />
+              <div className="absolute top-[78%] -left-2 w-4 h-4 rounded-full bg-cyan-950 border border-cyan-400/40" />
             </div>
 
             {/* Right Thread 1 */}
-            <div className="absolute top-8 bottom-8 right-[12%] sm:right-[18%] w-[1px] bg-white/15 pointer-events-none">
-              <div className="absolute top-[30%] -left-3 w-6 h-6 rounded-full bg-[#121622] border border-[#FFD400]/50 shadow-[0_0_14px_rgba(255,212,0,0.4)]" />
-              <div className="absolute top-[65%] -left-1.5 w-3 h-3 rounded-full bg-neutral-900 border border-white/30" />
+            <div className="absolute top-6 bottom-6 right-[12%] sm:right-[16%] w-[1px] bg-white/15 pointer-events-none">
+              <div className="absolute top-[28%] -left-3 w-6 h-6 rounded-full bg-[#121622] border border-[#FFD400]/60 shadow-[0_0_15px_rgba(255,212,0,0.5)]" />
+              <div className="absolute top-[68%] -left-1.5 w-3 h-3 rounded-full bg-neutral-900 border border-white/30" />
             </div>
 
             {/* Right Thread 2 (With Hanging Orb) */}
-            <div className="absolute top-4 bottom-4 right-[24%] sm:right-[28%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
-              <div className="absolute top-[48%] -left-2.5 w-5 h-5 rounded-full bg-[#161a26] border border-purple-400/40 shadow-[0_0_10px_rgba(192,132,252,0.4)]" />
-              <div className="absolute top-[18%] -left-1 w-2 h-2 rounded-full bg-white/60" />
+            <div className="absolute top-4 bottom-4 right-[22%] sm:right-[26%] w-[1px] bg-white/10 pointer-events-none hidden sm:block">
+              <div className="absolute top-[48%] -left-2.5 w-5 h-5 rounded-full bg-[#161a26] border border-purple-400/50 shadow-[0_0_12px_rgba(192,132,252,0.5)]" />
+              <div className="absolute top-[18%] -left-1.5 w-3 h-3 rounded-full bg-white/70" />
             </div>
 
             {/* =========================================================================
-                THE STACKED TIERED DISCS (5 Tiers Vertically Tiered In Perspective)
+                THE 4 STACKED TIERED DISCS (SHOWING SERVICE NAMES ON EACH DISC)
                 ========================================================================= */}
-            <div className="relative w-full max-w-[900px] h-full flex flex-col items-center justify-between py-6">
-              {[
-                { tier: 1, label: "01 TECHNOLOGY", size: "w-[85%] max-w-[760px] h-[80px]", scale: 1.05, y: "-translate-y-4" },
-                { tier: 2, label: "02 MARKETING", size: "w-[78%] max-w-[680px] h-[75px]", scale: 0.98, y: "translate-y-0" },
-                { tier: 3, label: "03 BRANDING", size: "w-[72%] max-w-[620px] h-[70px]", scale: 0.92, y: "translate-y-2" },
-                { tier: 4, label: "04 MEDIA", size: "w-[66%] max-w-[560px] h-[65px]", scale: 0.86, y: "translate-y-4" },
-                { tier: 5, label: "05 CORE ENGINE", size: "w-[58%] max-w-[480px] h-[60px]", scale: 0.80, y: "translate-y-6" },
-              ].map((plate, pIdx) => {
-                const isThisDivision = activeDivisionIdx === pIdx;
+            <div className="relative w-full max-w-[920px] h-full flex flex-col items-center justify-between py-6">
+              {SERVICE_DIVISIONS.map((division, pIdx) => {
+                const isThisActive = activeDivisionIdx === pIdx;
+                const scale = 1.05 - pIdx * 0.07;
+                const height = 82 - pIdx * 5;
 
                 return (
                   <div
-                    key={plate.tier}
+                    key={division.id}
                     onClick={() => {
-                      if (pIdx < 4) {
-                        setActiveDivisionIdx(pIdx);
-                        setRotationAngle(0);
-                      }
+                      setActiveDivisionIdx(pIdx);
+                      setRotationAngle(0);
                     }}
-                    className={`relative ${plate.size} rounded-[100%] transition-all duration-700 cursor-pointer flex items-center justify-center ${
-                      isThisDivision
+                    className={`relative w-[85%] max-w-[760px] rounded-[100%] transition-all duration-700 cursor-pointer flex items-center justify-center ${
+                      isThisActive
                         ? "z-20 scale-105"
-                        : "z-10 hover:scale-[1.02] opacity-75 hover:opacity-100"
+                        : "z-10 hover:scale-[1.02] opacity-70 hover:opacity-100"
                     }`}
                     style={{
-                      transform: `perspective(1000px) rotateX(68deg) scale(${plate.scale})`,
-                      boxShadow: isThisDivision
-                        ? `0 0 50px rgba(255,212,0,0.35), inset 0 0 30px rgba(255,212,0,0.2)`
+                      height: `${height}px`,
+                      transform: `perspective(1000px) rotateX(68deg) scale(${scale})`,
+                      boxShadow: isThisActive
+                        ? `0 0 55px rgba(255,212,0,0.38), inset 0 0 35px rgba(255,212,0,0.22)`
                         : `0 0 25px rgba(255,255,255,0.06), inset 0 0 15px rgba(255,255,255,0.04)`,
                     }}
                   >
                     {/* Glowing Outer Rim Border */}
                     <div
-                      className={`absolute inset-0 rounded-[100%] border transition-colors duration-500 ${
-                        isThisDivision
-                          ? "border-[#FFD400] shadow-[0_0_20px_#FFD400]"
+                      className={`absolute inset-0 rounded-[100%] border-2 transition-colors duration-500 ${
+                        isThisActive
+                          ? "border-[#FFD400] shadow-[0_0_25px_#FFD400]"
                           : "border-white/20 hover:border-white/40"
                       }`}
                     />
@@ -692,26 +833,32 @@ export default function ServiceUniverseSection() {
                     {/* Concentric Inner Ring */}
                     <div className="absolute inset-3 rounded-[100%] border border-white/10 pointer-events-none" />
 
-                    {/* Inner Celestial Plate Fill (Gradient Map mimicking the image) */}
-                    <div
-                      className={`absolute inset-0 rounded-[100%] bg-gradient-to-r from-[#07090e]/95 via-[#121622]/90 to-[#07090e]/95 backdrop-blur-md pointer-events-none`}
-                    />
+                    {/* Inner Celestial Plate Fill */}
+                    <div className="absolute inset-0 rounded-[100%] bg-gradient-to-r from-[#07090e]/95 via-[#121622]/90 to-[#07090e]/95 backdrop-blur-md pointer-events-none" />
 
-                    {/* Central Core Glow Beacon */}
+                    {/* Central Light Core */}
                     <div
                       className={`w-10 h-10 rounded-full transition-all duration-500 ${
-                        isThisDivision
-                          ? "bg-[#FFD400] shadow-[0_0_30px_#FFD400] scale-125"
+                        isThisActive
+                          ? "bg-[#FFD400] shadow-[0_0_35px_#FFD400] scale-125"
                           : "bg-white/20"
                       }`}
                     />
 
-                    {/* Disc Edge Label */}
+                    {/* PROMINENT SERVICE NAME SHOWN DIRECTLY ON EACH DISC */}
                     <div
-                      className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono tracking-widest text-neutral-400 uppercase pointer-events-none"
+                      className="absolute -bottom-7 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap"
                       style={{ transform: "rotateX(-68deg)" }}
                     >
-                      {plate.label}
+                      <span
+                        className={`text-[11px] sm:text-xs font-mono font-bold tracking-widest uppercase px-3 py-1 rounded-full backdrop-blur-md border transition-all ${
+                          isThisActive
+                            ? "bg-black/90 text-[#FFD400] border-[#FFD400] shadow-[0_0_15px_rgba(255,212,0,0.4)]"
+                            : "bg-black/60 text-neutral-300 border-white/10"
+                        }`}
+                      >
+                        0{division.tierNumber} {division.serviceName.toUpperCase()}
+                      </span>
                     </div>
                   </div>
                 );
@@ -719,197 +866,166 @@ export default function ServiceUniverseSection() {
             </div>
 
             {/* =========================================================================
-                THE 360-DEGREE ROTATING TOOLS CAROUSEL (ORBITING AROUND ACTIVE TIER)
+                THE 360-DEGREE ROTATING TOOLS CAROUSEL (ACTUAL BRAND COLORS - NO NAMES)
                 ========================================================================= */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div
-                className="relative w-[340px] h-[340px] sm:w-[500px] sm:h-[500px] lg:w-[620px] lg:h-[620px] rounded-full pointer-events-auto"
+                className="relative w-[340px] h-[340px] sm:w-[520px] sm:h-[520px] lg:w-[640px] lg:h-[640px] rounded-full pointer-events-auto"
                 style={{
                   transformStyle: "preserve-3d",
                   transform: "perspective(1200px) rotateX(68deg)",
                 }}
               >
                 {/* 360° Orbital Path Ring */}
-                <div className="absolute inset-0 rounded-full border border-dashed border-[#FFD400]/40 shadow-[0_0_30px_rgba(255,212,0,0.15)] pointer-events-none" />
+                <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#FFD400]/40 shadow-[0_0_30px_rgba(255,212,0,0.18)] pointer-events-none" />
 
-                {/* Orbiting Tool Nodes */}
+                {/* Orbiting Tool Nodes - SHOW ONLY LOGO IN ACTUAL COLOR */}
                 {activeDivision.tools.map((tool, tIdx) => {
-                  // Distribute evenly around 360 degrees
                   const baseAngle = (tIdx / totalTools) * 360;
                   const currentAngle = (baseAngle + rotationAngle) % 360;
                   const rad = (currentAngle * Math.PI) / 180;
 
-                  // Radius from center
-                  const radius = typeof window !== "undefined" && window.innerWidth < 640 ? 150 : 260;
+                  // Radius
+                  const radius = typeof window !== "undefined" && window.innerWidth < 640 ? 155 : 270;
                   const x = Math.cos(rad) * radius;
                   const y = Math.sin(rad) * radius;
 
-                  // Z-depth for perspective sizing & stacking
-                  const isFront = y > 0;
-                  const isSelected = selectedTool?.id === tool.id;
+                  const isHovered = hoveredTool?.id === tool.id;
 
                   return (
                     <div
                       key={tool.id}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedTool(tool);
-                      }}
+                      onMouseEnter={() => setHoveredTool(tool)}
+                      onMouseLeave={() => setHoveredTool(null)}
                       className={`group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 cursor-pointer ${
-                        isSelected ? "z-30 scale-125" : "z-10 hover:scale-115"
+                        isHovered ? "z-30 scale-135" : "z-10 hover:scale-120"
                       }`}
                       style={{
                         transform: `translate(${x}px, ${y}px) rotateX(-68deg)`,
                       }}
                     >
-                      {/* Tool Card Node (Dark Theme Silver / Amber Glow) */}
+                      {/* PURE LOGO CAPSULE NODE (NO NAME TEXT IN NODE - ACTUAL BRAND COLOR) */}
                       <div
-                        className={`relative rounded-2xl p-2.5 sm:p-3 flex items-center gap-2.5 transition-all duration-300 shadow-2xl ${
-                          isSelected
-                            ? "bg-[#0c0e14] border-2 border-[#FFD400] text-[#FFD400] shadow-[0_0_25px_rgba(255,212,0,0.5)]"
-                            : "bg-[#090b10]/95 hover:bg-[#111420] border border-white/20 hover:border-white/50 text-white"
+                        className={`relative w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center p-2.5 sm:p-3 transition-all duration-300 shadow-2xl ${
+                          isHovered
+                            ? "bg-[#0d1017] border-2 border-[#FFD400] shadow-[0_0_25px_rgba(255,212,0,0.6)] scale-110"
+                            : "bg-[#08090d]/95 hover:bg-[#121622] border border-white/20 hover:border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
                         } backdrop-blur-xl`}
                       >
-                        {/* Genuine SVG Brand Icon */}
-                        <div
-                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center p-1.5 transition-colors shrink-0 ${
-                            isSelected
-                              ? "bg-[#FFD400]/15 text-[#FFD400]"
-                              : "bg-white/[0.06] text-neutral-200 group-hover:text-white"
-                          }`}
-                        >
-                          <ToolBrandIcon name={tool.name} className="w-full h-full" />
-                        </div>
+                        {/* GENUINE OFFICIAL LOGO WITH ACTUAL OFFICIAL COLOR */}
+                        <FullColorToolLogo name={tool.name} className="w-full h-full object-contain" />
 
-                        {/* Tool Name Label */}
-                        <div className="flex flex-col pr-1">
-                          <span className="text-xs sm:text-sm font-bold font-mono tracking-tight whitespace-nowrap">
-                            {tool.name}
-                          </span>
-                          <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest hidden sm:inline">
-                            {tool.role}
-                          </span>
-                        </div>
-
-                        {/* Selected Indicator Dot */}
-                        {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400] animate-pulse" />
+                        {/* Subtle Glow Ring on hover */}
+                        {isHovered && (
+                          <div className="absolute inset-0 rounded-full border border-[#FFD400] animate-ping pointer-events-none opacity-40" />
                         )}
                       </div>
+
+                      {/* MICRO HOVER TOOLTIP ONLY (REVEALS TOOL NAME ON HOVER) */}
+                      {isHovered && (
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-40 px-3 py-1 rounded-md bg-black/90 border border-[#FFD400]/60 text-white text-[11px] font-mono whitespace-nowrap shadow-xl pointer-events-none">
+                          <span className="text-[#FFD400] font-bold">{tool.name}</span>
+                          <span className="text-neutral-400 ml-1.5">// {activeDivision.serviceName}</span>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Bottom 360 Drag Instruction Badge */}
+            {/* Bottom 360 Drag Prompt */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-              <div className="px-4 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300 flex items-center gap-2 shadow-lg">
+              <div className="px-4 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-neutral-300 flex items-center gap-2 shadow-xl">
                 <RotateCw className="w-3.5 h-3.5 text-[#FFD400] animate-spin" style={{ animationDuration: "8s" }} />
-                <span>DRAG HORIZONTALLY TO ROTATE 360° // CLICK ANY TOOL</span>
+                <span>DRAG HORIZONTALLY TO ROTATE 360° // SERVICE: {activeDivision.serviceName.toUpperCase()}</span>
               </div>
             </div>
           </div>
-
-          {/* =========================================================================
-              SELECTED TOOL DETAIL INSPECTOR (DARK THEME PREVIEW PANEL)
-              ========================================================================= */}
-          {selectedTool && (
-            <div className="relative z-20 mt-6 p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="flex items-center gap-4 sm:gap-5">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#0c0e14] border border-[#FFD400]/40 flex items-center justify-center p-3 text-[#FFD400] shadow-[0_0_20px_rgba(255,212,0,0.2)] shrink-0">
-                  <ToolBrandIcon name={selectedTool.name} className="w-full h-full" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-mono text-[#FFD400] px-2 py-0.5 rounded bg-[#FFD400]/10 border border-[#FFD400]/20 uppercase">
-                      {selectedTool.role}
-                    </span>
-                    <span className="text-xs font-mono text-neutral-400">
-                      {selectedTool.version}
-                    </span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
-                    {selectedTool.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 font-light mt-1 max-w-xl">
-                    {selectedTool.tagline}
-                  </p>
-                </div>
-              </div>
-
-              <div className="shrink-0 flex items-center gap-3 w-full md:w-auto justify-end">
-                <Link
-                  href="/contact-us?intent=consultation"
-                  className="w-full md:w-auto inline-block text-center"
-                >
-                  <div className="inline-flex items-center justify-between gap-3 px-5 py-2.5 rounded-full bg-[#FFD400] text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#ffe34d] transition-all cursor-pointer shadow-[0_0_15px_rgba(255,212,0,0.3)]">
-                    <span>ARCHITECT WITH {selectedTool.name.toUpperCase()}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </div>
-                </Link>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* =========================================================================
-            COMPLETE TECHNOLOGY MATRIX FOR ACTIVE SERVICE (RESPONSIVE GRID)
+            COMPLETE 4-SERVICE ECOSYSTEM MATRIX:
+            SHOWS ALL 4 SERVICE NAMES + ALL TOOL LOGOS IN ACTUAL COLOR (NO TEXT NAMES)
             ========================================================================= */}
-        <div className="mt-14">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/10">
-            <div>
-              <div className="text-xs font-mono text-[#FFD400] uppercase tracking-widest mb-1">
-                COMPLETE TOOL CATALOGUE
-              </div>
-              <h3 className="text-2xl sm:text-4xl font-[family-name:var(--font-bebas)] tracking-wide uppercase text-white">
-                {activeDivision.title} <span className="text-[#FFD400]">ECOSYSTEM</span>
-              </h3>
+        <div className="mt-8 space-y-8">
+          <div className="text-center max-w-2xl mx-auto mb-6">
+            <div className="text-xs font-mono text-[#FFD400] uppercase tracking-widest mb-1">
+              ALL 4 SERVICE DIVISIONS // OFFICIAL BRAND LOGOS
             </div>
-            <span className="text-xs font-mono text-neutral-400">
-              Showing {activeDivision.tools.length} verified production tools
-            </span>
+            <h3 className="text-2xl sm:text-4xl font-[family-name:var(--font-bebas)] tracking-wide uppercase text-white">
+              INTEGRATED <span className="text-[#FFD400]">TOOLS MATRICES</span>
+            </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {activeDivision.tools.map((tool) => {
-              const isSelected = selectedTool?.id === tool.id;
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {SERVICE_DIVISIONS.map((division, idx) => {
+              const isSelected = activeDivisionIdx === idx;
+              const Icon = division.icon;
 
               return (
                 <div
-                  key={tool.id}
-                  onClick={() => setSelectedTool(tool)}
-                  className={`group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 cursor-pointer flex flex-col justify-between ${
+                  key={division.id}
+                  onClick={() => {
+                    setActiveDivisionIdx(idx);
+                    setRotationAngle(0);
+                  }}
+                  className={`relative rounded-3xl p-6 sm:p-8 transition-all duration-300 cursor-pointer ${
                     isSelected
-                      ? "bg-[#0e111a] border-2 border-[#FFD400] shadow-[0_0_25px_rgba(255,212,0,0.2)]"
-                      : "bg-[#08090d]/85 hover:bg-[#0c0e14] border border-white/10 hover:border-white/30"
+                      ? "bg-[#0e111a]/95 border-2 border-[#FFD400] shadow-[0_0_35px_rgba(255,212,0,0.2)]"
+                      : "bg-[#08090d]/85 hover:bg-[#0c0e14] border border-white/10 hover:border-white/25 shadow-xl"
                   }`}
                 >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center p-2 text-white group-hover:text-[#FFD400] transition-colors">
-                        <ToolBrandIcon name={tool.name} className="w-full h-full" />
+                  {/* SERVICE NAME HEADER */}
+                  <div className="flex items-center justify-between gap-4 pb-4 mb-6 border-b border-white/10">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center p-2 ${
+                          isSelected ? "bg-[#FFD400] text-black" : "bg-white/10 text-white"
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-[10px] font-mono text-neutral-400 px-2 py-0.5 rounded bg-white/[0.04] border border-white/10">
-                        {tool.version}
-                      </span>
+                      <div>
+                        <span className="text-[10px] font-mono text-[#FFD400] uppercase tracking-widest block">
+                          DIVISION 0{division.tierNumber}
+                        </span>
+                        {/* PROMINENT SERVICE NAME */}
+                        <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-jakarta)]">
+                          {division.serviceName}
+                        </h4>
+                      </div>
                     </div>
 
-                    <h4 className="text-base sm:text-lg font-bold text-white tracking-tight mb-1 group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]">
-                      {tool.name}
-                    </h4>
-                    <p className="text-xs font-mono text-[#FFD400] mb-2">
-                      {tool.role}
-                    </p>
-                    <p className="text-xs text-neutral-300 font-light leading-relaxed mb-4">
-                      {tool.tagline}
-                    </p>
+                    <span className="text-xs font-mono px-2.5 py-1 rounded bg-white/10 text-neutral-300">
+                      {division.tools.length} Logos
+                    </span>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-neutral-400">{tool.badge}</span>
-                    <span className="text-[#FFD400] group-hover:translate-x-0.5 transition-transform">
-                      SELECT &rarr;
+                  {/* LOGOS ONLY - ACTUAL OFFICIAL BRAND COLORS - NO NAMES */}
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                    {division.tools.map((t) => (
+                      <div
+                        key={t.id}
+                        className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 hover:border-[#FFD400]/70 flex items-center justify-center p-2.5 sm:p-3 transition-all duration-300 hover:scale-110 shadow-md"
+                        title={t.name}
+                      >
+                        {/* ACTUAL BRAND LOGO IN FULL OFFICIAL COLOR */}
+                        <FullColorToolLogo name={t.name} className="w-full h-full object-contain" />
+
+                        {/* Floating tooltip on hover */}
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none px-2 py-0.5 rounded bg-black/90 border border-white/20 text-[10px] font-mono text-white whitespace-nowrap z-30">
+                          {t.name}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bottom selection prompt */}
+                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                    <span className="text-neutral-400">{division.tagline}</span>
+                    <span className="text-[#FFD400] flex items-center gap-1 font-bold">
+                      {isSelected ? "ACTIVE 3D ORBIT" : "SPIN THIS SERVICE →"}
                     </span>
                   </div>
                 </div>
