@@ -204,7 +204,7 @@ export default function AboutUsPage() {
           - Overlaps the frozen rocket banner section via -mt-[100vh]
           - Pinned at z-30 with dark background, rounded top, top border & deep shadow
           ========================================================================= */}
-      <section className="relative z-30 -mt-[100vh] min-h-screen bg-[#050608] text-white pt-[50px] pb-[50px] shadow-[0_-50px_140px_rgba(0,0,0,0.99)] border-t border-white/[0.08] rounded-t-[36px] sm:rounded-t-[48px]">
+      <section className="relative z-30 -mt-[100vh] min-h-screen bg-transparent text-white pt-[50px] pb-[50px] shadow-[0_-20px_60px_rgba(0,0,0,0.4)] border-t border-white/[0.08] rounded-t-[36px] sm:rounded-t-[48px]">
         {/* Subtle Ambient Top Border Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#FFD400]/6 blur-[160px] rounded-full pointer-events-none" />
 
@@ -281,7 +281,7 @@ export default function AboutUsPage() {
                     <h2 className="text-2xl sm:text-3xl font-[family-name:var(--font-syne)] font-bold uppercase tracking-tight text-white mb-4 leading-tight relative z-10">
                       WE ELIMINATE THE GAP
                       <br />
-                      <span className="bg-gradient-to-r from-white via-[#ffe34d] to-[#FFD400] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,212,0,0.25)]">
+                      <span className="text-[#FFD400] drop-shadow-[0_0_30px_rgba(255,212,0,0.45)]">
                         BETWEEN TECH &amp; CREATIVE.
                       </span>
                     </h2>
