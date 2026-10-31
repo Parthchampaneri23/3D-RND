@@ -1,26 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   Sparkles,
   Quote,
   Mail,
-  Globe,
-  ArrowUpRight,
-  ShieldCheck,
   Cpu,
   Palette,
   Bot,
   TrendingUp,
   Users,
-  CheckCircle2,
-  Heart,
-  Zap,
-  Flame,
 } from "lucide-react";
-import WaveText from "@/components/WaveText";
 import CyberButton from "@/components/CyberButton";
 
 interface TeamMember {
@@ -84,33 +76,6 @@ export default function TeamCultureSection({
       expertise: ["Programmatic SEO", "Paid Meta/Google", "Funnel Analytics", "Conversion Rate"],
       metric: { value: "8.04x", label: "Audited Average ROAS Lift" },
       icon: TrendingUp,
-    },
-  ];
-
-  const cultureValues = [
-    {
-      icon: Zap,
-      number: "01",
-      title: "Zero-Fluff Engineering",
-      desc: "We measure architecture strictly by uptime, conversion rate lift, and sub-millisecond execution — never by buzzwords.",
-    },
-    {
-      icon: Flame,
-      number: "02",
-      title: "Integrated DNA",
-      desc: "Engineers, 3D artists, and marketers collaborate under one roof. No fragmented handoffs, no lost context.",
-    },
-    {
-      icon: ShieldCheck,
-      number: "03",
-      title: "Relentless Craft",
-      desc: "Obsession with microscopic detail: 60 FPS spatial animations, fluid typographic scales, and pixel-precise interfaces.",
-    },
-    {
-      icon: Heart,
-      number: "04",
-      title: "Radical Ownership",
-      desc: "Every squad lead takes holistic responsibility for the client's commercial victory from initial sprint to long-term scale.",
     },
   ];
 
@@ -270,7 +235,7 @@ export default function TeamCultureSection({
       {/* =========================================================================
           2. LEADERSHIP & AUTONOMOUS SQUADS (DISTINCT INDIAN FACES & DISCIPLINES)
           ========================================================================= */}
-      <div className="mb-20">
+      <div>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold">
@@ -317,81 +282,6 @@ export default function TeamCultureSection({
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* =========================================================================
-          3. WORKPLACE CULTURE & CORE ETHOS (COLLABORATIVE STUDIO + 4 VALUES)
-          ========================================================================= */}
-      <div>
-        <div className="rounded-[32px] bg-white/[0.02] backdrop-blur-md border border-white/10 p-8 sm:p-12 overflow-hidden shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left: Studio Collaboration Photo */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-2xl overflow-hidden border border-white/15 shadow-2xl group/studio">
-                <Image
-                  src="/images/agency_team_studio.jpg"
-                  alt="RnD Technosoft Creative Studio Collaboration"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="object-cover group-hover/studio:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-
-                <div className="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-md border border-white/15 p-3 rounded-xl flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#FFD400] font-bold block">
-                      IN-HOUSE INNOVATION LAB
-                    </span>
-                    <span className="text-xs font-mono text-white">
-                      Cross-Discipline Sprint Rooms
-                    </span>
-                  </div>
-                  <CheckCircle2 className="w-4 h-4 text-[#FFD400]" />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: 4 Core Workplace Culture Pillars */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center gap-2">
-                  <Flame className="w-3.5 h-3.5" />
-                  <span>INTERNAL STANDARD OF EXCELLENCE</span>
-                </span>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-syne)] font-bold text-white uppercase mt-1">
-                  How We Think &amp; Build
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {cultureValues.map((val) => {
-                  const Icon = val.icon;
-                  return (
-                    <div
-                      key={val.number}
-                      className="p-5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#FFD400]/40 transition-colors space-y-2 group/val"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="w-8 h-8 rounded-lg bg-[#FFD400]/10 border border-[#FFD400]/30 flex items-center justify-center text-[#FFD400] group-hover/val:bg-[#FFD400] group-hover/val:text-black transition-colors">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="text-[10px] font-mono text-neutral-500 font-bold">
-                          {val.number}
-                        </span>
-                      </div>
-                      <h4 className="text-base font-[family-name:var(--font-syne)] font-bold text-white uppercase group-hover/val:text-[#FFD400] transition-colors">
-                        {val.title}
-                      </h4>
-                      <p className="text-xs text-neutral-300 font-light leading-relaxed">
-                        {val.desc}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
