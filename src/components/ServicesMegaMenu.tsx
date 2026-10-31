@@ -60,17 +60,17 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
       },
       {
         title: "Web & Enterprise Cloud",
-        href: "/services/web-cloud",
+        href: "/technology-solution/cloud-infrastructure-devops",
         desc: "Microservices, AWS/GCP mesh & zero-trust infra",
       },
       {
         title: "Mobile App Development",
-        href: "/services/mobile-apps",
+        href: "/technology-solution/mobile-applications",
         desc: "iOS & Android native, Flutter, 60fps spatial UI",
       },
       {
         title: "E-Commerce Platforms",
-        href: "/services/ecommerce-platforms",
+        href: "/technology-solution/ecommerce-platform-engineering",
         desc: "Headless Shopify Plus & 3D product customizers",
       },
     ],
@@ -85,24 +85,24 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     subcategories: [
       {
         title: "Search Dominance & Technical SEO",
-        href: "/services/seo-search",
+        href: "/digital-marketing/technical-seo-dominance",
         desc: "Automated schema graphs & Core Web Vitals optimization",
         badge: "HIGH ROI",
         isPopular: true,
       },
       {
         title: "Performance PPC Advertising",
-        href: "/services/seo-search",
+        href: "/digital-marketing/performance-ppc-advertising",
         desc: "Multi-channel paid media, Google Ads & Meta funnels",
       },
       {
         title: "Social Media & Community Building",
-        href: "/services/social-media",
+        href: "/digital-marketing/social-media-management",
         desc: "Viral organic content cadence & founder branding",
       },
       {
         title: "Content Strategy & Copywriting",
-        href: "/services/social-media",
+        href: "/digital-marketing/content-strategy-production",
         desc: "High-converting editorial briefs & conversion copy",
       },
     ],
@@ -117,19 +117,19 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     subcategories: [
       {
         title: "Brand Strategy & Design Systems",
-        href: "/services/brand-identity",
+        href: "/branding-design/brand-identity-systems",
         desc: "Design token architectures, vector logos & typography",
         badge: "AWARD WINNING",
       },
       {
         title: "Spatial 3D & UI/UX Architecture",
-        href: "/services/brand-identity",
+        href: "/branding-design/ui-ux-spatial-design",
         desc: "Interactive WebGL, Three.js & micro-animations",
         badge: "SPATIAL",
       },
       {
         title: "3D Motion Graphics & CGI",
-        href: "/services/commercial-media",
+        href: "/media-production/motion-graphics-3d-cgi",
         desc: "Photorealistic product visualizations & kinetic assets",
       },
     ],
@@ -144,18 +144,18 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     subcategories: [
       {
         title: "Commercial Film & Photography",
-        href: "/services/commercial-media",
+        href: "/media-production/commercial-video-production",
         desc: "Studio product photography & enterprise brand films",
       },
       {
         title: "8K Cinema Expedition & Story",
-        href: "/services/commercial-media",
+        href: "/media-production/commercial-video-production",
         desc: "Sub-zero and aerial drone storytelling cinematography",
         badge: "8K RAW",
       },
       {
         title: "Dedicated Agency Squads",
-        href: "/services/dedicated-squads",
+        href: "/media-production/dedicated-squads",
         desc: "Autonomous engineering pods & monthly retainers",
         badge: "PODS",
         isPopular: true,

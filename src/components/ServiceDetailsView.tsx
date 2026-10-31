@@ -9,9 +9,15 @@ import { ServiceDetail, servicesData } from "@/data/servicesData";
 
 interface ServiceDetailsViewProps {
   service: ServiceDetail;
+  parentPath?: string;
+  parentLabel?: string;
 }
 
-export default function ServiceDetailsView({ service }: ServiceDetailsViewProps) {
+export default function ServiceDetailsView({
+  service,
+  parentPath = "/services",
+  parentLabel = "Services",
+}: ServiceDetailsViewProps) {
   // Find index for prev/next navigation
   const currentIndex = servicesData.findIndex((s) => s.id === service.id);
   const prevService = currentIndex > 0 ? servicesData[currentIndex - 1] : null;
@@ -111,8 +117,8 @@ export default function ServiceDetailsView({ service }: ServiceDetailsViewProps)
       allServicesOrItems={relatedSummaries}
       prevItem={prevSummary}
       nextItem={nextSummary}
-      parentPath="/services"
-      parentLabel="Services"
+      parentPath={parentPath}
+      parentLabel={parentLabel}
     />
   );
 }

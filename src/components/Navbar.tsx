@@ -163,42 +163,42 @@ export default function Navbar() {
     },
     {
       title: "Web & Enterprise Cloud",
-      href: "/services/web-cloud",
+      href: "/technology-solution/cloud-infrastructure-devops",
       icon: Cpu,
     },
     {
       title: "Search Dominance & Technical SEO",
-      href: "/services/seo-search",
+      href: "/digital-marketing/technical-seo-dominance",
       icon: TrendingUp,
     },
     {
       title: "Mobile App Development",
-      href: "/services/mobile-apps",
+      href: "/technology-solution/mobile-applications",
       icon: Smartphone,
     },
     {
       title: "E-Commerce & Digital Storefronts",
-      href: "/services/ecommerce-platforms",
+      href: "/technology-solution/ecommerce-platform-engineering",
       icon: ShoppingBag,
     },
     {
       title: "Brand Strategy & Design Systems",
-      href: "/services/brand-identity",
+      href: "/branding-design/brand-identity-systems",
       icon: Palette,
     },
     {
       title: "Social Media & Community Building",
-      href: "/services/social-media",
+      href: "/digital-marketing/social-media-management",
       icon: Share2,
     },
     {
       title: "Commercial Film & Photography",
-      href: "/services/commercial-media",
+      href: "/media-production/commercial-video-production",
       icon: Camera,
     },
     {
       title: "Dedicated Agency Squads",
-      href: "/services/dedicated-squads",
+      href: "/media-production/dedicated-squads",
       icon: Users,
     },
   ];

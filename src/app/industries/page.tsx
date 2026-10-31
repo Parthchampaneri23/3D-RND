@@ -230,13 +230,13 @@ export default function IndustriesIndexPage() {
             {/* Main Content with Layered Overlap over the Banner */}
             <main
                 ref={mainRef}
-                className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]"
+                className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]"
             >
                 {/* =========================================================================
             1. ENTERPRISE ENGINEERING PHILOSOPHY HERO BAR
             ========================================================================= */}
                 <section className="max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-8">
-                    <div className="industry-hero-card p-8 sm:p-12 bg-gradient-to-r from-[#0c0e14] via-[#121520] to-[#0c0e14] border border-white/10 shadow-2xl relative overflow-hidden">
+                    <div className="industry-hero-card p-8 sm:p-12 bg-gradient-to-r from-[#0c0e14]/40 via-[#121520]/40 to-[#0c0e14]/40 backdrop-blur-sm border border-white/10 shadow-2xl relative overflow-hidden">
                         <div className="relative z-10 max-w-3xl space-y-4">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase">
                                 <Sparkles className="w-3.5 h-3.5" />
@@ -307,7 +307,7 @@ export default function IndustriesIndexPage() {
                             return (
                                 <article
                                     key={ind.slug}
-                                    className="industry-card-item group bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 shadow-xl overflow-hidden flex flex-col"
+                                    className="industry-card-item group bg-[#0c0e14]/60 backdrop-blur-md border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 shadow-xl overflow-hidden flex flex-col"
                                 >
                                     <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[360px]">
 
@@ -400,7 +400,7 @@ export default function IndustriesIndexPage() {
             3. CROSS-INDUSTRY ARCHITECTURAL CONSULTATION SECTION
             ========================================================================= */}
                 <section className="industry-consult-section max-w-7xl mx-auto px-6 md:px-12 py-16 border-t border-white/10">
-                    <div className="bg-[#0c0e14] border border-white/15 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+                    <div className="bg-[#0c0e14]/60 backdrop-blur-md border border-white/15 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
                         {/* Left Info */}
                         <div className="industry-consult-left lg:col-span-5 space-y-5">
