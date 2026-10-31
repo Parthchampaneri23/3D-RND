@@ -81,8 +81,7 @@ export default function CyberButton({
         >
           {children}
         </span>
-      </div>
-
+      </div>    
       {/* Right Circular Icon Sub-Badge */}
       <div
         className={`${iconSizes[size]} rounded-full ${badgeStyles[normalizedVariant]} flex items-center justify-center transition-all duration-300 shrink-0 ml-2 shadow-inner relative z-10`}
