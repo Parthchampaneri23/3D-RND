@@ -173,6 +173,9 @@ export default function ServiceCaseStudies() {
                   src={study.image}
                   alt={study.title}
                   fill
+                  unoptimized
+                  priority
+                  loading="eager"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c12] via-[#0a0c12]/50 to-transparent" />
@@ -230,7 +233,7 @@ export default function ServiceCaseStudies() {
                     ))}
                   </div>
 
-                  <Link href={study.href} className="inline-block shrink-0">
+                  <Link href={study.href} prefetch={false} className="inline-block shrink-0">
                     <div className="group/btn inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-white hover:text-[#FFD400] transition-colors">
                       <span>VIEW CASE STUDY</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -244,7 +247,7 @@ export default function ServiceCaseStudies() {
 
         {/* Explore All Portfolios link */}
         <div className="mt-12 text-center">
-          <Link href="/portfolios" className="inline-block">
+          <Link href="/portfolios" prefetch={false} className="inline-block">
             <div className="group relative inline-flex items-center justify-between rounded-full overflow-hidden bg-[#12141a]/95 hover:bg-[#1a1d26] border border-white/15 hover:border-[#FFD400]/70 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_0_25px_rgba(255,212,0,0.28)] transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none px-6 py-3 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase gap-4">
               <span className="relative z-10 text-white group-hover:text-[#FFD400]">
                 EXPLORE ALL RECENT WORK (PORTFOLIO)

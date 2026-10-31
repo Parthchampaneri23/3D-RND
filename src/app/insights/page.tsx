@@ -77,7 +77,7 @@ export default function InsightsPage() {
           scrollTrigger: {
             trigger: ".insight-filters-bar",
             start: "top 88%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -94,7 +94,7 @@ export default function InsightsPage() {
           scrollTrigger: {
             trigger: ".insight-filters-bar",
             start: "top 88%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -104,7 +104,7 @@ export default function InsightsPage() {
         scrollTrigger: {
           trigger: ".featured-editorial-section",
           start: "top 85%",
-          toggleActions: "restart none none reset",
+          toggleActions: "play none none none",
         },
       });
 
@@ -142,7 +142,7 @@ export default function InsightsPage() {
           scrollTrigger: {
             trigger: ".insight-grid-section",
             start: "top 85%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -152,7 +152,7 @@ export default function InsightsPage() {
         scrollTrigger: {
           trigger: ".research-briefing-section",
           start: "top 88%",
-          toggleActions: "restart none none reset",
+          toggleActions: "play none none none",
         },
       });
 

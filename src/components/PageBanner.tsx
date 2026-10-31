@@ -103,7 +103,7 @@ export default function PageBanner({
         scrollTrigger: {
           trigger: bannerRef.current,
           start: "top 85%",
-          toggleActions: "restart none none reset",
+          toggleActions: "play none none none",
         },
       });
 

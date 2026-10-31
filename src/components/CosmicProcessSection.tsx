@@ -137,19 +137,20 @@ export default function CosmicProcessSection({
           scrollTrigger: {
             trigger: section,
             start: "top 85%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         }
       );
 
-      // 2. Giant Typography Title Letter Wave Animation on Scroll (plays each time)
+      // 2. Giant Typography Title Letter Wave Animation on Scroll
       const titleChars = section.querySelectorAll(".process-title-reveal .animate-text-wave");
       if (titleChars && titleChars.length > 0) {
         const titleTl = gsap.timeline({
           scrollTrigger: {
             trigger: ".process-title-reveal",
             start: "top 85%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
+            once: true,
           },
         });
 
@@ -167,14 +168,19 @@ export default function CosmicProcessSection({
             }
           )
           .to(titleChars, {
-            y: -18,
+            y: -14,
             duration: 0.32,
-            stagger: {
-              each: 0.035,
-              repeat: 1,
-              yoyo: true,
-            },
+            stagger: 0.02,
+            ease: "sine.out",
+          })
+          .to(titleChars, {
+            y: 0,
+            duration: 0.32,
+            stagger: 0.02,
             ease: "sine.inOut",
+            onComplete: () => {
+              gsap.set(titleChars, { clearProps: "all" });
+            },
           });
       }
 
@@ -195,7 +201,7 @@ export default function CosmicProcessSection({
           scrollTrigger: {
             trigger: section,
             start: "top 82%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -206,7 +212,7 @@ export default function CosmicProcessSection({
           scrollTrigger: {
             trigger: cardsContainerRef.current,
             start: "top 85%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         });
 
@@ -535,7 +541,6 @@ export default function CosmicProcessSection({
         }
         .animate-text-wave {
           display: inline-block;
-          animation: textWave 2.8s ease-in-out infinite;
           will-change: transform;
         }
       `}</style>

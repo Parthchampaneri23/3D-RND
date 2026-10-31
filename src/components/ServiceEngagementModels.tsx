@@ -220,7 +220,7 @@ export default function ServiceEngagementModels() {
                     <span className="text-white font-bold">{model.turnaround}</span>
                   </div>
 
-                  <Link href={model.ctaHref} className="block w-full">
+                  <Link href={model.ctaHref} prefetch={false} className="block w-full">
                     <div
                       className={`group relative w-full inline-flex items-center justify-between rounded-full overflow-hidden transition-all duration-300 px-5 py-3 text-xs sm:text-sm font-mono font-bold tracking-[0.18em] uppercase ${
                         isPopular

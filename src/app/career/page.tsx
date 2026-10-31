@@ -138,7 +138,7 @@ export default function CareerPage() {
                     scrollTrigger: {
                         trigger: ".career-filter-bar",
                         start: "top 88%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -157,7 +157,7 @@ export default function CareerPage() {
                     scrollTrigger: {
                         trigger: ".career-jobs-grid",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -175,7 +175,7 @@ export default function CareerPage() {
                     scrollTrigger: {
                         trigger: ".career-perks-section",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );

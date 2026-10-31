@@ -261,28 +261,29 @@ body {
 .animate-smooth-wave {
   display: inline-block;
   will-change: transform, color;
-  animation: smooth-wave-motion 2.4s ease-in-out infinite;
+  animation: smooth-wave-motion 1.8s ease-out 1 forwards;
 }
 
-/* Undulating Text Wave Ripple */
+/* Undulating Text Wave Ripple (Plays once only) */
 @keyframes textWave {
-  0%, 100% {
+  0% {
     transform: translateY(0px);
   }
-  20% {
+  25% {
     transform: translateY(-8px);
     color: #FFD400;
   }
-  40% {
+  50% {
     transform: translateY(2px);
   }
-  60% {
+  75%, 100% {
     transform: translateY(0px);
+    color: inherit;
   }
 }
 
 .animate-text-wave {
   display: inline-block;
-  animation: textWave 2.8s ease-in-out infinite;
+  animation: textWave 1.6s ease-out 1 forwards;
   will-change: transform, color;
 }

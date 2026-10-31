@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -53,6 +53,18 @@ const NAVIGATION_DIVISIONS = [
 export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Pre-cache all service card images in browser memory immediately on page mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      servicesData.forEach((service) => {
+        if (service.image) {
+          const img = new window.Image();
+          img.src = service.image;
+        }
+      });
+    }
+  }, []);
 
   const filteredServices = useMemo(() => {
     return servicesData.filter((service) => {
@@ -113,7 +125,7 @@ export default function ServicesPage() {
             </div>
 
             <div className="shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Link href="/contact-us?intent=consultation" className="inline-block">
+              <Link href="/contact-us?intent=consultation" prefetch={false} className="inline-block">
                 <div className="group relative inline-flex items-center justify-between rounded-full overflow-hidden bg-[#12141a]/95 hover:bg-[#1a1d26] border border-white/15 hover:border-[#FFD400]/70 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_0_25px_rgba(255,212,0,0.28)] transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm gap-3 sm:gap-4">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none rounded-full" />
                   <div className="flex items-center space-x-3 relative z-10">
@@ -181,7 +193,7 @@ export default function ServicesPage() {
             SECTION 2.7: ENGAGEMENT MODELS
             Project-based work, retainers or dedicated teams
             ========================================================================= */}
-        <ServiceEngagementModels />
+        {/* <ServiceEngagementModels /> */}
 
         {/* =========================================================================
             SECTION 2.8: RELATED CASE STUDIES
@@ -221,14 +233,14 @@ export default function ServicesPage() {
           </div>
 
           {/* Category Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none" data-no-gsap>
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap cursor-pointer ${
                     isActive
                       ? "bg-[#FFD400] text-black font-bold shadow-[0_0_20px_rgba(255,212,0,0.4)]"
                       : "bg-white/[0.04] text-neutral-300 hover:text-white border border-white/15 hover:border-white/35 hover:bg-white/[0.08]"
@@ -251,20 +263,21 @@ export default function ServicesPage() {
                   setActiveCategory("All");
                   setSearchQuery("");
                 }}
-                className="px-5 py-2 rounded-full bg-[#FFD400] text-black font-mono text-xs uppercase font-bold hover:bg-[#ffe34d] transition-all cursor-pointer"
+                className="px-5 py-2 rounded-full bg-[#FFD400] text-black font-mono text-xs uppercase font-bold hover:bg-[#ffe34d] cursor-pointer"
               >
                 Reset Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch" data-no-gsap>
               {filteredServices.map((service: ServiceDetail) => {
                 const isTall = !!service.tall;
 
                 return (
                   <div
                     key={service.id}
-                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 transition-all duration-500 shadow-2xl flex flex-col justify-between ${
+                    data-no-gsap
+                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 shadow-2xl flex flex-col justify-between ${
                       isTall
                         ? "md:row-span-2 min-h-[500px] lg:min-h-[560px]"
                         : "min-h-[360px] lg:min-h-[400px]"
@@ -290,7 +303,11 @@ export default function ServicesPage() {
                         src={service.image}
                         alt={service.title}
                         fill
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        unoptimized
+                        priority
+                        loading="eager"
+                        data-no-gsap
+                        className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/70 to-black/35 pointer-events-none" />
                     </div>
@@ -298,8 +315,8 @@ export default function ServicesPage() {
                     {/* Bottom Content Area */}
                     <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
                       <div className="flex items-baseline justify-between gap-4 mb-1">
-                        <Link href={`/services/${service.id}`}>
-                          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FFD400] transition-colors font-[family-name:var(--font-syne)] uppercase">
+                        <Link href={`/services/${service.id}`} prefetch={false}>
+                          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FFD400] font-[family-name:var(--font-syne)] uppercase">
                             {service.title} {service.highlightText}
                           </h3>
                         </Link>
@@ -325,18 +342,18 @@ export default function ServicesPage() {
                         {/* Explore Spec Link */}
                         <Link
                           href={`/services/${service.id}`}
+                          prefetch={false}
                           className="inline-block"
                         >
-                          <div className="group/btn relative inline-flex items-center justify-between rounded-full overflow-hidden bg-[#12141a]/95 hover:bg-[#1a1d26] border border-white/15 hover:border-[#FFD400]/70 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_0_25px_rgba(255,212,0,0.28)] transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none px-3.5 py-1.5 text-xs gap-2.5">
-                            <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none rounded-full" />
+                          <div className="group/btn relative inline-flex items-center justify-between rounded-full overflow-hidden bg-[#12141a]/95 hover:bg-[#1a1d26] border border-white/15 hover:border-[#FFD400]/70 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] cursor-pointer select-none px-3.5 py-1.5 text-xs gap-2.5">
                             <div className="flex items-center space-x-2 relative z-10">
-                              <span className="w-2 h-2 rounded-full shrink-0 animate-pulse bg-[#FFD400] shadow-[0_0_8px_#FFD400]" />
-                              <span className="font-mono font-bold tracking-[0.18em] uppercase transition-colors whitespace-nowrap text-white group-hover/btn:text-[#FFD400]">
+                              <span className="w-2 h-2 rounded-full shrink-0 bg-[#FFD400] shadow-[0_0_8px_#FFD400]" />
+                              <span className="font-mono font-bold tracking-[0.18em] uppercase whitespace-nowrap text-white group-hover/btn:text-[#FFD400]">
                                 EXPLORE SPEC
                               </span>
                             </div>
-                            <div className="w-5 h-5 rounded-full bg-white/10 group-hover/btn:bg-[#FFD400] text-[#FFD400] group-hover/btn:text-black flex items-center justify-center transition-all duration-300 shrink-0 ml-1.5 shadow-inner relative z-10">
-                              <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 group-hover/btn:rotate-12 transition-transform duration-300" />
+                            <div className="w-5 h-5 rounded-full bg-white/10 group-hover/btn:bg-[#FFD400] text-[#FFD400] group-hover/btn:text-black flex items-center justify-center shrink-0 ml-1.5 shadow-inner relative z-10">
+                              <ArrowUpRight className="w-3 h-3" />
                             </div>
                           </div>
                         </Link>

@@ -23,6 +23,7 @@ export interface ServiceCategoryItem {
   index: string;
   badge: string;
   title: string;
+  categoryHref?: string;
   tagline: string;
   intro: string;
   icon: React.ElementType;
@@ -44,6 +45,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "01",
     badge: "2.3 TECHNOLOGY SOLUTIONS",
     title: "Technology Solutions & Cloud Engineering",
+    categoryHref: "/technology-solution",
     tagline: "High-Performance Web Platforms, Cloud Microservices & Scalable Systems",
     intro:
       "We architect fault-tolerant digital foundations designed to process millions of transactions with sub-second response times. From enterprise Next.js platforms to autonomous cloud microservices, we build software engineered to scale without bottlenecks.",
@@ -57,7 +59,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Full-stack Next.js 15 & React 19 web applications with 90+ Core Web Vitals and dynamic 60 FPS spatial interactions.",
         sla: "99.9% UPTIME",
         tags: ["Next.js 15", "TypeScript", "Tailwind", "REST/GraphQL"],
-        href: "/services/custom-web-development",
+        href: "/technology-solution/web-development",
       },
       {
         id: "cloud-infrastructure-devops",
@@ -235,6 +237,9 @@ export default function ServiceCategoryShowcase() {
                       src={category.visual}
                       alt={category.title}
                       fill
+                      unoptimized
+                      priority
+                      loading="eager"
                       sizes="(max-width: 1024px) 100vw, 550px"
                       className="object-cover group-hover/media:scale-105 transition-transform duration-700 ease-out"
                     />
@@ -273,11 +278,26 @@ export default function ServiceCategoryShowcase() {
                   <div className="space-y-3">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-semibold tracking-[0.25em] uppercase">
                       <Icon className="w-3.5 h-3.5" />
-                      <span>{category.badge}</span>
+                      {category.categoryHref ? (
+                        <Link href={category.categoryHref} className="hover:underline">
+                          {category.badge}
+                        </Link>
+                      ) : (
+                        <span>{category.badge}</span>
+                      )}
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-syne)] font-bold text-white uppercase tracking-tight leading-[1.1]">
-                      {category.title}
+                      {category.categoryHref ? (
+                        <Link
+                          href={category.categoryHref}
+                          className="hover:text-[#FFD400] transition-colors"
+                        >
+                          {category.title}
+                        </Link>
+                      ) : (
+                        category.title
+                      )}
                     </h2>
 
                     <p className="text-sm sm:text-base text-[#FFD400] font-mono tracking-wide">
@@ -290,7 +310,16 @@ export default function ServiceCategoryShowcase() {
                   </p>
 
                   <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <CyberButton href="/contact-us" size="sm">
+                    {category.categoryHref && (
+                      <CyberButton href={category.categoryHref} size="sm">
+                        EXPLORE CATEGORY
+                      </CyberButton>
+                    )}
+                    <CyberButton
+                      href="/contact-us"
+                      size="sm"
+                      variant={category.categoryHref ? "outline" : "solid"}
+                    >
                       DEPLOY DIVISION POD
                     </CyberButton>
                     <span className="text-xs font-mono text-neutral-400 flex items-center gap-1.5">
@@ -317,6 +346,7 @@ export default function ServiceCategoryShowcase() {
                     <Link
                       key={service.id}
                       href={service.href}
+                      prefetch={false}
                       className="group/card block rounded-2xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-[#FFD400]/60 p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_35px_rgba(255,212,0,0.12)] relative overflow-hidden"
                     >
                       {/* Top Row: Service SLA & Arrow */}

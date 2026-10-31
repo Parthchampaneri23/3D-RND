@@ -9,6 +9,7 @@ import {
   X,
   ChevronDown,
   Cpu,
+  Code,
   TrendingUp,
   Palette,
   Camera,
@@ -28,6 +29,7 @@ import {
   Factory,
 } from "lucide-react";
 import CyberButton from "@/components/CyberButton";
+import ServicesMegaMenu, { SERVICE_MEGA_CATEGORIES } from "@/components/ServicesMegaMenu";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -66,7 +68,7 @@ export default function Navbar() {
   const handleMouseLeaveServices = () => {
     megaMenuTimeoutRef.current = setTimeout(() => {
       setServicesMenuOpen(false);
-    }, 200);
+    }, 300);
   };
 
   const handleMouseEnterIndustries = () => {
@@ -150,6 +152,16 @@ export default function Navbar() {
 
   const serviceDropdownItems = [
     {
+      title: "Technology Solutions",
+      href: "/technology-solution",
+      icon: Cpu,
+    },
+    {
+      title: "Custom Web Development",
+      href: "/technology-solution/web-development",
+      icon: Code,
+    },
+    {
       title: "Web & Enterprise Cloud",
       href: "/services/web-cloud",
       icon: Cpu,
@@ -209,7 +221,7 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent shadow-none py-5"
         }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between relative">
         {/* Brand Logo in crisp white pill capsule */}
         <a href="/" className="flex items-center gap-3 group">
           <div className="px-3  rounded-xl transition-all flex items-center">
@@ -238,11 +250,11 @@ export default function Navbar() {
                   key={link.name}
                   onMouseEnter={handleMouseEnterServices}
                   onMouseLeave={handleMouseLeaveServices}
-                  className="relative py-1"
+                  className="py-3 group/mega"
                 >
                   <a
                     href={link.href}
-                    className={`inline-flex items-center gap-1.5 transition-colors hover:text-[#FFD400] drop-shadow-md ${isActive || servicesMenuOpen
+                    className={`relative inline-flex items-center gap-1.5 transition-colors hover:text-[#FFD400] drop-shadow-md ${isActive || servicesMenuOpen
                         ? "text-[#FFD400] font-bold"
                         : "text-white/90"
                       }`}
@@ -251,45 +263,21 @@ export default function Navbar() {
                     <ChevronDown
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesMenuOpen
                           ? "rotate-180 text-[#FFD400]"
-                          : "text-white/70 group-hover:text-[#FFD400]"
+                          : "text-white/70 group-hover:text-[#FFD400] group-hover/mega:rotate-180 group-hover/mega:text-[#FFD400]"
                         }`}
                     />
+                    {(isActive || servicesMenuOpen) && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFD400] shadow-[0_0_8px_#FFD400] rounded-full" />
+                    )}
                   </a>
-                  {(isActive || servicesMenuOpen) && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FFD400] shadow-[0_0_8px_#FFD400] rounded-full" />
-                  )}
 
-                  {/* Single-Column Dropdown for Services */}
-                  {servicesMenuOpen && (
-                    <div
-                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[310px] animate-fadeIn"
-                      onMouseEnter={handleMouseEnterServices}
-                      onMouseLeave={handleMouseLeaveServices}
-                    >
-                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5 max-h-[460px] overflow-y-auto scrollbar-none">
-                        <div className="flex flex-col gap-1.5">
-                          {serviceDropdownItems.map((item, idx) => {
-                            const Icon = item.icon;
-                            return (
-                              <Link
-                                key={idx}
-                                href={item.href}
-                                onClick={() => setServicesMenuOpen(false)}
-                                className="flex items-center gap-3.5 px-3.5 py-2.5 hover:bg-white/[0.05] transition-all group rounded-md"
-                              >
-                                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white shadow-[0_0_12px_rgba(255,255,255,0.15)] group-hover:border-[#FFD400] group-hover:shadow-[0_0_20px_rgba(255,212,0,0.4)] group-hover:scale-105 transition-all">
-                                  <Icon className="w-4 h-4 text-[#FFD400] transition-colors" />
-                                </div>
-                                <span className="text-[13.5px] font-medium text-neutral-100 group-hover:text-[#FFD400] transition-colors leading-snug">
-                                  {item.title}
-                                </span>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  {/* Services Mega Menu with Categories & Subcategories */}
+                  <ServicesMegaMenu
+                    isOpen={servicesMenuOpen}
+                    onClose={() => setServicesMenuOpen(false)}
+                    onMouseEnter={handleMouseEnterServices}
+                    onMouseLeave={handleMouseLeaveServices}
+                  />
                 </div>
               );
             }
@@ -322,15 +310,19 @@ export default function Navbar() {
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FFD400] shadow-[0_0_8px_#FFD400] rounded-full" />
                   )}
 
-                  {/* 2-Column Grid Dropdown: #08090d bg, no outer border, rounded-md */}
+                  {/* Industries Minimal Dropdown - Two Column */}
                   {industriesMenuOpen && (
                     <div
-                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[580px] animate-fadeIn"
+                      className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 w-[560px] animate-fadeIn"
                       onMouseEnter={handleMouseEnterIndustries}
                       onMouseLeave={handleMouseLeaveIndustries}
                     >
-                      <div className="rounded-md bg-[#08090d] border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] p-2.5">
-                        <div className="grid grid-cols-2 gap-1.5">
+                      <div className="rounded-2xl bg-[#07090e]/98 backdrop-blur-3xl border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.95)] overflow-hidden">
+                        {/* Top Accent Bar */}
+                        <div className="h-1 w-full bg-gradient-to-r from-[#FFD400]/0 via-[#FFD400] to-[#FFD400]/0" />
+                        
+                        {/* Industries Grid - Two Columns */}
+                        <div className="p-4 grid grid-cols-2 gap-2">
                           {industryDropdownItems.map((item, idx) => {
                             const Icon = item.icon;
                             return (
@@ -338,17 +330,38 @@ export default function Navbar() {
                                 key={idx}
                                 href={item.href}
                                 onClick={() => setIndustriesMenuOpen(false)}
-                                className="flex items-center gap-3.5 px-3.5 py-3 hover:bg-white/[0.05] transition-all group rounded-md"
+                                className="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all"
                               >
-                                <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white shadow-[0_0_12px_rgba(255,255,255,0.15)] group-hover:border-[#FFD400] group-hover:shadow-[0_0_20px_rgba(255,212,0,0.4)] group-hover:scale-105 transition-all">
-                                  <Icon className="w-5 h-5 text-[#FFD400] transition-colors" />
+                                <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-white/[0.06] border border-white/10 text-[#FFD400] group-hover:bg-[#FFD400] group-hover:text-black group-hover:scale-105 transition-all flex-shrink-0">
+                                  <Icon className="w-4 h-4" />
                                 </div>
-                                <span className="text-[13.5px] font-medium text-neutral-100 group-hover:text-[#FFD400] transition-colors leading-snug">
+                                <span className="text-xs font-medium text-neutral-300 group-hover:text-[#FFD400] transition-colors leading-tight font-[family-name:var(--font-jakarta)]">
                                   {item.title}
                                 </span>
                               </a>
                             );
                           })}
+                        </div>
+
+                        {/* Bottom Bar */}
+                        <div className="px-4 py-3 bg-black/60 border-t border-white/10 flex items-center justify-between text-xs">
+                          <Link
+                            href="/industries"
+                            onClick={() => setIndustriesMenuOpen(false)}
+                            className="inline-flex items-center gap-1.5 text-neutral-400 hover:text-[#FFD400] transition-colors font-[family-name:var(--font-jakarta)]"
+                          >
+                            <span>View All</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </Link>
+
+                          <Link
+                            href="/contact-us"
+                            onClick={() => setIndustriesMenuOpen(false)}
+                            className="inline-flex items-center gap-1.5 text-[#FFD400] font-bold hover:underline font-[family-name:var(--font-jakarta)]"
+                          >
+                            <span>Contact</span>
+                            <ArrowUpRight className="w-3 h-3" />
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -423,25 +436,42 @@ export default function Navbar() {
                   )}
                 </a>
 
-                {/* Mobile sub-links for Services (Single column, white rings, rounded-md) */}
+                {/* Mobile sub-links for Services (Categorized Mega Menu) */}
                 {link.hasMega && (
-                  <div className="py-2 grid grid-cols-1 gap-1.5 mt-1 border-t border-white/10 pt-2">
-                    {serviceDropdownItems.map((srv, i) => {
-                      const Icon = srv.icon;
+                  <div className="py-2 flex flex-col gap-2.5 mt-1 border-t border-white/10 pt-2.5">
+                    {SERVICE_MEGA_CATEGORIES.map((cat) => {
+                      const Icon = cat.icon;
                       return (
-                        <Link
-                          key={i}
-                          href={srv.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-3 p-2.5 rounded-md bg-[#08090d] text-neutral-200 hover:text-[#FFD400] hover:bg-white/[0.06] transition-all group"
-                        >
-                          <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-white/[0.04] border border-white text-[#FFD400] group-hover:border-[#FFD400] transition-colors">
-                            <Icon className="w-4 h-4" />
+                        <div key={cat.id} className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
+                          <Link
+                            href={cat.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center justify-between text-xs font-mono text-[#FFD400] font-bold uppercase tracking-wider mb-2"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Icon className="w-3.5 h-3.5" />
+                              <span>{cat.num} // {cat.name}</span>
+                            </span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </Link>
+                          <div className="grid grid-cols-1 gap-1 pl-2 border-l border-white/10">
+                            {cat.subcategories.map((sub, sIdx) => (
+                              <Link
+                                key={sIdx}
+                                href={sub.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="py-1.5 px-2 rounded-lg text-xs text-neutral-300 hover:text-[#FFD400] hover:bg-white/[0.05] flex items-center justify-between"
+                              >
+                                <span>{sub.title}</span>
+                                {sub.badge && (
+                                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#FFD400]/20 text-[#FFD400]">
+                                    {sub.badge}
+                                  </span>
+                                )}
+                              </Link>
+                            ))}
                           </div>
-                          <span className="text-xs font-medium leading-tight group-hover:text-[#FFD400]">
-                            {srv.title}
-                          </span>
-                        </Link>
+                        </div>
                       );
                     })}
                   </div>

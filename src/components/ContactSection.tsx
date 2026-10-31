@@ -60,7 +60,7 @@ export default function ContactSection() {
                 scrollTrigger: {
                     trigger: ".contact-header",
                     start: "top 85%",
-                    toggleActions: "restart none none reset",
+                    toggleActions: "play none none none",
                 },
             });
 
@@ -97,7 +97,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".helper-cards-container",
                         start: "top 80%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -115,7 +115,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".form-card-rect",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -132,7 +132,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".form-card-rect",
                         start: "top 78%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -151,7 +151,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".channels-grid",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -169,7 +169,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".faq-section",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -186,7 +186,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".faq-list",
                         start: "top 85%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -204,7 +204,7 @@ export default function ContactSection() {
                     scrollTrigger: {
                         trigger: ".cta-banner-rect",
                         start: "top 90%",
-                        toggleActions: "restart none none reset",
+                        toggleActions: "play none none none",
                     },
                 }
             );

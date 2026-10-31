@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import GSAPScrollAnimations from "@/components/GSAPScrollAnimations";
 import HeroSection from "@/components/HeroSection";
 import AboutUsSection from "@/components/AboutUsSection";
-import ServiceUniverseSection from "@/components/ServiceUniverseSection";
+import ServiceCardsSection from "@/components/ServiceCardsSection";
 import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import IndustriesServedSection from "@/components/IndustriesServedSection";
@@ -34,7 +34,7 @@ export default function Home() {
         <AboutUsSection />
 
         {/* 1.4 Service universe: Technology, Digital Marketing, Branding & Design, Media Production */}
-        <ServiceUniverseSection />
+        <ServiceCardsSection />
 
         {/* 1.5 Featured projects: Selected websites, applications, campaigns, branding and media projects */}
         <FeaturedProjectsSection />

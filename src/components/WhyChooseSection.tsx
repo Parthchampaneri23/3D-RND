@@ -104,13 +104,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: headerRef.current,
               start: "top 85%",
-              toggleActions: "restart none none reset",
-              onEnter: () => {
-                // Restart typewriter animation from the beginning whenever scrolling top-to-bottom
-                setCurrentText("");
-                setPhraseIndex(0);
-                setIsDeleting(false);
-              },
+              toggleActions: "play none none none",
             },
           }
         );
@@ -132,7 +126,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 80%",
-              toggleActions: "restart none none reset",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -153,7 +147,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 75%",
-              toggleActions: "restart none none reset",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -174,7 +168,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
             scrollTrigger: {
               trigger: cardsGridRef.current,
               start: "top 75%",
-              toggleActions: "restart none none reset",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -195,7 +189,7 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
           scrollTrigger: {
             trigger: wavePathRef.current,
             start: "top 80%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -586,7 +580,6 @@ export default function WhyChooseSection({ className = "" }: { className?: strin
         }
         .animate-text-wave {
           display: inline-block;
-          animation: textWave 2.8s ease-in-out infinite;
           will-change: transform;
         }
 

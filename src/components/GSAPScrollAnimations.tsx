@@ -48,8 +48,8 @@ export default function GSAPScrollAnimations() {
       );
 
       headings.forEach((heading) => {
-        // Skip hero headline which has its own entry
-        if (heading.closest("#hero")) return;
+        // Skip hero headline or directory grid
+        if (heading.closest("#hero") || heading.closest("#directory") || heading.closest("[data-no-gsap]")) return;
 
         // If already handled by custom WaveText or typewriter, skip
         if (
@@ -65,7 +65,8 @@ export default function GSAPScrollAnimations() {
           scrollTrigger: {
             trigger: heading,
             start: "top 88%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
+            once: true,
           },
         });
 
@@ -110,7 +111,7 @@ export default function GSAPScrollAnimations() {
       );
 
       badges.forEach((badge) => {
-        if (badge.closest("#hero")) return;
+        if (badge.closest("#hero") || badge.closest("#directory") || badge.closest("[data-no-gsap]")) return;
 
         gsap.fromTo(
           badge,
@@ -128,7 +129,7 @@ export default function GSAPScrollAnimations() {
             scrollTrigger: {
               trigger: badge,
               start: "top 90%",
-              toggleActions: "restart none none reset",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -140,7 +141,7 @@ export default function GSAPScrollAnimations() {
       );
 
       sectionParagraphs.forEach((para) => {
-        if (para.closest("#hero")) return;
+        if (para.closest("#hero") || para.closest("#directory") || para.closest("[data-no-gsap]")) return;
 
         gsap.fromTo(
           para,
@@ -156,7 +157,7 @@ export default function GSAPScrollAnimations() {
             scrollTrigger: {
               trigger: para,
               start: "top 88%",
-              toggleActions: "restart none none reset",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -168,8 +169,8 @@ export default function GSAPScrollAnimations() {
       );
 
       images.forEach((img) => {
-        // Skip hero astronaut or horizontal work track items (they have custom scrub)
-        if (img.closest("#hero") || img.closest(".capability-horizontal-card")) return;
+        // Skip hero astronaut, directory grid, or horizontal work track items
+        if (img.closest("#hero") || img.closest("#directory") || img.closest("[data-no-gsap]") || img.closest(".capability-horizontal-card")) return;
 
         gsap.fromTo(
           img,

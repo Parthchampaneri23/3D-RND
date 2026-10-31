@@ -51,7 +51,8 @@ export default function ProcessSection() {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
+            once: true,
           },
         });
 
@@ -69,14 +70,19 @@ export default function ProcessSection() {
             }
           )
           .to(titleChars, {
-            y: -15,
+            y: -14,
             duration: 0.3,
-            stagger: {
-              each: 0.03,
-              repeat: 1,
-              yoyo: true,
-            },
+            stagger: 0.02,
+            ease: "sine.out",
+          })
+          .to(titleChars, {
+            y: 0,
+            duration: 0.3,
+            stagger: 0.02,
             ease: "sine.inOut",
+            onComplete: () => {
+              gsap.set(titleChars, { clearProps: "all" });
+            },
           });
       }
 
@@ -87,7 +93,7 @@ export default function ProcessSection() {
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 80%",
-            toggleActions: "restart none none reset",
+            toggleActions: "play none none none",
           },
         });
 
@@ -234,7 +240,6 @@ export default function ProcessSection() {
         }
         .animate-text-wave {
           display: inline-block;
-          animation: textWave 2.8s ease-in-out infinite;
           will-change: transform;
         }
       `}</style>

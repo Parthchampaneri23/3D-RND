@@ -71,7 +71,7 @@ export default function ServiceConversionCTA() {
                 </div>
               </div>
 
-              <Link href="/contact-us?intent=quotation" className="block w-full">
+              <Link href="/contact-us?intent=quotation" prefetch={false} className="block w-full">
                 <div className="group/btn relative w-full inline-flex items-center justify-between rounded-full overflow-hidden bg-[#FFD400] hover:bg-[#ffe34d] text-black font-mono font-bold text-xs sm:text-sm tracking-[0.18em] uppercase px-6 py-3.5 transition-all shadow-[0_0_20px_rgba(255,212,0,0.3)]">
                   <span className="relative z-10">REQUEST FORMAL QUOTATION</span>
                   <div className="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
@@ -112,7 +112,7 @@ export default function ServiceConversionCTA() {
                 </div>
               </div>
 
-              <Link href="/contact-us?intent=consultation" className="block w-full">
+              <Link href="/contact-us?intent=consultation" prefetch={false} className="block w-full">
                 <div className="group/btn relative w-full inline-flex items-center justify-between rounded-full overflow-hidden bg-white/[0.08] hover:bg-white/[0.14] text-white border border-white/20 hover:border-blue-400 font-mono font-bold text-xs sm:text-sm tracking-[0.18em] uppercase px-6 py-3.5 transition-all">
                   <span className="relative z-10">BOOK 30-MIN CONSULTATION</span>
                   <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">

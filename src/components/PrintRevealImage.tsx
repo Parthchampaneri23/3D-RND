@@ -71,7 +71,7 @@ export default function PrintRevealImage({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 88%",
-          toggleActions: "restart none none reset",
+          toggleActions: "play none none none",
         },
       });
 

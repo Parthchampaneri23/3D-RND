@@ -224,6 +224,7 @@ export default function UnifiedDetailsView({
                             {/* Left: Back Link */}
                             <Link
                                 href={parentPath}
+                                prefetch={false}
                                 className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.18em] text-neutral-400 hover:text-[#FFD400] transition-colors group"
                             >
                                 <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1.5 transition-transform text-[#FFD400]" />
@@ -838,6 +839,7 @@ export default function UnifiedDetailsView({
                                     <Link
                                         key={rIdx}
                                         href={`${parentPath}/${rel.id}`}
+                                        prefetch={false}
                                         className="rounded-2xl border border-white/10 bg-[#0c0e14] overflow-hidden hover:border-[#FFD400]/50 hover:shadow-[0_0_30px_rgba(255,212,0,0.15)] transition-all group flex flex-col"
                                     >
                                         <div className="relative aspect-[16/10] overflow-hidden">
@@ -883,6 +885,7 @@ export default function UnifiedDetailsView({
                                 {prevItem ? (
                                     <Link
                                         href={`${parentPath}/${prevItem.id}`}
+                                        prefetch={false}
                                         className="group flex items-center gap-3.5 p-4 sm:px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#FFD400]/40 transition-all w-full sm:w-auto"
                                     >
                                         <ArrowLeft className="w-4 h-4 text-[#FFD400] group-hover:-translate-x-1 transition-transform" />
@@ -902,6 +905,7 @@ export default function UnifiedDetailsView({
                                 {nextItem ? (
                                     <Link
                                         href={`${parentPath}/${nextItem.id}`}
+                                        prefetch={false}
                                         className="group flex items-center justify-end gap-3.5 p-4 sm:px-6 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-[#FFD400]/40 transition-all w-full sm:w-auto ml-auto"
                                     >
                                         <div className="text-right">
