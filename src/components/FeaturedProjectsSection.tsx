@@ -19,69 +19,69 @@ interface ProjectItem {
 }
 
 export default function FeaturedProjectsSection() {
-  // Center card (index 2: Sync Spatial 3D Configurator) is open by default
+  // Center card (index 2: Lumen Sal Spatial 3D) is open by default
   const [activeIndex, setActiveIndex] = useState(2);
 
   const projects: ProjectItem[] = [
     {
-      id: "nexus-trading",
-      category: "FINTECH",
-      tag: "FINTECH & TRADING",
-      verticalTitle: "NEXUS QUANT TRADING",
-      title: "Nexus Quantum Trading Engine",
-      location: "NEW YORK // WALL STREET",
-      desc: "Ultra-low-latency financial analytics and distributed portfolio management dashboard processing $2.4B+ in daily asset telemetry with sub-millisecond execution.",
+      id: "quantum-mobile-os",
+      category: "MOBILE APP",
+      tag: "MOBILE APP // FINTECH",
+      verticalTitle: "QUANTUM MOBILE WEALTH",
+      title: "Quantum Mobile Wealth Suite",
+      location: "ZURICH // NEW YORK",
+      desc: "Cross-platform mobile wealth management app featuring hardware enclave biometric cryptography, offline WatermelonDB sync, and 60 FPS Skia graphics.",
       image: "/images/project_it_fintech.jpg",
-      specs: "Sub-1.2ms Latency // 99.999% SLA // 2025",
-      link: "/portfolios",
+      specs: "60 FPS Native // $850M+ AUM // 2026",
+      link: "/portfolios/quantum-mobile-os",
     },
     {
-      id: "aegis-ai",
-      category: "AI & ML",
-      tag: "ENTERPRISE AI & ML",
-      verticalTitle: "PROJECT AEGIS NEURAL AI",
-      title: "Project Aegis Autonomous Neural Network",
-      location: "SAN FRANCISCO // TOKYO",
-      desc: "Distributed enterprise generative AI orchestrator featuring real-time multi-tenant LLM inference, active neural graph visualization, and automated cluster load-balancing.",
-      image: "/images/project_it_ai.jpg",
-      specs: "89 PetaFLOPS // 412 GPU Nodes // 2025",
-      link: "/portfolios",
+      id: "kailua",
+      category: "WEB APP",
+      tag: "WEBSITE & WEB APPS",
+      verticalTitle: "KAILUA HEADLESS FLAGSHIP",
+      title: "Kailua Headless Storefront",
+      location: "VANCOUVER // LONDON",
+      desc: "Lightning-fast headless Shopify Plus edge storefront engineered with Next.js 15, sub-150ms Algolia search, and interactive 3D WebGL fabric inspection.",
+      image: "/images/service_ecommerce_color.jpg",
+      specs: "0.8s LCP // +340% Conversions // 2026",
+      link: "/portfolios/kailua",
     },
     {
-      id: "sync-spatial",
-      category: "SPATIAL 3D",
-      tag: "SPATIAL 3D & WEB",
-      verticalTitle: "SYNC SPATIAL WEB STUDIO",
-      title: "Sync Spatial 3D Web Configurator",
-      location: "GENEVA // LONDON",
-      desc: "Photorealistic WebGL & WebGPU 3D spatial product configurator featuring real-time cinema GLSL lighting shaders, procedural materials, and frictionless headless checkout.",
-      image: "/images/project_it_spatial.jpg",
-      specs: "WebGL 2.0 // +340% Conversions // 2025",
-      link: "/portfolios",
+      id: "lumen-sal",
+      category: "BRANDING",
+      tag: "BRANDING & 3D SPATIAL",
+      verticalTitle: "LUMEN SAL ATELIER",
+      title: "Lumen Sal Spatial 3D Showroom",
+      location: "GENEVA // PARIS",
+      desc: "Photorealistic Three.js & WebGL spatial interior showroom featuring dynamic PBR solar lighting shaders, procedural materials, and bespoke typography tokens.",
+      image: "/images/project_lumen_sal.jpg",
+      specs: "60 FPS WebGL // sub-2MB Draco // 2026",
+      link: "/portfolios/lumen-sal",
     },
     {
-      id: "nebula-mesh",
+      id: "nebula-cloud",
       category: "CLOUD INFRA",
-      tag: "CLOUD & KUBERNETES",
-      verticalTitle: "NEBULA CLOUD MESH OS",
-      title: "Nebula Multi-Region Kubernetes Mesh",
+      tag: "WEBSITE & CLOUD PLATFORM",
+      verticalTitle: "NEBULA DISTRIBUTED OS",
+      title: "Nebula Distributed Cloud OS",
       location: "FRANKFURT // SINGAPORE",
-      desc: "Autonomous distributed cloud computing management plane orchestrating hybrid Kubernetes clusters across AWS, GCP, and bare-metal nodes with zero-downtime failover.",
-      image: "/images/project_it_cloud.jpg",
-      specs: "0.00s RTO // 14 Edge Regions // 2025",
-      link: "/portfolios",
+      desc: "Autonomous multi-region Kubernetes cloud management console orchestrating 10,000+ pods with live WebSocket telemetry, zero-downtime blue/green deployments.",
+      image: "/images/nebula_cloud_os_3d.jpg",
+      specs: "0.00s RTO // 10k+ Pods // 2025",
+      link: "/portfolios/nebula-cloud",
     },
     {
-      id: "cybershield-mesh",
-      category: "SECURITY",
-      tag: "CYBERSECURITY & ZERO-TRUST",
-      verticalTitle: "CYBERSHIELD DEFENSE MESH",
-      title: "CyberShield Biometric Defense System",
-      location: "ZURICH // DUBAI",
-      desc: "Post-quantum cryptographic key management platform featuring biometric authentication, real-time threat intelligence telemetry, and automated SOC 2 compliance.",
-      image: "/images/project_it_cyber.jpg",
-      specs: "Zero-Trust // SOC 2 Type II // 2025",
-      link: "/portfolios",
+      id: "mission-ops",
+      category: "CINEMA",
+      tag: "VIDEOGRAPHY & PHOTOGRAPHY",
+      verticalTitle: "VANGUARD HIGH-ALTITUDE",
+      title: "Vanguard 8K Alpine Commercial",
+      location: "ZERMATT // SWISS ALPS",
+      desc: "Award-winning commercial film captured in minus 25°C blizzards using RED V-Raptor 8K cameras, high-altitude FPV drones, and Dolby Atmos spatial audio.",
+      image: "/images/project_forest_film.jpg",
+      specs: "8K Cinema // Dolby Atmos // 2025",
+      link: "/portfolios/mission-ops",
     },
   ];
 
@@ -99,104 +99,85 @@ export default function FeaturedProjectsSection() {
       id="work"
       className="relative bg-transparent text-white overflow-hidden py-20 sm:py-28 lg:py-32 selection:bg-[#FFD400] selection:text-black border-t border-white/5"
     >
-      {/* Background Starfield and Ambient Glowing Nebulae */}
-      <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#c59a58]/5 blur-[180px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[550px] h-[550px] bg-[#FFD400]/5 blur-[180px] rounded-full pointer-events-none" />
+      {/* Soft Nebula Ambient Flare */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-[#FFD400]/5 blur-[200px] rounded-full pointer-events-none" />
 
-      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-10">
-        {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 sm:pb-10 mb-6 sm:mb-8 border-b border-white/10">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>FEATURED IT MISSIONS // SOFTWARE PORTFOLIO</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase text-white">
-              ENGINEERED FOR THE{" "}
-              <span className="text-[#c59a58] sm:text-[#FFD400] drop-shadow-[0_0_35px_rgba(212,175,55,0.35)]">
-                HIGHEST STAKES
-              </span>
-            </h2>
+      <div className="max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono font-medium tracking-[0.25em] uppercase text-[#FFD400] mb-4 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>FEATURED CASE STUDIES // LIVE PORTFOLIO</span>
           </div>
 
-          <div className="hidden lg:flex items-center space-x-3 text-xs font-mono text-neutral-400 uppercase tracking-widest">
-            <span className="text-[#FFD400] font-semibold">INTERACTIVE SHOWCASE</span>
-            <span className="text-white/20">|</span>
-            <span>HOVER TO EXPLORE IT PROJECTS</span>
-          </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-[family-name:var(--font-syne)] font-bold tracking-tight uppercase leading-[1.05] text-white">
+            ENGINEERED FOR <span className="text-[#FFD400]">PERFORMANCE.</span>
+          </h2>
+
+          <p className="text-sm sm:text-base text-neutral-400 font-light mt-4 leading-relaxed">
+            Click through our selected enterprise case studies to inspect architectural blueprints, verified metrics, and interactive production deployments.
+          </p>
         </div>
 
-        {/* ----------------- EXPANDING ACCORDION GALLERY CONTAINER ----------------- */}
-        <div
-          onMouseLeave={() => setActiveIndex(2)}
-          className="relative flex flex-col md:flex-row items-stretch gap-3 sm:gap-4 lg:gap-5 w-full min-h-[580px] sm:min-h-[640px] lg:h-[680px] xl:h-[720px] pb-12 sm:pb-16"
-        >
-          {projects.map((project, idx) => {
-            const isActive = activeIndex === idx;
+        {/* 5-Card Horizontal Interactive Accordion Grid */}
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-5 h-auto lg:h-[640px] items-stretch">
+          {projects.map((project, index) => {
+            const isActive = activeIndex === index;
 
             return (
               <div
                 key={project.id}
-                onMouseEnter={() => setActiveIndex(idx)}
-                onClick={() => setActiveIndex(idx)}
-                className={`relative rounded-[32px] sm:rounded-[40px] lg:rounded-[46px] overflow-hidden cursor-pointer select-none transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-                  verticalOffsets[idx]
+                onClick={() => setActiveIndex(index)}
+                className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group border border-white/10 hover:border-[#FFD400]/60 shadow-2xl ${
+                  verticalOffsets[index]
                 } ${
                   isActive
-                    ? "flex-[3.5] sm:flex-[4] lg:flex-[4.6] border-[1.5px] border-[#c59a58] sm:border-[#FFD400]/90 shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(212,175,55,0.22)]"
-                    : "flex-1 border border-white/10 hover:border-white/25 hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
+                    ? "lg:flex-[3.5] flex-1 min-h-[480px] lg:min-h-0 ring-1 ring-[#FFD400]/40"
+                    : "lg:flex-[0.9] flex-none h-24 lg:h-auto min-w-0 hover:lg:flex-[1.1]"
                 }`}
-                style={{
-                  minHeight: isActive ? "420px" : "120px",
-                }}
               >
-                {/* Background Image: Colourful and Vibrant in both states */}
+                {/* Background Image with Cinematic Color Grading */}
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className={`object-cover transition-all duration-1000 ease-out ${
-                    isActive
-                      ? "scale-105 opacity-100 saturate-110 brightness-105"
-                      : "scale-100 opacity-70 saturate-100 brightness-90 hover:opacity-95 hover:scale-105"
-                  }`}
-                  priority={idx === 2}
-                />
-
-                {/* Overlays: Subtle Dark Scrim preserving vivid colors */}
-                <div
-                  className={`absolute inset-0 transition-opacity duration-700 pointer-events-none ${
-                    isActive
-                      ? "bg-gradient-to-t from-black/95 via-black/40 to-black/10 opacity-100"
-                      : "bg-black/40 hover:bg-black/25 opacity-100"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className={`object-cover transition-transform duration-1000 ease-out ${
+                    isActive ? "scale-105" : "scale-100 group-hover:scale-110"
                   }`}
                 />
 
-                {/* ================= INACTIVE (COLLAPSED) VIEW ================= */}
+                {/* Ambient Dark Gradient Vignette Overlay */}
                 <div
-                  className={`absolute inset-0 flex flex-col justify-between items-center py-6 sm:py-8 px-2 transition-all duration-500 ${
+                  className={`absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/30 transition-opacity duration-500 ${
+                    isActive ? "opacity-90" : "opacity-75 group-hover:opacity-60"
+                  }`}
+                />
+
+                {/* ================= COLLAPSED (INACTIVE) VIEW ================= */}
+                <div
+                  className={`absolute inset-0 flex flex-row lg:flex-col justify-between items-center p-5 sm:p-6 transition-all duration-500 ${
                     isActive
-                      ? "opacity-0 pointer-events-none -translate-y-4"
-                      : "opacity-100 pointer-events-auto translate-y-0"
+                      ? "opacity-0 pointer-events-none"
+                      : "opacity-100 pointer-events-auto"
                   }`}
                 >
-                  {/* Top Capsule Category Badge */}
-                  <div className="w-full flex justify-center">
-                    <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/75 border border-white/25 text-[9px] sm:text-[10px] font-mono tracking-widest text-[#FFD400] uppercase backdrop-blur-md text-center shadow-lg">
-                      {project.tag}
-                    </span>
-                  </div>
+                  {/* Top/Left Category Icon/Tag */}
+                  <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase text-[#FFD400] px-2.5 py-1 rounded bg-black/60 border border-white/10 backdrop-blur-sm">
+                    {project.category}
+                  </span>
 
-                  {/* Vertical Centered Sideways Title */}
-                  <div className="my-auto flex items-center justify-center">
-                    <span className="[writing-mode:vertical-rl] rotate-180 uppercase tracking-[0.24em] text-white hover:text-[#FFD400] font-[family-name:var(--font-syne)] font-bold text-xs sm:text-sm drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] whitespace-nowrap transition-colors">
+                  {/* Vertical Rotated Title on Desktop, Horizontal on Mobile */}
+                  <div className="lg:[writing-mode:vertical-rl] lg:rotate-180 text-left my-auto">
+                    <h3 className="text-sm sm:text-base lg:text-lg font-[family-name:var(--font-syne)] font-bold tracking-wider uppercase text-white group-hover:text-[#FFD400] transition-colors whitespace-nowrap">
                       {project.verticalTitle}
-                    </span>
+                    </h3>
                   </div>
 
-                  {/* Bottom Decorative Index Accent */}
-                  <div className="w-2 h-2 rounded-full bg-[#FFD400]/70 shadow-[0_0_8px_#FFD400]" />
+                  {/* Bottom Arrow Indicator */}
+                  <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#FFD400] text-white group-hover:text-black flex items-center justify-center transition-all duration-300 shrink-0">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
 
                 {/* ================= ACTIVE (EXPANDED) VIEW ================= */}
@@ -239,7 +220,7 @@ export default function FeaturedProjectsSection() {
                         href={project.link}
                         className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black font-bold text-xs tracking-widest uppercase transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,212,0,0.45)] hover:scale-105 active:scale-95"
                       >
-                        <span>EXPLORE PROJECT</span>
+                        <span>EXPLORE CASE STUDY</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
@@ -248,6 +229,17 @@ export default function FeaturedProjectsSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* View All Projects Action Link */}
+        <div className="text-center mt-12 sm:mt-16">
+          <Link
+            href="/portfolios"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-[#FFD400] text-white text-xs font-mono uppercase tracking-[0.2em] transition-all"
+          >
+            <span>VIEW ALL 15 PORTFOLIO CASE STUDIES</span>
+            <ArrowUpRight className="w-4 h-4 text-[#FFD400]" />
+          </Link>
         </div>
       </div>
     </section>

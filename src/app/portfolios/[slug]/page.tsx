@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPortfolioById, portfolioData } from "@/data/portfolioData";
-import UnifiedDetailsView, {
-  UnifiedDetailItem,
-  RelatedItemSummary,
-} from "@/components/UnifiedDetailsView";
+import {
+  getPortfolioById,
+  portfolioData,
+  getRelatedPortfolios,
+} from "@/data/portfolioData";
+import PortfolioDetailView from "@/components/PortfolioDetailView";
 
 export function generateStaticParams() {
   return portfolioData.map((p) => ({
@@ -25,8 +26,8 @@ export async function generateMetadata({
     };
   }
   return {
-    title: `${project.title} | RnD Technosoft Case Study`,
-    description: project.tagline,
+    title: `${project.title} — ${project.category} | RnD Technosoft Case Study`,
+    description: project.summary || project.tagline,
   };
 }
 
@@ -49,67 +50,14 @@ export default async function PortfolioDetailPage({
       ? portfolioData[currentIndex + 1]
       : null;
 
-  const unifiedItem: UnifiedDetailItem = {
-    id: project.id,
-    index: project.index,
-    title: project.title,
-    tagline: project.tagline,
-    category: project.category,
-    image: project.image,
-    galleryImages: project.galleryImages,
-    client: project.client,
-    year: project.year,
-    sla: project.sla,
-    badge: project.badge,
-    overview: project.overview,
-    quote: project.quote,
-    deliverables: project.deliverables,
-    scope: project.scope,
-    techStack: project.techStack,
-    faqs: project.faqs,
-    beforeAfter: project.beforeAfter,
-  };
-
-  const relatedSummaries: RelatedItemSummary[] = portfolioData.map((p) => ({
-    id: p.id,
-    index: p.index,
-    title: p.title,
-    category: p.category,
-    image: p.image,
-    tagline: p.tagline,
-  }));
-
-  const prevSummary: RelatedItemSummary | null = prevProject
-    ? {
-        id: prevProject.id,
-        index: prevProject.index,
-        title: prevProject.title,
-        category: prevProject.category,
-        image: prevProject.image,
-        tagline: prevProject.tagline,
-      }
-    : null;
-
-  const nextSummary: RelatedItemSummary | null = nextProject
-    ? {
-        id: nextProject.id,
-        index: nextProject.index,
-        title: nextProject.title,
-        category: nextProject.category,
-        image: nextProject.image,
-        tagline: nextProject.tagline,
-      }
-    : null;
+  const relatedProjects = getRelatedPortfolios(project.id, 3);
 
   return (
-    <UnifiedDetailsView
-      type="portfolio"
-      item={unifiedItem}
-      allServicesOrItems={relatedSummaries}
-      prevItem={prevSummary}
-      nextItem={nextSummary}
-      parentPath="/portfolios"
-      parentLabel="Portfolio"
+    <PortfolioDetailView
+      project={project}
+      prevProject={prevProject}
+      nextProject={nextProject}
+      relatedProjects={relatedProjects}
     />
   );
 }
