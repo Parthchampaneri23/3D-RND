@@ -8,7 +8,7 @@ export default function RnDFooter() {
   };
 
   return (
-    <footer className="relative bg-transparent text-white pt-20 pb-12 border-t border-white/10 overflow-hidden">
+    <footer className="relative bg-black text-white pt-20 pb-12 border-t border-white/10 overflow-hidden">
       {/* Ambient Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[250px] bg-[#FFD400]/5 blur-[160px] rounded-full pointer-events-none" />
 
