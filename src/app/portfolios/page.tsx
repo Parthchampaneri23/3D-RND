@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -110,6 +110,7 @@ export default function PortfoliosPage() {
   const [projectsList, setProjectsList] = useState<PortfolioProjectDetail[]>(initialPortfolioData);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [adminStatusFilter, setAdminStatusFilter] = useState<"all" | "published" | "drafts">("all");
+  const [itemsToShow, setItemsToShow] = useState(6); // Pagination - initial items to display
 
   // Multi-dimensional filters
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -221,11 +222,17 @@ export default function PortfoliosPage() {
     selectedIndustry !== "All Industries" ||
     searchQuery.trim().length > 0;
 
+  // Reset itemsToShow when filters change
+  useEffect(() => {
+    setItemsToShow(6);
+  }, [activeCategory, selectedService, selectedIndustry, searchQuery]);
+
   const resetFilters = () => {
     setActiveCategory("All");
     setSelectedService("All Services");
     setSelectedIndustry("All Industries");
     setSearchQuery("");
+    setItemsToShow(6); // Reset pagination
   };
 
   return (
@@ -478,14 +485,19 @@ export default function PortfoliosPage() {
               </button>
             </div>
           ) : (
+            <>
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-              {filteredProjects.map((project: PortfolioProjectDetail, idx: number) => {
+              {filteredProjects.slice(0, itemsToShow).map((project: PortfolioProjectDetail, idx: number) => {
+                const isTall = !!project.isFeatured && idx % 3 === 0;
+
                 return (
                   <div
                     key={project.id}
-                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 transition-colors duration-300 shadow-2xl flex flex-col justify-between h-[460px] transform-gpu ${
-                      !project.published ? "opacity-75 ring-1 ring-amber-400/50" : ""
-                    }`}
+                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 transition-all duration-500 shadow-2xl flex flex-col justify-between ${
+                      isTall
+                        ? "md:row-span-2 min-h-[540px] lg:min-h-[600px]"
+                        : "min-h-[420px] lg:min-h-[460px]"
+                    } ${!project.published ? "opacity-75 ring-1 ring-amber-400/50" : ""}`}
                   >
                     {/* Top Row: Index Tag & Category Badge */}
                     <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between gap-2 pointer-events-none">
@@ -633,6 +645,26 @@ export default function PortfoliosPage() {
                 );
               })}
             </div>
+
+            {/* Load More Button */}
+            {itemsToShow < filteredProjects.length && (
+              <div className="relative z-10 flex justify-center mt-12">
+                <button
+                  type="button"
+                  onClick={() => setItemsToShow((prev: number) => prev + 6)}
+                  className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#12141a]/95 hover:bg-[#1a1d26] border border-white/15 hover:border-[#FFD400]/70 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_0_25px_rgba(255,212,0,0.28)] transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer overflow-hidden"
+                >
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                  <span className="relative z-10 font-mono font-bold tracking-[0.18em] uppercase text-sm">
+                    Load More Projects
+                  </span>
+                  <span className="relative z-10 px-2 py-0.5 rounded-md bg-[#FFD400]/10 text-[#FFD400] text-xs font-mono">
+                    +{Math.min(6, filteredProjects.length - itemsToShow)}
+                  </span>
+                </button>
+              </div>
+            )}
+            </>
           )}
 
           {/* Bottom Conversion CTA Form */}
