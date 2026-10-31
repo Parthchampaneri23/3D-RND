@@ -58,6 +58,53 @@ const INDUSTRY_FILTER_OPTIONS = [
   "Travel & Tourism",
 ];
 
+/**
+ * Ultra-smooth card image renderer with progressive fade-in,
+ * GPU compositor isolation, and ambient shimmer to eliminate black flashing during scroll.
+ */
+function SmoothCardImage({
+  src,
+  alt,
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  priority?: boolean;
+}) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden bg-[#0c0e14] transform-gpu [backface-visibility:hidden]">
+      {/* Subtle ambient shimmer while decoding */}
+      <div
+        className={`absolute inset-0 bg-[#0e111a] transition-opacity duration-700 pointer-events-none z-0 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-white/[0.01] via-white/[0.05] to-white/[0.01] animate-pulse" />
+      </div>
+
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        quality={80}
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 transform-gpu ${
+          isLoaded
+            ? "opacity-100 scale-100 filter-none"
+            : "opacity-0 scale-[1.02] blur-[3px]"
+        }`}
+      />
+
+      {/* Atmospheric gradient overlay for typography contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#090b10] via-[#090b10]/75 to-black/40 pointer-events-none z-10" />
+    </div>
+  );
+}
+
 export default function PortfoliosPage() {
   // Live projects list allowing admin reorder and publish/unpublish toggling
   const [projectsList, setProjectsList] = useState<PortfolioProjectDetail[]>(initialPortfolioData);
@@ -200,7 +247,8 @@ export default function PortfoliosPage() {
         </div>
       )}
 
-      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
+      {/* Main Content Area - Solid bg-[#050608] to isolate compositor and prevent WebGL redraw flashes */}
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
         {/* Top Header Section */}
         <section className="bg-black max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 pt-14 pb-6">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
@@ -432,39 +480,35 @@ export default function PortfoliosPage() {
           ) : (
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
               {filteredProjects.map((project: PortfolioProjectDetail, idx: number) => {
-                const isTall = !!project.isFeatured && idx % 3 === 0;
-
                 return (
                   <div
                     key={project.id}
-                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 transition-all duration-500 shadow-2xl flex flex-col justify-between ${
-                      isTall
-                        ? "md:row-span-2 min-h-[540px] lg:min-h-[600px]"
-                        : "min-h-[420px] lg:min-h-[460px]"
-                    } ${!project.published ? "opacity-75 ring-1 ring-amber-400/50" : ""}`}
+                    className={`group relative rounded-3xl overflow-hidden bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/60 transition-colors duration-300 shadow-2xl flex flex-col justify-between h-[460px] transform-gpu ${
+                      !project.published ? "opacity-75 ring-1 ring-amber-400/50" : ""
+                    }`}
                   >
                     {/* Top Row: Index Tag & Category Badge */}
                     <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between gap-2 pointer-events-none">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs text-white/80 tracking-wider px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/15">
+                        <span className="font-mono text-xs text-white/90 tracking-wider px-2.5 py-1 rounded-md bg-black/85 border border-white/15 shadow-md">
                           [{project.index}]
                         </span>
                         {project.isFeatured && (
-                          <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest text-[#FFD400] px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-[#FFD400]/40">
+                          <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest text-[#FFD400] px-2.5 py-1 rounded-md bg-black/85 border border-[#FFD400]/40 shadow-md">
                             <Sparkles className="w-3 h-3" />
                             Featured
                           </span>
                         )}
                       </div>
 
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFD400] px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-[#FFD400]/30 shadow-md truncate max-w-[200px]">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFD400] px-3 py-1 rounded-full bg-black/90 border border-[#FFD400]/30 shadow-md truncate max-w-[200px]">
                         {project.category}
                       </span>
                     </div>
 
                     {/* Admin Interactive Action Overlay */}
                     {isAdminMode && (
-                      <div className="absolute top-16 right-5 z-30 flex items-center gap-1.5 p-1 rounded-xl bg-black/90 border border-[#FFD400]/40 backdrop-blur-md shadow-xl">
+                      <div className="absolute top-16 right-5 z-30 flex items-center gap-1.5 p-1 rounded-xl bg-black/95 border border-[#FFD400]/40 shadow-xl">
                         {/* Publish / Unpublish Toggle */}
                         <button
                           type="button"
@@ -515,16 +559,12 @@ export default function PortfoliosPage() {
                       </div>
                     )}
 
-                    {/* Background Project Thumbnail */}
-                    <div className="absolute inset-0 z-0 overflow-hidden">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#090b10] via-[#090b10]/75 to-black/40 pointer-events-none" />
-                    </div>
+                    {/* Background Project Thumbnail with progressive smooth fade-in and GPU layer */}
+                    <SmoothCardImage
+                      src={project.image}
+                      alt={project.title}
+                      priority={idx < 6}
+                    />
 
                     {/* Bottom Content Area */}
                     <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
@@ -548,7 +588,7 @@ export default function PortfoliosPage() {
 
                       {/* Verified Result Metric Badge (When available) */}
                       {project.results && project.results.length > 0 && (
-                        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.06] border border-[#FFD400]/30 backdrop-blur-md w-fit">
+                        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/75 border border-[#FFD400]/30 w-fit shadow-md">
                           <TrendingUp className="w-3.5 h-3.5 text-[#FFD400] shrink-0" />
                           <span className="text-xs font-mono font-bold text-[#FFD400]">
                             {project.results[0].metric}
@@ -561,13 +601,13 @@ export default function PortfoliosPage() {
 
                       {/* Linked Services & Industries Chips */}
                       <div className="flex flex-wrap items-center gap-1.5 mb-4">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] text-neutral-300 border border-white/10">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-neutral-300 border border-white/10">
                           {project.industry}
                         </span>
                         {project.tags.slice(0, 2).map((t) => (
                           <span
                             key={t}
-                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/40 text-neutral-400 border border-white/10"
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-neutral-400 border border-white/10"
                           >
                             {t}
                           </span>
