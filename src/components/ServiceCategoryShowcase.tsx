@@ -318,7 +318,7 @@ export default function ServiceCategoryShowcase() {
                     <CyberButton
                       href="/contact-us"
                       size="sm"
-                      variant={category.categoryHref ? "outline" : "solid"}
+                      variant={category.categoryHref ? "dark" : "gold"}
                     >
                       DEPLOY DIVISION POD
                     </CyberButton>
