@@ -171,7 +171,7 @@ export default function PortfoliosPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {filteredProjects.map((project: PortfolioProjectDetail) => {
               const isTall = !!project.isFeatured;
 
@@ -208,15 +208,6 @@ export default function PortfoliosPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] via-[#0c0e14]/65 to-black/35 pointer-events-none" />
                   </div>
-
-                  {/* Optional Center Emoji Badge (from Reference) */}
-                  {project.emoji && (
-                    <div className="relative z-10 my-auto flex justify-center items-center pointer-events-none">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/20 shadow-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
-                        {project.emoji}
-                      </div>
-                    </div>
-                  )}
 
                   {/* Bottom Content Area */}
                   <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
@@ -277,7 +268,7 @@ export default function PortfoliosPage() {
         {/* =========================================================================
             3. BOTTOM CTA CARD (Matching Reference Site)
             ========================================================================= */}
-        <div className="mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+        <div className="relative z-10 mt-20 sm:mt-24 rounded-3xl bg-gradient-to-r from-[#0c0e14] via-[#141722] to-[#0c0e14] border border-white/15 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl overflow-hidden">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono font-medium tracking-[0.25em] uppercase mb-3">
               <Sparkles className="w-3.5 h-3.5" />

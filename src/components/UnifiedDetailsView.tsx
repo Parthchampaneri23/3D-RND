@@ -35,6 +35,7 @@ import RnDFooter from "./RnDFooter";
 import SpaceBackground from "./SpaceBackground";
 import BeforeAfterSection, { BeforeAfterData } from "./BeforeAfterSection";
 import PageBanner from "./PageBanner";
+import ServiceConversionCTA from "./ServiceConversionCTA";
 
 export interface UnifiedDetailItem {
     id: string;
@@ -108,14 +109,6 @@ export default function UnifiedDetailsView({
     parentLabel,
 }: UnifiedDetailsViewProps) {
     const [activeFaq, setActiveFaq] = useState<number | null>(0);
-    const [formSubmitted, setFormSubmitted] = useState(false);
-    const [formLoading, setFormLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        projectType: item.category || "Full-Stack Web & Cloud",
-        message: "",
-    });
 
     const fullTitle = item.highlightText
         ? `${item.title} ${item.highlightText}`
@@ -189,14 +182,6 @@ export default function UnifiedDetailsView({
         },
     ];
 
-    const handleFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setFormLoading(true);
-        setTimeout(() => {
-            setFormLoading(false);
-            setFormSubmitted(true);
-        }, 900);
-    };
 
     return (
         <div className="relative min-h-screen bg-[#050608] text-white selection:bg-[#FFD400] selection:text-black font-sans">
@@ -641,172 +626,14 @@ export default function UnifiedDetailsView({
                 {/* =========================================================================
             7. PROJECT COMMISSION DIALOGUE & INTERACTIVE CTA FORM
             ========================================================================= */}
-                <section
+                <ServiceConversionCTA
                     id="inquire-form"
-                    className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 pb-16"
-                >
-                    <div className="rounded-3xl bg-gradient-to-r from-[#11131a] via-[#161a24] to-[#11131a] text-white p-8 sm:p-14 relative overflow-hidden shadow-2xl border border-[#FFD400]/30">
-                        {/* Ambient Nebula Glow */}
-                        <div className="absolute top-0 right-1/4 w-[450px] h-[300px] bg-[#FFD400]/10 rounded-full blur-[120px] pointer-events-none" />
-
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-                            {/* Left Column: Direct Inquiries Description */}
-                            <div className="lg:col-span-5 space-y-6">
-                                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#FFD400]/10 border border-[#FFD400]/30 text-[#FFD400] text-xs font-mono uppercase tracking-[0.2em]">
-                                    <Calendar className="w-3.5 h-3.5" />
-                                    <span>Turnkey Commission Dialogue</span>
-                                </div>
-
-                                <h3 className="font-[family-name:var(--font-syne)] text-3xl sm:text-4xl lg:text-5xl text-white font-bold uppercase leading-tight">
-                                    Ready to Architect Your Enterprise System?
-                                </h3>
-
-                                <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
-                                    Schedule a confidential technical dialogue with our principal
-                                    software architects and engineering directors.
-                                </p>
-
-                                <div className="space-y-3 pt-2">
-                                    <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-300">
-                                        <CheckCircle2 className="w-4 h-4 text-[#FFD400]" />
-                                        <span>Direct engineering consultation with zero sales fluff</span>
-                                    </div>
-                                    <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-300">
-                                        <CheckCircle2 className="w-4 h-4 text-[#FFD400]" />
-                                        <span>Transparent fixed milestones &amp; technical scope documentation</span>
-                                    </div>
-                                    <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-300">
-                                        <CheckCircle2 className="w-4 h-4 text-[#FFD400]" />
-                                        <span>Guaranteed response within 4 business hours</span>
-                                    </div>
-                                </div>
-
-                                <div className="pt-4 flex flex-wrap gap-4">
-                                    <Link
-                                        href="/contact-us"
-                                        className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs uppercase tracking-[0.16em] font-mono font-bold transition-all"
-                                    >
-                                        Direct Studio Inquiries
-                                    </Link>
-                                    <a
-                                        href="tel:+912224908800"
-                                        className="px-6 py-3 rounded-full bg-[#FFD400]/15 hover:bg-[#FFD400] hover:text-black border border-[#FFD400]/40 text-[#FFD400] text-xs uppercase tracking-[0.16em] font-mono font-bold transition-all"
-                                    >
-                                        Call: +91 22 2490 8800
-                                    </a>
-                                </div>
-                            </div>
-
-                            {/* Right Column: Interactive Fast Inquire Form */}
-                            <div className="lg:col-span-7 bg-[#0b0c10]/95 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-white/10 shadow-2xl">
-                                {formSubmitted ? (
-                                    <div className="py-12 text-center space-y-4">
-                                        <div className="w-14 h-14 rounded-full bg-[#FFD400] text-black mx-auto flex items-center justify-center shadow-[0_0_25px_rgba(255,212,0,0.5)]">
-                                            <Check className="w-7 h-7 stroke-[3]" />
-                                        </div>
-                                        <h4 className="text-2xl font-[family-name:var(--font-syne)] font-bold text-white uppercase">
-                                            Transmission Confirmed
-                                        </h4>
-                                        <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed">
-                                            Thank you. Your project brief has been encrypted and routed directly to our Principal Architecture Squad. We will respond within 4 business hours.
-                                        </p>
-                                        <button
-                                            type="button"
-                                            onClick={() => setFormSubmitted(false)}
-                                            className="mt-4 px-6 py-2 rounded-full border border-white/20 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:text-white"
-                                        >
-                                            Send Another Inquiry
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <form onSubmit={handleFormSubmit} className="space-y-4">
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                                                    Full Name *
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    required
-                                                    value={formData.name}
-                                                    onChange={(e) =>
-                                                        setFormData({ ...formData, name: e.target.value })
-                                                    }
-                                                    placeholder="e.g. Vikram Sharma"
-                                                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 focus:border-[#FFD400] text-sm text-white placeholder-neutral-500 focus:outline-none transition-colors"
-                                                />
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                                                    Work Email *
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    required
-                                                    value={formData.email}
-                                                    onChange={(e) =>
-                                                        setFormData({ ...formData, email: e.target.value })
-                                                    }
-                                                    placeholder="e.g. v.sharma@enterprise.com"
-                                                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 focus:border-[#FFD400] text-sm text-white placeholder-neutral-500 focus:outline-none transition-colors"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                                                Selected Discipline / Scope
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={formData.projectType}
-                                                onChange={(e) =>
-                                                    setFormData({
-                                                        ...formData,
-                                                        projectType: e.target.value,
-                                                    })
-                                                }
-                                                className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 focus:border-[#FFD400] text-sm text-[#FFD400] font-mono focus:outline-none transition-colors"
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                                                Project Brief &amp; Target Timeline
-                                            </label>
-                                            <textarea
-                                                rows={3}
-                                                required
-                                                value={formData.message}
-                                                onChange={(e) =>
-                                                    setFormData({ ...formData, message: e.target.value })
-                                                }
-                                                placeholder="Share your technical goals, target launch date, and key milestones..."
-                                                className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 focus:border-[#FFD400] text-sm text-white placeholder-neutral-500 focus:outline-none transition-colors resize-none"
-                                            />
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            disabled={formLoading}
-                                            className="w-full py-4 rounded-full bg-[#FFD400] hover:bg-[#ffe34d] text-black text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_25px_rgba(255,212,0,0.3)] hover:shadow-[0_0_35px_rgba(255,212,0,0.5)] flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
-                                        >
-                                            {formLoading ? (
-                                                <span>Encrypting &amp; Transmitting...</span>
-                                            ) : (
-                                                <>
-                                                    <Send className="w-4 h-4" />
-                                                    <span>Transmit Project Commission Brief</span>
-                                                </>
-                                            )}
-                                        </button>
-                                    </form>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    defaultService={fullTitle}
+                    category={item.category}
+                    badge="Turnkey Commission Dialogue"
+                    title={`Ready to Architect ${fullTitle}?`}
+                    subtitle="Share your technical goals, target timeline, and key milestones. Our principal software architects will review your brief and respond within 4 business hours."
+                />
 
                 {/* =========================================================================
             8. RECENT & RELATED DATA SECTION (Matching Reference Page)
