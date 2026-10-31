@@ -11,7 +11,7 @@ export interface CyberButtonProps {
   className?: string;
   showDot?: boolean;
   size?: "sm" | "md" | "lg";
-  variant?: "dark" | "gold" | "outline" | "solid";
+  variant?: "dark" | "gold";
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
 }
@@ -27,8 +27,6 @@ export default function CyberButton({
   type = "button",
   fullWidth = false,
 }: CyberButtonProps) {
-  const normalizedVariant: "dark" | "gold" =
-    variant === "outline" ? "dark" : variant === "solid" ? "gold" : variant;
 
   const sizeStyles = {
     sm: "px-3.5 py-1.5 text-xs gap-2.5",
@@ -54,7 +52,7 @@ export default function CyberButton({
 
   const content = (
     <div
-      className={`group relative inline-flex items-center justify-between rounded-full overflow-hidden ${variantStyles[normalizedVariant]} transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none ${sizeStyles[size]} ${
+      className={`group relative inline-flex items-center justify-between rounded-full overflow-hidden ${variantStyles[variant]} transition-all duration-300 hover:scale-[1.025] active:scale-[0.98] cursor-pointer select-none ${sizeStyles[size]} ${
         fullWidth ? "w-full" : ""
       } ${className}`}
     >
@@ -66,7 +64,7 @@ export default function CyberButton({
         {showDot && (
           <span
             className={`w-2.5 h-2.5 rounded-full shrink-0 animate-pulse ${
-              normalizedVariant === "gold"
+              variant === "gold"
                 ? "bg-black shadow-[0_0_8px_rgba(0,0,0,0.6)]"
                 : "bg-[#FFD400] shadow-[0_0_8px_#FFD400]"
             }`}
@@ -74,7 +72,7 @@ export default function CyberButton({
         )}
         <span
           className={`font-mono font-bold tracking-[0.18em] uppercase transition-colors whitespace-nowrap ${
-            normalizedVariant === "gold"
+            variant === "gold"
               ? "text-black"
               : "text-white group-hover:text-[#FFD400]"
           }`}
@@ -84,7 +82,7 @@ export default function CyberButton({
       </div>    
       {/* Right Circular Icon Sub-Badge */}
       <div
-        className={`${iconSizes[size]} rounded-full ${badgeStyles[normalizedVariant]} flex items-center justify-center transition-all duration-300 shrink-0 ml-2 shadow-inner relative z-10`}
+        className={`${iconSizes[size]} rounded-full ${badgeStyles[variant]} flex items-center justify-center transition-all duration-300 shrink-0 ml-2 shadow-inner relative z-10`}
       >
         <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:rotate-12 transition-transform duration-300" />
       </div>
