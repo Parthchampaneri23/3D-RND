@@ -721,36 +721,28 @@ export default function ServiceUniverseSection() {
                           DIVISION 0{division.tierNumber} // ACTIVE ECOSYSTEM
                         </span>
                         {/* PROMINENT SERVICE NAME */}
-                        {division.id === "technology-solutions" ? (
-                          <Link
-                            href="/technology-solution"
-                            prefetch={false}
-                            className="group/techlink flex items-center gap-2 hover:text-[#FFD400] transition-colors"
-                          >
-                            <h3 className="text-xl sm:text-2xl font-bold text-white group-hover/techlink:text-[#FFD400] tracking-tight uppercase font-[family-name:var(--font-syne)] transition-colors">
-                              {division.serviceName}
-                            </h3>
-                            <ArrowUpRight className="w-4 h-4 text-[#FFD400] group-hover/techlink:translate-x-0.5 group-hover/techlink:-translate-y-0.5 transition-transform" />
-                          </Link>
-                        ) : (
-                          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-syne)]">
+                        <Link
+                          href={division.id === "technology-solutions" ? "/technology-solution" : `/services#${division.id}`}
+                          prefetch={false}
+                          className="group/techlink flex items-center gap-2 hover:text-[#FFD400] transition-colors"
+                        >
+                          <h3 className="text-xl sm:text-2xl font-bold text-white group-hover/techlink:text-[#FFD400] tracking-tight uppercase font-[family-name:var(--font-syne)] transition-colors">
                             {division.serviceName}
                           </h3>
-                        )}
+                          <ArrowUpRight className="w-4 h-4 text-[#FFD400] group-hover/techlink:translate-x-0.5 group-hover/techlink:-translate-y-0.5 transition-transform" />
+                        </Link>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      {division.id === "technology-solutions" && (
-                        <Link
-                          href="/technology-solution"
-                          prefetch={false}
-                          className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono px-3 py-1 rounded-full bg-[#FFD400]/15 text-[#FFD400] border border-[#FFD400]/30 hover:bg-[#FFD400] hover:text-black transition-all"
-                        >
-                          <span>Explore Category</span>
-                          <ArrowUpRight className="w-3 h-3" />
-                        </Link>
-                      )}
+                      <Link
+                        href={division.id === "technology-solutions" ? "/technology-solution" : `/services#${division.id}`}
+                        prefetch={false}
+                        className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono px-3 py-1 rounded-full bg-[#FFD400]/15 text-[#FFD400] border border-[#FFD400]/30 hover:bg-[#FFD400] hover:text-black transition-all"
+                      >
+                        <span>Explore Category</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
                       <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white/10 text-white border border-white/10">
                         {division.tools.length} Logos
                       </span>

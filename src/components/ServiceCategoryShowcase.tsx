@@ -67,7 +67,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Kubernetes orchestration, automated CI/CD pipelines, multi-region redundancy, and bank-grade AWS/GCP cloud resilience.",
         sla: "<15m INCIDENT RESPONSE",
         tags: ["Docker", "Kubernetes", "Terraform", "AWS / GCP"],
-        href: "/services/cloud-infrastructure-devops",
+        href: "/services/web-cloud",
       },
       {
         id: "enterprise-software-solutions",
@@ -75,7 +75,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Bespoke SaaS architectures, high-load backends, internal operations software, and mission-critical database scaling.",
         sla: "100% IP OWNERSHIP",
         tags: ["Microservices", "PostgreSQL", "Node / Go", "SOC2"],
-        href: "/services/enterprise-software-solutions",
+        href: "/services/web-cloud",
       },
       {
         id: "ecommerce-platform-engineering",
@@ -83,7 +83,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Headless Shopify Plus and custom checkout engines optimized for high-volume flash sales and compounding conversion rates.",
         sla: "1.2s CHECKOUT SPEED",
         tags: ["Headless Shopify", "Stripe", "Next.js", "Algolia"],
-        href: "/services/ecommerce-platform-engineering",
+        href: "/services/ecommerce-platforms",
       },
     ],
   },
@@ -92,6 +92,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "02",
     badge: "2.4 DIGITAL MARKETING",
     title: "Digital Marketing & Performance Growth",
+    categoryHref: "/services#digital-marketing",
     tagline: "Programmatic Search Dominance, Paid Funnels & Conversion Engineering",
     intro:
       "Data-engineered customer acquisition models. We replace guesswork with algorithmic precision, deploying multi-channel performance funnels, technical backlink graphs, and behavioral CRO that consistently drive predictable revenue expansion.",
@@ -105,7 +106,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Algorithmic keyword clusters, programmatic internal linking, crawl budget optimization, and top-3 organic ranking capture.",
         sla: "+180% TRAFFIC SURGE",
         tags: ["Semantic Indexing", "Core Web Vitals", "Backlinks", "Schema"],
-        href: "/services/technical-seo-dominance",
+        href: "/services/seo-search",
       },
       {
         id: "performance-ppc-advertising",
@@ -113,7 +114,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "High-ROI paid search and social campaigns across Google Ads, Meta, and TikTok with real-time ROAS telemetry dashboards.",
         sla: "8.4x AVG ROAS",
         tags: ["Google Ads", "Meta Ads Manager", "TikTok Ads", "Attribution"],
-        href: "/services/performance-ppc-advertising",
+        href: "/services/seo-search",
       },
       {
         id: "social-media-management",
@@ -121,7 +122,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Viral organic community building, platform-specific content cadence, and influencer amplification that establishes brand authority.",
         sla: "100% ORGANIC-DRIVEN",
         tags: ["Content Calendars", "Audience Ops", "LinkedIn", "Instagram"],
-        href: "/services/social-media-management",
+        href: "/services/social-media",
       },
       {
         id: "content-strategy-production",
@@ -129,7 +130,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "High-authority editorial briefs, thought leadership articles, and high-converting commercial copy crafted for your target buyer persona.",
         sla: "CONVERSION-FIRST",
         tags: ["Whitepapers", "Landing Copy", "Email Funnels", "Guides"],
-        href: "/services/content-strategy-production",
+        href: "/services/social-media",
       },
     ],
   },
@@ -138,6 +139,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "03",
     badge: "2.5 BRANDING & DESIGN",
     title: "Branding Systems & Spatial UI/UX",
+    categoryHref: "/services#branding-design",
     tagline: "Category-Defining Visual Identities & Fluid Human-Centric Interfaces",
     intro:
       "Great software requires an unforgettable aesthetic. We construct cohesive design languages, mathematically scaled design systems, and spatial 3D user interfaces that elevate market perception and command enterprise pricing power.",
@@ -151,7 +153,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Comprehensive brand identity guidelines, modern logos, typography scales, color palettes, and unified design token architectures.",
         sla: "PRODUCTION-READY",
         tags: ["Design Systems", "Vector Identity", "Figma", "Guidelines"],
-        href: "/services/brand-identity-systems",
+        href: "/services/brand-identity",
       },
       {
         id: "ui-ux-spatial-design",
@@ -159,7 +161,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Next-gen user journeys, micro-interactive prototypes, and 3D web interfaces mapped through rigorous usability heatmaps.",
         sla: "60 FPS INTERACTION",
         tags: ["Spatial 3D", "Wireframing", "Interaction Design", "Figma"],
-        href: "/services/ui-ux-spatial-design",
+        href: "/services/brand-identity",
       },
     ],
   },
@@ -168,6 +170,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "04",
     badge: "2.6 MEDIA PRODUCTION",
     title: "Commercial Media & Motion Production",
+    categoryHref: "/services#media-production",
     tagline: "Cinematic Commercial Films, 3D CGI Motion & High-Impact Brand Assets",
     intro:
       "Transforming complex product capabilities into breathtaking visual narratives. Combining in-house cinema equipment, 3D Unreal Engine environments, and post-production color mastering to tell your enterprise story with emotional impact.",
@@ -181,7 +184,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "End-to-end commercial productions: scriptwriting, 4K/8K cinematography, sound engineering, and multi-platform promotional edits.",
         sla: "CINEMA-GRADE 4K/8K",
         tags: ["Brand Films", "Product Launches", "Color Grading", "Voiceover"],
-        href: "/services/commercial-video-production",
+        href: "/services/commercial-media",
       },
       {
         id: "motion-graphics-3d-cgi",
@@ -189,7 +192,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
         desc: "Photorealistic 3D product animations, kinetic typography, dynamic HUD holograms, and spatial VFX for web and commercials.",
         sla: "PHOTOREALISTIC",
         tags: ["Three.js", "Cinema4D", "Blender 3D", "After Effects"],
-        href: "/services/motion-graphics-3d-cgi",
+        href: "/services/commercial-media",
       },
     ],
   },
@@ -232,7 +235,11 @@ export default function ServiceCategoryShowcase() {
                     isReversed ? "lg:col-start-8" : ""
                   }`}
                 >
-                  <div className="relative aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 shadow-2xl group/media">
+                  <Link
+                    href={category.categoryHref || `#${category.id}`}
+                    prefetch={false}
+                    className="block relative aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 hover:border-[#FFD400]/60 shadow-2xl group/media cursor-pointer transition-all duration-500"
+                  >
                     <Image
                       src={category.visual}
                       alt={category.title}
@@ -262,7 +269,7 @@ export default function ServiceCategoryShowcase() {
                         // {category.index}
                       </span>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Corner Sci-Fi Framing Accents */}
                   <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#FFD400]/60 pointer-events-none" />
