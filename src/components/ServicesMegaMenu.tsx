@@ -79,7 +79,7 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     id: "digital-marketing",
     num: "02",
     name: "Digital Marketing",
-    href: "/services#digital-marketing",
+    href: "/digital-marketing",
     icon: TrendingUp,
     tagline: "High-intent customer acquisition & search dominance",
     subcategories: [
@@ -111,7 +111,7 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     id: "branding-design",
     num: "03",
     name: "Branding & Design",
-    href: "/services#branding-design",
+    href: "/branding-design",
     icon: Palette,
     tagline: "Category-defining identities & human-centric UI/UX",
     subcategories: [
@@ -138,7 +138,7 @@ export const SERVICE_MEGA_CATEGORIES: ServiceMegaCategory[] = [
     id: "media-production",
     num: "04",
     name: "Media Production",
-    href: "/services#media-production",
+    href: "/media-production",
     icon: Camera,
     tagline: "Cinematic commercial films & 8K expedition capture",
     subcategories: [

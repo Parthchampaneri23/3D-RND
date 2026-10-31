@@ -92,7 +92,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "02",
     badge: "2.4 DIGITAL MARKETING",
     title: "Digital Marketing & Performance Growth",
-    categoryHref: "/services#digital-marketing",
+    categoryHref: "/digital-marketing",
     tagline: "Programmatic Search Dominance, Paid Funnels & Conversion Engineering",
     intro:
       "Data-engineered customer acquisition models. We replace guesswork with algorithmic precision, deploying multi-channel performance funnels, technical backlink graphs, and behavioral CRO that consistently drive predictable revenue expansion.",
@@ -139,7 +139,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "03",
     badge: "2.5 BRANDING & DESIGN",
     title: "Branding Systems & Spatial UI/UX",
-    categoryHref: "/services#branding-design",
+    categoryHref: "/branding-design",
     tagline: "Category-Defining Visual Identities & Fluid Human-Centric Interfaces",
     intro:
       "Great software requires an unforgettable aesthetic. We construct cohesive design languages, mathematically scaled design systems, and spatial 3D user interfaces that elevate market perception and command enterprise pricing power.",
@@ -170,7 +170,7 @@ const CATEGORIES: ServiceCategoryItem[] = [
     index: "04",
     badge: "2.6 MEDIA PRODUCTION",
     title: "Commercial Media & Motion Production",
-    categoryHref: "/services#media-production",
+    categoryHref: "/media-production",
     tagline: "Cinematic Commercial Films, 3D CGI Motion & High-Impact Brand Assets",
     intro:
       "Transforming complex product capabilities into breathtaking visual narratives. Combining in-house cinema equipment, 3D Unreal Engine environments, and post-production color mastering to tell your enterprise story with emotional impact.",

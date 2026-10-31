@@ -110,12 +110,12 @@ export default function IndustryDetailClientView({
             />
 
             {/* Overlapping Main Content */}
-            <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-[#050608] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
+            <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)]">
                 {/* =========================================================================
             1. SHORT INFO & ARCHITECTURAL SUMMARY SECTION
             ========================================================================= */}
                 <section className="max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-10">
-                    <div className="p-8 sm:p-12 bg-gradient-to-r from-[#0c0e14] via-[#121520] to-[#0c0e14] border border-white/10 shadow-2xl relative overflow-hidden">
+                    <div className="p-8 sm:p-12 bg-gradient-to-r from-[#0c0e14]/40 via-[#121520]/40 to-[#0c0e14]/40 backdrop-blur-sm border border-white/10 shadow-2xl relative overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                             {/* Left Column (8 cols): Short Info & Tagline */}
                             <div className="lg:col-span-8 space-y-4">
@@ -253,7 +253,7 @@ export default function IndustryDetailClientView({
                         {industry.serviceCombinations?.map((combo, sIdx) => (
                             <div
                                 key={sIdx}
-                                className="group p-6 sm:p-7 bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-300 relative flex flex-col justify-between"
+                                className="group p-6 sm:p-7 bg-[#0c0e14]/60 backdrop-blur-md border border-white/10 hover:border-[#FFD400]/50 transition-all duration-300 relative flex flex-col justify-between"
                             >
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
@@ -323,7 +323,7 @@ export default function IndustryDetailClientView({
                         {industry.works.map((work, wIdx) => (
                             <article
                                 key={work.id}
-                                className="group bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 shadow-xl overflow-hidden flex flex-col"
+                                className="group bg-[#0c0e14]/60 backdrop-blur-md border border-white/10 hover:border-[#FFD400]/50 transition-all duration-500 shadow-xl overflow-hidden flex flex-col"
                             >
                                 <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[360px]">
                                     {/* Left: Project Image with Multi-Directional Glide & Settle Animation */}
@@ -433,7 +433,7 @@ export default function IndustryDetailClientView({
                         {industry.process?.map((stepItem, pIdx) => (
                             <div
                                 key={pIdx}
-                                className="p-6 bg-[#0c0e14] border border-white/10 hover:border-[#FFD400]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                                className="p-6 bg-[#0c0e14]/60 backdrop-blur-md border border-white/10 hover:border-[#FFD400]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
                             >
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -476,7 +476,7 @@ export default function IndustryDetailClientView({
             6. ATTRACTIVE CASE STUDY DEEP DIVE SECTION
             ========================================================================= */}
                 <section className="max-w-7xl mx-auto px-6 md:px-12 py-14 border-t border-white/10">
-                    <div className="p-8 sm:p-12 bg-[#090b10] border border-[#FFD400]/30 shadow-2xl relative overflow-hidden">
+                    <div className="p-8 sm:p-12 bg-[#090b10]/50 backdrop-blur-md border border-[#FFD400]/30 shadow-2xl relative overflow-hidden">
                         {/* Background Aesthetic Watermark */}
                         <div className="absolute right-4 bottom-2 text-white/[0.02] text-8xl sm:text-9xl font-black select-none pointer-events-none font-mono">
                             CASE STUDY
@@ -561,7 +561,7 @@ export default function IndustryDetailClientView({
                     id="consultation-section"
                     className="max-w-7xl mx-auto px-6 md:px-12 py-14 border-t border-white/10"
                 >
-                    <div className="bg-[#0c0e14] border border-white/15 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+                    <div className="bg-[#0c0e14]/60 backdrop-blur-md border border-white/15 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                         {/* Left Instructions */}
                         <div className="lg:col-span-5 space-y-5">
                             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD400] font-semibold flex items-center gap-2">
@@ -658,7 +658,7 @@ export default function IndustryDetailClientView({
                                             <select
                                                 value={formData.timeline}
                                                 onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                                                className="w-full px-3 py-2.5 text-xs font-mono bg-[#0c0e14] border border-white/15 text-white focus:outline-none focus:border-[#FFD400] transition-colors"
+                                                className="w-full px-3 py-2.5 text-xs font-mono bg-[#0c0e14]/60 backdrop-blur-sm border border-white/15 text-white focus:outline-none focus:border-[#FFD400] transition-colors"
                                             >
                                                 <option value="Next 30 Days">Immediate (Next 30 Days)</option>
                                                 <option value="Next 60-90 Days">Next Quarter (60-90 Days)</option>
@@ -722,7 +722,7 @@ export default function IndustryDetailClientView({
                             return (
                                 <div
                                     key={fIdx}
-                                    className="border border-white/10 bg-[#0c0e14] transition-colors hover:border-white/25"
+                                    className="border border-white/10 bg-[#0c0e14]/40 backdrop-blur-sm transition-colors hover:border-white/25"
                                 >
                                     <button
                                         type="button"

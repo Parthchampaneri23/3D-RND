@@ -105,21 +105,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Central Telemetry Command & Microservices Mesh",
         deliverablesSummary: "Sub-40ms WebSocket and Kafka streaming ingestion engines, multi-tenant plant dashboards, and automated SCADA protocol bridges.",
         badge: "Edge Architecture",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Field Maintenance PWA & AR Parts Inspector",
         deliverablesSummary: "Offline-capable technician mobile app with QR-code equipment diagnostic scanning, instant fault logging, and tactile parts schematics.",
         badge: "Mobile Telemetry",
       },
       {
         serviceTitle: "Dedicated Agency Squads",
-        serviceHref: "/services/dedicated-squads",
+        serviceHref: "/technology-solution/enterprise-software-solutions",
         role: "Embedded Systems & Industrial Protocol Engineers",
         deliverablesSummary: "Specialized senior pods deployed on-site or remote to integrate OPC-UA gateways, calibrate vibration sensors, and configure ISO 9001 compliance logs.",
         badge: "Dedicated Pods",
@@ -272,21 +272,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "HIPAA-Grade Cloud Architecture & EHR Interoperability",
         deliverablesSummary: "FHIR and HL7 compliant database schemas, zero-knowledge patient vaults, and sub-100ms WebRTC encrypted consultation streams.",
         badge: "HIPAA Cloud",
       },
       {
         serviceTitle: "Search Dominance & Technical SEO",
-        serviceHref: "/services/seo-search",
+        serviceHref: "/digital-marketing/technical-seo-dominance",
         role: "High-Intent Patient Acquisition & Local Practice Dominance",
         deliverablesSummary: "Local clinic map pack optimization, medical schema markup, and specialized high-conversion doctor profile funnels.",
         badge: "Patient Growth",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Patient Health Portal & Contactless Check-In",
         deliverablesSummary: "Biometrically secured mobile patient apps with digital consent signatures, instant billing, and tele-triage messaging.",
         badge: "Patient Portal",
@@ -439,21 +439,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "E-Commerce & Digital Storefronts",
-        serviceHref: "/services/ecommerce-platforms",
+        serviceHref: "/technology-solution/ecommerce-platform-engineering",
         role: "Headless Sub-Second D2C Commerce & Subscription Engine",
         deliverablesSummary: "Ultra-fast headless Shopify or BigCommerce storefronts with 1-click reordering, smart bundle builders, and dynamic delivery pause triggers.",
         badge: "Headless D2C",
       },
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/cloud-infrastructure-devops",
         role: "IoT Cold-Chain Telemetry & Warehouse Inventory Mesh",
         deliverablesSummary: "MQTT sensor event streams tracking temperature, ambient humidity, and container GPS in real time with automated FIFO dispatch routing.",
         badge: "Cold-Chain IoT",
       },
       {
         serviceTitle: "Commercial Film & Photography",
-        serviceHref: "/services/commercial-media",
+        serviceHref: "/media-production/commercial-video-production",
         role: "Appetite-Appeal Visual Media & Sensory Storytelling",
         deliverablesSummary: "High-speed macro cinematography, commercial product photography, and interactive 3D culinary package mockups.",
         badge: "Visual Media",
@@ -602,21 +602,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "E-Commerce & Digital Storefronts",
-        serviceHref: "/services/ecommerce-platforms",
+        serviceHref: "/technology-solution/ecommerce-platform-engineering",
         role: "Sub-Second Headless Commerce & GraphQL Mesh",
         deliverablesSummary: "Custom Shopify Plus or BigCommerce headless architectures delivering sub-400ms time to first byte and frictionless biometric checkout.",
         badge: "Headless Retail",
       },
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Photorealistic In-Browser 3D Spatial Configurator",
         deliverablesSummary: "Custom WebGL GLSL shaders, physical ambient occlusion, and Draco-quantized geometry allowing real-time material and finish customization.",
         badge: "3D Spatial Web",
       },
       {
         serviceTitle: "Brand Strategy & Design Systems",
-        serviceHref: "/services/brand-identity",
+        serviceHref: "/branding-design/brand-identity-systems",
         role: "Luxury Retail Design Systems & Omnichannel Typography",
         deliverablesSummary: "Unified design tokens, micro-animations, and bespoke digital flagship interfaces reflecting luxury boutique aesthetics.",
         badge: "Luxury Branding",
@@ -765,21 +765,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Zero-Commission Direct Reservation Engine & PMS Bridge",
         deliverablesSummary: "Sub-second multi-currency booking checkout integrating bidirectionally with Opera, Mews, and Cloudbeds PMS for instant rate parity.",
         badge: "Direct Booking",
       },
       {
         serviceTitle: "Commercial Film & Photography",
-        serviceHref: "/services/commercial-media",
+        serviceHref: "/media-production/commercial-video-production",
         role: "Cinematic Resort Drone & Spatial 360 Photography",
         deliverablesSummary: "Golden-hour aerial cinematography, architectural interior photography, and high-fidelity 360-degree immersive panoramic environments.",
         badge: "Visual Production",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Digital Guest Key & Contactless Concierge PWA",
         deliverablesSummary: "Zero-download web mobile app for mobile room entry, in-room Michelin dining ordering, and private excursion concierge chat.",
         badge: "Guest Concierge",
@@ -928,21 +928,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Scalable Examination Mesh & Interactive 3D SimLab",
         deliverablesSummary: "WebAssembly physics engines, Three.js chemistry apparatus simulations, and auto-scaling Kubernetes test delivery clusters.",
         badge: "Interactive SimLab",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Micro-Learning Mobile Companion & Offline Sync",
         deliverablesSummary: "Native mobile learning apps with bite-sized lesson streaks, offline video downloads, and automated push notifications.",
         badge: "Mobile LMS",
       },
       {
         serviceTitle: "Dedicated Agency Squads",
-        serviceHref: "/services/dedicated-squads",
+        serviceHref: "/technology-solution/enterprise-software-solutions",
         role: "SCORM / xAPI Compliance & EdTech Architecture Squads",
         deliverablesSummary: "Specialized engineers deploying interoperability bridges for Canvas, Moodle, and Blackboard LMS systems.",
         badge: "LTI / SCORM Squad",
@@ -1091,21 +1091,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "In-Browser 3D Building Digital Twin & Inventory Engine",
         deliverablesSummary: "Three.js and WebGL2 building orbit visualizer with real-time apartment availability, floor selection, and live lighting simulation.",
         badge: "3D PropTech",
       },
       {
         serviceTitle: "Search Dominance & Technical SEO",
-        serviceHref: "/services/seo-search",
+        serviceHref: "/digital-marketing/technical-seo-dominance",
         role: "High-Net-Worth Investor Acquisition & International SEO",
         deliverablesSummary: "Multi-regional real estate search indexing, schema markup for luxury developments, and targeted lead funnels.",
         badge: "Investor Lead Gen",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Jobsite Drone Telemetry & Field Inspection Portal",
         deliverablesSummary: "Offline tablet app syncing BIM IFC models, drone photogrammetry overlays, and automated safety milestone verification.",
         badge: "BIM Field App",
@@ -1254,21 +1254,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Investor-Grade SaaS Core & Multi-Tenant Database Mesh",
         deliverablesSummary: "Production Next.js 15 App Router architecture, PostgreSQL schemas with Row-Level Security (RLS), and sub-50ms global API routes.",
         badge: "Venture SaaS",
       },
       {
         serviceTitle: "Dedicated Agency Squads",
-        serviceHref: "/services/dedicated-squads",
+        serviceHref: "/technology-solution/enterprise-software-solutions",
         role: "Full-Stack Senior Engineering Squad on Demand",
         deliverablesSummary: "Autonomous squads consisting of a Principal Architect, Senior Frontend Lead, and Backend DevOps engineer moving at 2-week sprint speed.",
         badge: "Rapid Squads",
       },
       {
         serviceTitle: "Brand Strategy & Design Systems",
-        serviceHref: "/services/brand-identity",
+        serviceHref: "/branding-design/brand-identity-systems",
         role: "Pitch-Ready Brand Identity & High-Converting Landing Pages",
         deliverablesSummary: "Investor pitch decks, component-driven design systems in Figma, and high-converting marketing landing pages that secure early signups.",
         badge: "Investor Brand",
@@ -1417,21 +1417,21 @@ export const industriesList: IndustryData[] = [
     serviceCombinations: [
       {
         serviceTitle: "Web & Enterprise Cloud",
-        serviceHref: "/services/web-cloud",
+        serviceHref: "/technology-solution/web-development",
         role: "Distributed Edge Search Caching & GDS Connector Mesh",
         deliverablesSummary: "Redis edge caching layer caching hundreds of thousands of flight and hotel routes with sub-120ms response times and zero rate-limit drops.",
         badge: "Edge Travel Engine",
       },
       {
         serviceTitle: "Mobile App Development",
-        serviceHref: "/services/mobile-apps",
+        serviceHref: "/technology-solution/mobile-applications",
         role: "Interactive 3D Destination Map & Offline Trail App",
         deliverablesSummary: "Progressive mobile app with Mapbox GL 3D topographic terrain elevation, offline GPS wayfinding, and digital RFID boarding passes.",
         badge: "Spatial Guide",
       },
       {
         serviceTitle: "Search Dominance & Technical SEO",
-        serviceHref: "/services/seo-search",
+        serviceHref: "/digital-marketing/technical-seo-dominance",
         role: "Programmatic Destination & Route SEO Dominance",
         deliverablesSummary: "Automated generation of thousands of indexable, high-ranking travel route and city attraction pages with dynamic pricing schema.",
         badge: "Travel SEO",
@@ -1548,3 +1548,4 @@ export const industriesList: IndustryData[] = [
     ],
   },
 ];
+

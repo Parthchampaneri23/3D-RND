@@ -72,9 +72,9 @@ export default function PortfoliosPage() {
         breadcrumb="PORTFOLIOS"
       />
 
-      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] bg-transparent border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
-        {/* Top Header Row */}
-        <section className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 pt-14 pb-4">
+      <main className="relative z-20 w-full -mt-10 sm:-mt-14 md:-mt-18 rounded-t-[32px] sm:rounded-t-[44px] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
+        {/* Top Header Row - Solid Black Background */}
+        <section className="bg-black max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 pt-14 pb-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium tracking-[0.25em] uppercase mb-4 bg-black/60 border border-[#FFD400]/40 text-[#FFD400] backdrop-blur-md">
@@ -112,11 +112,15 @@ export default function PortfoliosPage() {
         </section>
 
         {/* =========================================================================
-            2. FILTER & SEARCH BAR + BENTO DIRECTORY GRID
+            2. FILTER & SEARCH BAR + BENTO DIRECTORY GRID - Galaxy Background
             ========================================================================= */}
-        <div className="pt-6 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
+        <div className="relative pt-6 pb-24 px-4 sm:px-8 lg:px-12 max-w-[1600px] mx-auto">
+        {/* Galaxy/Space Background for Grid Section */}
+        <div className="absolute inset-0 bg-[#050608] z-0">
+          <SpaceBackground />
+        </div>
         {/* Filter and Search Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
           {/* Category Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
             {CATEGORIES.map((cat) => {
@@ -152,7 +156,7 @@ export default function PortfoliosPage() {
 
         {/* Bento Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-24 rounded-3xl bg-white/[0.02] border border-white/10">
+          <div className="relative z-10 text-center py-24 rounded-3xl bg-white/[0.02] border border-white/10">
             <p className="text-neutral-400 text-base font-mono mb-4">
               No projects found matching &ldquo;{searchQuery || activeCategory}&rdquo;
             </p>

@@ -30,6 +30,22 @@ import ServiceConversionCTA from "@/components/ServiceConversionCTA";
 import { servicesData, ServiceDetail } from "@/data/servicesData";
 import ServiceUniverseSection from "@/components/ServiceUniverseSection";
 
+// Helper function to map service IDs to proper category/subcategory URLs
+const getServiceUrl = (serviceId: string): string => {
+  const serviceUrlMap: Record<string, string> = {
+    "web-cloud": "/technology-solution/cloud-infrastructure-devops",
+    "ecommerce-platforms": "/technology-solution/ecommerce-platform-engineering",
+    "mobile-apps": "/technology-solution/mobile-applications",
+    "seo-search": "/digital-marketing/technical-seo-dominance",
+    "social-media": "/digital-marketing/social-media-management",
+    "brand-identity": "/branding-design/brand-identity-systems",
+    "commercial-media": "/media-production/commercial-video-production",
+    "dedicated-squads": "/media-production/dedicated-squads",
+  };
+  
+  return serviceUrlMap[serviceId] || `/technology-solution/${serviceId}`;
+};
+
 const CATEGORIES = [
   "All",
   "Web & Cloud",
@@ -315,7 +331,7 @@ export default function ServicesPage() {
                     {/* Bottom Content Area */}
                     <div className="relative z-10 mt-auto p-6 sm:p-7 pt-12 flex flex-col justify-end">
                       <div className="flex items-baseline justify-between gap-4 mb-1">
-                        <Link href={`/services/${service.id}`} prefetch={false}>
+                        <Link href={getServiceUrl(service.id)} prefetch={false}>
                           <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#FFD400] font-[family-name:var(--font-syne)] uppercase">
                             {service.title} {service.highlightText}
                           </h3>
@@ -341,7 +357,7 @@ export default function ServicesPage() {
 
                         {/* Explore Spec Link */}
                         <Link
-                          href={`/services/${service.id}`}
+                          href={getServiceUrl(service.id)}
                           prefetch={false}
                           className="inline-block"
                         >
